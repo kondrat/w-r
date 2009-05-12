@@ -1,14 +1,15 @@
 jQuery(document).ready( function(){
 
-						var sec=0;
-						var start = 1;
-						var int;
-						var resHour,resMin, resSec;
-						var resMin = "00";
-						var minut = 0;
-						var resHour = "00";
-						var hour = 0;
-						var k = 0;
+		var sec=0;
+		var int;
+		var resHour,resMin, resSec;
+		var resMin = "00";
+		var minut = 0;
+		var resHour = "00";
+		var hour = 0;
+		var k = 0;
+		var i = 0;
+						
 	$('#clock1').click( function(){
 			
 			var firstObj = new Date();	
@@ -23,13 +24,7 @@ jQuery(document).ready( function(){
 								}	
 								
 								
-								var i; 
-								if ( k > 0 ) {
-									i = k + sec;
-									k = 0;
-								} else {
-									i = sec;
-								}
+								i = k + sec;
 								
 								if ( i < 10 ) {
 									resSec = '0' + i;
@@ -38,6 +33,8 @@ jQuery(document).ready( function(){
 								} else if ( i == 60 ) {
 									resSec = "00";
 									sec = 0;
+									i = 0;
+									k = 0;
 									firstObj = new Date();
 									minut++;
 								}
@@ -64,11 +61,7 @@ jQuery(document).ready( function(){
 					
 								
 								$('#clock1').html(resHour + ":" + resMin + ":"+ resSec);
-									$('#t').html(t);
-									$('#sec').html(sec);
-									k = sec;
-									$('#k').html(k);
-				}	,100);
+				}	,80);
 
 			
 		
@@ -82,7 +75,7 @@ jQuery(document).ready( function(){
 	$('#clock2').click( function(){
 		
 			 clearInterval(int);
-			 k = sec;
+			 k = i;
 			 sec = 0;
 			
 		
@@ -92,13 +85,3 @@ jQuery(document).ready( function(){
 
 				
 });
-		
-
-
-
-
-
-
-
-
-
