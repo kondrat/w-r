@@ -79,11 +79,14 @@ msgstr 	"Сдвинуть"
 msgid	"Upload" 
 msgstr 	"Загрузить"
 
-msgid	"Upload now (without registration)" 
-msgstr 	"Загрузить БЕЗ регистрации"
-
 msgid	"You must have cookie enabled" 
 msgstr 	"Cookie должны быть включены"
 
-msgid	"Image wasn\'t uploaded" 
-msgstr 	"Фотография не была сохранена"
+msgid	"Interval" 
+msgstr 	"Интервал"
+
+msgid	"Work" 
+msgstr 	"Работа"
+
+msgid	"Rest" 
+msgstr 	"Законный отдых"

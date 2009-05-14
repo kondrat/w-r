@@ -26,7 +26,7 @@
 	?>
 </head>
 <body>
-	<div class="container showgrid">
+	<div class="container showgrid.">
 
 			<div class="span-24">
 
@@ -53,7 +53,6 @@
 		    <div class="span-4">
 		        Left sidebar
 		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
 		    </div>
 		
 		    <div class="span-16">
@@ -71,10 +70,11 @@
 						</div>
 			      	</div>
 			        <div class="span-4">
-			       		Box2
+			       		<?php echo date("l dS \of F"); ?>
 			        </div>
 			        <div class="span-4 last">
-			            Box3
+			            <?php __('Week'); 
+			            echo ' '.date("W"); ?>
 			        </div>
 			   	</div>
 
