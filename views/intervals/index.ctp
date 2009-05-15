@@ -3,9 +3,6 @@
 	<div class="span-8">
 		<div class="chessKnob work"> <?php __('Work');?></div>
 		<p class="clock clock1" id="clock1">00:00:00</p>
-		<p id="t"></p>
-		<p id="sec"></p>
-		<p id="k"></p>
 	</div>
 	<div class="span-8 last">
 		<div class="chessKnob rest"> <?php __('Rest');?></div>

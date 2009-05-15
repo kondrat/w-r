@@ -1,19 +1,36 @@
 jQuery(document).ready( function(){
-
-		var int = 0;
-		var k = 0;
-		var i = 0;	
-								
-	$('#clock1, .work').click( function(){
-			
-		var firstObj = new Date();	
-		var sec = 0;
+	
 
 		var resHour,resMin, resSec;
+		var sec = 0;
 		var resMin = "00";
 		var minut = 0;
 		var resHour = "00";
 		var hour = 0;
+		var int = 0;
+		var k = 0;
+		var i = 0;
+		
+		var resHour2,resMin2, resSec2;
+		var sec2 = 0;
+		var resMin2 = "00";
+		var minut2 = 0;
+		var resHour2 = "00";
+		var hour2 = 0;
+		var int2 = 0;
+		var k2 = 0;
+		var i2 = 0;		
+								
+	$('#clock1, .work').click( function(){
+			 $('#clock1').css({'background-color' :'#d2ffe9'});
+			 $('#clock2').css({'background-color' :'#ffffff'});
+			clearInterval(int2);
+			k2 = i2;
+			sec2 = 0;
+			int2 = 0;
+			
+		var firstObj = new Date();	
+
 				
 				if ( int == 0 ) {	
 					int = setInterval(function () {
@@ -62,41 +79,83 @@ jQuery(document).ready( function(){
 										
 							
 										
-										$('#clock1').html(resHour + ":" + resMin + ":"+ resSec);
-						}	,80);
-		
+										$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
+										document.title = 'Work ' + resHour + ":" + resMin; 
+						}	,80);		
 				}		
 			}
 	);
 	
 	$('#clock2, .rest').click( function(){
+			$('#clock2').css({'background-color' :'#ffd7d7'});
+			$('#clock1').css({'background-color' :'#ffffff'});
+			clearInterval(int);
+			k = i;
+			sec = 0;
+			int = 0;
+			var firstObj2 = new Date();
+							 
+				if ( int2 == 0 ) {	
+					int2 = setInterval(function () {
+													
+										var curObj2 = new Date();
+										var t2 = ( curObj2.getTime() - firstObj2.getTime() )-(sec2*1000);		
 		
-			 clearInterval(int);
-			 k = i;
-			 sec = 0;
-			 int = 0;
-			
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
+										if ( t2 > 999 ) { 
+											sec2++; 
+										}	
+										
+										
+										i2 = k2 + sec2;
+										
+										if ( i2 < 10 ) {
+											resSec2 = '0' + i2;
+										} else if ( i2 >= 10 && i2 < 60 ) {
+											resSec2 = i2;
+										} else if ( i2 == 60 ) {
+											resSec2 = "00";
+											sec2 = 0;
+											i2 = 0;
+											k2 = 0;
+											firstObj2 = new Date();
+											minut2++;
+										}
+										
+										if ( minut2 > 0 && minut2 < 10 ) {
+											resMin2 = "0" + minut2;
+										} else if (minut2 >= 10 && minut2 < 60) {
+											resMin2 = minut2;
+										} else if ( minut2 == 60 ) {
+											resMin2 = "00";
+											minut2 = 0;
+											hour2++;
+										}
+										
+										if ( hour2 > 0 && hour2 < 10 ) {
+											resHour2 = "0" + hour2;
+										} else if ( hour2 >= 10 && hour2 < 24 ) {
+											resHour2 = hour2;
+										} else if ( hour2 == 24) {
+											resHour2 = "00";
+											hour2 = 0;
+										}
+										
+							
+										
+										$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+										document.title = 'Rest ' + resHour2 + ":" + resMin2;
+						}	,80);		
+				}				
 	
 	});	
 	
 	
-
+	$("#clock2").trigger('click');
 				
 });
 
-function ttt(){
-	alert('hiiii');
-}
+
+
 
 /*
 var start=new Date();
