@@ -9,6 +9,11 @@ class IntervalsController extends AppController {
         $this->Auth->allow('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
+        
+        // swiching off Security component for ajax call
+			if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
+     			$this->Security->enabled = false; 
+     		}
     }
 //--------------------------------------------------------------------
 	function index() {
@@ -36,16 +41,13 @@ class IntervalsController extends AppController {
 	function add() {
 				Configure::write('debug', 0);
 				$this->autoRender = false;
-					//print_r($this->data);
-					//echo $_POST['work'];
-					echo $this->data['work'];
-					
-				exit;			
+					//print_r($this->data);		
 		if (!empty($this->data)) {
 			if ($this->RequestHandler->isAjax()) {
 				Configure::write('debug', 0);
 				$this->autoRender = false;
-				echo 'hi';
+				
+				echo json_encode(array('hi'=> $this->data['work'], 'typ'=> ' hiii'));
 				exit;				
 				
 				

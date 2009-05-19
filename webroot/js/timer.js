@@ -190,16 +190,14 @@ function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 jQuery(document).ready( function(){
 	
 	$('.addInterval').click(function(){
-		
-			$.ajax({
-			   type: "POST",
-			   url: path + "/intervals/add",
-			  //data: "data[work]=John&data[rest]=Boston",
-			   //data: "work=John&rest=Boston",
-			   success: function(msg){
-			     alert( "Data Saved: " + msg );
-			   }
-			 });
+    		$.post(
+	    		path + "/intervals/add",
+	    		{"data[work]": "test" },
+	        	function(data){
+					alert(data.hi);
+	          	},
+	          	"json"
+          	);			 
 
 	})
 });
