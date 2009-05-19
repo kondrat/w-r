@@ -186,3 +186,21 @@ function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 	var myW = window.open(wUri,wName,'width='+wWidth+',height='+wHeight+',top='+positionTop+',left='+positionLeft+',location=0,menubar='+menuBars+',resizable=0,scrollbars='+scrollBars+',status=0,titlebar=0,toolbar=0,directories=0,hotkeys=0')
 	myW.focus();
 }
+
+jQuery(document).ready( function(){
+	
+	$('.addInterval').click(function(){
+		
+			$.ajax({
+			   type: "POST",
+			   url: path + "/intervals/add",
+			  //data: "data[work]=John&data[rest]=Boston",
+			   //data: "work=John&rest=Boston",
+			   success: function(msg){
+			     alert( "Data Saved: " + msg );
+			   }
+			 });
+
+	})
+});
+

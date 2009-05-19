@@ -10,6 +10,7 @@
 	border: 5px solid #ccc;
 	text-align: center;
 	cursor: pointer;
+	margin-bottom: 2px;
 }
 .clock1 {
 	color: green;

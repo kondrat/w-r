@@ -1,17 +1,18 @@
-<div class="groups form">
-<?php echo $form->create('Group');?>
+<div class="intervals form">
+<?php echo $form->create('Interval');?>
 	<fieldset>
- 		<legend><?php __('Add Group');?></legend>
+ 		<legend><?php __('Add Interval');?></legend>
 	<?php
-		echo $form->input('name');
+		echo $form->input('hour_id');
+		echo $form->input('project_id');
+		echo $form->input('period');
+		echo $form->input('type');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('List Groups', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Users', true), array('controller'=> 'users', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New User', true), array('controller'=> 'users', 'action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('List Intervals', true), array('action'=>'index'));?></li>
 	</ul>
 </div>

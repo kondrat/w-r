@@ -29,6 +29,8 @@ class ProjectsController extends AppController {
 		}
 		$users = $this->Project->User->find('list');
 		$this->set(compact('users'));
+		$users2 = $this->Project->find('all');
+		$this->set('user2',$users2);
 	}
 
 	function edit($id = null) {

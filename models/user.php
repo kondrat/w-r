@@ -71,6 +71,41 @@ class User extends AppModel {
 						  );
 
 //--------------------------------------------------------------------
+	var $hasAndBelongsToMany = array(
+		'Project' => array(
+			'className' => 'Project',
+			'joinTable' => 'projects_users',
+			'foreignKey' => 'user_id',
+			'associationForeignKey' => 'project_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
+	);
+	
+	var $hasMany = array(
+		'Hour' => array(
+			'className' => 'Hour',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
+//--------------------------------------------------------------------
 	function betweenRus($data, $min, $max, $key) {
 		//debug($data);
 		$length = mb_strlen($data[$key], 'utf8');

@@ -4,7 +4,7 @@
  		<legend><?php __('Add Project');?></legend>
 	<?php
 		echo $form->input('name');
-		echo $form->input('user_id');
+		echo $form->input('User');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
