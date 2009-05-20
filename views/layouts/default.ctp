@@ -100,7 +100,7 @@
 
 	
 
-		    <div class="span-24" style="border-top: 1px solid #eee; margin-top: 10px;color:#ccc;">
+		    <div class="span-24" style="border-top: 1px solid #eee; margin-top: 10px;color:#ccc;font-weight: bold">
 		       work-rest &copy;<?php echo date('Y');?>
 		    </div>
 		

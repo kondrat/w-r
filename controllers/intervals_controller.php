@@ -39,15 +39,38 @@ class IntervalsController extends AppController {
 	}
 //--------------------------------------------------------------------
 	function add() {
+		
+		$hourId = null;
+		
 				Configure::write('debug', 0);
 				$this->autoRender = false;
 					//print_r($this->data);		
 		if (!empty($this->data)) {
 			if ($this->RequestHandler->isAjax()) {
 				Configure::write('debug', 0);
-				$this->autoRender = false;
+				//$this->autoRender = false;
+				$userId= null;
+				if ($this->Auth->user('id')) {
+					$userId = $this->Auth->user('id');
+				}
 				
-				echo json_encode(array('hi'=> $this->data['work'], 'typ'=> ' hiii'));
+				//$hourId = $this->Interval->Hour->getHour($userId);
+				
+				if ( isset( $this->data['work']) && $this->data['work'] != 0 ) {
+					$workInt = $this->Interval->find('first', array('conditions'=> array('Interval.hour_id' => $hourId, 'Interval.type' => 'work'), 'order' => 'created DESC' ) );
+					$newWorkInt = $workInt['interval'] + $this->data['work'];
+					$newWorkInt = 156;
+				} else {
+					$newWorkInt = 155;
+				}
+				//$this->data['Interval']['interval'];
+				
+				
+				
+				
+				
+				
+				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $newWorkInt) );
 				exit;				
 				
 				

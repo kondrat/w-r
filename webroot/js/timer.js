@@ -1,6 +1,8 @@
 jQuery(document).ready( function(){
 	
 
+
+
 		var resHour,resMin, resSec;
 		var sec = 0;
 		var resMin = "00";
@@ -81,6 +83,8 @@ jQuery(document).ready( function(){
 										
 										$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
 										document.title = 'Work ' + resHour + ":" + resMin; 
+										workTotal = parseInt(resHour)*60 + parseInt(resMin)*60 + parseInt(resSec);
+										
 						}	,80);		
 				}		
 			}
@@ -144,6 +148,7 @@ jQuery(document).ready( function(){
 										
 										$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 										document.title = 'Rest ' + resHour2 + ":" + resMin2;
+										restTotal = parseInt(resHour2)*60 + parseInt(resMin2)*60 + parseInt(resSec2);
 						}	,80);		
 				}				
 	
@@ -151,8 +156,75 @@ jQuery(document).ready( function(){
 	
 	
 	$("#clock2").trigger('click');
+
+
+		var clockObj = new Date();
+		var secInt = 0;
+
+		var restStamp = 0;
+		var restDelta = 0;
+		var restTotal = 0;
+		
+		var workStamp = 0;
+		var workDelta = 0;
+		var workTotal = 0;
+	
+		var it = 0;
+		var hourInt = 0;
+		
+					setInterval(function () {
+													
+										var curClockObj = new Date();
+										
+										var test1 = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
+		
+										if ( test1 > 999 ) { 
+											secInt++;
+											hourInt++;
+											it++;
+										}	
+										
+										if ( it == 20) {
+											if ( hourInt == 3600 ) {
+												hourInt = 0;
+												//alert('new Hour');
+											}
+											//secInt = 0;
+											it = 0;
+											restDelta = restTotal - restStamp;											
+											restStamp = restTotal;
+											
+											workDelta = workTotal - workStamp;											
+											workStamp = workTotal;
+											
+																						
+											//curClockObj = 0;
+											//clockObj = new Date();
+	
+																$.post(
+																	path + "/intervals/add",
+																	{"data[work]": workDelta,"data[rest]":restDelta },
+																			function(data){
+																				$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
+																			},
+																			"json"
+																);			 
+												
+													
+										}
+										
+																			
+										$('#test1').html(secInt);
+										$('#test3').html(it);
+						}	,80);	
+	
+
+
+						$(window).unload( function () { alert(hourInt); } );
+
 				
 });
+
 
 
 
@@ -187,18 +259,29 @@ function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 	myW.focus();
 }
 
+
+
+
 jQuery(document).ready( function(){
+
+
+	
 	
 	$('.addInterval').click(function(){
+		var clock1 = $('#clock1').html();
+		var clock2 = $('#clock2').html();
     		$.post(
 	    		path + "/intervals/add",
-	    		{"data[work]": "test" },
+	    		{"data[work]": clock1,"data[rest]":clock2 },
 	        	function(data){
-					alert(data.hi);
+								$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
 	          	},
 	          	"json"
           	);			 
 
 	})
+	
+	
+	
 });
 

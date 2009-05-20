@@ -6,7 +6,7 @@ class UsersController extends AppController {
 	//var $uses = array('User');
 	var $name = 'Users';
 	var $helpers = array('Form');
-	var $components = array( 'Security','userReg','kcaptcha');
+	var $components = array( 'Security','Cookie','userReg','kcaptcha');
 	var $pageTitle = 'Данные пользователя';
 	var $paginate = array('limit' => 5);
 

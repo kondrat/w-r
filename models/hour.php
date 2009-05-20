@@ -34,5 +34,35 @@ class Hour extends AppModel {
 		)
 	);
 
+
+
+//--------------------------------------------------------------------
+	/**
+	 * Sets the current user's hour
+	 *
+	 * @param string $userId
+	 * @access public
+	 */
+	function getHour($userId = null) {
+		
+		
+		$hours = array();
+		if ( $userId ) {
+			$hours = $this->find('first', array('conditions'=> array('Hour.user_id' => $userId, 'Hour.status' => 'open') ) );
+			$this->data['Hour']['user_id'] = $userId;
+			
+			if ( $hours == array() ) {
+				$this->data['Hour']['status'] = 'open';
+			}
+			$this->save($this->data);
+			return $this->id;
+		} else {
+			return 10;
+		}
+		
+		
+	}
+//--------------------------------------------------------------------
+
 }
 ?>
