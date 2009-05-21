@@ -1,4 +1,4 @@
-<?php echo $javascript->link('timer',false);?>
+<?php echo $javascript->link('timer2',false);?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
 	<div class="span-8">
