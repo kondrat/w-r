@@ -26,6 +26,8 @@
 </a>
 <div id="test1">test1</div>
 <div id="test2">test2</div>
+<p style="margin:0"> real </p>
+<div id="test4">test4</div>
 <div id="test3">test3</div>
 
 <?php echo $form->end( );?>

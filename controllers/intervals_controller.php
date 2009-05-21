@@ -24,15 +24,17 @@ class IntervalsController extends AppController {
 			if( !$this->Cookie->read('guestKey')) {												
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				
-				if( !$this->Session->check('firstHour') ) {				
-					$this->Session->write('firstHour', $key );			
+				if( !$this->Session->check('guestKey') ) {				
+					$this->Session->write('guestKey', $key );			
 				}	
 										
 			} else {
-				$this->Session->write('firstHour', $this->Cookie->read('guestKey') );
+				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
 			}
 			
-			
+				if ( $this->Session->check('ii') ) {					
+					$this->Session->write('ii', 1);
+				}
 			
 		//$this->Interval->recursive = 0;
 		//$this->set('intervals', $this->paginate());
@@ -41,36 +43,55 @@ class IntervalsController extends AppController {
 	function add() {
 		
 		$hourId = null;
+		$workInt = array();
+		$projectId = null;
 		
 				Configure::write('debug', 0);
 				$this->autoRender = false;
 					//print_r($this->data);		
 		if (!empty($this->data)) {
+			
+			App::import('Sanitize');
+			
 			if ($this->RequestHandler->isAjax()) {
-				Configure::write('debug', 0);
-				//$this->autoRender = false;
+								
 				$userId= null;
 				if ($this->Auth->user('id')) {
 					$userId = $this->Auth->user('id');
 				}
 				
-				//$hourId = $this->Interval->Hour->getHour($userId);
+				$hourId = $this->Interval->Hour->getHour($userId);
 				
+				$this->data['work'] = Sanitize::paranoid($this->data['work']);
+				$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
+					
 				if ( isset( $this->data['work']) && $this->data['work'] != 0 ) {
-					$workInt = $this->Interval->find('first', array('conditions'=> array('Interval.hour_id' => $hourId, 'Interval.type' => 'work'), 'order' => 'created DESC' ) );
-					$newWorkInt = $workInt['interval'] + $this->data['work'];
-					$newWorkInt = 156;
+									
+					$this->Interval->saveInterval( $this->data['work'] , $hourId, $projectId, 'work');
+					
+				} 
+				
+				if ( isset( $this->data['rest']) && $this->data['rest'] != 0 ) {
+					
+					$this->Interval->saveInterval($this->data['rest'], $hourId, $projectId, 'rest');
+					
+				} 
+			
+				$ii = 1;
+				if ( !$this->Session->check('ii') ) {					
+					$this->Session->write('ii', $ii);
 				} else {
-					$newWorkInt = 155;
+					$ii = $ii + $this->Session->read('ii');
+					$this->Session->write('ii', $ii);
 				}
-				//$this->data['Interval']['interval'];
 				
 				
 				
 				
 				
 				
-				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $newWorkInt) );
+				
+				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $ii ) );
 				exit;				
 				
 				
