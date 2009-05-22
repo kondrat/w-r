@@ -11,14 +11,13 @@
 		<p class="clock clock2" id="clock2">00:00:00</p>
 		
 	</div>
-	<div class="span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-		<div style="margin: 0; width: 65%;height: 10px; background-color: #95ffca; float: left;"></div>
-		<div style="margin: 0; width: 35%; height: 10px; background-color: #ff7d7d; float: left;"></div>
+	<div class="grafWrapper">
+		<div class="graf0 span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+			<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>
+			<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+		</div>
 	</div>
-	<div class="span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-		<div style="margin: 0; width: 55%;height: 10px; background-color: #95ffca; float: left;"></div>
-		<div style="margin: 0; width: 45%; height: 10px; background-color: #ff7d7d; float: left;"></div>
-	</div>
+
 </div>
 <h2><?php __('Interval');?></h2>
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
@@ -29,6 +28,6 @@
 <p style="margin:0"> real </p>
 <div id="test4">test4</div>
 <div id="test3">test3</div>
-
+<ul class="ultest"></ul>
 <?php echo $form->end( );?>
 <div class="addInterval" style="cursor: pointer">submit</div>

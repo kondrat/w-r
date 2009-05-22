@@ -48,7 +48,8 @@ class Interval extends AppModel {
 							$this->data['Interval']['interval'] = $interval;
 							$this->data['Interval']['type'] = $type;
 							
-							$this->save($this->data);
+							$this->create($this->data);
+							$this->save();
 							
 						} else {		
 										

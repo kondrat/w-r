@@ -44,12 +44,12 @@ class Hour extends AppModel {
 	 * @param string $userId
 	 * @access public
 	 */
-	function getHour($userId = null) {
+	function getHour($userId = null, $key = null, $nextHour = null ) {
 				
 		$hours = array();
 		
 		if ( $userId ) {
-			$hours = $this->find('first', array('conditions'=> array('Hour.user_id' => $userId, 'Hour.status' => 'open') ) );
+			$hours = $this->find('first', array('conditions'=> array('Hour.user_id' => $userId, 'Hour.status' => 'open'),'contain' => false ) );
 			$this->data['Hour']['user_id'] = $userId;
 			
 			if ( $hours == array() ) {
@@ -59,8 +59,28 @@ class Hour extends AppModel {
 			} else {
 				return $hours['Hour']['id'];
 			}
+			
+		} elseif($key != null) {
+			
+			
+			$hours = $this->find('first', array('conditions'=> array('Hour.key' => $key, 'Hour.status' => 'open'),'contain' => false ) );
+			
+			$this->data['Hour']['key'] = $key;
+			
+				//return $hours['Hour']['id'];
+			if ( !isset($hours) || $hours == array() ) {
+				$this->data['Hour']['status'] = 'open';
+				if ( $this->save($this->data) ) {
+					return $this->id;	
+				} else {
+					return 114;
+				}			
+			} else {
+				return $hours['Hour']['id'];
+			}
+			
 		} else {
-			return 10;
+			return 15;
 		}
 		
 		

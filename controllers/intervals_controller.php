@@ -10,7 +10,7 @@ class IntervalsController extends AppController {
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
-        // swiching off Security component for ajax call
+      // swiching off Security component for ajax call
 			if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
      			$this->Security->enabled = false; 
      		}
@@ -43,6 +43,7 @@ class IntervalsController extends AppController {
 	function add() {
 		
 		$hourId = null;
+		$key = null;
 		$workInt = array();
 		$projectId = null;
 		
@@ -58,13 +59,16 @@ class IntervalsController extends AppController {
 				$userId= null;
 				if ($this->Auth->user('id')) {
 					$userId = $this->Auth->user('id');
+				} else {
+					$key = $this->Session->read('guestKey');
 				}
-				
-				$hourId = $this->Interval->Hour->getHour($userId);
 				
 				$this->data['work'] = Sanitize::paranoid($this->data['work']);
 				$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
-					
+				$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
+
+				$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour);
+									
 				if ( isset( $this->data['work']) && $this->data['work'] != 0 ) {
 									
 					$this->Interval->saveInterval( $this->data['work'] , $hourId, $projectId, 'work');
@@ -77,7 +81,7 @@ class IntervalsController extends AppController {
 					
 				} 
 			
-				$ii = 1;
+				$ii = 0;
 				if ( !$this->Session->check('ii') ) {					
 					$this->Session->write('ii', $ii);
 				} else {
@@ -91,7 +95,7 @@ class IntervalsController extends AppController {
 				
 				
 				
-				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $ii ) );
+				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $this->data['nextHour'] ) );
 				exit;				
 				
 				

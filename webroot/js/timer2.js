@@ -2,18 +2,24 @@ jQuery(document).ready( function(){
 	
 		var clockObj = new Date();
 		var secInt = 0;
-    	var typeInt = 'rest';
-    	
-		var restStamp = 0;
-		var restDelta = 0;
-		var restTotal = 0;
-		
+		var typeInt = 'rest';
+		var hourDay = 0;
+		var grafClass = 'graf0';
+		var nextHour = 0;
+					
 		var workStamp = 0;
 		var workDelta = 0;
 		var workTotal = 0;
-	
+		var hourWork = 0;
+
+		var restStamp = 0;
+		var restDelta = 0;
+		var restTotal = 0;
+		var hourRest = 0;
+			
 		var loop = 0;
 		var hourInt = 0;
+		var graf = 0;
 
 
 		var resHour,resMin, resSec;
@@ -33,6 +39,8 @@ jQuery(document).ready( function(){
 		var hour2 = 0;
 		var k2 = 0;
 		var i2 = 0;		
+
+
 								
 	$('#clock1, .work').click( function(){
 		
@@ -66,11 +74,13 @@ jQuery(document).ready( function(){
 		
 										if ( test1 > 999 ) { 
 											secInt++;
+											
 											hourInt++;
 											loop++;
 											i++;
 											i2++;
 											
+											graf++;
 										}
 										
 								if ( typeInt == 'work' ) {			
@@ -108,7 +118,7 @@ jQuery(document).ready( function(){
 										
 										$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
 										document.title = 'Work ' + resHour + ":" + resMin; 
-										workTotal = parseInt(resHour)*60 + parseInt(resMin)*60 + parseInt(resSec);										
+										workTotal = parseInt(hour)*60 + parseInt(minut)*60 + parseInt(i)*1;										
 										
 									}	
 										
@@ -148,22 +158,82 @@ jQuery(document).ready( function(){
 										
 										$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 										document.title = 'Rest ' + resHour2 + ":" + resMin2;
-										restTotal = parseInt(resHour2)*60 + parseInt(resMin2)*60 + parseInt(resSec2);									
+										restTotal = parseInt(hour2)*60 + parseInt(minut2)*60 + parseInt(i2);									
 								}											
 										
 										
 										if ( loop == 10) {
-											if ( hourInt == 3600 ) {
-												hourInt = 0;
-												//alert('new Hour');
-											}
-											//secInt = 0;
 											
+											
+											if ( graf == 20 ) {
+												
+												var workPS = Math.floor(hourWork/36);
+												var restPS = Math.floor(hourRest/36);
+												
+												if ( (workPS - restPS) > 100 ) {
+													restPS = 100 - workPS;
+												}
+											
+
+												
+												$('.hourWork:last').width( workPS+"%");
+												$('.hourRest:last').width( restPS+"%");
+												
+												graf = 0;											
+											}
+											
+											nextHour = 0;
+											
+											if ( hourInt == 30 ) {
+												
+												nextHour = 1;
+												
+												hourDay++;
+												
+												var grafClass = '.graf'+hourDay;
+												$('.grafWrapper').append(	'<div class="'+grafClass+' span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
+																										'<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>'+
+																										'<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>'+
+																									'</div>'
+																					);
+											
+												
+												
+												
+												hourInt = 0
+												hourWork = 0;
+												hourRest = 0;											
+											}
+											
+											workDelta = parseInt(workTotal) - parseInt(workStamp);											
+											workStamp = workTotal;
+																						
 											restDelta = parseInt(restTotal) - parseInt(restStamp);											
 											restStamp = restTotal;
 											
-											//workDelta = parseInt(workTotal) - parseInt(workStamp);											
-											//workStamp = workTotal;
+
+											
+											hourWork = parseInt(hourWork) + parseInt(workDelta);
+											hourRest = parseInt(hourRest) + parseInt(restDelta);
+											
+											
+											
+											
+											var qq1 = workDelta; 
+											var qq2 = restDelta;	
+													
+											var red = 'color: blue';
+											var check = 0;
+											if ( restDelta < 0 || restDelta > loop ) {
+												red = 'color: red';
+												check = 1;
+											}
+
+											if ( workDelta < 0 || workDelta > loop ) {
+												red = 'color: red';
+												check = 1;
+											}
+											
 											if ( restDelta > loop ) {
 												restDelta = loop;
 											}
@@ -171,17 +241,11 @@ jQuery(document).ready( function(){
 											
 											loop = 0;
 											
-											if ( restDelta < 0 || restDelta > 11 ) {
-												alert( 'restDelta ' + restDelta);
-											}
+											if ( check == 1 ) {
+												$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - loop - '+ loop + '</li>');	
+											}																					
 
-											if ( workDelta < 0 || workDelta > 11 ) {
-												alert( 'workDelta ' + workDelta);
-											}
-																																	
-											//curClockObj = 0;
-											//clockObj = new Date();
-											saveTime( workDelta, restDelta);
+											saveTime( workDelta, restDelta, nextHour);
 		 
 												
 													
@@ -189,9 +253,10 @@ jQuery(document).ready( function(){
 										
 																			
 										$('#test1').html(secInt);
-										$('#test4').html(workDelta + ' - ' + restDelta + ' - save - '+ save);
-										$('#test3').html(loop);
-						}	,80);	
+										$('#test4').html(workDelta + ' - ' + restDelta + ' - save - '+ save );
+										$('#test3').html('hourWork: '+ hourWork+' - hourRest: '+ hourRest);
+										
+						}	,100);	
 	
 
 
@@ -205,12 +270,12 @@ jQuery(document).ready( function(){
 
 
 var save = 0;
-function saveTime( workDelta,  restDelta ) {
+function saveTime( workDelta,  restDelta, nextHour ) {
 	//alert(workDelta + ' - ' + restDelta);
 		save++;
 		$.post(
 			path + "/intervals/add",
-			{"data[work]": workDelta,"data[rest]":restDelta },
+			{"data[work]": workDelta,"data[rest]":restDelta,"data[nextHour]":nextHour },
 					function(data){
 						$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
 					},
