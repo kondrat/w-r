@@ -8,7 +8,7 @@
 # Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-05-20 21:36:15
+# Date/time:                    2009-05-22 21:37:52
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -29,14 +29,14 @@ USE `w-r`;
 
 CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `id` int(11) unsigned NOT NULL auto_increment,
-  `user_id` int(11) unsigned NOT NULL,
-  `key` char(64) default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `key` varchar(32) default NULL,
   `status` enum('open','closed') default 'open',
   `start` datetime default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 
 
@@ -47,50 +47,8 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
 LOCK TABLES `hours` WRITE;
 /*!40000 ALTER TABLE `hours` DISABLE KEYS;*/
 REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `start`, `created`) VALUES
-	('1','2',NULL,'closed',NULL,'2009-05-20 13:15:15'),
-	('2','2',NULL,'closed',NULL,'2009-05-20 13:17:59'),
-	('3','2',NULL,'open',NULL,'2009-05-20 13:19:08'),
-	('4','1',NULL,'open',NULL,'2009-05-20 13:37:38'),
-	('5','2',NULL,'open',NULL,'2009-05-20 13:37:49'),
-	('6','2',NULL,'open',NULL,'2009-05-20 13:38:45'),
-	('7','2',NULL,'open',NULL,'2009-05-20 15:44:35'),
-	('8','2',NULL,'open',NULL,'2009-05-20 15:44:47'),
-	('9','2',NULL,'open',NULL,'2009-05-20 16:59:44'),
-	('10','2',NULL,'open',NULL,'2009-05-20 17:00:59'),
-	('11','2',NULL,'open',NULL,'2009-05-20 17:01:04'),
-	('12','2',NULL,'open',NULL,'2009-05-20 17:30:10'),
-	('13','2',NULL,'open',NULL,'2009-05-20 17:30:31'),
-	('14','2',NULL,'open',NULL,'2009-05-20 17:30:34'),
-	('15','2',NULL,'open',NULL,'2009-05-20 17:30:38'),
-	('16','2',NULL,'open',NULL,'2009-05-20 17:31:06'),
-	('17','2',NULL,'open',NULL,'2009-05-20 17:32:45'),
-	('18','2',NULL,'open',NULL,'2009-05-20 17:33:04'),
-	('19','2',NULL,'open',NULL,'2009-05-20 17:55:38'),
-	('20','2',NULL,'open',NULL,'2009-05-20 17:56:58'),
-	('21','2',NULL,'open',NULL,'2009-05-20 17:57:06'),
-	('22','2',NULL,'open',NULL,'2009-05-20 17:57:17'),
-	('23','2',NULL,'open',NULL,'2009-05-20 17:57:23'),
-	('24','2',NULL,'open',NULL,'2009-05-20 17:57:31'),
-	('25','2',NULL,'open',NULL,'2009-05-20 18:00:20'),
-	('26','2',NULL,'open',NULL,'2009-05-20 18:00:30'),
-	('27','2',NULL,'open',NULL,'2009-05-20 18:00:40'),
-	('28','2',NULL,'open',NULL,'2009-05-20 18:00:51'),
-	('29','2',NULL,'open',NULL,'2009-05-20 18:01:00'),
-	('30','2',NULL,'open',NULL,'2009-05-20 18:01:11'),
-	('31','2',NULL,'open',NULL,'2009-05-20 18:01:20'),
-	('32','2',NULL,'open',NULL,'2009-05-20 18:01:31'),
-	('33','2',NULL,'open',NULL,'2009-05-20 18:01:40'),
-	('34','2',NULL,'open',NULL,'2009-05-20 18:01:51'),
-	('35','2',NULL,'open',NULL,'2009-05-20 18:02:00'),
-	('36','2',NULL,'open',NULL,'2009-05-20 18:02:11'),
-	('37','2',NULL,'open',NULL,'2009-05-20 18:02:20'),
-	('38','2',NULL,'open',NULL,'2009-05-20 18:02:31'),
-	('39','2',NULL,'open',NULL,'2009-05-20 18:02:41'),
-	('40','2',NULL,'open',NULL,'2009-05-20 18:02:51'),
-	('41','2',NULL,'open',NULL,'2009-05-20 18:03:01'),
-	('42','2',NULL,'open',NULL,'2009-05-20 18:03:11'),
-	('43','2',NULL,'open',NULL,'2009-05-20 18:03:21'),
-	('44','2',NULL,'open',NULL,'2009-05-20 18:03:31');
+	('78',NULL,'fa5727f273e0eed24acbc7f683ea2350','open',NULL,'2009-05-22 21:11:32'),
+	('79',NULL,'b50340b3f51cc3b8dcd4d2e6aa6f102e','open',NULL,'2009-05-22 21:31:05');
 /*!40000 ALTER TABLE `hours` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -104,12 +62,12 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
   `hour_id` int(11) unsigned NOT NULL,
   `project_id` int(11) unsigned default NULL,
   `interval` int(11) unsigned NOT NULL,
-  `type` char(1) NOT NULL default 'r',
+  `type` varchar(10) NOT NULL default 'rest',
   `created` datetime default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 
 
@@ -117,8 +75,15 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
 # Dumping data for table 'intervals'
 #
 
-# No data found.
-
+LOCK TABLES `intervals` WRITE;
+/*!40000 ALTER TABLE `intervals` DISABLE KEYS;*/
+REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `created`) VALUES
+	('73','78',NULL,'20','work','2009-05-22 21:11:32'),
+	('74','78',NULL,'1560','rest','2009-05-22 21:11:32'),
+	('75','79',NULL,'340','rest','2009-05-22 21:31:05'),
+	('76','79',NULL,'10','work','2009-05-22 21:32:36');
+/*!40000 ALTER TABLE `intervals` ENABLE KEYS;*/
+UNLOCK TABLES;
 
 
 #
@@ -202,7 +167,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 
@@ -214,7 +179,8 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS;*/
 REPLACE INTO `users` (`id`, `username`, `password`, `timezone`, `email`, `uuid`, `active`, `created`) VALUES
 	('1','admin','c129b324aee662b04eccf68babba85851346dff9',NULL,'admin@w-r.ru','4a06df7e237e2',0,'2009-05-10 18:06:54'),
-	('2','work1','c129b324aee662b04eccf68babba85851346dff9',NULL,'work1@mm.ru','4a12b4ab9dc81',0,'2009-05-19 17:31:23');
+	('2','work1','c129b324aee662b04eccf68babba85851346dff9',NULL,'work1@mm.ru','4a12b4ab9dc81',0,'2009-05-19 17:31:23'),
+	('3','work2','c129b324aee662b04eccf68babba85851346dff9',NULL,'work2@mm.ru','4a1528e104bc9',0,'2009-05-21 14:11:45');
 /*!40000 ALTER TABLE `users` ENABLE KEYS;*/
 UNLOCK TABLES;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;*/
