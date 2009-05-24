@@ -5,10 +5,10 @@
 # Database:                     w-r
 # Server version:               5.0.6-beta-nt
 # Server OS:                    Win32
-# Target compatibility:         HeidiSQL w/ MySQL Server 4.1
+# Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-05-25 00:41:24
+# Date/time:                    2009-05-25 00:42:48
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -37,7 +37,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) TYPE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -141,7 +141,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) TYPE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -277,7 +277,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) TYPE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -310,7 +310,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
   `perm` int(10) unsigned default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -346,7 +346,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`)
-) TYPE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
