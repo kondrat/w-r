@@ -66,8 +66,13 @@ class IntervalsController extends AppController {
 				$this->data['work'] = Sanitize::paranoid($this->data['work']);
 				$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
 				$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
-
-				$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour);
+				$nextHour = $this->data['nextHour'];
+				
+				if ( $key != null || $userId != null ) {
+					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour);
+				} else {
+					$hourId = 1000;
+				}
 									
 				if ( isset( $this->data['work']) && $this->data['work'] != 0 ) {
 									

@@ -12,7 +12,7 @@
 		
 	</div>
 	<div class="grafWrapper">
-		<div class="graf0 span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+		<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
 			<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>
 			<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 		</div>

@@ -55,7 +55,7 @@ class Interval extends AppModel {
 										
 							$newWorkInt = $checkInt['Interval']['interval'] + $interval;					
 							$this->id = $checkInt['Interval']['id'];
-							$this->saveField('interval', $newWorkInt , $validate = false);
+							$this->saveField('interval', $newWorkInt , false);
 							
 						}
 			

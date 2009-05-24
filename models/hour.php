@@ -42,45 +42,84 @@ class Hour extends AppModel {
 	 * Sets the current user's hour
 	 *
 	 * @param string $userId
+	 * @param string $key
+	 * @param string $nextHour
 	 * @access public
 	 */
-	function getHour($userId = null, $key = null, $nextHour = null ) {
+	function getHour($userId = null, $key = null, $nextHour = 0 ) {
 				
 		$hours = array();
-		
-		if ( $userId ) {
+
+		if ( $userId !=  null ) {
 			$hours = $this->find('first', array('conditions'=> array('Hour.user_id' => $userId, 'Hour.status' => 'open'),'contain' => false ) );
 			$this->data['Hour']['user_id'] = $userId;
 			
 			if ( $hours == array() ) {
 				$this->data['Hour']['status'] = 'open';
-				$this->save($this->data);
-				return $this->id;				
-			} else {
-				return $hours['Hour']['id'];
-			}
-			
-		} elseif($key != null) {
-			
-			
-			$hours = $this->find('first', array('conditions'=> array('Hour.key' => $key, 'Hour.status' => 'open'),'contain' => false ) );
-			
-			$this->data['Hour']['key'] = $key;
-			
-				//return $hours['Hour']['id'];
-			if ( !isset($hours) || $hours == array() ) {
-				$this->data['Hour']['status'] = 'open';
-				if ( $this->save($this->data) ) {
+				$this->create($this->data);
+				if ( $this->save() ) {
 					return $this->id;	
 				} else {
 					return 114;
-				}			
+				}						
 			} else {
+				
+				if ( $nextHour == 1 ) {
+					$this->id = $hours['Hour']['id'];
+					$this->saveField('type', 'closed' , false);
+					
+					$this->data['Hour']['key'] = $key;
+					$this->data['Hour']['status'] = 'open';
+					$this->create($this->data);
+					if ( $this->save() ) {
+						return $this->id;	
+					} else {
+						return 114;
+					}										
+				}				
 				return $hours['Hour']['id'];
 			}
 			
+		} elseif( $key != null ) {
+			
+			
+			
+			$hours = $this->find('first', array('conditions'=> array('Hour.key' => $key, 'Hour.status' => 'open'),'contain' => false ) );			
+			$this->data['Hour']['key'] = $key;
+			
+			if (  $hours == array() ) {
+				
+				$this->data['Hour']['status'] = 'open';
+				$this->create($this->data);
+				if ( $this->save() ) {
+					return $this->id;
+				} else {
+					return 114;
+				}				
+							
+			} else {
+				
+				if ( $nextHour == 1 ) {
+					
+					$this->id = $hours['Hour']['id'];
+					$this->saveField('status', 'closed' , false);
+					
+					$this->data['Hour']['status'] = 'open';
+					$this->data['Hour']['key'] = $key;
+					$this->create($this->data);
+					if ( $this->save() ) {
+						return $this->id;	
+					} else {
+						return 114;
+					}										
+				}
+															
+				return $hours['Hour']['id'];
+				
+			}
+			
 		} else {
-			return 15;
+			return 115;
 		}
 		
 		
