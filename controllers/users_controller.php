@@ -52,11 +52,7 @@ class UsersController extends AppController {
          			}
 
 					if ($this->referer()=='/') {
-						if( $this->User->Album->find('count',array('conditions'=> array('Album.user_id'=> $this->Auth->user('id') ), 'order'=>'desc') ) < '1' ) {
-							$this->redirect( array('controller'=>'albums','action'=>'add') );
-						}
 
-						$this->redirect( array('controller'=>'albums','action'=>'useralbum' ),null,true );	
 					} else {
 
 						$this->redirect( $this->Auth->redirect() );

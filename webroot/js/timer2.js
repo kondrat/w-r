@@ -61,7 +61,7 @@ jQuery(document).ready( function(){
 	});	
 
 	
-					setInterval(function () {
+				var interval = setInterval(function () {
 													
 										var curClockObj = new Date();
 										
@@ -173,24 +173,25 @@ jQuery(document).ready( function(){
 													
 											var red = 'color: blue';
 											var check = 0;
+											
 											if ( restDelta < 0 || restDelta > loop ) {
 												red = 'color: red';
-												check = 1;
-											}
-
-											if ( workDelta < 0 || workDelta > loop ) {
+												check = 1;											
+												if ( workDelta < 0 || workDelta > loop ) {
+													workDelta = 0;
+													restDelta = 0;
+												} else {
+													restDelta = loop - workDelta;
+												}												
+											} else if (workDelta < 0 || workDelta > loop) {
 												red = 'color: red';
 												check = 1;
+													workDelta = loop - restDelta;			
+											} else {
+												workDelta = loop - restDelta;												
 											}
-											
-											if ( restDelta > loop ) {
-												restDelta = loop;
-											}
-											
-											workDelta = loop - restDelta;	
-	
-	
-											
+
+																					
 											hourWork = parseInt(hourWork) + parseInt(workDelta);
 											hourRest = parseInt(hourRest) + parseInt(restDelta);
 											
@@ -202,7 +203,9 @@ jQuery(document).ready( function(){
 												var workPS = Math.floor(hourWork/36);
 												var restPS = Math.floor(hourRest/36);
 												
-												if ( (workPS - restPS) > 100 ) {
+												if ( (parseInt(workPS) + parseInt(restPS)) > 100 ) {
+													restPS = 100 - workPS;
+												} else if (( parseInt(workPS) + parseInt(restPS)) >= 99 ) {
 													restPS = 100 - workPS;
 												}
 											
@@ -268,6 +271,12 @@ jQuery(document).ready( function(){
 							 //saveTime( workDelta, restDelta); 
 						} );
 
+
+	$('.addInterval').click(function(){		
+		clearInterval(interval);
+		//alert('clear');
+	})
+
 				
 });
 
@@ -327,8 +336,11 @@ jQuery(document).ready( function(){
 	
 	
 	$('.addInterval').click(function(){
+		
+		/*
 		var clock1 = $('#clock1').html();
 		var clock2 = $('#clock2').html();
+			
     		$.post(
 	    		path + "/intervals/add",
 	    		{"data[work]": clock1,"data[rest]":clock2 },
@@ -337,7 +349,7 @@ jQuery(document).ready( function(){
 	          	},
 	          	"json"
           	);			 
-
+			*/
 	})
 	
 	

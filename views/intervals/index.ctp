@@ -2,12 +2,18 @@
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
 	<div class="span-8">
-		<div class="chessKnob work"> <?php __('Work');?></div>
+		<div class="chessKnob work">
+			<span><?php __('Work');?></span>
+			<div class="plusWork">+</div>
+		</div>
 		<p class="clock clock1" id="clock1">00:00:00</p>
 		
 	</div>
-	<div class="span-8 last">
-		<div class="chessKnob rest"> <?php __('Rest');?></div>
+	<div class="rest span-8 last">
+		<div class="chessKnob rest">
+			<span><?php __('Rest');?></span>
+			<div class="plusRest">-</div>
+		</div>
 		<p class="clock clock2" id="clock2">00:00:00</p>
 		
 	</div>
@@ -30,4 +36,4 @@
 <div id="test3">test3</div>
 <ul class="ultest"></ul>
 <?php echo $form->end( );?>
-<div class="addInterval" style="cursor: pointer">submit</div>
+<div class="addInterval" style="cursor: pointer">stop</div>

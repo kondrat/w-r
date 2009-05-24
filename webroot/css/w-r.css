@@ -19,6 +19,10 @@
 	color: red;
 	background-color: #ffd7d7;
 }
+
+
+
+
 /*form classes*/
 .error-message {
 	color: #8A1F11;
@@ -150,11 +154,37 @@ div.formWrap input.form-error {
 }
 .work{
 	color: green;
+	position: relative;
+}
+.work span {
 	cursor: pointer;
+}
+.plusWork {
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	height: 15px;
+	width: 20px;
+	border: 2px solid #ccc;
+	cursor: pointer;
+	line-height: 0.75;
 }
 .rest{
 	color: red;
+	position: relative;
+}
+.rest span {
 	cursor: pointer;
+}
+.plusRest {
+	position: absolute;
+	top: 5px;
+	right: 12px;
+	height: 15px;
+	width: 20px;
+	border: 2px solid #ccc;
+	cursor: pointer;
+	line-height: 0.55;
 }
 .intervals h2 {
 	margin-bottom: 0;

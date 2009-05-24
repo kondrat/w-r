@@ -32,9 +32,7 @@ class IntervalsController extends AppController {
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
 			}
 			
-				if ( $this->Session->check('ii') ) {					
-					$this->Session->write('ii', 1);
-				}
+
 			
 		//$this->Interval->recursive = 0;
 		//$this->set('intervals', $this->paginate());
