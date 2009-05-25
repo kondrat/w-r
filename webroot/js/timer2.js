@@ -1,5 +1,5 @@
 jQuery(document).ready( function(){
-	
+	/*
 		var clockObj = new Date();
 		var secInt = 0;
 		var typeInt = 'rest';
@@ -38,7 +38,9 @@ jQuery(document).ready( function(){
 		var resHour2 = "00";
 		var hour2 = 0;
 		var k2 = 0;
-		var i2 = 0;		
+		var i2 = 0;	
+		
+	*/	
 
 
 								

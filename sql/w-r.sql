@@ -3,12 +3,12 @@
 # --------------------------------------------------------
 # Host:                         127.0.0.1
 # Database:                     w-r
-# Server version:               5.0.6-beta-nt
+# Server version:               5.0.67-community-nt
 # Server OS:                    Win32
 # Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-05-25 00:42:48
+# Date/time:                    2009-05-25 21:48:30
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -32,12 +32,12 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `user_id` int(11) unsigned default NULL,
   `key` varchar(32) default NULL,
   `status` enum('open','closed') default 'open',
-  `start` datetime default NULL,
+  `worksession` char(32) default NULL,
   `created` datetime default NULL,
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8;
 
 
 
@@ -47,7 +47,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
 
 LOCK TABLES `hours` WRITE;
 /*!40000 ALTER TABLE `hours` DISABLE KEYS;*/
-REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `start`, `created`, `modified`) VALUES
+REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `worksession`, `created`, `modified`) VALUES
 	('181',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:18:52',NULL),
 	('182',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:19:52',NULL),
 	('183',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:20:52',NULL),
@@ -77,13 +77,13 @@ REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `start`, `created`, `mod
 	('207',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:37:05',NULL),
 	('208',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:37:52',NULL),
 	('209',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:38:05',NULL),
-	('210',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 00:38:19',NULL),
+	('210',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 00:38:19',NULL),
 	('211',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:38:51',NULL),
 	('212',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:39:04',NULL),
-	('213',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 00:39:08',NULL),
+	('213',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 00:39:08',NULL),
 	('214',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:39:52',NULL),
 	('215',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:40:05',NULL),
-	('216',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 00:40:08',NULL),
+	('216',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 00:40:08',NULL),
 	('217',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:40:51',NULL),
 	('218',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:41:04',NULL),
 	('219',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 00:41:51',NULL),
@@ -107,21 +107,30 @@ REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `start`, `created`, `mod
 	('237',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:53:04',NULL),
 	('238',NULL,'63582da2e6c595734b4904e4341fca00','closed',NULL,'2009-05-24 00:54:04',NULL),
 	('240','2',NULL,'open',NULL,'2009-05-24 00:59:04',NULL),
-	('241',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 01:40:24',NULL),
+	('241',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 01:40:24',NULL),
 	('242',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 01:48:55',NULL),
-	('243',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 11:41:25',NULL),
-	('244',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 12:41:28',NULL),
+	('243',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 11:41:25',NULL),
+	('244',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 12:41:28',NULL),
 	('245',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','closed',NULL,'2009-05-24 13:05:55',NULL),
 	('246',NULL,'77534e87db8b214986558a0fe0f24a0a','open',NULL,'2009-05-24 14:12:14',NULL),
 	('247','3',NULL,'open',NULL,'2009-05-24 14:12:53',NULL),
-	('248',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 14:34:45',NULL),
+	('248',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','2','2009-05-24 14:34:45',NULL),
 	('249',NULL,'7dd70a448dbc9ce7e7b79d76edb43c4f','open',NULL,'2009-05-24 15:01:41',NULL),
-	('250',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 15:37:35',NULL),
-	('251',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 16:37:34',NULL),
-	('252',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 17:37:34',NULL),
-	('253',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed',NULL,'2009-05-24 18:37:34',NULL),
-	('254',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','open',NULL,'2009-05-24 19:37:34',NULL),
-	('257',NULL,'63582da2e6c595734b4904e4341fca00','open',NULL,'2009-05-24 23:38:23','2009-05-24 23:38:23');
+	('250',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','1','2009-05-24 15:37:35',NULL),
+	('251',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','1','2009-05-24 16:37:34',NULL),
+	('252',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','1','2009-05-24 17:37:34',NULL),
+	('253',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','closed','1','2009-05-24 18:37:34',NULL),
+	('254',NULL,'cdba02d3b088f87d2e5ba4ae2d25e7b8','open','1','2009-05-24 19:37:34',NULL),
+	('257',NULL,'63582da2e6c595734b4904e4341fca00','open',NULL,'2009-05-24 23:38:23','2009-05-24 23:38:23'),
+	('258',NULL,'fa5727f273e0eed24acbc7f683ea2350','closed','3','2009-05-25 14:28:12','2009-05-25 15:28:12'),
+	('259',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed',NULL,'2009-05-25 14:28:51','2009-05-25 15:28:51'),
+	('260',NULL,'fa5727f273e0eed24acbc7f683ea2350','open','3','2009-05-25 15:28:12','2009-05-25 15:28:12'),
+	('261',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed','5','2009-05-25 15:28:51','2009-05-25 16:28:51'),
+	('262',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed','5','2009-05-25 16:28:51','2009-05-25 17:28:51'),
+	('263',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed','5','2009-05-25 17:28:51','2009-05-25 18:28:51'),
+	('264',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed','5','2009-05-25 18:28:51','2009-05-25 19:28:51'),
+	('265',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','closed','5','2009-05-25 19:28:51','2009-05-25 21:28:56'),
+	('266',NULL,'37ac05d936e5b9b2e7c1f1ea3b8750a9','open',NULL,'2009-05-25 21:28:56','2009-05-25 21:28:56');
 /*!40000 ALTER TABLE `hours` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -141,7 +150,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=351 DEFAULT CHARSET=utf8;
 
 
 
@@ -214,7 +223,7 @@ REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `cr
 	('284','224',NULL,'60','work','2009-05-24 00:44:04','2009-05-24 00:44:54'),
 	('285','225',NULL,'60','rest','2009-05-24 00:44:51','2009-05-24 00:45:42'),
 	('286','226',NULL,'50','work','2009-05-24 00:45:04','2009-05-24 00:45:55'),
-	('287','1000',NULL,'618','work','2009-05-24 00:45:15','2009-05-24 23:36:15'),
+	('287','1000',NULL,'4158','work','2009-05-24 00:45:15','2009-05-25 14:08:29'),
 	('288','227',NULL,'60','rest','2009-05-24 00:45:51','2009-05-24 00:46:42'),
 	('289','228',NULL,'60','work','2009-05-24 00:46:04','2009-05-24 00:46:55'),
 	('290','229',NULL,'45','rest','2009-05-24 00:46:51','2009-05-24 00:47:31'),
@@ -230,7 +239,7 @@ REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `cr
 	('300','237',NULL,'60','work','2009-05-24 00:53:04','2009-05-24 00:53:56'),
 	('301','238',NULL,'40','work','2009-05-24 00:54:04','2009-05-24 00:54:55'),
 	('302','239',NULL,'30','work','2009-05-24 00:55:04','2009-05-24 23:36:33'),
-	('303','1000',NULL,'7980','rest','2009-05-24 00:56:05','2009-05-24 23:46:54'),
+	('303','1000',NULL,'14350','rest','2009-05-24 00:56:05','2009-05-25 19:49:11'),
 	('304','240',NULL,'1810','work','2009-05-24 00:59:04','2009-05-24 01:56:24'),
 	('305','240',NULL,'1780','rest','2009-05-24 01:00:04','2009-05-24 23:47:03'),
 	('306','241',NULL,'3466','work','2009-05-24 01:40:24','2009-05-24 11:41:16'),
@@ -250,9 +259,9 @@ REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `cr
 	('320','248',NULL,'3011','work','2009-05-24 14:37:34','2009-05-24 15:28:05'),
 	('321','249',NULL,'1546','work','2009-05-24 15:01:41','2009-05-24 23:35:35'),
 	('322','249',NULL,'3014','rest','2009-05-24 15:12:42','2009-05-24 23:41:34'),
-	('323','250',NULL,'1800','rest','2009-05-24 15:37:35','2009-05-24 16:35:44'),
-	('324','250',NULL,'1800','work','2009-05-24 15:38:54','2009-05-24 16:37:24'),
-	('325','251',NULL,'3600','work','2009-05-24 16:37:34','2009-05-24 17:37:24'),
+	('323','250',NULL,'1600','rest','2009-05-24 15:37:35','2009-05-24 16:35:44'),
+	('324','250',NULL,'1600','work','2009-05-24 15:38:54','2009-05-24 16:37:24'),
+	('325','251',NULL,'2600','work','2009-05-24 16:37:34','2009-05-24 17:37:24'),
 	('326','252',NULL,'3600','work','2009-05-24 17:37:34','2009-05-24 18:37:24'),
 	('327','253',NULL,'3600','work','2009-05-24 18:37:34','2009-05-24 19:37:24'),
 	('328','254',NULL,'526','work','2009-05-24 19:37:34','2009-05-24 19:46:14'),
@@ -260,7 +269,24 @@ REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `cr
 	('330','255',NULL,'90','work','2009-05-24 23:36:43','2009-05-24 23:38:13'),
 	('331','256',NULL,'10','work','2009-05-24 23:37:12','2009-05-24 23:37:12'),
 	('332','257',NULL,'16','work','2009-05-24 23:38:23','2009-05-24 23:38:33'),
-	('333','257',NULL,'3404','rest','2009-05-24 23:38:33','2009-05-25 00:38:33');
+	('333','257',NULL,'3404','rest','2009-05-24 23:38:33','2009-05-25 00:38:33'),
+	('334','258',NULL,'218','rest','2009-05-25 14:28:12','2009-05-25 14:31:42'),
+	('335','258',NULL,'3382','work','2009-05-25 14:28:22','2009-05-25 15:28:02'),
+	('336','259',NULL,'173','work','2009-05-25 14:28:51','2009-05-25 14:31:41'),
+	('337','259',NULL,'3427','rest','2009-05-25 14:28:51','2009-05-25 15:28:41'),
+	('338','260',NULL,'5464','work','2009-05-25 15:28:12','2009-05-25 21:33:07'),
+	('339','261',NULL,'1780','rest','2009-05-25 15:28:51','2009-05-25 15:59:11'),
+	('340','261',NULL,'1700','work','2009-05-25 15:31:01','2009-05-25 16:28:41'),
+	('341','260',NULL,'16246','rest','2009-05-25 15:52:47','2009-05-25 21:48:27'),
+	('342','262',NULL,'3410','work','2009-05-25 16:28:51','2009-05-25 17:28:41'),
+	('343','263',NULL,'8','work','2009-05-25 17:28:51','2009-05-25 17:28:51'),
+	('344','263',NULL,'3592','rest','2009-05-25 17:28:51','2009-05-25 18:28:41'),
+	('345','264',NULL,'1718','rest','2009-05-25 18:28:51','2009-05-25 18:57:21'),
+	('346','264',NULL,'1882','work','2009-05-25 18:57:21','2009-05-25 19:28:41'),
+	('347','265',NULL,'1358','work','2009-05-25 19:28:51','2009-05-25 20:21:48'),
+	('348','251',NULL,'500','rest',NULL,NULL),
+	('349','265',NULL,'5702','rest','2009-05-25 19:39:07','2009-05-25 21:28:46'),
+	('350','266',NULL,'1180','rest','2009-05-25 21:28:56','2009-05-25 21:48:26');
 /*!40000 ALTER TABLE `intervals` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -277,7 +303,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 
 
@@ -310,7 +336,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
   `perm` int(10) unsigned default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 
 
@@ -346,7 +372,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 

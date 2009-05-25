@@ -1,4 +1,46 @@
 <?php echo $javascript->link('timer2',false);?>
+<?php $script = "
+		var clockObj = new Date();
+		var secInt = 0;
+		var typeInt = 'rest';
+		var hourDay = 0;
+		var grafClass = 'graf0';
+		var nextHour = 0;
+					
+		var workStamp = 0;
+		var workDelta = 0;
+		var workTotal = 0; //to restore
+		var hourWork = 0;
+
+		var restStamp = 0;
+		var restDelta = 0;
+		var restTotal = 0; //to restore
+		var hourRest = 0;
+			
+		var loop = 0;
+		var hourInt = 0;
+		var graf = 0;
+
+
+		var resHour,resMin, resSec;
+		var sec = 0;
+		var resMin = '00';
+		var minut = 20;  //to restore
+		var resHour = '00';
+		var hour = 10;  //to restore
+		var k = 0;
+		var i = 0;
+		
+		var resHour2,resMin2, resSec2;
+		var sec2 = 0;
+		var resMin2 = '00';
+		var minut2 = 20;  //to restore
+		var resHour2 = '00';
+		var hour2 = 10;  //to restore
+		var k2 = 0;
+		var i2 = 0;		"
+?>
+<?php echo $javascript->codeBlock($script,  array('allowCache'=>false,'safe'=>true,'inline'=>false));?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
 	<div class="span-8">
@@ -17,13 +59,43 @@
 		<p class="clock clock2" id="clock2">00:00:00</p>
 		
 	</div>
-	<div class="grafWrapper">
-		<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-			<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>
-			<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
-		</div>
-	</div>
 
+<?php if ( isset($hoursSaved) && $hoursSaved != array() ): ?>	
+	<?php foreach ( $hoursSaved as $hour ) : ?>
+		<?php $work = $rest = 0;?>
+		<?php foreach ( $hour['Interval'] as $interval ) {
+
+			if ( $interval['type'] == 'work' ) {
+				$work += $interval['interval'];
+			} 
+			if ( $interval['type'] == 'rest') {
+				$rest = $interval['interval'];
+			}
+		}
+		
+		$work = floor($work/36);
+		$rest = floor($rest/36);
+		$title = '"Work: '.$work.'% | Rest: '.$rest.'%"';
+		
+		?>
+		
+		<div class="grafWrapper" title = <?php echo $title; ?>>
+			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+				<div class="hourWork" style="width:<?php echo $work;?>%;margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
+				<div class="hourRest" style="width:<?php echo $rest;?>%;margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+			</div>
+		</div>
+	<?php endforeach ?>
+<?php endif ?>
+
+		<div class="grafWrapper">
+			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+				<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
+				<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+			</div>
+		</div>
+		
+		
 </div>
 <h2><?php __('Interval');?></h2>
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">

@@ -18,9 +18,18 @@ class IntervalsController extends AppController {
 //--------------------------------------------------------------------
 	function index() {
 		
-		
+			$hoursSaved = array();
+			$conditions = array();
+			
 			$key = md5(uniqid(rand(), true));
 			
+			$workSession = md5(uniqid(rand(), true));
+			$this->Session->write('workSession', $workSession );	
+			
+			
+			
+			
+					
 			if( !$this->Cookie->read('guestKey')) {												
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				
@@ -34,6 +43,22 @@ class IntervalsController extends AppController {
 			
 
 			
+			
+			
+			$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey'), 'Hour.worksession' => array(1,3,5) ), 'fields' => array( 'Hour.worksession','Hour.created'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+			$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
+			$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
+			
+			$datetime = new DateTime($currentHour['Hour']['created']);			 
+			if ( ( Date('U') - $datetime->format('U') ) > 500 ) {
+				$workSession = md5(uniqid(rand(), true));
+				$this->Session->write('workSession', $workSession );	
+			}
+
+
+			
+			$this->set('hoursSaved', $hoursSaved);
+			
 		//$this->Interval->recursive = 0;
 		//$this->set('intervals', $this->paginate());
 	}
@@ -44,6 +69,7 @@ class IntervalsController extends AppController {
 		$key = null;
 		$workInt = array();
 		$projectId = null;
+		
 		
 				Configure::write('debug', 0);
 				$this->autoRender = false;
@@ -64,10 +90,11 @@ class IntervalsController extends AppController {
 				$this->data['work'] = Sanitize::paranoid($this->data['work']);
 				$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
 				$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
+				
 				$nextHour = $this->data['nextHour'];
 				
 				if ( $key != null || $userId != null ) {
-					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour);
+					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour, $workSession);
 				} else {
 					$hourId = 1000;
 				}
