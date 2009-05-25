@@ -23,37 +23,52 @@ class IntervalsController extends AppController {
 			
 			$key = md5(uniqid(rand(), true));
 			
-			$workSession = md5(uniqid(rand(), true));
-			$this->Session->write('workSession', $workSession );	
+
 			
-			
-			
-			
-					
-			if( !$this->Cookie->read('guestKey')) {												
+								
+			if( !$this->Cookie->read('guestKey')) {	
+				
+															
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				
+				$this->Session->write('guestKey', $key );
+				
 				if( !$this->Session->check('guestKey') ) {				
-					$this->Session->write('guestKey', $key );			
+								
 				}	
+				
+				$workSession = md5(uniqid(rand(), true));
+				$this->Session->write('workSession', $workSession );	
 										
 			} else {
+				
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
+					
+				$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey') ), 'fields' => array( 'Hour.worksession','Hour.created'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+				if ( $currentHour != array() ) {
+					$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
+					$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
+				
+					$datetime = new DateTime($currentHour['Hour']['created']);			 
+					if ( ( Date('U') - $datetime->format('U') ) > 500 ) {
+						$workSession = md5(uniqid(rand(), true));
+						$this->Session->write('workSession', $workSession );
+						//to close opend hour, to start new hour;	
+					} else {
+						$this->Session->write('workSession', $currentHour['Hour']['worksession'] );
+					}					
+				
+				}
+				
+			
+							
 			}
 			
 
 			
 			
 			
-			$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey'), 'Hour.worksession' => array(1,3,5) ), 'fields' => array( 'Hour.worksession','Hour.created'), 'order' => array('Hour.created DESC'),'contain' => false ) );
-			$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
-			$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
-			
-			$datetime = new DateTime($currentHour['Hour']['created']);			 
-			if ( ( Date('U') - $datetime->format('U') ) > 500 ) {
-				$workSession = md5(uniqid(rand(), true));
-				$this->Session->write('workSession', $workSession );	
-			}
+
 
 
 			
@@ -92,7 +107,7 @@ class IntervalsController extends AppController {
 				$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
 				
 				$nextHour = $this->data['nextHour'];
-				
+				$workSession = $this->Session->read('workSession');
 				if ( $key != null || $userId != null ) {
 					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour, $workSession);
 				} else {

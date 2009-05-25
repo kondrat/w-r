@@ -46,7 +46,7 @@ class Hour extends AppModel {
 	 * @param string $nextHour
 	 * @access public
 	 */
-	function getHour($userId = null, $key = null, $nextHour = 0 ) {
+	function getHour($userId = null, $key = null, $nextHour = 0, $workSession = null ) {
 				
 		$hours = array();
 
@@ -88,7 +88,7 @@ class Hour extends AppModel {
 			$this->data['Hour']['key'] = $key;
 			
 			if (  $hours == array() ) {
-				
+				$this->data['Hour']['worksession'] = $workSession;
 				$this->data['Hour']['status'] = 'open';
 				$this->create($this->data);
 				if ( $this->save() ) {
@@ -104,6 +104,7 @@ class Hour extends AppModel {
 					$this->id = $hours['Hour']['id'];
 					$this->saveField('status', 'closed' , false);
 					
+					$this->data['Hour']['worksession'] = $workSession;
 					$this->data['Hour']['status'] = 'open';
 					$this->data['Hour']['key'] = $key;
 					$this->create($this->data);
