@@ -198,8 +198,34 @@ jQuery(document).ready( function(){
 											hourRest = parseInt(hourRest) + parseInt(restDelta);
 											
 											
-											saveTime( workDelta, restDelta, nextHour);
-																						
+											saveTime( hourWork, hourRest, nextHour);										
+											nextHour = 0;										
+											loop = 0;
+											
+											if ( check == 1 ) {
+												$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - loop - '+ loop + '</li>');	
+											}																																		
+										}
+	
+												if ( hourInt == 3600 ) {
+												
+												nextHour = 1;
+												
+												hourDay++;
+												
+												hourWork = 0;
+												hourRest = 0;
+																									
+												var grafClass = '.graf'+hourDay;
+												$('.grafWrapper').append(	'<div class="'+grafClass+' graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
+																										'<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>'+
+																										'<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>'+
+																									'</div>'
+																					);																								
+												hourInt = 0
+										
+											}												
+																				
 											if ( graf == 20 ) {
 												
 												var workPS = Math.floor(hourWork/36);
@@ -220,46 +246,7 @@ jQuery(document).ready( function(){
 												graf = 0;											
 											}
 
-											
-											nextHour = 0;
-											
-											if ( hourInt == 3600 ) {
-												
-												nextHour = 1;
-												
-												hourDay++;
-												
-												hourWork = 0;
-												hourRest = 0;
-																									
-												var grafClass = '.graf'+hourDay;
-												$('.grafWrapper').append(	'<div class="'+grafClass+' graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
-																										'<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>'+
-																										'<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>'+
-																									'</div>'
-																					);																								
-												hourInt = 0
-										
-											}
-											
 
-											
-											
-											
-
-											
-											loop = 0;
-											
-											if ( check == 1 ) {
-												$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - loop - '+ loop + '</li>');	
-											}																					
-
-											
-		 
-												
-													
-										}
-										
 																			
 										$('#test1').html(secInt);
 										$('#test4').html(workDelta + ' - ' + restDelta + ' - save - '+ save );										
@@ -270,7 +257,7 @@ jQuery(document).ready( function(){
 
 
 						$(window).unload( function () {
-							 //saveTime( workDelta, restDelta); 
+							 saveTime( hourWork, hourRest, nextHour);
 						} );
 
 

@@ -1,4 +1,19 @@
 <?php echo $javascript->link('timer2',false);?>
+<?php if ( isset($hoursSaved) && $hoursSaved != array() ) {
+					$hourInt = null;
+					$lastOpenHour = array_pop( $hoursSaved );
+					
+					foreach ($lastOpenHour['Interval'] as $lastOpenHourInt ) {
+						$hourInt += $lastOpenHourInt['interval'];
+					}
+					
+					
+			} 
+
+			
+
+?>	
+
 <?php $script = "
 		var clockObj = new Date();
 		var secInt = 0;
@@ -18,28 +33,29 @@
 		var hourRest = 0;
 			
 		var loop = 0;
-		var hourInt = 0;
+		var hourInt = ".$hourInt.";
 		var graf = 0;
 
 
 		var resHour,resMin, resSec;
 		var sec = 0;
 		var resMin = '00';
-		var minut = 20;  //to restore
+		var minut = 0;  //to restore
 		var resHour = '00';
-		var hour = 10;  //to restore
+		var hour = 0;  //to restore
 		var k = 0;
 		var i = 0;
 		
 		var resHour2,resMin2, resSec2;
 		var sec2 = 0;
 		var resMin2 = '00';
-		var minut2 = 20;  //to restore
+		var minut2 = 0;  //to restore
 		var resHour2 = '00';
-		var hour2 = 10;  //to restore
+		var hour2 = 0;  //to restore
 		var k2 = 0;
 		var i2 = 0;		"
 ?>
+
 <?php echo $javascript->codeBlock($script,  array('allowCache'=>false,'safe'=>true,'inline'=>false));?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
@@ -86,7 +102,7 @@
 			</div>
 		</div>
 	<?php endforeach ?>
-<?php endif ?>
+<?php else: ?>
 
 		<div class="grafWrapper">
 			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
@@ -95,6 +111,7 @@
 			</div>
 		</div>
 		
+<?php endif ?>
 		
 </div>
 <h2><?php __('Interval');?></h2>

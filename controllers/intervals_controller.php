@@ -44,16 +44,17 @@ class IntervalsController extends AppController {
 				
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
 					
-				$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey') ), 'fields' => array( 'Hour.worksession','Hour.created'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+				$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey') ), 'fields' => array( 'Hour.worksession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
 				if ( $currentHour != array() ) {
 					$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
 					$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
 				
-					$datetime = new DateTime($currentHour['Hour']['created']);			 
-					if ( ( Date('U') - $datetime->format('U') ) > 500 ) {
+					$datetime = new DateTime($currentHour['Hour']['modified']);			 
+					if ( ( Date('U') - $datetime->format('U') ) > 10000 ) {
 						$workSession = md5(uniqid(rand(), true));
 						$this->Session->write('workSession', $workSession );
 						//to close opend hour, to start new hour;	
+						$hoursSaved = array();
 					} else {
 						$this->Session->write('workSession', $currentHour['Hour']['worksession'] );
 					}					
