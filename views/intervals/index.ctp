@@ -1,6 +1,9 @@
+<?php echo $javascript->link('jquery.cookie',false);?>
 <?php echo $javascript->link('timer2',false);?>
-<?php if ( isset($hoursSaved) && $hoursSaved != array() ) {
-					$hourInt = null;
+<?php 
+	$hourInt = 0;
+	if ( isset($hoursSaved) && $hoursSaved != array() ) {
+
 					$lastOpenHour = array_pop( $hoursSaved );
 					
 					foreach ($lastOpenHour['Interval'] as $lastOpenHourInt ) {
@@ -9,9 +12,6 @@
 					
 					
 			} 
-
-			
-
 ?>	
 
 <?php $script = "

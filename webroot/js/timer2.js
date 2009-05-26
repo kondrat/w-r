@@ -17,7 +17,7 @@ jQuery(document).ready( function(){
 		var restTotal = 0;
 		var hourRest = 0;
 			
-		var loop = 0;
+
 		var hourInt = 0;
 		var graf = 0;
 
@@ -42,7 +42,7 @@ jQuery(document).ready( function(){
 		
 	*/	
 
-
+	$.cookie("the_cookie", "the_value111");
 								
 	$('#clock1, .work').click( function(){
 		
@@ -66,6 +66,7 @@ jQuery(document).ready( function(){
 				var interval = setInterval(function () {
 													
 										var curClockObj = new Date();
+										nextHour = 0;	
 										
 										var test1 = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
 		
@@ -73,7 +74,7 @@ jQuery(document).ready( function(){
 											secInt++;
 											
 											hourInt++;
-											loop++;
+
 											i++;
 											i2++;
 											
@@ -158,54 +159,7 @@ jQuery(document).ready( function(){
 										restTotal = parseInt(hour2)*60 + parseInt(minut2)*60 + parseInt(i2);									
 								}											
 										
-										
-										if ( loop == 10) {
-											
-											workDelta = parseInt(workTotal) - parseInt(workStamp);											
-											workStamp = workTotal;
-																						
-											restDelta = parseInt(restTotal) - parseInt(restStamp);											
-											restStamp = restTotal;
-											
 
-	
-											
-											var qq1 = workDelta; 
-											var qq2 = restDelta;	
-													
-											var red = 'color: blue';
-											var check = 0;
-											
-											if ( restDelta < 0 || restDelta > loop ) {
-												red = 'color: red';
-												check = 1;											
-												if ( workDelta < 0 || workDelta > loop ) {
-													workDelta = 0;
-													restDelta = 0;
-												} else {
-													restDelta = loop - workDelta;
-												}												
-											} else if (workDelta < 0 || workDelta > loop) {
-												red = 'color: red';
-												check = 1;
-													workDelta = loop - restDelta;			
-											} else {
-												workDelta = loop - restDelta;												
-											}
-
-																					
-											hourWork = parseInt(hourWork) + parseInt(workDelta);
-											hourRest = parseInt(hourRest) + parseInt(restDelta);
-											
-											
-											saveTime( hourWork, hourRest, nextHour);										
-											nextHour = 0;										
-											loop = 0;
-											
-											if ( check == 1 ) {
-												$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - loop - '+ loop + '</li>');	
-											}																																		
-										}
 	
 												if ( hourInt == 3600 ) {
 												
@@ -228,6 +182,49 @@ jQuery(document).ready( function(){
 																				
 											if ( graf == 20 ) {
 												
+												workDelta = parseInt(workTotal) - parseInt(workStamp);											
+												workStamp = workTotal;
+																							
+												restDelta = parseInt(restTotal) - parseInt(restStamp);											
+												restStamp = restTotal;												
+												
+											//to del
+												var qq1 = workDelta; 
+												var qq2 = restDelta;	
+														
+												var red = 'color: blue';
+												var check = 0;
+											//to del
+													
+												if ( restDelta < 0 || restDelta > graf ) {
+													//to del
+													red = 'color: red';
+													check = 1;											
+													if ( workDelta < 0 || workDelta > graf ) {
+														workDelta = 0;
+														restDelta = 0;
+													} else {
+														restDelta = graf - workDelta;
+													}												
+												} else if (workDelta < 0 || workDelta > graf) {
+													//to del
+													red = 'color: red';
+													check = 1;
+														workDelta = graf - restDelta;			
+												} else {
+													workDelta = graf - restDelta;												
+												}
+	
+																						
+												hourWork = parseInt(hourWork) + parseInt(workDelta);
+												hourRest = parseInt(hourRest) + parseInt(restDelta);
+												
+												
+												saveTime( hourWork, hourRest, nextHour);													
+												
+												
+												
+												
 												var workPS = Math.floor(hourWork/36);
 												var restPS = Math.floor(hourRest/36);
 												
@@ -243,11 +240,16 @@ jQuery(document).ready( function(){
 												$('.hourRest:last').width( restPS+"%");
 												$('.graf:last').attr( { title: "Work: " + workPS+"% : Rest: "+restPS+"%" } );
 												
-												graf = 0;											
+												graf = 0;	
+												//to del
+														if ( check == 1 ) {
+															$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - graf - '+ graf + '</li>');	
+														}	
+												//to del										
 											}
 
 
-																			
+											//to del								
 										$('#test1').html(secInt);
 										$('#test4').html(workDelta + ' - ' + restDelta + ' - save - '+ save );										
 										$('#test3').html('hourWork: '+ hourWork+' - hourRest: '+ hourRest + ' - save - '+ save );
