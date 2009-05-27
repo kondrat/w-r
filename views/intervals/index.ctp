@@ -1,5 +1,8 @@
 <?php echo $javascript->link('jquery.cookie',false);?>
+<?php echo $javascript->link('json2',false);?>
+
 <?php echo $javascript->link('timer2',false);?>
+
 <?php 
 	$hourInt = 0;
 	if ( isset($hoursSaved) && $hoursSaved != array() ) {
@@ -14,49 +17,6 @@
 			} 
 ?>	
 
-<?php $script = "
-		var clockObj = new Date();
-		var secInt = 0;
-		var typeInt = 'rest';
-		var hourDay = 0;
-		var grafClass = 'graf0';
-		var nextHour = 0;
-					
-		var workStamp = 0;
-		var workDelta = 0;
-		var workTotal = 0; //to restore
-		var hourWork = 0;
-
-		var restStamp = 0;
-		var restDelta = 0;
-		var restTotal = 0; //to restore
-		var hourRest = 0;
-			
-		var loop = 0;
-		var hourInt = ".$hourInt.";
-		var graf = 0;
-
-
-		var resHour,resMin, resSec;
-		var sec = 0;
-		var resMin = '00';
-		var minut = 0;  //to restore
-		var resHour = '00';
-		var hour = 0;  //to restore
-		var k = 0;
-		var i = 0;
-		
-		var resHour2,resMin2, resSec2;
-		var sec2 = 0;
-		var resMin2 = '00';
-		var minut2 = 0;  //to restore
-		var resHour2 = '00';
-		var hour2 = 0;  //to restore
-		var k2 = 0;
-		var i2 = 0;		"
-?>
-
-<?php echo $javascript->codeBlock($script,  array('allowCache'=>false,'safe'=>true,'inline'=>false));?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
 	<div class="span-8">

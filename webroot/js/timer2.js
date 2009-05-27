@@ -1,5 +1,5 @@
 jQuery(document).ready( function(){
-	/*
+
 		var clockObj = new Date();
 		var secInt = 0;
 		var typeInt = 'rest';
@@ -40,9 +40,26 @@ jQuery(document).ready( function(){
 		var k2 = 0;
 		var i2 = 0;	
 		
-	*/	
+	
 
-	$.cookie("the_cookie", "the_value111");
+
+	var myJSONObject = {"bindings": [
+        {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
+        {"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
+        {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
+    ]
+	};
+	
+		alert($.cookie("the_cookie4") );
+		var myJSONText = JSON.stringify(myJSONObject);
+		$.cookie("the_cookie3", myJSONText );
+		alert(myJSONText);
+		
+		var cc = JSON.parse(myJSONText);
+		alert(cc.bindings[2].method);
+
+	//alert( testt.bindings[2].method );
+	//alert(myJSONObject.bindings[2].method);
 								
 	$('#clock1, .work').click( function(){
 		
