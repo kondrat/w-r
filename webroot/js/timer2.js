@@ -20,10 +20,10 @@ jQuery(document).ready( function(){
 
 		var hourInt = 0;
 		var graf = 0;
+		var saveSumm = 0;
 
-
-		var resHour,resMin, resSec;
 		var sec = 0;
+		var resSec = "00";
 		var resMin = "00";
 		var minut = 0;
 		var resHour = "00";
@@ -31,8 +31,9 @@ jQuery(document).ready( function(){
 		var k = 0;
 		var i = 0;
 		
-		var resHour2,resMin2, resSec2;
+
 		var sec2 = 0;
+		var resSec2 = "00";
 		var resMin2 = "00";
 		var minut2 = 0;
 		var resHour2 = "00";
@@ -42,24 +43,52 @@ jQuery(document).ready( function(){
 		
 	
 
+	if ( $.cookie("the_cookie11") != null ) {
+			
+		 var cc = JSON.parse( $.cookie("the_cookie11") );
 
-	var myJSONObject = {"bindings": [
-        {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
-        {"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
-        {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
-    ]
-	};
-	
-		alert($.cookie("the_cookie4") );
-		var myJSONText = JSON.stringify(myJSONObject);
-		$.cookie("the_cookie3", myJSONText );
-		alert(myJSONText);
+		 //secInt = cc.secInt;
+		 typeInt = cc.typeInt;
+		 hourDay = cc.hourDay;
+		 grafClass = cc.grafClass;
+		 nextHour = cc.nextHour;
+					
+		 workStamp = cc.workStamp;
+		 workDelta = cc.workDelta;
+		 workTotal = cc.workTotal;
+		 hourWork = cc.hourWork;
+
+		 restStamp = cc.restStamp;
+		 restDelta = cc.restDelta;
+		 restTotal = cc.restTotal;
+		 hourRest = cc.hourRest;
+			
+
+		 hourInt = cc.hourInt;
+		 graf = cc.graf;
+		 saveSumm  = cc.saveSumm;
+		 saveCount = cc.saveCount;
+		 
+		 sec = cc.sec;
+		 resSec = cc.resSec,
+		 resMin = cc.resMin;
+		 minut = cc.minut;
+		 resHour = cc.resHour;
+		 hour = cc.hour;
+		 k = cc.k;
+		 i = cc.i;
 		
-		var cc = JSON.parse(myJSONText);
-		alert(cc.bindings[2].method);
+		 sec2 = cc.sec2;
+		 resSec2 = cc.resSec2,
+		 resMin2 = cc.resMin2;
+		 minut2 = cc.minut2;
+		 resHour2 = cc.resHour2;
+		 hour2 = cc.hour2;
+		 k2 = cc.k2;
+		 i2 = cc.i2;			
+	}
+	
 
-	//alert( testt.bindings[2].method );
-	//alert(myJSONObject.bindings[2].method);
 								
 	$('#clock1, .work').click( function(){
 		
@@ -77,17 +106,28 @@ jQuery(document).ready( function(){
 				
 			typeInt = 'rest';
 			i2 = k2;
-	});	
-
+	});
+		
+	if( typeInt == 'rest' ) {
+			$('#clock2').css({'background-color' :'#ffd7d7'});
+			$('#clock1').css({'background-color' :'#ffffff'});		
+	} else if (typeInt == 'work' ) {
+			$('#clock1').css({'background-color' :'#d2ffe9'});
+			$('#clock2').css({'background-color' :'#ffffff'});		
+	}
+	
+	$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
+	$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+	grafon( hourWork, hourRest );
 	
 				var interval = setInterval(function () {
 													
 										var curClockObj = new Date();
 										nextHour = 0;	
 										
-										var test1 = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
+										var increm = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
 		
-										if ( test1 > 999 ) { 
+										if ( increm > 999 ) { 
 											secInt++;
 											
 											hourInt++;
@@ -96,6 +136,7 @@ jQuery(document).ready( function(){
 											i2++;
 											
 											graf++;
+											saveSumm++;
 										}
 										
 								if ( typeInt == 'work' ) {			
@@ -176,9 +217,10 @@ jQuery(document).ready( function(){
 										restTotal = parseInt(hour2)*60 + parseInt(minut2)*60 + parseInt(i2);									
 								}											
 										
+							
 
-	
-												if ( hourInt == 3600 ) {
+										
+											if ( hourInt == 3600 ) {
 												
 												nextHour = 1;
 												
@@ -214,6 +256,7 @@ jQuery(document).ready( function(){
 											//to del
 													
 												if ( restDelta < 0 || restDelta > graf ) {
+													alert(graf);
 													//to del
 													red = 'color: red';
 													check = 1;											
@@ -231,45 +274,85 @@ jQuery(document).ready( function(){
 												} else {
 													workDelta = graf - restDelta;												
 												}
-	
+												graf = 0;
 																						
 												hourWork = parseInt(hourWork) + parseInt(workDelta);
 												hourRest = parseInt(hourRest) + parseInt(restDelta);
-												
-												
-												saveTime( hourWork, hourRest, nextHour);													
-												
-												
-												
-												
-												var workPS = Math.floor(hourWork/36);
-												var restPS = Math.floor(hourRest/36);
-												
-												if ( (parseInt(workPS) + parseInt(restPS)) > 100 ) {
-													restPS = 100 - workPS;
-												} else if (( parseInt(workPS) + parseInt(restPS)) >= 99 ) {
-													restPS = 100 - workPS;
-												}
+
 											
+												var varsObject = {		
+																//'secInt': secInt,
+																'typeInt': typeInt,
+																'hourDay': hourDay,
+																'grafClass': grafClass,
+																'nextHour': nextHour,
+																			
+																'workStamp': workStamp,
+																'workDelta': workDelta,
+																'workTotal': workTotal,
+																'hourWork': hourWork,
+														
+																'restStamp': restStamp,
+																'restDelta': restDelta,
+																'restTotal': restTotal,
+																'hourRest': hourRest,
+																	
+														
+																'hourInt': hourInt,
+																'graf': graf,
+																'saveSumm': saveSumm, 
+																'saveCount': saveCount,
+														
+											
+																'sec': sec,
+																'resSec':resSec,
+																'resMin': resMin,
+																'minut': minut,
+																'resHour': resHour,
+																'hour': hour,
+																'k': k,
+																'i': i,
+																
+																'sec2': sec2,
+																'resSec2':resSec2,
+																'resMin2': resMin2,
+																'minut2': minut2,
+																'resHour2': resHour2,
+																'hour2':hour2,
+																'k2': k2,
+																'i2': i2,		
+												};
+												var myJSONText = JSON.stringify(varsObject);
+													
+												
+													
+												
+												$.cookie("the_cookie11", myJSONText );	
+												
+												
+												grafon( hourWork, hourRest );
 
 												
-												$('.hourWork:last').width( workPS+"%");
-												$('.hourRest:last').width( restPS+"%");
-												$('.graf:last').attr( { title: "Work: " + workPS+"% : Rest: "+restPS+"%" } );
-												
-												graf = 0;	
+													
+													
+													
 												//to del
 														if ( check == 1 ) {
-															$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - save - '+ save + ' - graf - '+ graf + '</li>');	
+															$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - saveCount - '+ saveCount + '</li>');	
 														}	
 												//to del										
 											}
-
+											
+											
+											if ( saveSumm  == 40 ) {
+												saveTime( hourWork, hourRest, nextHour);
+												saveSumm = 0;
+											}
 
 											//to del								
-										$('#test1').html(secInt);
-										$('#test4').html(workDelta + ' - ' + restDelta + ' - save - '+ save );										
-										$('#test3').html('hourWork: '+ hourWork+' - hourRest: '+ hourRest + ' - save - '+ save );
+										$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
+										$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount );										
+										$('#test3').html('hourWork: '+ hourWork+' - hourRest: '+ hourRest + ' - saveCount - '+ saveCount );
 										
 						}	,100);	
 	
@@ -289,19 +372,34 @@ jQuery(document).ready( function(){
 });
 
 
-
-var save = 0;
-function saveTime( workDelta,  restDelta, nextHour ) {
-		save++;
+var saveCount = 0;
+function saveTime( hourWork, hourRest, nextHour ) {
+		saveCount++;
 		$.post(
 			path + "/intervals/add",
-			{"data[work]": workDelta,"data[rest]":restDelta,"data[nextHour]":nextHour },
+			{"data[work]": hourWork,"data[rest]":hourRest,"data[nextHour]":nextHour },
 					function(data){
 						$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
 					},
 					"json"
 		);	
 	
+}
+
+function grafon( hourWork, hourRest ) {
+	
+		workPS = Math.floor(hourWork/36);
+		restPS = Math.floor(hourRest/36);
+		
+		if ( (parseInt(workPS) + parseInt(restPS)) > 100 ) {
+			restPS = 100 - workPS;
+		} else if (( parseInt(workPS) + parseInt(restPS)) >= 99 ) {
+			restPS = 100 - workPS;
+		}
+		
+		$('.hourWork:last').width( workPS+"%");
+		$('.hourRest:last').width( restPS+"%");
+		$('.graf:last').attr( { title: "Work: " + workPS+"% : Rest: "+restPS+"%" } );
 }
 
 
@@ -363,4 +461,3 @@ jQuery(document).ready( function(){
 	
 	
 });
-
