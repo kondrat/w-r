@@ -49,6 +49,7 @@ class Hour extends AppModel {
 	function getHour($userId = null, $key = null, $nextHour = 0, $workSession = null ) {
 				
 		$hours = array();
+		$summ = null;
 
 		if ( $userId !=  null ) {
 			$hours = $this->find('first', array('conditions'=> array('Hour.user_id' => $userId, 'Hour.status' => 'open'),'contain' => false ) );
@@ -84,7 +85,7 @@ class Hour extends AppModel {
 			
 			
 			
-			$hours = $this->find('first', array('conditions'=> array('Hour.key' => $key, 'Hour.status' => 'open'),'contain' => false ) );			
+			$hours = $this->find('first', array('conditions'=> array('Hour.key' => $key, 'Hour.status' => 'open'),'contain' => 'Interval' ) );			
 			$this->data['Hour']['key'] = $key;
 			
 			if (  $hours == array() ) {
@@ -98,8 +99,11 @@ class Hour extends AppModel {
 				}				
 							
 			} else {
-				
-				if ( $nextHour == 1 ) {
+				//checing the contol summ of hour's intervals.
+				foreach ( $hours['Interval'] as $interval ) {
+					$summ += $interval['interval'];
+				}
+				if ( $nextHour == 1 || $summ >= 3601 ) {
 					
 					$this->id = $hours['Hour']['id'];
 					$this->saveField('status', 'closed' , false);

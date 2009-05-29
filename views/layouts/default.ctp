@@ -63,6 +63,8 @@
 								//debug($this->params);
 								if ($session->check('Auth.User.username')) {
 									echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
+								} elseif ( $session->check('guestKey') ) {
+									echo '<b>&laquo;'.$session->read('guestKey').'&raquo;</b>';
 								} else {
 									echo 'Username';
 								}

@@ -90,3 +90,6 @@ msgstr 	"Работа"
 
 msgid	"Rest" 
 msgstr 	"Законный отдых"
+
+msgid	"Week" 
+msgstr 	"Неделя"

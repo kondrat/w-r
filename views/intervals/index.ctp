@@ -4,6 +4,7 @@
 <?php echo $javascript->link('timer2',false);?>
 
 <?php 
+	/*
 	$hourInt = 0;
 	if ( isset($hoursSaved) && $hoursSaved != array() ) {
 
@@ -15,6 +16,7 @@
 					
 					
 			} 
+		*/
 ?>	
 
 <div class="intervals index clearfix">
@@ -51,6 +53,9 @@
 		
 		$work = floor($work/36);
 		$rest = floor($rest/36);
+		if ( ($work + $rest) == 99 ) {
+			$rest = 100 - $work;
+		}
 		$title = '"Work: '.$work.'% | Rest: '.$rest.'%"';
 		
 		?>
@@ -85,4 +90,7 @@
 <div id="test3">test3</div>
 <ul class="ultest"></ul>
 <?php echo $form->end( );?>
-<div class="addInterval" style="cursor: pointer">stop</div>
+<div class="stopInterval" style="cursor: pointer">stop</div>
+<div class="startInterval" style="cursor: pointer">start</div>
+<div class="addPlus" style="cursor: pointer">Plus</div>
+<div class="addMinus" style="cursor: pointer">Minus</div>
