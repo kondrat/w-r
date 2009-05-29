@@ -26,19 +26,19 @@
 			<span><?php __('Work');?></span>
 			<div class="plusWork">+</div>
 		</div>
-		<p class="clock clock1" id="clock1">00:00:00</p>
-		
+		<p class="clock clock1" id="clock1">00:00:00</p>		
 	</div>
+	
 	<div class="rest span-8 last">
 		<div class="chessKnob rest">
 			<span><?php __('Rest');?></span>
 			<div class="plusRest">-</div>
 		</div>
-		<p class="clock clock2" id="clock2">00:00:00</p>
-		
+		<p class="clock clock2" id="clock2">00:00:00</p>		
 	</div>
 
 <?php if ( isset($hoursSaved) && $hoursSaved != array() ): ?>	
+	<div class="grafWrapper" >
 	<?php foreach ( $hoursSaved as $hour ) : ?>
 		<?php $work = $rest = 0;?>
 		<?php foreach ( $hour['Interval'] as $interval ) {
@@ -60,13 +60,14 @@
 		
 		?>
 		
-		<div class="grafWrapper" title = <?php echo $title; ?>>
-			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+		
+			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px" title = <?php echo $title; ?>>
 				<div class="hourWork" style="width:<?php echo $work;?>%;margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
 				<div class="hourRest" style="width:<?php echo $rest;?>%;margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 			</div>
-		</div>
+		
 	<?php endforeach ?>
+	</div>
 <?php else: ?>
 
 		<div class="grafWrapper">

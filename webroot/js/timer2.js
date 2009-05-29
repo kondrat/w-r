@@ -121,7 +121,11 @@ jQuery(document).ready( function(){
 	
 	$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
 	$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+	
+
+	
 	grafon( workHour, restHour );
+	
 			$('.startInterval').click( function(){				
 				var clockObj = new Date();
 				interval = setInterval(function () {
@@ -371,8 +375,36 @@ jQuery(document).ready( function(){
     }).mousedown(function(){
       $(this).append('<span style="color:#00F;">'+ workTotal +'</span>');
     });
+
+	$('.plusWork').click(function(){		
+		clearInterval(interval);
+		secInt = 0;
+		clockObj = 0;
+		
+		workTotal = parseInt(workTotal) + 1000; 
+		restTotal = parseInt(restTotal) - 1000;
+		
+		
+		
+		//$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
+		//$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);		
+		
+	})
+	
+	$('.plusRest').click(function(){		
+		clearInterval(interval);
+		secInt = 0;
+		clockObj = 0;
+
+		
+		
+	})
+
+
 				
 });
+
+
 
 
 var saveCount = 0;
@@ -405,6 +437,39 @@ function grafon( workHour, restHour ) {
 		$('.graf:last').attr( { title: "Work: " + workPS+"% : Rest: "+restPS+"%" } );
 }
 
+function clockDisp ( ) {
+	
+	if ( i < 10 ) {
+		resSec = '0' + i;
+	} else if ( i >= 10 && i < 60 ) {
+		resSec = i;
+	} else if ( i == 60 ) {
+		resSec = "00";
+		i = 0;
+		minut++;
+	}
+			
+	if ( minut > 0 && minut < 10 ) {
+		resMin = "0" + minut;
+	} else if (minut >= 10 && minut < 60) {
+		resMin = minut;
+	} else if ( minut == 60 ) {
+		resMin = "00";
+		minut = 0;
+		hour++;
+	}
+			
+	if ( hour > 0 && hour < 10 ) {
+		resHour = "0" + hour;
+	} else if ( hour >= 10 && hour < 24 ) {
+		resHour = hour;
+	} else if ( hour == 24) {
+		resHour = "00";
+		hour = 0;
+	}
+	return (resHour + ":" + resMin + ":" + resSec );
+			
+}
 
 /*
 var start=new Date();
