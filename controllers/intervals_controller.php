@@ -127,13 +127,7 @@ class IntervalsController extends AppController {
 					
 				} 
 			
-				$ii = 0;
-				if ( !$this->Session->check('ii') ) {					
-					$this->Session->write('ii', $ii);
-				} else {
-					$ii = $ii + $this->Session->read('ii');
-					$this->Session->write('ii', $ii);
-				}
+	
 				
 				
 				

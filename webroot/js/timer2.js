@@ -8,6 +8,7 @@ jQuery(document).ready( function(){
 		var hourDay = 0;
 		var grafClass = 'graf0';
 		var nextHour = 0;
+		var HourStat = new Array();
 					
 		var workStamp = 0;
 		var workDelta = 0;
@@ -125,13 +126,12 @@ jQuery(document).ready( function(){
 
 	
 	grafon( workHour, restHour );
-	
+
 			$('.startInterval').click( function(){				
 				var clockObj = new Date();
 				interval = setInterval(function () {
 													
-								var curClockObj = new Date();
-								nextHour = 0;	
+								var curClockObj = new Date();	
 										
 								var increm = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
 		
@@ -267,6 +267,9 @@ jQuery(document).ready( function(){
 									workHour = parseInt(workHour) + parseInt(workDelta);
 									restHour = parseInt(restHour) + parseInt(restDelta);
 									
+									HourStat[hourDay] = new Array( workHour, restHour);
+									//$('#test4').after('<p style="margin:0">'+HourStat[hourDay][0]+'</p>');
+									
 									grafon( workHour, restHour );
 	
 									
@@ -281,15 +284,16 @@ jQuery(document).ready( function(){
 								}
 	
 								if ( saveSumm  == 40 ) {
-									if ( hourInt == 3600 ) {
-										nextHour = 1;
-									}
+
 									saveTime( workHour, restHour, nextHour);
+									if ( nextHour == 1 ) {
+										nextHour = 0;
+									}
 									saveSumm = 0;
 								}
 	
 								if ( hourInt == 3600 ) {
-								
+									nextHour = 1;
 									hourDay++;
 									
 									workHour = 0;
@@ -308,11 +312,13 @@ jQuery(document).ready( function(){
 										$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
 										$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount );										
 										$('#test3').html('workHour: '+ workHour+' | restHour: '+ restHour + ' | saveCount : '+ saveCount );
+										//
 										
 						}	,100);	
 			});
-	
-
+					//to del;
+					//$('#test4').after('<p style="margin:0">'+HourStat[hourDay][0]+'</p>');
+					
 						$(window).unload( function () {
 								saveTime( workHour, restHour, nextHour);
 												var varsObject = {		
@@ -376,23 +382,59 @@ jQuery(document).ready( function(){
       $(this).append('<span style="color:#00F;"> resMin2 : '+ resMin2 +' | minut2: ' + minut2+'</span>');
     });
 
+
+			HourStat[0] = new Array();
+			HourStat[0][0] = 3200;
+			HourStat[0][1] = 400;
+			HourStat[1] = new Array();
+			HourStat[1][0] = 3200;
+			HourStat[1][1] = 400;
+			HourStat[2] = new Array();
+			HourStat[2][0] = 3200;
+			HourStat[2][1] = 400;
+			HourStat.reverse();	
+
+
 	$('.plusWork').click(function(){		
 		clearInterval(interval);
 		secInt = 0;
 		clockObj = 0;
+		var step = 600;
 		
-		if ( restTotal >= 10) {
-			workTotal = parseInt(workTotal) + 10; 
-			restTotal = parseInt(restTotal) - 10;
+		//clocks
+		if ( restTotal >= step) {
+			workTotal = parseInt(workTotal) + step; 
+			restTotal = parseInt(restTotal) - step;
 
-		} else if ( restTotal < 10 ) {
+		} else if ( restTotal < step ) {
 			workTotal = parseInt(workTotal) + parseInt(restTotal);
 			restTotal = 0;
 		}
 			workStamp = workTotal;
 			restStamp = restTotal;
+		
+		
+		//grafs
 			
+
+			
+			for ( var i in HourStat ) {
+				if ( ( parseInt(step) - parseInt(HourStat[i][1]) ) < 0 ) {
+					HourStat[i][1] = HourStat[i][1] - step;
+					HourStat[i][0] = parseInt(HourStat[i][0]) + parseInt(step);
+					break;
+				} else {
+					step = step - parseInt(HourStat[i][1]);
+					HourStat[i][0] = parseInt(HourStat[i][0]) + HourStat[i][1];
+					HourStat[i][1] = 0;					
+				}
+				
+				
+			   
+			} 
+			 alert( HourStat );
 			if ( restHour >= 0 ) {
+				
 				var hourTotalTime = parseInt(workHour) + parseInt(restHour);
 				
 				var newWorkHourDelta = ( hourTotalTime - parseInt(workHour) );
