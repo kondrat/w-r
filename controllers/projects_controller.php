@@ -3,7 +3,18 @@ class ProjectsController extends AppController {
 
 	var $name = 'Projects';
 	var $helpers = array('Html', 'Form');
-
+//--------------------------------------------------------------------	
+  function beforeFilter() {
+        $this->Auth->allow('*');
+        parent::beforeFilter(); 
+        $this->Auth->autoRedirect = false;
+        
+      // swiching off Security component for ajax call
+			if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
+     			$this->Security->enabled = false; 
+     		}
+    }
+//--------------------------------------------------------------------
 	function index() {
 		$this->Project->recursive = 0;
 		$this->set('projects', $this->paginate());

@@ -81,6 +81,10 @@
 <?php endif ?>
 		
 </div>
+<?php echo $form->end( );?>
+	<?php echo $form->create('Project');?>
+		<?php echo $form->input('name');?>
+	<?php echo $form->end(__('Submit',true));?>
 <h2><?php __('Interval');?></h2>
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
 <?php __('In new window');?>
@@ -91,8 +95,9 @@
 <div id="test4">test4</div>
 <div id="test3">test3</div>
 <ul class="ultest"></ul>
-<?php echo $form->end( );?>
+
 <div class="stopInterval" style="cursor: pointer">stop</div>
 <div class="startInterval" style="cursor: pointer">start</div>
 <div class="addPlus" style="cursor: pointer">Plus</div>
 <div class="addMinus" style="cursor: pointer">Minus</div>
+<div class="delCookie" style="cursor: pointer">delCookie</div>
