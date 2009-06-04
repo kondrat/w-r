@@ -1,12 +1,12 @@
 /*
 var testAr = new Array();
-testAr[0] = 10;
-testAr[1] = 20;
-testAr[5] = 50;
-testAr[3] = new Array();
-testAr[3][0] = 'fiz';
-testAr[3][3] = 'miz';
-alert(testAr);
+testAr[0] = new Array(10,15);
+testAr.push(new Array(99,93));
+
+
+var tt12 = testAr.pop();
+
+alert(tt12[1]);
 */
 
 jQuery(document).ready( function(){
@@ -14,22 +14,23 @@ jQuery(document).ready( function(){
 	if ( 100 > 0 ) {			
 		var secInt = 0;
 		var interval;
-		
+		var nextInterval = 0;
 		var typeInt = 'rest';
 		var hourDay = 0;
-		var grafClass = 'graf0';
+
 		var nextHour = 0;
 		var HourStat = new Array();
 		 		HourStat[hourDay] = new Array();
 		 //work
-		 		HourStat[hourDay][0] = new Array();
+		 		//HourStat[hourDay][0] = new Array();
 		 //rest
+		 		/*
 		 		HourStat[hourDay][1] = 0;
 		 		HourStat[hourDay][0][0] = new Array();
 		 		HourStat[hourDay][0][0][0] = 0;
-
+				*/
 		
-		var projectId = 'w';
+		var projectId = 'rest';
 		
 					
 		var workStamp = 0;
@@ -84,7 +85,7 @@ jQuery(document).ready( function(){
 		 HourStat[hourDay][0] = new Array(0,0);
 		 HourStat[hourDay][0][0] = new Array(0,0);
 		 //HourStat[hourDay][1] = new Array();
-		 grafClass = cc.grafClass;
+
 					
 		 workStamp = cc.workStamp;
 		 workDelta = cc.workDelta;
@@ -130,7 +131,7 @@ jQuery(document).ready( function(){
 		
 			$('#clock1').css({'background-color' :'#d2ffe9'});
 			$('#clock2').css({'background-color' :'#ffffff'});
-
+			nextInterval = 1;
 			typeInt = 'work';
 			i = k;
 			
@@ -139,7 +140,7 @@ jQuery(document).ready( function(){
 	$('#clock2, .rest').click( function(){
 			$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('#clock1').css({'background-color' :'#ffffff'});
-				
+			nextInterval = 1;	
 			typeInt = 'rest';
 			i2 = k2;
 	});
@@ -252,7 +253,25 @@ jQuery(document).ready( function(){
 										restTotal = parseInt(hour2)*3600 + parseInt(minut2)*60 + parseInt(i2);									
 								}											
 										
-											
+								if( nextInterval == 1 ) {
+									//so, new interval
+									workDelta = parseInt(workTotal) - parseInt(workStamp);											
+									workStamp = workTotal;
+																				
+									restDelta = parseInt(restTotal) - parseInt(restStamp);											
+									restStamp = restTotal;
+									
+									var temp1 = HourStat[hourDay].pop();
+									temp1[0] = temp1[0] + workDelta;
+									HourStat[hourDay].push(temp1);
+																		
+									
+									HourStat[hourDay].push( new Array(0,typeInt) );
+									nextInterval = 0;																		
+									
+									//alert(HourStat[hourDay]);
+									
+								}			
 																				
 								if ( graf == 10 ) {
 											 		
@@ -327,8 +346,8 @@ jQuery(document).ready( function(){
 								 		HourStat[hourDay][0][0] = new Array();
 								 		HourStat[hourDay][0][0][0] = 0;
 																						
-									var grafClass = '.graf'+hourDay;
-									$('.grafWrapper').append(	'<div class="'+grafClass+' graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
+
+									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
 																							'<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>'+
 																							'<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>'+
 																						'</div>'
@@ -336,8 +355,9 @@ jQuery(document).ready( function(){
 									hourInt = 0
 							
 								}	
+										//to del
 										if ( 10 > 9 ) {
-											//to del								
+																		
 											$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
 											$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
 											$('#test3').html('workHour: '+ HourStat[hourDay][0][0][0]+' | restHour: '+ HourStat[hourDay][1] + ' | saveCount : '+ saveCount );
@@ -357,7 +377,6 @@ jQuery(document).ready( function(){
 												'HourStatWork':HourStat[hourDay][0][0][0],
 												'HourStatRest':HourStat[hourDay][1],
 												'projectId': projectId,
-												'grafClass': grafClass,
 															
 												'workStamp': workStamp,
 												'workDelta': workDelta,

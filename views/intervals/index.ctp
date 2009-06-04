@@ -39,7 +39,6 @@
 
 <?php if ( isset($hoursSaved) && $hoursSaved != array() ): ?>	
 	<div class="grafWrapper" >
-	<?php $i = 0;?>
 	<?php foreach ( $hoursSaved as $hour ) : ?>
 		<?php $work = $rest = 0;?>
 		<?php foreach ( $hour['Interval'] as $interval ) {
@@ -62,17 +61,17 @@
 		?>
 		
 		
-			<div class="graf<?php echo $i;?> graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px" title = <?php echo $title; ?>>
+			<div class="graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px" title = <?php echo $title; ?>>
 				<div class="hourWork" style="width:<?php echo $work;?>%;margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
 				<div class="hourRest" style="width:<?php echo $rest;?>%;margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 			</div>
-	<?php $i++; ?>
+
 	<?php endforeach ?>
 	</div>
 <?php else: ?>
 
 		<div class="grafWrapper">
-			<div class="graf0 graf span-1" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
 				<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
 				<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 			</div>
