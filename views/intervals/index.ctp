@@ -72,8 +72,8 @@
 
 		<div class="grafWrapper">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-				<div class="hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
-				<div class="hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+				<!-- <div class=" hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div> -->
+				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 			</div>
 		</div>
 		
