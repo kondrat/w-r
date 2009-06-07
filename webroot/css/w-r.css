@@ -176,7 +176,7 @@ div.formWrap input.form-error {
 .rest span {
 	cursor: pointer;
 }
-.plusRest {
+.minusRest {
 	position: absolute;
 	top: 5px;
 	right: 12px;

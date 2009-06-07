@@ -32,7 +32,7 @@
 	<div class="rest span-8 last">
 		<div class="chessKnob rest">
 			<span><?php __('Rest');?></span>
-			<div class="plusRest">-</div>
+			<div class="minusRest">-</div>
 		</div>
 		<p class="clock clock2" id="clock2">00:00:00</p>		
 	</div>
