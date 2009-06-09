@@ -24,7 +24,7 @@ jQuery(document).ready( function(){
 		 		HourStat[0] = new Array( new Array(0,'rest') );
 		 		//HourStat[0][0][0] = 0;
 		 		//HourStat[0][0][1] = 'rest';
-		
+		var mel2 = new Array();
 
 		
 					
@@ -168,7 +168,7 @@ jQuery(document).ready( function(){
 
 					}					
 				}
-				correction = 0;
+				
 				
 				var clockObj = new Date();
 				interval = setInterval(function () {
@@ -267,7 +267,7 @@ jQuery(document).ready( function(){
 								}											
 									
 										
-								if( nextInterval == 1 ) {
+								if( nextInterval == 1 && correction != 1) {
 									nextInterval = 0;
 									
 									//so, new interval
@@ -277,7 +277,7 @@ jQuery(document).ready( function(){
 																			
 									workStamp = workTotal;
 									restStamp = restTotal;	
-										
+									
 									var Delta1 = 0;
 									if ( typeInt == 'work' ) {
 										Delta1 = restDelta;
@@ -289,12 +289,20 @@ jQuery(document).ready( function(){
 									var temp1 = HourStat[hourDay].pop();
 									temp1[0] = temp1[0] + Delta1;
 									HourStat[hourDay].push(temp1);
-									
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], HourStat[hourDay][HourStat[hourDay].length - 1 ][1], 1 );																		
+									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ]);
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], HourStat[hourDay][HourStat[hourDay].length - 1 ][1], 1 );
 
-                                    //New interval creation
-									HourStat[hourDay].push( new Array(0,typeInt) );								
-								}			
+                  //New interval creation
+									HourStat[hourDay].push( new Array(0,typeInt) );	
+																
+								}	else if ( nextInterval == 1 && correction == 1 ) {
+									HourStat[hourDay].push( new Array(0,typeInt) );	
+									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ][1]);
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], HourStat[hourDay][HourStat[hourDay].length - 1 ][1], 2 );
+									
+								}	
+								nextInterval = 0;	
+								correction = 0;
 																				
 								if ( graf == 5 ) {
 									graf = 0;
@@ -359,7 +367,44 @@ jQuery(document).ready( function(){
 									//alert(	HourStat[hourDay][HourStat[hourDay].length - 1][1] );								
 								}
 	
-								if ( saveSumm  == 20 ) {
+								if ( saveSumm  == 10 ) {
+									//alert(HourStat);
+									
+									//trying to create json text.
+									
+									for ( var aa in HourStat ) {
+										var mel = '{';
+										for ( var bb in HourStat[aa] ) {
+												mel += '"'+HourStat[aa][bb][0] + '":"'+ HourStat[aa][bb][1]+'"';												
+
+											if ( bb != (HourStat[aa].length - 1) ) {
+													mel += ',';
+											} else {
+												mel += '}';
+											}
+	
+										}
+										mel2[aa] = mel;
+									}
+									
+									
+									
+									var testTest =  '{' + "ircEvent" + ':' + "PRIVMSG"+ ',' + "method"+ ':' + "newURI" +','+ "regex"+ ':' +  "helloTest" + '}';
+									//alert(mel2.toString());
+									var mmmlll = JSON.parse( mel2.toString());
+									var myJSONText2 = JSON.stringify(mmmlll);
+									alert(myJSONText2);
+									
+									var HourStatObject = {"HourStat": [
+									       mmmlll
+									    ]
+									};									
+									
+
+									var myJSONText = JSON.stringify(HourStatObject);
+									alert(myJSONText);
+									$(".stopInterval").trigger('click');	
+									
 									//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
 									if ( nextHour == 1 ) {
 										nextHour = 0;
@@ -387,15 +432,15 @@ jQuery(document).ready( function(){
 							
 								}	
 										//to del
-										/*
+										
 										if ( 10 > 9 ) {
-																		
-											$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
-											$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
-											$('#test3').html('Interval: '+ HourStat[hourDay][HourStat.length][0]+' | type: '+ HourStat[hourDay][HourStat.length][1] + ' | saveCount : '+ saveCount );
+											$('#test1').html(mel2);						
+											//$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
+											//$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
+											//$('#test3').html('Interval: '+ HourStat[hourDay][HourStat.length][0]+' | type: '+ HourStat[hourDay][HourStat.length][1] + ' | saveCount : '+ saveCount );
 											//
 										}
-										*/
+										
 										
 						}	,100);	
 			});
@@ -463,6 +508,7 @@ jQuery(document).ready( function(){
 		clearInterval(interval);
 		secInt = 0;
 		clockObj = 0;
+
 	})
 	$(".startInterval").trigger('click');	
 
@@ -798,6 +844,7 @@ function grafon2( workHour2, typeInt2 ,nextInt ) {
 		if ( nextInt == 0 ) {
 				
 					$('.interval:last').width( workPS+"%");
+					
 		} else if ( nextInt == 1) {
 
             $('.interval:last').width( workPS+"%");
@@ -808,6 +855,14 @@ function grafon2( workHour2, typeInt2 ,nextInt ) {
 				$('.graf:last').append('<div class="interval hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>');				
 			}
 
+		} else if ( nextInt == 2 ) {
+			
+			if ( typeInt2 == 'rest' ) {
+				$('.graf:last').append('<div class="interval hourRest1" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>');		//red			
+			} else if ( typeInt2 == 'work') {
+				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>');		//green		
+			}	
+					
 		}
 	
 }
