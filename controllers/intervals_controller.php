@@ -103,9 +103,13 @@ class IntervalsController extends AppController {
 					$key = $this->Session->read('guestKey');
 				}
 				
-				$this->data['work'] = Sanitize::paranoid($this->data['work']);
-				$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
-				$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
+				$this->data['work'] = Sanitize::paranoid($this->data['work'], array(' ', ',','{','}','[',']',':','"'));
+			//	$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
+			//	$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
+				$ttbb = json_decode($this->data['work']);
+				
+				echo json_encode( array('hi'=> $ttbb, 'hi2'=> null, 'hi3'=> null ) );
+				exit;					
 				
 				$nextHour = $this->data['nextHour'];
 				$workSession = $this->Session->read('workSession');

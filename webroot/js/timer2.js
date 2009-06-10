@@ -24,7 +24,6 @@ jQuery(document).ready( function(){
 		 		HourStat[0] = new Array( new Array(0,'rest') );
 		 		//HourStat[0][0][0] = 0;
 		 		//HourStat[0][0][1] = 'rest';
-		var mel2 = new Array();
 
 		
 					
@@ -370,41 +369,13 @@ jQuery(document).ready( function(){
 								if ( saveSumm  == 10 ) {
 									//alert(HourStat);
 									
-									//trying to create json text.
-									
-									for ( var aa in HourStat ) {
-										var mel = '{';
-										for ( var bb in HourStat[aa] ) {
-												mel += '"'+HourStat[aa][bb][0] + '":"'+ HourStat[aa][bb][1]+'"';												
+									//to create json text.
+									var HourStatJSONText = JSON.stringify(HourStat);
+									//alert( HourStatJSONText );
 
-											if ( bb != (HourStat[aa].length - 1) ) {
-													mel += ',';
-											} else {
-												mel += '}';
-											}
-	
-										}
-										mel2[aa] = mel;
-									}
-									
-									
-									
-									var testTest =  '{' + "ircEvent" + ':' + "PRIVMSG"+ ',' + "method"+ ':' + "newURI" +','+ "regex"+ ':' +  "helloTest" + '}';
-									//alert(mel2.toString());
-									var mmmlll = JSON.parse( mel2.toString());
-									var myJSONText2 = JSON.stringify(mmmlll);
-									alert(myJSONText2);
-									
-									var HourStatObject = {"HourStat": [
-									       mmmlll
-									    ]
-									};									
-									
 
-									var myJSONText = JSON.stringify(HourStatObject);
-									alert(myJSONText);
-									$(".stopInterval").trigger('click');	
-									
+									//$(".stopInterval").trigger('click');	
+									saveTime2( HourStatJSONText );
 									//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
 									if ( nextHour == 1 ) {
 										nextHour = 0;
@@ -433,8 +404,7 @@ jQuery(document).ready( function(){
 								}	
 										//to del
 										
-										if ( 10 > 9 ) {
-											$('#test1').html(mel2);						
+										if ( 10 > 9 ) {					
 											//$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
 											//$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
 											//$('#test3').html('Interval: '+ HourStat[hourDay][HourStat.length][0]+' | type: '+ HourStat[hourDay][HourStat.length][1] + ' | saveCount : '+ saveCount );
@@ -836,7 +806,17 @@ function saveTime( workHour, restHour, nextHour ) {
 		);	
 	
 }
-
+function saveTime2( hourStatJson ) {
+		$.post(
+			path + "/intervals/add",
+			{"data[work]": hourStatJson },
+					function(data){
+						$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
+					},
+					"json"
+		);	
+	
+}
 
 function grafon2( workHour2, typeInt2 ,nextInt ) {
 		workPS = Math.floor(workHour2/60*100);
