@@ -2,6 +2,7 @@
 <?php echo $javascript->link('json2',false);?>
 
 <?php echo $javascript->link('timer2',false);?>
+<?php echo $javascript->link('project',false);?>
 
 <?php 
 	/*
@@ -18,7 +19,7 @@
 			} 
 		*/
 ?>	
-
+<?php //echo $html->link('test ext link','http://mail.ru' );?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
 	<div class="span-8">
@@ -60,10 +61,16 @@
 		
 		?>
 		
-		
+		<!--
 			<div class="graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px" title = <?php echo $title; ?>>
 				<div class="hourWork" style="width:<?php echo $work;?>%;margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
 				<div class="hourRest" style="width:<?php echo $rest;?>%;margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+			</div>
+		-->
+			<div class="grafWrapper">
+				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+				</div>
 			</div>
 
 	<?php endforeach ?>
@@ -72,7 +79,6 @@
 
 		<div class="grafWrapper">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-				<!-- <div class=" hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div> -->
 				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 			</div>
 		</div>
@@ -81,10 +87,19 @@
 		
 </div>
 <?php echo $form->end( );?>
-	<?php echo $form->create('Project');?>
-		<?php echo $form->input('name');?>
-	<?php echo $form->end(__('Submit',true));?>
-<h2><?php __('Interval');?></h2>
+
+	<?php //echo $form->create('Project');?>
+		<?php //echo $form->input('name');?>
+	<?php //echo $form->end(__('Submit',true));?>
+	<div class="projectWrapper">
+		<div class="projectTitle">
+			<?php __('My projects...');?>
+		</div>
+		<div class="projectMain">
+			
+		</div>
+	</div>
+
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
 <?php __('In new window');?>
 </a>

@@ -10,6 +10,18 @@ alert(mm);
 
 jQuery(document).ready( function(){
 
+$.expr[':'].external = function(obj){
+    return (obj.hostname != location.hostname);
+};
+
+
+$(document).ready(function(){
+        // Add 'external' CSS class to all external links
+        $('a:external').css({'background-color':'blue'});
+});
+
+
+
 	if ( 100 > 0 ) {			
 		var secInt = 0;
 		var interval;
@@ -165,7 +177,8 @@ jQuery(document).ready( function(){
 							}
 						}
 
-					}					
+					}
+										
 				}
 				
 				
@@ -367,12 +380,9 @@ jQuery(document).ready( function(){
 								}
 	
 								if ( saveSumm  == 10 ) {
-									//alert(HourStat);
 									
 									//to create json text.
 									var HourStatJSONText = JSON.stringify(HourStat);
-									//alert( HourStatJSONText );
-
 
 									//$(".stopInterval").trigger('click');	
 									saveTime2( HourStatJSONText );
@@ -484,10 +494,18 @@ jQuery(document).ready( function(){
 
 
 		
-
+	//var intToSetVar = 0;
 
 	$('.minusRest').click(function(){		
 		clearInterval(interval);
+		
+		/*
+		clearTimeout(intToSetVar);
+		intToSetVar = setTimeout(function () { 
+					alert('hii');
+			}, 5000 );
+		*/
+			
 		//set up correction mode
 		correction = 1;	
 		secInt = 0;
@@ -819,6 +837,7 @@ function saveTime2( hourStatJson ) {
 }
 
 function grafon2( workHour2, typeInt2 ,nextInt ) {
+	
 		workPS = Math.floor(workHour2/60*100);
 		
 		if ( nextInt == 0 ) {

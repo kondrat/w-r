@@ -189,3 +189,16 @@ div.formWrap input.form-error {
 .intervals h2 {
 	margin-bottom: 0;
 }
+/*--- Projects --*/
+.projectTitle {
+	/*background-color: grey;*/
+	border-bottom: 1px solid grey;
+	cursor: pointer;
+}
+.projectMain {
+	/*background-color: grey;*/
+	display:none;
+	height: 90px;
+	border-bottom: 1px solid grey;
+	cursor: pointer;
+}
