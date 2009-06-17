@@ -1,4 +1,4 @@
-<?php echo $javascript->link('jquery.cookie',false);?>
+﻿<?php echo $javascript->link('jquery.cookie',false);?>
 <?php echo $javascript->link('json2',false);?>
 
 <?php echo $javascript->link('timer2',false);?>
@@ -22,21 +22,45 @@
 <?php //echo $html->link('test ext link','http://mail.ru' );?>
 <div class="intervals index clearfix">
 	<?php echo $form->create('Interval');?>
-	<div class="span-8">
-		<div class="chessKnob work">
-			<span><?php __('Work');?></span>
-			<div class="plusWork">+</div>
-		</div>
-		<p class="clock clock1" id="clock1">00:00:00</p>		
+    <div class="span-16 last topChessWrapper">
+        <div class="span-8">
+            <div class="chessKnob work">
+                <span><?php __('Work');?></span>
+                <div class="plusWork">+</div>
+            </div>
+        </div>
+
+        <div class="rest span-8 last">
+            <div class="chessKnob rest">
+                <span><?php __('Rest');?></span>
+                <div class="minusRest">-</div>
+            </div>
+        </div>
+        <div class="projectTitle"><?php __(' switch projects');?></div>
+        <div class="projectWrapper span-14 prepend-1">
+            <div class="projectMain">
+				<div class="projectsNameWrpapper clearfix">
+					<div class="span-2 myProject">Work</div>
+					<div class="span-2 myProject">Work1</div>
+				</div>
+                <div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
+            </div>
+        </div>
+
+
 	</div>
-	
-	<div class="rest span-8 last">
-		<div class="chessKnob rest">
-			<span><?php __('Rest');?></span>
-			<div class="minusRest">-</div>
-		</div>
-		<p class="clock clock2" id="clock2">00:00:00</p>		
-	</div>
+    
+    <!-- my projects block -->
+    
+
+      
+        <div class="span-8">
+            <p class="clock clock1" id="clock1">00:00:00</p>
+        </div>
+        <div class="span-8 last">
+            <p class="clock clock2" id="clock2">00:00:00</p>
+        </div>
+      
 
 <?php if ( isset($hoursSaved) && $hoursSaved != array() ): ?>	
 	<div class="grafWrapper" >
@@ -91,14 +115,7 @@
 	<?php //echo $form->create('Project');?>
 		<?php //echo $form->input('name');?>
 	<?php //echo $form->end(__('Submit',true));?>
-	<div class="projectWrapper">
-		<div class="projectTitle">
-			<?php __('My projects...');?>
-		</div>
-		<div class="projectMain">
-			
-		</div>
-	</div>
+
 
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
 <?php __('In new window');?>

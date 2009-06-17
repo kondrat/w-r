@@ -8,11 +8,9 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort('user_id');?></th>
+	<th><?php echo $paginator->sort('color');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -25,16 +23,14 @@ foreach ($projects as $project):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $project['Project']['id']; ?>
-		</td>
-		<td>
 			<?php echo $project['Project']['name']; ?>
 		</td>
 		<td>
-			<?php echo $project['Project']['created']; ?>
+			<?php echo $project['Project']['color']; ?>
+			<div style="color: green; font-size: larger; font-weight: bold; background-color: #D2FFE9;text-align:center; border: 3px solid grey">Work</div>
 		</td>
 		<td>
-			<?php echo $project['Project']['modified']; ?>
+			<?php echo $time->relativeTime($project['Project']['created'],array('j/n/y'), false); ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>

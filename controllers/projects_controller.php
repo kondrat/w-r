@@ -2,7 +2,7 @@
 class ProjectsController extends AppController {
 
 	var $name = 'Projects';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form','Time');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow('*');

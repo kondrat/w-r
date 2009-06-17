@@ -1,6 +1,6 @@
 jQuery(document).ready( function(){
 
-	$(".projectTitle").click(function(){
+	$(".projectTitle, .projectMainClose , .myProject").click(function(){
 		/*
 			if ($(".projectMain").is(":hidden")) {
 		
@@ -16,14 +16,15 @@ jQuery(document).ready( function(){
 		*/
 
 
-      if ( $(".projectMain").is(":hidden") ) {
-        $(".projectMain").slideDown("slow");
-      } else {
-        $(".projectMain").slideUp();
-      }
+          if ( $(".projectMain").is(":hidden") ) {
+            $(".projectMain").slideDown("slow");
+			$(".projectTitle").text('close id').css({'color' : 'blue'});
+          } else {
+            $(".projectMain").slideUp();
+			$(".projectTitle").text('switch projects').css({'color' : '#000'});
+          }
 
-		});
-	
+    });
 	
 	
 });

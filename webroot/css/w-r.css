@@ -81,8 +81,8 @@ div.formWrap input.form-error {
 	margin: 20px 0 0 0;
 	background-color: #4A4A4A;
 	border: 7px solid #ccc;
-	opacity: 0.8;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	/*opacity: 0.8;*/
+	/*filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);*/
 	cursor: move; 
 	height: 70px;
 }
@@ -124,7 +124,7 @@ div.formWrap input.form-error {
 	position:relative;
 }
 .capReset span {
-	color:grey;
+	color:#ccc;
 	font-size:smaller;
 	font-weight:bold;
 	left:-5px;
@@ -191,14 +191,36 @@ div.formWrap input.form-error {
 }
 /*--- Projects --*/
 .projectTitle {
-	/*background-color: grey;*/
-	border-bottom: 1px solid grey;
+    position:absolute;
+    top: 10px;
+    left: 190px;
+	font-weight: bold;
 	cursor: pointer;
 }
 .projectMain {
-	/*background-color: grey;*/
+	background-color:white;
 	display:none;
-	height: 90px;
-	border-bottom: 1px solid grey;
-	cursor: pointer;
+	border: 3px solid #ccc;
 }
+.projectMainClose, .myProject {
+    cursor:pointer;
+}
+.projectWrapper{
+    position:absolute;
+    top: 30px;
+}
+.topChessWrapper {
+    position:relative;
+}
+.projectsNameWrpapper {
+	margin: 10px;
+}
+.projectsNameWrpapper div {
+	text-align:center;
+}
+
+
+
+
+
+
