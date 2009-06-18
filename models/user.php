@@ -1,6 +1,7 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
+	var $actsAs = array('Containable');
 //--------------------------------------------------------------------
 	var $validate = array(
 							'username' => array(

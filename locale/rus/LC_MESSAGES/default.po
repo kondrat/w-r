@@ -64,6 +64,12 @@ msgstr 	"Подтвердить пароль"
 msgid	"Check your login and password" 
 msgstr 	"Проверте логин и пароль"
 
+msgid	"Previous" 
+msgstr 	"Пред."
+
+msgid	"Next" 
+msgstr 	"След."
+
 msgid	"Groups" 
 msgstr 	"Группы"
 
@@ -93,3 +99,30 @@ msgstr 	"Законный отдых"
 
 msgid	"Week" 
 msgstr 	"Неделя"
+
+msgid	"on %s" 
+msgstr 	"%s"
+
+msgid	"%s ago" 
+msgstr 	"%s назад"
+
+msgid	"month" 
+msgstr 	"месяц"
+
+msgid	"week" 
+msgstr 	"неделя"
+
+msgid	"day" 
+msgstr 	"день"
+
+msgid	"hour" 
+msgstr 	"часа"
+
+msgid	"minute" 
+msgstr 	"минут"
+
+msgid	"Created" 
+msgstr 	"Создан"
+
+msgid	"Are you sure you want to delete # %s?" 
+msgstr 	"Вы подтверждаете удаление # %s?"

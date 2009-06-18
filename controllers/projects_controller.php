@@ -16,10 +16,13 @@ class ProjectsController extends AppController {
     }
 //--------------------------------------------------------------------
 	function index() {
+		
+		$this->paginate['Project']['limit'] = 3;
+		
 		$this->Project->recursive = 0;
 		$this->set('projects', $this->paginate());
 	}
-
+//--------------------------------------------------------------------
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Project.', true));

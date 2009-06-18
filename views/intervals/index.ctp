@@ -40,8 +40,15 @@
         <div class="projectWrapper span-14 prepend-1">
             <div class="projectMain">
 				<div class="projectsNameWrpapper clearfix">
-					<div class="span-2 myProject">Work</div>
-					<div class="span-2 myProject">Work1</div>
+					<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
+						<?php foreach ( $projectUser as $project ): ?>
+							<div class="span-2 myProject"><?php echo $project['Project']['name'];?></div>
+						<?php endforeach ?>
+					<?php else: ?>
+						<div class="span-2 myProject">Work</div>
+						<div class="span-2 myProject">Work2</div>
+						<div class="span-2 myProject">Work3</div>
+					<?php endif ?>
 				</div>
                 <div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
             </div>

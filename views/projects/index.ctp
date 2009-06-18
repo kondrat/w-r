@@ -1,53 +1,56 @@
+<?php echo $javascript->link('jquery.cookie',false);?>
+
+<?php echo $javascript->link('project',false);?>
+
 <div class="projects index">
-<h2><?php __('Projects');?></h2>
-<p>
-<?php
-echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
-?></p>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort('color');?></th>
-	<th><?php echo $paginator->sort('created');?></th>
-	<th class="actions"><?php __('Actions');?></th>
-</tr>
-<?php
-$i = 0;
-foreach ($projects as $project):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
-?>
-	<tr<?php echo $class;?>>
-		<td>
-			<?php echo $project['Project']['name']; ?>
-		</td>
-		<td>
-			<?php echo $project['Project']['color']; ?>
-			<div style="color: green; font-size: larger; font-weight: bold; background-color: #D2FFE9;text-align:center; border: 3px solid grey">Work</div>
-		</td>
-		<td>
-			<?php echo $time->relativeTime($project['Project']['created'],array('j/n/y'), false); ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $project['Project']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</table>
+	<p><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></p>
+
+	
+
+					<?php echo $paginator->sort('name');?>
+					<?php echo $paginator->sort('color');?>
+					<?php echo $paginator->sort('created');?>
+					<br />
+					<br />
+	<div class="clearfix">
+		<?php foreach ($projects as $project): ?>
+			
+				<div class="projectList span-15">
+					
+
+										
+						
+							<div class="projectPreview">
+								<?php echo $project['Project']['name']; ?>
+							</div>
+						
+					
+						<?php echo $project['Project']['color']; ?>
+						
+						<div class="projectCreated">
+							<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
+							<?php //echo __('Created',true).'&nbsp;'.$time->niceShort($project['Project']['created']); ?>
+						</div>	
+												
+						<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
+							<?php //echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>
+							<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit.png"), array('action'=>'edit', $project['Project']['id']),null,null,false); ?>
+							&nbsp;
+							<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete.png"), array('action'=>'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id']) , false); ?>
+						</div>
+						<div style="clear:both;"></div>
+
+						
+				</div>
+		
+		<?php endforeach; ?>
+	</div>
+	
 </div>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></li>
-	</ul>
-</div>
+		<div class="page">
+			<?php if( isset($this->params['paging']['Project']['pageCount']) && $this->params['paging']['Project']['pageCount'] > 1 ): ?>
+				<?php echo $paginator->prev($html->image('icons/left_arrow.png',array('class'=>'pageImgPrev','alt'=>__('Prev',true) ) ), array('escape' => false ) , $html->image('icons/left_arrow_disable.png'),  array('escape' => false ,'class'=>'menuPage'));?>
+  				<?php echo $paginator->numbers( array('modulus'=>'5','separator'=>' &middot; ', 'class' => 'menuPage' ), null );?>
+				<?php echo $paginator->next( $html->image('icons/right_arrow.png',array('class'=>'pageImgNext','alt'=>__('Next',true) ) ), array('escape' => false ), $html->image('icons/right_arrow_disable.png'), array('escape' => false ,'class'=>'menuPage'));?>
+			<?php endif ?>
+		</div>

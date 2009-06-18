@@ -20,8 +20,31 @@
 	background-color: #ffd7d7;
 }
 
-
-
+/*paginator classes*/
+.page {
+	text-align: center;
+}
+.page div.menuPage {
+	display:inline;
+	font-weight: normal;
+}
+.page a {
+	text-decoration: none;
+}
+.page, .page a, .page span a {
+	color: #464646;
+	font-weight: bold;
+}
+.page span a:hover {
+	color: #000;
+}
+.page span.current {
+	color: #999;
+	font-weight: bold;
+}
+.page img {
+	margin: -3px 2px;
+}
 
 /*form classes*/
 .error-message {
@@ -218,9 +241,30 @@ div.formWrap input.form-error {
 .projectsNameWrpapper div {
 	text-align:center;
 }
-
-
-
-
+.projectList {
+	margin: 0 5px 5px 5px;
+	padding: 1px 5px 0 5px;
+	border-bottom: 1px solid #D5D5D5;
+}
+.projectCreated {
+	font-size: 11px;
+	font-weight: 500;
+	color: #999;
+}
+.projectPreview {
+	color: green;
+	font-size: larger;
+	font-weight: bold;
+	background-color: #D2FFE9;
+	text-align:center;
+	border: 3px solid grey;
+	display: inline;
+	padding: 0 20px;
+}
+.projectActions a {
+	text-decoration: none;
+	font-weight: bold;
+	color: grey;
+}
 
 

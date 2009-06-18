@@ -25,7 +25,29 @@ jQuery(document).ready( function(){
           }
 
     });
-	
+		
+		$(' a img.pageImgPrev').hover(	
+			function(){
+				var srcImg = $(this).attr("src");
+				$(this).attr({src: "/w-r/img/icons/left_arrow2.png"});
+			},
+			function(){
+				$(this).attr({src: "/w-r/img/icons/left_arrow.png"});				
+			}			
+		);		
+		
+		
+		
+		
+		$(' a img.pageImgNext').hover(	
+			function(){
+				var srcImg = $(this).attr("src");
+				$(this).attr({src: "/w-r/img/icons/right_arrow2.png"});
+			},
+			function(){
+				$(this).attr({src: "/w-r/img/icons/right_arrow.png"});				
+			}			
+		);
 	
 });
 

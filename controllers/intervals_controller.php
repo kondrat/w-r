@@ -6,7 +6,7 @@ class IntervalsController extends AppController {
 	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow('*');
+        $this->Auth->allow('index');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -20,10 +20,9 @@ class IntervalsController extends AppController {
 		
 			$hoursSaved = array();
 			$conditions = array();
+			$projectUser = array();
 			
 			$key = md5(uniqid(rand(), true));
-			
-
 			
 								
 			if( !$this->Cookie->read('guestKey')) {	
@@ -60,9 +59,16 @@ class IntervalsController extends AppController {
 					}					
 				
 				}
-				
-			
 							
+			}
+			
+			if ( $this->Auth->user('id') ) {
+				
+					//$this->Interval->Hour->User->Project->bindModel( array( 'hasOne' => array('ProjectsUser') ) );
+					//$projectUser = $this->Interval->Hour->User->Project->find('all', array( 'conditions'=> array( 'ProjectsUser.user_id'=> $this->Auth->user('id') ) ) );
+					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );
+					
+			} else {
 			}
 			
 
@@ -72,11 +78,9 @@ class IntervalsController extends AppController {
 
 
 
-			
+			$this->set('projectUser', $projectUser);
 			$this->set('hoursSaved', $hoursSaved);
 			
-		//$this->Interval->recursive = 0;
-		//$this->set('intervals', $this->paginate());
 	}
 //--------------------------------------------------------------------
 	function add() {
