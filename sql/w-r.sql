@@ -3,12 +3,12 @@
 # --------------------------------------------------------
 # Host:                         127.0.0.1
 # Database:                     w-r
-# Server version:               5.0.67-community-nt
+# Server version:               5.0.6-beta-nt
 # Server OS:                    Win32
 # Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-06-17 22:08:14
+# Date/time:                    2009-06-22 00:34:37
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -32,12 +32,12 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `user_id` int(11) unsigned default NULL,
   `key` varchar(32) default NULL,
   `status` enum('open','closed') default 'open',
-  `worksession` char(32) default NULL,
+  `worksession` text,
   `created` datetime default NULL,
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -48,41 +48,10 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
 LOCK TABLES `hours` WRITE;
 /*!40000 ALTER TABLE `hours` DISABLE KEYS;*/
 REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `worksession`, `created`, `modified`) VALUES
-	('449',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:03:39','2009-06-04 14:04:39'),
-	('450',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:04:39','2009-06-04 14:05:39'),
-	('451',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:05:39','2009-06-04 14:06:39'),
-	('452',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:06:39','2009-06-04 14:07:39'),
-	('453',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:07:39','2009-06-04 14:08:39'),
-	('454',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:08:39','2009-06-04 14:09:40'),
-	('455',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:09:40','2009-06-04 14:10:39'),
-	('456',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:10:39','2009-06-04 14:12:05'),
-	('457',NULL,'7b7596c816d820445c93d488d69158b5','closed','47c95e6bcab097e66b38a1e65e77ca71','2009-06-04 14:12:05','2009-06-04 21:12:36'),
-	('458',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:12:36','2009-06-04 21:14:10'),
-	('459',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:14:10','2009-06-04 21:15:16'),
-	('460',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:15:16','2009-06-04 21:17:14'),
-	('461',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:17:14','2009-06-04 21:18:39'),
-	('462',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:18:39','2009-06-04 21:19:45'),
-	('463',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:19:45','2009-06-04 21:20:45'),
-	('464',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:20:45','2009-06-04 21:21:45'),
-	('465',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:21:45','2009-06-04 21:22:45'),
-	('466',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:22:45','2009-06-04 21:23:45'),
-	('467',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:23:45','2009-06-04 21:24:45'),
-	('468',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:24:45','2009-06-04 21:25:45'),
-	('469',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:25:45','2009-06-04 21:26:45'),
-	('470',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:26:45','2009-06-04 21:27:45'),
-	('471',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:27:45','2009-06-04 21:28:45'),
-	('472',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:28:45','2009-06-04 21:29:45'),
-	('473',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:29:45','2009-06-04 21:30:45'),
-	('474',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:30:45','2009-06-04 21:31:45'),
-	('475',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:31:45','2009-06-04 21:32:45'),
-	('476',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:32:45','2009-06-04 21:33:52'),
-	('477',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:33:52','2009-06-04 21:34:59'),
-	('478',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:34:59','2009-06-04 21:35:59'),
-	('479',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:35:59','2009-06-04 21:36:59'),
-	('480',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:36:59','2009-06-04 21:38:55'),
-	('481',NULL,'7b7596c816d820445c93d488d69158b5','closed','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:38:55','2009-06-04 21:39:50'),
-	('482',NULL,'7b7596c816d820445c93d488d69158b5','open','d2ec6d432553cde1613c8d3e557ffc48','2009-06-04 21:39:50','2009-06-04 21:39:50'),
-	('483',NULL,'afef6c617014be3edc25f30dff00018d','open',NULL,'2009-06-10 19:25:06','2009-06-10 19:25:06');
+	('1',NULL,NULL,'open','[[[9,"rest","rest_1"],[1,"work","project_1"]]]','2009-06-21 23:39:28','2009-06-21 23:39:28'),
+	('2',NULL,NULL,'open','[[[9,"rest","rest_1"],[10,"work","project_1"],[1,"rest","rest_1"]]]','2009-06-21 23:40:19','2009-06-21 23:40:19'),
+	('3',NULL,NULL,'open','[[[9,"rest","rest_1"],[10,"work","project_1"],[11,"rest","rest_1"]]]','2009-06-21 23:40:28','2009-06-21 23:40:28'),
+	('4',NULL,NULL,'open','[[[1,"rest","rest_1"],[9,"rest","rest_1"]]]','2009-06-22 00:10:13','2009-06-22 00:10:13');
 /*!40000 ALTER TABLE `hours` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -110,8 +79,12 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
 # Dumping data for table 'intervals'
 #
 
-# No data found.
-
+LOCK TABLES `intervals` WRITE;
+/*!40000 ALTER TABLE `intervals` DISABLE KEYS;*/
+REPLACE INTO `intervals` (`id`, `hour_id`, `project_id`, `interval`, `type`, `created`, `modified`) VALUES
+	('1','484',NULL,'2','work','2009-06-18 01:00:40','2009-06-18 02:15:27');
+/*!40000 ALTER TABLE `intervals` ENABLE KEYS;*/
+UNLOCK TABLES;
 
 
 #
@@ -127,7 +100,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -138,7 +111,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS;*/
 REPLACE INTO `projects` (`id`, `name`, `color`, `created`, `modified`) VALUES
-	('2','first',NULL,'2009-05-19 17:43:51','2009-05-19 17:43:51'),
+	('2','first',NULL,'2009-04-19 17:43:51','2009-05-19 17:43:51'),
 	('3','third',NULL,'2009-05-19 17:49:41','2009-05-19 17:49:41'),
 	('4','forth',NULL,'2009-05-19 17:52:25','2009-05-19 17:52:25'),
 	('5','fifth',NULL,'2009-05-19 18:16:07','2009-05-19 18:16:07'),
@@ -162,7 +135,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
   `perm` int(10) unsigned default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -198,7 +171,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

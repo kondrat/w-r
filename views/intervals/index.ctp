@@ -19,43 +19,50 @@
 			} 
 		*/
 ?>	
-<?php //echo $html->link('test ext link','http://mail.ru' );?>
-<div class="intervals index clearfix">
-	<?php echo $form->create('Interval');?>
+<div class="intervals index clearfix" style=" margin: -10px 0 0 0;">
+	<?php //echo $form->create('Interval');?>
+		<div class="timerControl clearfix">
+			<div class="projectTitle span-3"><?php __('switch projects');?></div>
+			<div class="stopStart span-3">
+				<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>
+				<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>
+			</div>
+		</div>
     <div class="span-16 last topChessWrapper">
         <div class="span-8">
-            <div class="chessKnob work">
-                <span><?php __('Work');?></span>
-                <div class="plusWork">+</div>
+            <div class="chessKnob work">           		
+                <span><?php __('Work');?></span>                            
+                <div class="minusWork">-</div>               
             </div>
         </div>
 
         <div class="rest span-8 last">
             <div class="chessKnob rest">
+            	
                 <span><?php __('Rest');?></span>
+                
                 <div class="minusRest">-</div>
             </div>
         </div>
-        <div class="projectTitle"><?php __(' switch projects');?></div>
+    </div>   
         <div class="projectWrapper span-14 prepend-1">
-            <div class="projectMain">
-				<div class="projectsNameWrpapper clearfix">
-					<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
-						<?php foreach ( $projectUser as $project ): ?>
-							<div class="span-2 myProject"><?php echo $project['Project']['name'];?></div>
-						<?php endforeach ?>
-					<?php else: ?>
-						<div class="span-2 myProject">Work</div>
-						<div class="span-2 myProject">Work2</div>
-						<div class="span-2 myProject">Work3</div>
-					<?php endif ?>
-				</div>
-                <div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
-            </div>
+	      	<div class="projectMain">
+						<div class="projectsNameWrpapper clearfix">
+							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
+								<?php foreach ( $projectUser as $project ): ?>
+									<div class="span-2 myProject" style="background-color:#D2FFE9;color:green;" id="<?php echo 'project_'.$project['Project']['id'];?>"><?php echo $project['Project']['name'];?></div>
+								<?php endforeach ?>
+							<?php else: ?>
+								<div class="span-2 myProject" style="background-color:#D2FFE9;color:green;" id="project_1">Work</div>
+								<div class="span-2 myProject" style="background-color:#ffffae;color:olive;" id="project_2">Work2</div>
+								<div class="span-2 myProject" style="background-color:#ddffff;color:teal;" id="project_3">Work3</div>
+							<?php endif ?>
+						</div>
+	        	<div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
+	       	</div>
         </div>
 
 
-	</div>
     
     <!-- my projects block -->
     
@@ -105,7 +112,7 @@
 			</div>
 
 	<?php endforeach ?>
-	</div>
+	</div><!--grafWrapper-->
 <?php else: ?>
 
 		<div class="grafWrapper">
@@ -116,26 +123,19 @@
 		
 <?php endif ?>
 		
-</div>
-<?php echo $form->end( );?>
-
-	<?php //echo $form->create('Project');?>
-		<?php //echo $form->input('name');?>
-	<?php //echo $form->end(__('Submit',true));?>
+</div><!--last-->
+<?php //echo $form->end( );?>
 
 
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
 <?php __('In new window');?>
 </a>
 <div id="test1">test1</div>
-<div id="test2">test2</div>
+<p class="margin:0;"> Data from app</p>
+<div id="test2"></div>
 <p style="margin:0"> real </p>
 <div id="test4">test4</div>
 <div id="test3">test3</div>
-<ul class="ultest"></ul>
+<!--<ul class="ultest"></ul>-->
 
-<div class="stopInterval" style="cursor: pointer">stop</div>
-<div class="startInterval" style="cursor: pointer">start</div>
-<div class="addPlus" style="cursor: pointer">Plus</div>
-<div class="addMinus" style="cursor: pointer">Minus</div>
 <div class="delCookie" style="cursor: pointer">delCookie</div>

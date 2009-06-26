@@ -9,17 +9,19 @@ alert(mm);
 
 
 jQuery(document).ready( function(){
+    
+	if ( 10 > 0 ) {
+    $.expr[':'].external = function(obj){
+        return (obj.hostname != location.hostname);
 
-$.expr[':'].external = function(obj){
-    return (obj.hostname != location.hostname);
-};
+    };
 
 
-$(document).ready(function(){
-        // Add 'external' CSS class to all external links
-        $('a:external').css({'background-color':'blue'});
-});
-
+    $(document).ready(function(){
+            // Add 'external' CSS class to all external links
+            $('a:external').css({'background-color':'blue'});
+    });
+	}
 
 
 	if ( 100 > 0 ) {			
@@ -27,15 +29,17 @@ $(document).ready(function(){
 		var interval;
 		var nextInterval = 0;
 		var typeInt = 'rest';
+		var projectId = 'project_1';
+		var projectName = 'Work';
+		var workBackground = '#d2ffe9';
+		var colorProjectId = 'green';
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;
 
 		var nextHour = 0;
 		var HourStat = new Array();
-		var projectId = 'rest';
-		 		HourStat[0] = new Array( new Array(0,'rest') );
-		 		//HourStat[0][0][0] = 0;
-		 		//HourStat[0][0][1] = 'rest';
+		var projectId = 'rest_1';
+		 		HourStat[0] = new Array( new Array(0,'rest','rest_1') );
 
 		
 					
@@ -129,37 +133,87 @@ $(document).ready(function(){
 	}
 	
 
-								
-	$('#clock1, .work').click( function(){
-		
-			$('#clock1').css({'background-color' :'#d2ffe9'});
+	//#ffd7d7 - red;							
+	$('#clock1, .work').click( function(){		
+			$('#clock1').css({'background-color' : workBackground });
 			$('#clock2').css({'background-color' :'#ffffff'});
+			$('.work span').css({'font-size':'100%'});
+			$('.rest span').css({'font-size':'85%'});
+			
+			$('.minusRest').css({'display':'none'});
+			$('.minusWork').css({'display':'block'});
+			
+			projectId = $('.myProject:first').attr("id");
 			nextInterval = 1;
 			typeInt = 'work';
-			i = k;
-			
+			i = k;			
 	});
 	
 	$('#clock2, .rest').click( function(){
-			$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('#clock1').css({'background-color' :'#ffffff'});
+			$('#clock2').css({'background-color' :'#ffd7d7'});
+			$('.work span').css({'font-size':'85%'});
+			$('.rest span').css({'font-size':'100%'});
+			
+			$('.minusRest').css({'display':'block'});
+			$('.minusWork').css({'display':'none'});
+			
+			projectId = 'rest_1';
 			nextInterval = 1;	
 			typeInt = 'rest';
 			i2 = k2;
 	});
+
+	$(".myProject").click(function(){
+		
+		//$(".stopInterval").trigger('click');
+		var prevProjectId = projectId;
+		projectId = $(this).attr("id");
+		//only if we chose another project.
+		if ( prevProjectId != projectId ) {
+			
+			projectName = $(this).text();
+			colorProjectId = $(this).css("color");
+			workBackground = $(this).css("background-color");
+		
+		
+		
+			$('.clock1, .work').css({'color':colorProjectId});
+			$('.work span').text(projectName);
+			$('#clock1').css({'background-color' : workBackground });
+			$('#clock2').css({'background-color' :'#ffffff'});
+			$('.work span').css({'font-size':'100%'});
+			$('.rest span').css({'font-size':'85%'});
+			
+		
+			nextInterval = 1;
+			typeInt = 'work';
+			i = k;
+		}
+
+		
+	});
+
 		
 	if( typeInt == 'rest' ) {
 			$('#clock2').css({'background-color' :'#ffd7d7'});
-			$('#clock1').css({'background-color' :'#ffffff'});		
+			$('#clock1').css({'background-color' :'#ffffff'});
+			$('.minusRest').css({'display':'block'});	
+			$('.minusWork').css({'display':'none'});	
 	} else if (typeInt == 'work' ) {
-			$('#clock1').css({'background-color' :'#d2ffe9'});
-			$('#clock2').css({'background-color' :'#ffffff'});		
+			$('#clock1').css({'background-color' : workBackground });
+			$('#clock2').css({'background-color' :'#ffffff'});	
+			$('.minusRest').css({'display':'none'});
+			$('.minusWork').css({'display':'block'});		
 	}
 	
 	$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
 	$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 
 			$('.startInterval').click( function(){	
+				
+				$('.startInterval').css({'display':'none'});
+				$('.stopInterval').css({'display':'inline'});
 				
 				if ( correction == 1 ) {
 
@@ -291,26 +345,45 @@ $(document).ready(function(){
 									restStamp = restTotal;	
 									
 									var Delta1 = 0;
-									if ( typeInt == 'work' ) {
-										Delta1 = restDelta;
-									} else if ( typeInt == 'rest' ) {
+									if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'work' ) {
 										Delta1 = workDelta;
+									} else if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'rest' ) {
+										Delta1 = restDelta;
 									}						
 									
 																		
 									var temp1 = HourStat[hourDay].pop();
+									//alert(temp1);
+									//$(".stopInterval").trigger('click');	
 									temp1[0] = temp1[0] + Delta1;
-									HourStat[hourDay].push(temp1);
-									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ]);
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], HourStat[hourDay][HourStat[hourDay].length - 1 ][1], 1 );
 
-                  //New interval creation
-									HourStat[hourDay].push( new Array(0,typeInt) );	
-																
+									if ( temp1[0] > -1 ) {
+					
+										HourStat[hourDay].push(temp1);
+																				
+										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId );
+										
+										HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+									
+									} else {
+										
+										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
+										alert(HourStat[hourDay][HourStat[hourDay].length - 1 ]);
+										//alert(temp1);
+										$(".stopInterval").trigger('click');	
+									}
+									
+	                //New interval creation
+	               // if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][2] != projectId ) {
+										//HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+									//}
+
+									
+																								
 								}	else if ( nextInterval == 1 && correction == 1 ) {
-									HourStat[hourDay].push( new Array(0,typeInt) );	
+									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ][1]);
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], HourStat[hourDay][HourStat[hourDay].length - 1 ][1], 2 );
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 2 , colorProjectId);
 									
 								}	
 								nextInterval = 0;	
@@ -373,10 +446,10 @@ $(document).ready(function(){
 									HourStat[hourDay].push(temp2);	
 									
 																
-									$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
+									//$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
 									
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], HourStat[hourDay][HourStat[hourDay].length - 1][1], 0 );
-									//alert(	HourStat[hourDay][HourStat[hourDay].length - 1][1] );								
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, colorProjectId );
+																
 								}
 	
 								if ( saveSumm  == 10 ) {
@@ -384,9 +457,9 @@ $(document).ready(function(){
 									//to create json text.
 									var HourStatJSONText = JSON.stringify(HourStat);
 
-									//$(".stopInterval").trigger('click');	
+									
 									saveTime2( HourStatJSONText );
-									//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
+									
 									if ( nextHour == 1 ) {
 										nextHour = 0;
 									}
@@ -397,23 +470,22 @@ $(document).ready(function(){
 									nextHour = 1;
 									hourDay++;
 								 	HourStat[hourDay] = new Array();
-								 	HourStat[hourDay].push(new Array(0,typeInt));
+								 	HourStat[hourDay].push(new Array(0,typeInt,projectId));
 
                                     if ( typeInt == 'rest') {
-                                        color = '#ff7d7d';
+                                        color2 = '#ff7d7d';
                                     } else {
-                                        color = '#95ffca';
+                                        color2 = colorProjectId;
                                     }
 
 									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
-																								'<div class="interval" style="margin: 0; height: 10px; background-color:'+color+'; float: left;width:0%"></div>'+
-																								'</div>'
+																								'<div class="interval" style="margin: 0; height: 10px; background-color:'+color2+'; float: left;width:0%"></div>'+
+																						'</div>'
 																					);																								
 									hourInt = 0
-							
 								}	
-										//to del
-										
+								
+										//to del										
 										if ( 10 > 9 ) {					
 											//$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
 											//$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
@@ -488,23 +560,19 @@ $(document).ready(function(){
 		clearInterval(interval);
 		secInt = 0;
 		clockObj = 0;
+		$('.startInterval').css({'display':'inline'});
+		$(this).css({'display':'none'});
 
 	})
 	$(".startInterval").trigger('click');	
 
 
 		
-	//var intToSetVar = 0;
 
 	$('.minusRest').click(function(){		
 		clearInterval(interval);
 		
-		/*
-		clearTimeout(intToSetVar);
-		intToSetVar = setTimeout(function () { 
-					alert('hii');
-			}, 5000 );
-		*/
+
 			
 		//set up correction mode
 		correction = 1;	
@@ -737,6 +805,7 @@ $(document).ready(function(){
 
 	})
 
+	// not started yet
 	$('.plusRest').click(function(){		
 		clearInterval(interval);
 		secInt = 0;
@@ -836,30 +905,38 @@ function saveTime2( hourStatJson ) {
 	
 }
 
-function grafon2( workHour2, typeInt2 ,nextInt ) {
+function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 	
 		workPS = Math.floor(workHour2/60*100);
+		
+		if ( typeof color == 'undefined' ) {
+			color = '#ff7d7d';
+		} else {
+			color = color; 
+		}
+		
 		
 		if ( nextInt == 0 ) {
 				
 					$('.interval:last').width( workPS+"%");
 					
+					
 		} else if ( nextInt == 1) {
-
+				
             $('.interval:last').width( workPS+"%");
             
-			if ( typeInt2 == 'work' ) {
-				$('.graf:last').append('<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>');					
-			} else if ( typeInt2 == 'rest') {
-				$('.graf:last').append('<div class="interval hourWork" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>');				
+			if ( typeInt2 == 'rest' ) {
+				$('.graf:last').append('<div class="interval hourRest" style="margin: 0; height: 10px; background-color:#FF7D7D; float: left;"></div>');					
+			} else if ( typeInt2 == 'work') {
+				$('.graf:last').append('<div class="interval hourWork" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');				
 			}
-
+//To Fix!!
 		} else if ( nextInt == 2 ) {
 			
 			if ( typeInt2 == 'rest' ) {
-				$('.graf:last').append('<div class="interval hourRest1" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>');		//red			
+				$('.graf:last').append('<div class="interval hourRest1" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');		//red			
 			} else if ( typeInt2 == 'work') {
-				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: #95ffca; float: left;"></div>');		//green		
+				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: #FF7D7D; float: left;"></div>');		//green		
 			}	
 					
 		}

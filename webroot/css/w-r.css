@@ -172,8 +172,9 @@ div.formWrap input.form-error {
 /*work -rest*/
 .chessKnob {
 	margin: 0;
-	font-size: 15pt;
+	font-size: 200%;
 	text-align: center;
+	position: relative;
 }
 .work{
 	color: green;
@@ -181,8 +182,9 @@ div.formWrap input.form-error {
 }
 .work span {
 	cursor: pointer;
+	font-size: 85%;
 }
-.plusWork {
+.minusWork {
 	position: absolute;
 	top: 5px;
 	left: 10px;
@@ -190,7 +192,7 @@ div.formWrap input.form-error {
 	width: 20px;
 	border: 2px solid #ccc;
 	cursor: pointer;
-	line-height: 0.75;
+	line-height: 0.55;
 }
 .rest{
 	color: red;
@@ -198,6 +200,7 @@ div.formWrap input.form-error {
 }
 .rest span {
 	cursor: pointer;
+	font-size: 100%;
 }
 .minusRest {
 	position: absolute;
@@ -212,12 +215,17 @@ div.formWrap input.form-error {
 .intervals h2 {
 	margin-bottom: 0;
 }
+.intervals {
+	margin-top: -10px;
+}
 /*--- Projects --*/
 .projectTitle {
-    position:absolute;
-    top: 10px;
-    left: 190px;
+  /*position:absolute;
+  top: 10px;
+  left: 190px;
+  */
 	font-weight: bold;
+	font-size: 10pt;
 	cursor: pointer;
 }
 .projectMain {
@@ -225,15 +233,21 @@ div.formWrap input.form-error {
 	display:none;
 	border: 3px solid #ccc;
 }
+.myProject {
+    border: 3px solid gray;
+    font-weight: bold;
+}
 .projectMainClose, .myProject {
     cursor:pointer;
 }
 .projectWrapper{
-    position:absolute;
-    top: 30px;
+   position:absolute;
+    top: 118px;
+    
 }
 .topChessWrapper {
     position:relative;
+    /*height: 30px;*/
 }
 .projectsNameWrpapper {
 	margin: 10px;
@@ -266,5 +280,40 @@ div.formWrap input.form-error {
 	font-weight: bold;
 	color: grey;
 }
-
-
+.timerControl div {
+	/*display: inline;*/
+}
+.stopStart div {
+	display: inline;
+}
+.stopInterval {
+	color: red;
+	font-weight: bold;
+}
+.startInterval {
+	color: green;
+	font-weight: bold;
+}
+.newProject {
+	font-weight: bold;
+	margin: 5px 0 0 0;
+}
+.newProject a {
+	text-decoration:none;
+	color: gray;
+}
+.newProject a:hover {
+	color: #000;
+}
+.projects .input {
+	float: none;
+}
+.projects .submit {
+	margin: 5px;
+}
+.newProjectWrapper {
+	border: 2px solid gray;
+	padding: 5px;
+	margin: 5px;
+	display:none;
+}

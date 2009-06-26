@@ -1,10 +1,24 @@
-<?php echo $javascript->link('jquery.cookie',false);?>
+<?php echo $javascript->link(array('jquery.cookie','jquery.form'),false);?>
 
 <?php echo $javascript->link('project',false);?>
 
 <div class="projects index">
-	<p><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></p>
+	
+	<div class="newProject"><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></div>
+	<div class="newProjectWrapper span-15 last">
+	<div class="projects form">
+			<?php echo $form->create('Project');?>
 
+				<?php
+					echo $form->input('name');
+				?>
+				<div><?php __('Color');?></div>
+
+					<?php echo $form->submit('Submit',array('class'=>'projectSubmit'));?>
+					<?php echo $form->end();?>
+
+			</div>
+	</div>
 	
 
 					<?php echo $paginator->sort('name');?>

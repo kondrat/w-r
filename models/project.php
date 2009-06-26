@@ -5,7 +5,8 @@ class Project extends AppModel {
 	var $actsAs = array('Containable');
 	
 	var $validate = array(
-		'user_id' => array('numeric')
+		'user_id' => array('numeric'),
+		'name'=> array('alfanumeric'),
 	);
 //--------------------------------------------------------------------
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

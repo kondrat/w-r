@@ -6,7 +6,7 @@ class IntervalsController extends AppController {
 	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow('index');
+        $this->Auth->allow('index','add');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -89,11 +89,13 @@ class IntervalsController extends AppController {
 		$key = null;
 		$workInt = array();
 		$projectId = null;
+		$workHoursArray = array();
 		
 		
 				Configure::write('debug', 0);
 				$this->autoRender = false;
-					//print_r($this->data);		
+				//print_r($this->data);
+							
 		if (!empty($this->data)) {
 			
 			App::import('Sanitize');
@@ -107,12 +109,11 @@ class IntervalsController extends AppController {
 					$key = $this->Session->read('guestKey');
 				}
 				
-				$this->data['work'] = Sanitize::paranoid($this->data['work'], array(' ', ',','{','}','[',']',':','"'));
-			//	$this->data['rest'] = Sanitize::paranoid($this->data['rest']);
-			//	$this->data['nextHour'] = Sanitize::paranoid($this->data['nextHour']);
-				$ttbb = json_decode($this->data['work']);
+				$this->data['Hour']['worksession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
+				//$this->Interval->Hour->save($this->data);
+				$workHoursArray = json_decode($this->data['work']);
 				
-				echo json_encode( array('hi'=> $ttbb, 'hi2'=> null, 'hi3'=> null ) );
+				echo json_encode( array('hi'=> $ttbb, 'hi2'=> 'a', 'hi3'=> 'b' ) );
 				exit;					
 				
 				$nextHour = $this->data['nextHour'];

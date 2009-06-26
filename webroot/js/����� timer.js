@@ -1,4 +1,13 @@
+
+if ( a > b ) {
+	alert('avia');
+	
+}
+
+
+
 jQuery(document).ready( function(){
+	var newt = null;
 	$('#clock1').click( function(){
 		setInterval(
 		
