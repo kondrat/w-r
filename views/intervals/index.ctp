@@ -130,6 +130,7 @@
 <a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
 <?php __('In new window');?>
 </a>
+<div id="hourstat">hourstat</div>
 <div id="test1">test1</div>
 <p class="margin:0;"> Data from app</p>
 <div id="test2"></div>

@@ -6,7 +6,7 @@ class Project extends AppModel {
 	
 	var $validate = array(
 		'user_id' => array('numeric'),
-		'name'=> array('alfanumeric'),
+		'name'=> array('alphaNumeric'),
 	);
 //--------------------------------------------------------------------
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

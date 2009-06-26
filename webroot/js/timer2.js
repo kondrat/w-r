@@ -356,22 +356,29 @@ jQuery(document).ready( function(){
 									//alert(temp1);
 									//$(".stopInterval").trigger('click');	
 									temp1[0] = temp1[0] + Delta1;
-
-									if ( temp1[0] > -1 ) {
+									
+									//checking if interval was to short or not
+									if ( temp1[0] > 2 ) {
 					
 										HourStat[hourDay].push(temp1);
 																				
 										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId );
 										
 										HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+
 									
 									} else {
-										
+										$('.interval:last').remove();
 										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
-										alert(HourStat[hourDay][HourStat[hourDay].length - 1 ]);
-										//alert(temp1);
 										$(".stopInterval").trigger('click');	
 									}
+
+									var nnnT = '';
+									$.each(HourStat[hourDay], function() {									
+											nnnT += this + " temp1: " + temp1[0] + ";<br />";									
+									} );
+									$('#hourstat').html(nnnT);
+
 									
 	                //New interval creation
 	               // if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][2] != projectId ) {
@@ -390,6 +397,7 @@ jQuery(document).ready( function(){
 								correction = 0;
 																				
 								if ( graf == 5 ) {
+																	
 									graf = 0;
 									
 										workDelta = parseInt(workTotal) - parseInt(workStamp);																					
@@ -449,6 +457,12 @@ jQuery(document).ready( function(){
 									//$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
 									
 									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, colorProjectId );
+									
+									var nnnT = '';
+									$.each(HourStat[hourDay], function() {									
+											nnnT += this + " ;<br />";									
+									} );
+									$('#hourstat').html(nnnT);
 																
 								}
 	
@@ -508,7 +522,7 @@ jQuery(document).ready( function(){
 												'typeInt': typeInt,
 												'hourDay': hourDay,
 												//'lastInterval':toSaveInterval[0],
-												'lastIntervalType':toSaveInterval[1],
+												//'lastIntervalType':toSaveInterval[1],
 												
 												//'intervals':[],
 												
