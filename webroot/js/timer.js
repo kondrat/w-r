@@ -33,7 +33,13 @@ jQuery(document).ready( function(){
 		var hour2 = 0;
 		var int2 = 0;
 		var k2 = 0;
-		var i2 = 0;		
+		var i2 = 0;	
+		if ( 10 > 1){
+			alert('hell');
+		}
+		
+		alert();
+		
 								
 	$('#clock1, .work').click( function(){
 			 $('#clock1').css({'background-color' :'#d2ffe9'});
@@ -280,6 +286,9 @@ function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 	myW.focus();
 }
 
+if (10>1){
+	alert('hell2');
+}
 
 
 

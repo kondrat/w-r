@@ -23,12 +23,14 @@
 	<?php //echo $form->create('Interval');?>
 		<div class="timerControl clearfix">
 			<div class="projectTitle span-3"><?php __('switch projects');?></div>
-			<div class="stopStart span-3">
-				<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>
-				<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>
-			</div>
 		</div>
     <div class="span-16 last topChessWrapper">
+    	
+	    	<div class="stopStart span-3">
+					<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>
+					<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>
+				</div>
+				
         <div class="span-8">
             <div class="chessKnob work">           		
                 <span><?php __('Work');?></span>                            
