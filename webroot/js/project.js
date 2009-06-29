@@ -18,7 +18,12 @@ jQuery(document).ready( function(){
       $(".newProjectWrapper").toggle();
       return false;
     });
-
+    
+		$("a.projectEdit").click(function () {
+     	$(this).parents(".projectList").find(".projectDataEdit").toggle();
+      return false;
+    });
+    
 		/*
 		$('.projectSubmit').click(function(){
 			$(this).parents("form:first").ajaxSubmit({
@@ -33,20 +38,15 @@ jQuery(document).ready( function(){
 		*/
 		$(' a img.pageImgPrev').hover(	
 			function(){
-				var srcImg = $(this).attr("src");
 				$(this).attr({src: "/w-r/img/icons/left_arrow2.png"});
 			},
 			function(){
 				$(this).attr({src: "/w-r/img/icons/left_arrow.png"});				
 			}			
-		);		
-		
-		
-		
+		);			
 		
 		$(' a img.pageImgNext').hover(	
 			function(){
-				var srcImg = $(this).attr("src");
 				$(this).attr({src: "/w-r/img/icons/right_arrow2.png"});
 			},
 			function(){
@@ -54,6 +54,23 @@ jQuery(document).ready( function(){
 			}			
 		);
 		
-
+		$('.projectActions a ').hover(	
+			function(){
+				$(this).find('img.projectDelImg').attr({src: "/w-r/img/icons/delete.png"});
+			},
+			function(){
+				$('img.projectDelImg').attr({src: "/w-r/img/icons/delete_2.png"});				
+			}			
+		);	
+			
+		$('.projectActions a').hover(	
+			function(){
+				$(this).find('img.projectEditImg').attr({src: "/w-r/img/icons/edit.png"});
+			},
+			function(){
+				$('img.projectEditImg').attr({src: "/w-r/img/icons/edit_2.png"});				
+			}			
+		);		
+				
 });
 

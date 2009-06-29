@@ -3,9 +3,10 @@ class ProjectsController extends AppController {
 
 	var $name = 'Projects';
 	var $helpers = array('Html', 'Form','Time');
+	var $components = array('Security');
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow('*');
+        $this->Auth->allow('index');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -16,11 +17,14 @@ class ProjectsController extends AppController {
     }
 //--------------------------------------------------------------------
 	function index() {
-		
-		$this->paginate['Project']['limit'] = 3;
-		
-		$this->Project->recursive = 0;
-		$this->set('projects', $this->paginate());
+		if ( $this->Auth->user('id') ) {
+			$this->paginate['Project']['limit'] = 3;		
+			$this->Project->bindModel( array( 'hasOne' => array('ProjectsUser') ) );
+			$this->paginate['Project']['conditions'] = array( 'ProjectsUser.user_id'=> $this->Auth->user('id') );
+			$this->paginate['Project']['fields'] = array();
+			$this->paginate['Project']['contain'] = 'ProjectsUser';
+			$this->set('projects', $this->paginate());
+		}
 	}
 //--------------------------------------------------------------------
 	function view($id = null) {
@@ -30,23 +34,38 @@ class ProjectsController extends AppController {
 		}
 		$this->set('project', $this->Project->read(null, $id));
 	}
-
+//--------------------------------------------------------------------
 	function add() {
 		if (!empty($this->data)) {
+			
+			if ( $this->Auth->user('id') ) {
+				$this->data['User']['User'] = $this->Auth->user('id');
+			} else {
+				$this->Session->setFlash(__('The Project could not be saved.Invalid user. Please, try again.', true));
+				$this->redirect(array('action'=>'index'));				
+			}
+			
+			
+			
 			$this->Project->create();
 			if ($this->Project->save($this->data)) {
 				$this->Session->setFlash(__('The Project has been saved', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Project could not be saved. Please, try again.', true));
+				$this->redirect(array('action'=>'index'));
 			}
+			
 		}
+		
+		
 		$users = $this->Project->User->find('list');
 		$this->set(compact('users'));
 		$users2 = $this->Project->find('all');
 		$this->set('user2',$users2);
+		
 	}
-
+//--------------------------------------------------------------------
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Project', true));
@@ -66,7 +85,7 @@ class ProjectsController extends AppController {
 		$users = $this->Project->User->find('list');
 		$this->set(compact('users'));
 	}
-
+//--------------------------------------------------------------------
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Project', true));

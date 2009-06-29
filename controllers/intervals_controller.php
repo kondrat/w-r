@@ -63,11 +63,7 @@ class IntervalsController extends AppController {
 			}
 			
 			if ( $this->Auth->user('id') ) {
-				
-					//$this->Interval->Hour->User->Project->bindModel( array( 'hasOne' => array('ProjectsUser') ) );
-					//$projectUser = $this->Interval->Hour->User->Project->find('all', array( 'conditions'=> array( 'ProjectsUser.user_id'=> $this->Auth->user('id') ) ) );
-					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );
-					
+					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
 			} else {
 			}
 			

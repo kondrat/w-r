@@ -276,6 +276,7 @@ div.formWrap input.form-error {
 	padding: 0 20px;
 }
 .projectActions a {
+	
 	text-decoration: none;
 	font-weight: bold;
 	color: grey;
@@ -321,5 +322,4 @@ div.formWrap input.form-error {
 	border: 2px solid gray;
 	padding: 5px;
 	margin: 5px;
-	display:none;
 }

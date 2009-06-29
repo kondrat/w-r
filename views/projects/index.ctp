@@ -5,7 +5,7 @@
 <div class="projects index">
 	
 	<div class="newProject"><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></div>
-	<div class="newProjectWrapper span-15 last">
+	<div class="newProjectWrapper span-15 last hide">
 	<div class="projects form">
 			<?php echo $form->create('Project');?>
 
@@ -19,45 +19,110 @@
 
 			</div>
 	</div>
-	
-
+			<?php if( isset($this->params['paging']['Project']['pageCount']) && $this->params['paging']['Project']['pageCount'] > 1 ): ?>
 					<?php echo $paginator->sort('name');?>
 					<?php echo $paginator->sort('color');?>
 					<?php echo $paginator->sort('created');?>
+			<?php endif ?>
 					<br />
 					<br />
 	<div class="clearfix">
-		<?php foreach ($projects as $project): ?>
-			
-				<div class="projectList span-15">
-					
+		<?php if( isset($projects) && $projects != array() ):?>
+			<?php foreach ($projects as $project): ?>
+				
+					<div class="projectList span-15">
 
-										
+								<div class="projectPreview">
+									<?php echo $project['Project']['name']; ?>
+								</div>
+							
 						
-							<div class="projectPreview">
-								<?php echo $project['Project']['name']; ?>
+							<?php echo $project['Project']['color']; ?>
+							
+							<div class="projectCreated">
+								<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
+								<?php //echo __('Created',true).'&nbsp;'.$time->niceShort($project['Project']['created']); ?>
+							</div>	
+													
+							<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
+								<?php //echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>
+								<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit_2.png",array('class'=>'projectEditImg')), array('action'=>'edit', $project['Project']['id']),array('class'=>'projectEdit'),null,false); ?>
+								&nbsp;
+								<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete_2.png",array('class'=>'projectDelImg')), array('action'=>'delete', $project['Project']['id']), array('class'=>'projectDel'), sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id']) , false); ?>
 							</div>
-						
-					
-						<?php echo $project['Project']['color']; ?>
-						
-						<div class="projectCreated">
-							<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
-							<?php //echo __('Created',true).'&nbsp;'.$time->niceShort($project['Project']['created']); ?>
-						</div>	
-												
-						<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
-							<?php //echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>
-							<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit.png"), array('action'=>'edit', $project['Project']['id']),null,null,false); ?>
-							&nbsp;
-							<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete.png"), array('action'=>'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id']) , false); ?>
-						</div>
-						<div style="clear:both;"></div>
-
-						
+							<div style="clear:both;"></div>
+							
+							<div class="projectDataEdit hide">
+								<?php echo $form->create('Project');?>
+									<fieldset>
+								 		<legend><?php __('Edit Project');?></legend>
+									<?php
+										echo $form->hidden('id', array('value'=> $project['Project']['id']) );
+										echo $form->input('name', array('value'=> $project['Project']['name']) );
+										echo 'Color';
+									?>
+									</fieldset>
+								<?php echo $form->end('Submit');?>
+							</div>
+							
+					</div>
+			
+			<?php endforeach; ?>
+		<?php else: ?>
+			<div class="clearfix">
+					<div class="projectList span-15">	
+							<div class="projectPreview" id="project_1">
+									Work
+							</div>
+								
+							<div class="projectCreated">
+								<?php //echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
+								<?php echo __('Created',true); ?>
+							</div>	
+																				
+							<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
+								<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit_2.png",array('class'=>'projectEdit')), array('action'=>'edit', 1),null,null,false); ?>
+								&nbsp;
+								<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete_2.png",array('class'=>'projectDel')), array('action'=>'delete', 1), null, sprintf(__('Are you sure you want to delete # %s?', true), 1) , false); ?>
+							</div>
+							<div style="clear:both;"></div>
+					</div>
+					<div class="projectList span-15">	
+								<div class="projectPreview" id="project_2">
+									Work2
+							</div>		
+							<div class="projectCreated">
+								<?php //echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
+								<?php echo __('Created',true); ?>
+							</div>	
+																				
+							<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
+								<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit_2.png",array('class'=>'projectEdit')), array('action'=>'edit', 1),null,null,false); ?>
+								&nbsp;
+								<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete_2.png",array('class'=>'projectDel')), array('action'=>'delete', 1), null, sprintf(__('Are you sure you want to delete # %s?', true), 1) , false); ?>
+							</div>
+							<div style="clear:both;"></div>
+					</div>
+					<div class="projectList span-15">
+							<div class="projectPreview" id="project_3">
+									Work3
+							</div>
+								
+							<div class="projectCreated">
+								<?php //echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
+								<?php echo __('Created',true); ?>
+							</div>	
+																				
+							<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
+								<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit_2.png",array('class'=>'projectEdit')), array('action'=>'edit', 1),null,null,false); ?>
+								&nbsp;
+								<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete_2.png",array('class'=>'projectDel')), array('action'=>'delete', 1), null, sprintf(__('Are you sure you want to delete # %s?', true), 1) , false); ?>
+							</div>
+							<div style="clear:both;"></div>							
 				</div>
-		
-		<?php endforeach; ?>
+					
+			</div>
+		<?php endif ?>
 	</div>
 	
 </div>
