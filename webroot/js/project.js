@@ -20,7 +20,19 @@ jQuery(document).ready( function(){
     });
     
 		$("a.projectEdit").click(function () {
-     	$(this).parents(".projectList").find(".projectDataEdit").toggle();
+			var hide = true;
+			if ( $(this).parents(".projectList").find(".projectDataEdit").is('.hide') ) {
+				var hide = false;
+				alert(hide);
+			}			
+		    $("div.projectDataEdit").each(function (i) {
+					if( $("div.projectDataEdit").not('.hide') ) {
+						$("div.projectDataEdit").addClass('hide');
+					}
+				});
+			if ( hide != false ) {
+     			$(this).parents(".projectList").find(".projectDataEdit").removeClass('hide');
+     	}
       return false;
     });
     
