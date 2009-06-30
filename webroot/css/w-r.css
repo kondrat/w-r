@@ -323,3 +323,19 @@ div.formWrap input.form-error {
 	padding: 5px;
 	margin: 5px;
 }
+.colorPicker {
+	border: 2px groove gray;
+	text-align: center;
+	font-size: smaller;
+	padding: 2px;
+	cursor:pointer;
+}
+.colorPickerMore{
+	cursor:pointer;
+	
+}
+.projectDataEdit{
+}
+.projectDataEdit .submit {
+	margin: 5px;
+}

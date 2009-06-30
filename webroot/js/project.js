@@ -20,21 +20,39 @@ jQuery(document).ready( function(){
     });
     
 		$("a.projectEdit").click(function () {
-			var hide = true;
-			if ( $(this).parents(".projectList").find(".projectDataEdit").is('.hide') ) {
-				var hide = false;
-				alert(hide);
-			}			
+			//getting the object status
+			var ttm2 = $(this).parents(".projectList").find(".projectDataEdit");
+    			if ( $(ttm2).is('.hide') ) {
+     				var hide = true;
+     			} else {
+     				var hide = false;
+     			}
+			//hiding each object
 		    $("div.projectDataEdit").each(function (i) {
 					if( $("div.projectDataEdit").not('.hide') ) {
 						$("div.projectDataEdit").addClass('hide');
 					}
 				});
-			if ( hide != false ) {
-     			$(this).parents(".projectList").find(".projectDataEdit").removeClass('hide');
-     	}
+				//if it was hidden showing it.
+				if ( hide == true ) {
+     			$(this).parents(".projectList").find(".projectDataEdit").toggleClass('hide');
+     		}
+
       return false;
     });
+  
+		$(".colorPicker").click(function () {
+			var colorCode = $(this).text();
+			var projectEdit = $(this).parents(".projectList").children('.projectPreview');
+			$(projectEdit).css({'background-color':colorCode,'color':'#000'});
+			$(".projectList input:eq[3]").attr({'value': colorCode});
+			return false;
+		}); 
+  
+  
+  
+  
+  
     
 		/*
 		$('.projectSubmit').click(function(){

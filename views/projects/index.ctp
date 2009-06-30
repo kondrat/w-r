@@ -28,6 +28,7 @@
 					<br />
 	<div class="clearfix">
 		<?php if( isset($projects) && $projects != array() ):?>
+			<?php $i = 0; ?>
 			<?php foreach ($projects as $project): ?>
 				
 					<div class="projectList span-15">
@@ -56,17 +57,29 @@
 								<?php echo $form->create('Project');?>
 									<fieldset>
 								 		<legend><?php __('Edit Project');?></legend>
-									<?php
-										echo $form->hidden('id', array('value'=> $project['Project']['id']) );
-										echo $form->input('name', array('value'=> $project['Project']['name']) );
-										echo 'Color';
-									?>
+								 		<div class="span-5">
+											<?php
+												echo $form->hidden('id', array('value'=> $project['Project']['id'], 'id'=>'projectId'.$i) );
+												echo $form->input('name', array('value'=> $project['Project']['name'],'id'=>'projectName'.$i) );
+												echo $form->hidden('color', array('id'=>'projectColor'.$i) );
+											?>
+										</div>
+										<div class="span-3">
+											<?php echo $form->end('Submit');?>
+										</div>
+										<div class="clear">
+											<?php echo __('Color',true).':'; ?>
+										</div>
+									
+									<?php echo $this->element('color/color', array('cache' => false)); ?>
+
+									
 									</fieldset>
-								<?php echo $form->end('Submit');?>
+								
 							</div>
 							
 					</div>
-			
+				<?php $i++;?>
 			<?php endforeach; ?>
 		<?php else: ?>
 			<div class="clearfix">
