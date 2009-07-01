@@ -356,18 +356,20 @@ jQuery(document).ready( function(){
 									//alert(temp1);
 									//$(".stopInterval").trigger('click');	
 									temp1[0] = temp1[0] + Delta1;
-									
+									//alert(HourStat[0][0]);
 									//checking if interval was to short or not
-									if ( temp1[0] > 2 ) {
+									if ( temp1[0] > 2 || typeof(HourStat[0][0]) == 'undefined' ) {
+										//alert('here1');
 					
 										HourStat[hourDay].push(temp1);
 																				
-										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId );
+										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);
 										
 										HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 
 									
 									} else {
+										//alert('here2');
 										$('.interval:last').remove();
 										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 										$(".stopInterval").trigger('click');	
@@ -390,7 +392,7 @@ jQuery(document).ready( function(){
 								}	else if ( nextInterval == 1 && correction == 1 ) {
 									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ][1]);
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 2 , colorProjectId);
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 2 , workBackground);
 									
 								}	
 								nextInterval = 0;	
@@ -456,7 +458,7 @@ jQuery(document).ready( function(){
 																
 									//$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
 									
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, colorProjectId );
+									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, workBackground );
 									
 									var nnnT = '';
 									$.each(HourStat[hourDay], function() {									
@@ -489,7 +491,7 @@ jQuery(document).ready( function(){
                                     if ( typeInt == 'rest') {
                                         color2 = '#ff7d7d';
                                     } else {
-                                        color2 = colorProjectId;
+                                        color2 = workBackground;
                                     }
 
 									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
@@ -924,7 +926,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		workPS = Math.floor(workHour2/60*100);
 		
 		if ( typeof color == 'undefined' ) {
-			color = '#ff7d7d';
+			color = 'red';
 		} else {
 			color = color; 
 		}
@@ -940,7 +942,8 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
             $('.interval:last').width( workPS+"%");
             
 			if ( typeInt2 == 'rest' ) {
-				$('.graf:last').append('<div class="interval hourRest" style="margin: 0; height: 10px; background-color:#FF7D7D; float: left;"></div>');					
+				//old red #FF7D7D
+				$('.graf:last').append('<div class="interval hourRest" style="margin: 0; height: 10px; background-color:red; float: left;"></div>');					
 			} else if ( typeInt2 == 'work') {
 				$('.graf:last').append('<div class="interval hourWork" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');				
 			}
@@ -950,7 +953,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 			if ( typeInt2 == 'rest' ) {
 				$('.graf:last').append('<div class="interval hourRest1" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');		//red			
 			} else if ( typeInt2 == 'work') {
-				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: #FF7D7D; float: left;"></div>');		//green		
+				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: red; float: left;"></div>');		//green		
 			}	
 					
 		}

@@ -33,12 +33,12 @@
 				
 					<div class="projectList span-15">
 
-								<div class="projectPreview">
+								<div class="projectPreview" style="color: #000;background-color:<?php echo $project['Project']['color']; ?>">
 									<?php echo $project['Project']['name']; ?>
 								</div>
 							
 						
-							<?php echo $project['Project']['color']; ?>
+							
 							
 							<div class="projectCreated">
 								<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
@@ -54,7 +54,7 @@
 							<div style="clear:both;"></div>
 							
 							<div class="projectDataEdit hide">
-								<?php echo $form->create('Project');?>
+								<?php echo $form->create('Project',array('id'=> 'formEdit'.$i));?>
 									<fieldset>
 								 		<legend><?php __('Edit Project');?></legend>
 								 		<div class="span-5">

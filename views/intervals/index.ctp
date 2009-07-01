@@ -52,7 +52,7 @@
 						<div class="projectsNameWrpapper clearfix">
 							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
 								<?php foreach ( $projectUser as $project ): ?>
-									<div class="span-2 myProject" style="background-color:#D2FFE9;color:green;" id="<?php echo 'project_'.$project['Project']['id'];?>"><?php echo $project['Project']['name'];?></div>
+									<div class="span-2 myProject" style="background-color:<?php echo $project['Project']['color'];?>;color:#000;" id="<?php echo 'project_'.$project['Project']['id'];?>"><?php echo $project['Project']['name'];?></div>
 								<?php endforeach ?>
 							<?php else: ?>
 								<div class="span-2 myProject" style="background-color:#D2FFE9;color:green;" id="project_1">Work</div>

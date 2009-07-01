@@ -3,7 +3,7 @@ class ProjectsController extends AppController {
 
 	var $name = 'Projects';
 	var $helpers = array('Html', 'Form','Time');
-	var $components = array('Security');
+	//var $components = array('Security');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow('index');
@@ -23,6 +23,7 @@ class ProjectsController extends AppController {
 			$this->paginate['Project']['conditions'] = array( 'ProjectsUser.user_id'=> $this->Auth->user('id') );
 			$this->paginate['Project']['fields'] = array();
 			$this->paginate['Project']['contain'] = 'ProjectsUser';
+			$this->paginate['Project']['order'] = array('Project.modified'=>'desc');
 			$this->set('projects', $this->paginate());
 		}
 	}
