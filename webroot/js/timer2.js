@@ -143,7 +143,9 @@ jQuery(document).ready( function(){
 			$('.minusRest').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});
 			
+//to fix!!! wrong!!!
 			projectId = $('.myProject:first').attr("id");
+
 			nextInterval = 1;
 			typeInt = 'work';
 			i = k;			
@@ -169,6 +171,7 @@ jQuery(document).ready( function(){
 		//$(".stopInterval").trigger('click');
 		var prevProjectId = projectId;
 		projectId = $(this).attr("id");
+
 		//only if we chose another project.
 		if ( prevProjectId != projectId ) {
 			
