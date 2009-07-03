@@ -9,6 +9,7 @@
 	<?php
 		echo $html->meta('icon');
 		echo $html->css('w-r');
+		echo $html->css('w-r-u');
 		echo $html->css('screen');
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
@@ -53,6 +54,7 @@
 		    </div>
 		    <div class="span-4">
 		        Left sidebar
+		        <hr />
 		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
 		    </div>
 		
@@ -97,7 +99,19 @@
 		
 		    <div class="span-4 last">
 		        Right sidebar
-		        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+		        <hr />
+						<div id="hourstat">hourstat</div>
+						<div id="test1">test1</div>
+						<p class="margin:0;"> Data from app</p>
+						<div id="test2"></div>
+						<p style="margin:0"> real </p>
+						<div id="test4">test4</div>
+						<div id="test3">test3</div>
+						
+						<div class="delCookie" style="cursor: pointer">delCookie</div>
+
+
+
 		    </div>
 
 

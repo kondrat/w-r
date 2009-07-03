@@ -286,20 +286,21 @@ div.formWrap input.form-error {
 }
 .stopStart {
 	position:absolute;
-	left: 275px;
+	left: 303px;
 	top: 5px;
 	z-index:10;
 }
 .stopStart div {
-	display: inline;
+	/*display: inline;*/
 }
 .stopInterval {
-	color: red;
-	font-weight: bold;
+	/*color: red;
+	font-weight: bold;*/
+	
 }
 .startInterval {
-	color: green;
-	font-weight: bold;
+	/*color: green;
+	font-weight: bold;*/
 }
 .newProject {
 	font-weight: bold;

@@ -26,9 +26,11 @@
 		</div>
     <div class="span-16 last topChessWrapper">
     	
-	    	<div class="stopStart span-3">
-					<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>
-					<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>
+	    	<div class="stopStart span-1">
+					<!--	<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>-->
+					<!--<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>-->
+					<div class="stopInterval" style="cursor: pointer;"><?php echo $html->image('icons/stop.png');?></div>
+					<div class="startInterval" style="cursor: pointer;"><?php echo $html->image('icons/stop_2.png');?></div>
 				</div>
 				
         <div class="span-8">
@@ -101,12 +103,6 @@
 		
 		?>
 		
-		<!--
-			<div class="graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px" title = <?php echo $title; ?>>
-				<div class="hourWork" style="width:<?php echo $work;?>%;margin: 0; height: 10px; background-color: #95ffca; float: left;" ></div>
-				<div class="hourRest" style="width:<?php echo $rest;?>%;margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
-			</div>
-		-->
 			<div class="grafWrapper">
 				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
 					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
@@ -119,26 +115,24 @@
 
 		<div class="grafWrapper">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: red; float: left;"></div>
 			</div>
 		</div>
 		
 <?php endif ?>
 		
-</div><!--last-->
+
 <?php //echo $form->end( );?>
+	<div class="span-3 clear" style="margin: 5px 0;">
+		<a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
+			<?php __('In small window');?>
+		</a>
+	</div>
+
+	<div class="clear"></div>
+	<div class="quickLogin span-7 prepend-1">
+		<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>
+	</div>
 
 
-<a onclick="openWin(this, 'r-w', 550, 220, 0); return false" href="http://localhost/w-r">
-<?php __('In new window');?>
-</a>
-<div id="hourstat">hourstat</div>
-<div id="test1">test1</div>
-<p class="margin:0;"> Data from app</p>
-<div id="test2"></div>
-<p style="margin:0"> real </p>
-<div id="test4">test4</div>
-<div id="test3">test3</div>
-<!--<ul class="ultest"></ul>-->
-
-<div class="delCookie" style="cursor: pointer">delCookie</div>
+</div><!--last-->

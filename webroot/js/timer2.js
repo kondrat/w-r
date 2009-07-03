@@ -26,7 +26,7 @@ jQuery(document).ready( function(){
 
 	if ( 100 > 0 ) {			
 		var secInt = 0;
-		var interval;
+		var interval = false;
 		var nextInterval = 0;
 		var typeInt = 'rest';
 		var projectId = 'project_1';
@@ -134,7 +134,12 @@ jQuery(document).ready( function(){
 	
 
 	//#ffd7d7 - red;							
-	$('#clock1, .work').click( function(){		
+	$('#clock1, .work').click( function(){
+		
+			if (!interval) {
+				$(".startInterval").trigger('click');
+			}
+				
 			$('#clock1').css({'background-color' : workBackground });
 			$('#clock2').css({'background-color' :'#ffffff'});
 			$('.work span').css({'font-size':'100%'});
@@ -152,6 +157,12 @@ jQuery(document).ready( function(){
 	});
 	
 	$('#clock2, .rest').click( function(){
+
+			if (!interval) {
+				$(".startInterval").trigger('click');
+			}		
+	
+			
 			$('#clock1').css({'background-color' :'#ffffff'});
 			$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('.work span').css({'font-size':'85%'});
@@ -192,7 +203,7 @@ jQuery(document).ready( function(){
 			nextInterval = 1;
 			typeInt = 'work';
 			i = k;
-		}
+		} 
 
 		
 	});
@@ -492,7 +503,7 @@ jQuery(document).ready( function(){
 								 	HourStat[hourDay].push(new Array(0,typeInt,projectId));
 
                                     if ( typeInt == 'rest') {
-                                        color2 = '#ff7d7d';
+                                        color2 = 'red';
                                     } else {
                                         color2 = workBackground;
                                     }
@@ -581,6 +592,7 @@ jQuery(document).ready( function(){
 		clockObj = 0;
 		$('.startInterval').css({'display':'inline'});
 		$(this).css({'display':'none'});
+		interval = false;
 
 	})
 	$(".startInterval").trigger('click');	

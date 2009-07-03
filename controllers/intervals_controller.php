@@ -3,7 +3,7 @@ class IntervalsController extends AppController {
 
 	var $name = 'Intervals';
 	var $helpers = array('Html', 'Form');
-	var $components = array('Security','Cookie');
+	var $components = array('Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow('index','add');
