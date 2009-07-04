@@ -12,10 +12,11 @@ class UsersController extends AppController {
 
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow( 'logout', 'reg','kcaptcha', 'reset', 'acoset','aroset','permset','buildAcl');
+        $this->Auth->allow( 'logout','login', 'reg','kcaptcha', 'reset', 'acoset','aroset','permset','buildAcl');
           
         //to Del:
         $this->Auth->allowedActions = array('*');
+        //$this->Auth->allowedControllers = array('*');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -32,11 +33,11 @@ class UsersController extends AppController {
 //--------------------------------------------------------------------
 	function login() {
 		$this->pageTitle = __('Login',true);
-	
+			//echo 'blin OK1';
 		if( !empty($this->data) ) {
 
 			if( $this->Auth->login() ) {
-				
+					//echo 'blin OK';
             	// Retrieve user data
 
              		
@@ -52,7 +53,7 @@ class UsersController extends AppController {
          			}
 
 					if ($this->referer()=='/') {
-
+						$this->redirect( $this->Auth->redirect() );
 					} else {
 
 						$this->redirect( $this->Auth->redirect() );

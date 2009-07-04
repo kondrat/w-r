@@ -130,9 +130,16 @@
 	</div>
 
 	<div class="clear"></div>
-	<div class="quickLogin span-7 prepend-1">
-		<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>
-	</div>
+	<?php if( !$session->check('Auth.User.id') ): ?>
+		<hr />
+		<div class="quickLogin span-7 prepend-1">
+			<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>
+		</div>
+		<div class="span-7 reg">
+			<?php echo $html->link(__('Get Started—Join!',true), array('controller'=>'users','action'=>'reg') );?>
+		</div>
+	<?php endif ?>
+	
 
 
 </div><!--last-->

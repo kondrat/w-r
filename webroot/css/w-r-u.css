@@ -5,3 +5,23 @@
 p.quickLoginForPas {
 	margin-bottom: 0;
 }
+/*reg - get started*/
+.reg {
+
+}
+.reg a {
+	display:block;
+	border: 3px solid #ccc;
+	margin: 30px auto;
+	padding: 3px 10px;
+	text-align:center;
+	width: 9.5em;
+	font-size: larger;
+	text-decoration:none;
+	font-weight: bold;
+	background-color: #97CD39;
+	color: #fff;
+}
+.reg a:hover {
+	color: #f2f2f2;
+}
