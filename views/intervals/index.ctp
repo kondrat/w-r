@@ -1,5 +1,5 @@
 <?php
-	echo $javascript->link(array('jquery.cookie','json2','timer2','project'));
+	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'));
 ?>
 <div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>
@@ -15,23 +15,21 @@
 					<div class="startInterval" style="cursor: pointer;"><?php echo $html->image('icons/stop_2.png');?></div>
 				</div>
 				
-        <div class="span-8">
-            <div class="chessKnob work">           		
+        <div class="work span-7 prepend-1">
+            <div class="chessKnob work2">           		
                 <span><?php __('Work');?></span>                            
-                <div class="minusWork">-</div>               
+                <div class="minusWork"></div>               
             </div>
         </div>
 
-        <div class="rest span-8 last">
-            <div class="chessKnob rest">
-            	
-                <span><?php __('Rest');?></span>
-                
-                <div class="minusRest">-</div>
+        <div class="rest span-7 last">
+            <div class="chessKnob rest2">         	
+                <span><?php __('Rest');?></span>              
+                <div class="minusRest"></div>
             </div>
         </div>
     </div>   
-        <div class="projectWrapper span-14 prepend-1">
+        <div class="projectWrapper span-12 prepend-2">
 	      	<div class="projectMain">
 						<div class="projectsNameWrpapper clearfix">
 							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
@@ -54,10 +52,10 @@
     
 
       
-        <div class="span-8">
+        <div class="span-7 prepend-1">
             <p class="clock clock1" id="clock1">00:00:00</p>
         </div>
-        <div class="span-8 last">
+        <div class="span-7 last">
             <p class="clock clock2" id="clock2">00:00:00</p>
         </div>
       
@@ -85,7 +83,7 @@
 		
 		?>
 		
-			<div class="grafWrapper">
+			<div class="grafWrapper span-14 last prepend-1">
 				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
 					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 				</div>
@@ -95,7 +93,7 @@
 	</div><!--grafWrapper-->
 <?php else: ?>
 
-		<div class="grafWrapper">
+		<div class="grafWrapper span-14 last prepend-1">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
 				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: red; float: left;"></div>
 			</div>
@@ -113,6 +111,9 @@
 
 	<div class="clear"></div>
 	<?php if( !$session->check('Auth.User.id') ): ?>
+	
+	<div id="testCorrection">correction test</div>
+		
 		<hr />
 		<div class="quickLogin span-7 prepend-1">
 			<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>

@@ -1,15 +1,20 @@
 jQuery(document).ready( function(){
 	
-	$('.minusRest').click(function(){		
-		clearInterval(interval);
+	$('.rest div.minusRest').click(function(){	
+		//stop interva module	
+		if ( interval ) {
+			clearInterval(interval);					
+			//set up correction mode
+			correction = 1;	
+			secInt = 0;
+			clockObj = 0;
+			interval = false;
+			//alert(interval);
+		}
 		
-
-			
-		//set up correction mode
-		correction = 1;	
-		secInt = 0;
-		clockObj = 0;
-		
+				$('.startInterval').css({'display':'inline'});
+				$('.stopInterval').css({'display':'none'});
+					
 		var step = 5;
 		var totalStep = 0;
 
@@ -40,18 +45,19 @@ jQuery(document).ready( function(){
 
 		//start from the end.
 		HourStat.reverse();
-		//mark for exiting the external loop	
+		//mark for stopping of an external loop	
 		var endBigLoop = 0;
 		
 		for ( var ii in HourStat ) {
-						//position of the div to operate.
-						pos = parseInt(HourStat.length) - parseInt(ii) -1;
-					
-						//creation of the new interval workTemp.	
-						if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
-							$('.graf:eq('+pos+')').append(	'<div class="interval hourWork wwoorrkk" style="margin: 0; height: 10px; background-color:#95ffca; float: left;width:0%"></div>');				
-							HourStat[ii].push(new Array(0,'workTemp') );
-						}	
+			
+				//position of the div to operate.
+				pos = parseInt(HourStat.length) - parseInt(ii) -1;
+			
+				//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
+				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
+					$('.graf:eq('+pos+')').append(	'<div class="interval hourWork wwoorrkk" style="margin: 0; height: 10px; background-color:green; float: left;width:0%"></div>');				
+					HourStat[ii].push(new Array(0,'workTemp') );
+				}	
 					
 				//temp array to store info of the workTemp.
 				var workLastTemp = new Array(0,'workTemp');
@@ -75,7 +81,7 @@ jQuery(document).ready( function(){
 							totalStep = 0;
 							break;
 						case 'rest':
-							
+												
 							if (  HourStat[ii][j][0] > 0  ) {
 								
 									if ( HourStat[ii][j][0] >= step ) {
@@ -142,8 +148,9 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
-															//to del;
-															$('#test4').after('<p style="margin:0">'+HourStat+'</p>');
+//to del;
+$('#testCorrection').html('');
+$('#testCorrection').after('<p style="margin:0">'+HourStat.join('<br />')+'</p>');
  			//clocks
 	 		if ( 100 > 10 ) {
 						//clocks
@@ -242,5 +249,5 @@ jQuery(document).ready( function(){
 		secInt = 0;
 		clockObj = 0;
 	})
-	s				
+		
 });

@@ -46,129 +46,6 @@
 	margin: -3px 2px;
 }
 
-/*form classes*/
-.error-message {
-	color: #8A1F11;
-	font-weight: bold;
-	margin-left: 12em;
-}
-#UserUsername, #UserPassword, #UserPassword1, #UserPassword2,#UserEmail {
-	width: 206px;
-}
-div.input {
-	/*margin-bottom: 1em;*/
-	float:left;
-}
-#UserLoginForm fieldset {
-	width: 212px;
-}
-#UserGroupId {
-	margin: 0;
-} 
-.formWrap label {
-	margin: 0 1em 0 0;
-	float: left;
-	width: 11em;
-	text-align: right; 
-}
-div.formWrap  {
-	background-color: inherit;
-	border:0;
-	margin: 0;
-	padding: 0 0 1em 0;
-}
-div.formWrap input.form-error {
-	background-color: #FBC2C4;
-}
-.submit {
-	margin: 1em 0 1em 13.5em;
-}
-#ajimg {
-	margin: 0 0 0 12em;
-	padding: 0;
-	height: 15px;
-}
-.greenMessage{
-	margin: 0 0 0 12em;
-	padding: 0;
-	height: 15px;
-}
-
-/*login*/
-
-
-.signup {
-	z-index: 10;
-	border: 1px solid #ccc;
-	background-color: #efe;	
-	margin: 20px 0 0 0;
-	background-color: #4A4A4A;
-	border: 7px solid #ccc;
-	/*opacity: 0.8;*/
-	/*filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);*/
-	cursor: move; 
-	height: 70px;
-}
-.innerSignup {
-	background-color:#000000;
-	padding:10px 10px 10px 10px;
-	text-align:center;
-}
-.innerSignup a{
-	/*color:#FF8080;*/
-	color:red;
-	font-weight: bold;
-	text-align: center;
-	text-decoration:none;
-}
-
-.innerSignup a:hover{
-	color:red;
-	text-decoration:underline;
-}  
-
-
-
-
-.capchaImg {
-	margin: 0 0 1em 12em;
-}
-#UserCaptcha {
-	width: 116px;	
-}
-.capchaImg p img {
-	border: none;
-	margin: 0;
-	cursor: pointer;
-}
-.capReset {
-	float: left;
-	margin: 19px 19px 0 19px;
-	position:relative;
-}
-.capReset span {
-	color:#ccc;
-	font-size:smaller;
-	font-weight:bold;
-	left:-5px;
-	position:absolute;
-	top:25px;
-	width:150px;
-}
-
-#capImg {
-	cursor: pointer;
-}
-.capPlace {
-	/*background-image: url(../img/bg.jpg);*/
-	background-color: #eee;
-	border: 1px solid #7f9db9;
-	
-	width: 120px;
-	height: 60px;
-	float: left;
-}
-
 /*work -rest*/
 .chessKnob {
 	margin: 0;
@@ -184,16 +61,36 @@ div.formWrap input.form-error {
 	cursor: pointer;
 	font-size: 85%;
 }
+
+/* minus*/
 .minusWork {
 	position: absolute;
-	top: 5px;
-	left: 10px;
-	height: 15px;
-	width: 20px;
-	border: 2px solid #ccc;
+	top: 50px;
+	left: -9px;
+	height: 24px;
+	width: 24px;
+	background-image: url(../img/icons/round_remove.png);
 	cursor: pointer;
 	line-height: 0.55;
 }
+.minusWork:hover {
+	background-image: url(../img/icons/round_remove_green.png);
+}
+.minusRest {
+	position: absolute;
+	background-image: url(../img/icons/round_remove.png);
+	top: 50px;
+	right: -10px;
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+	line-height: 0.55;
+}
+.minusRest:hover {
+	background-image: url(../img/icons/round_remove_red.png);
+}
+
+
 .rest{
 	color: red;
 	position: relative;
@@ -202,16 +99,12 @@ div.formWrap input.form-error {
 	cursor: pointer;
 	font-size: 100%;
 }
-.minusRest {
-	position: absolute;
-	top: 5px;
-	right: 12px;
-	height: 15px;
-	width: 20px;
-	border: 2px solid #ccc;
-	cursor: pointer;
-	line-height: 0.55;
+
+.grafWrapper {
 }
+
+
+
 .intervals h2 {
 	margin-bottom: 0;
 }
@@ -287,8 +180,8 @@ div.formWrap input.form-error {
 .stopStart {
 	position:absolute;
 	left: 303px;
-	top: 5px;
-	z-index:10;
+	top: 50px;
+	/*z-index:10;*/
 }
 .stopStart div {
 	/*display: inline;*/
@@ -296,7 +189,7 @@ div.formWrap input.form-error {
 .stopInterval {
 	/*color: red;
 	font-weight: bold;*/
-	
+	display:none;
 }
 .startInterval {
 	/*color: green;

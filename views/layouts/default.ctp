@@ -92,7 +92,7 @@
 						<p class="margin:0;"> Data from app</p>
 						<div id="test2"></div>
 						<p style="margin:0"> real </p>
-						<div id="test4">test4</div>
+						
 						<div id="test3">test3</div>
 						
 						<div class="delCookie" style="cursor: pointer">delCookie</div>
