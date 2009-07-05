@@ -1,25 +1,7 @@
-﻿<?php echo $javascript->link('jquery.cookie',false);?>
-<?php echo $javascript->link('json2',false);?>
-
-<?php echo $javascript->link('timer2',false);?>
-<?php echo $javascript->link('project',false);?>
-
-<?php 
-	/*
-	$hourInt = 0;
-	if ( isset($hoursSaved) && $hoursSaved != array() ) {
-
-					$lastOpenHour = array_pop( $hoursSaved );
-					
-					foreach ($lastOpenHour['Interval'] as $lastOpenHourInt ) {
-						$hourInt += $lastOpenHourInt['interval'];
-					}
-					
-					
-			} 
-		*/
-?>	
-<div class="intervals index clearfix" style=" margin: -10px 0 0 0;">
+<?php
+	echo $javascript->link(array('jquery.cookie','json2','timer2','project'));
+?>
+<div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>
 		<div class="timerControl clearfix">
 			<div class="projectTitle span-3"><?php __('switch projects');?></div>

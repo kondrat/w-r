@@ -59,20 +59,18 @@
 		    </div>
 		
 		    <div class="span-16">
-		    	<div class="clearfix">
 			        <div class="span-8">
 			            <div class="rounded." style="background-color: #ccc; padding-left: 20px;">
-							<?php
-								//debug($this->params);
-								if ($session->check('Auth.User.username')) {
-									echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
-								} elseif ( $session->check('guestKey') ) {
-									echo '<b>&laquo;'.$session->read('guestKey').'&raquo;</b>';
-								} else {
-									echo 'Username';
-								}
-							?>
-						</div>
+										<?php
+											if ($session->check('Auth.User.username')) {
+												echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
+											} elseif ( $session->check('guestKey') ) {
+												echo '<b>&laquo;'.$session->read('guestKey').'&raquo;</b>';
+											} else {
+												echo 'Username';
+											}
+										?>
+									</div>
 			      	</div>
 			        <div class="span-4">
 			       		<?php echo date("l dS \of F"); ?>
@@ -81,22 +79,11 @@
 			            <?php __('Week'); 
 			            echo ' '.date("W"); ?>
 			        </div>
-			   	</div>
-
-		        <div class="span-16 last">
-					<?php $session->flash(); ?>
-					<?php
-						/*
-						if ($session->check('Message.auth')) {						
-								$session->flash('auth',array('class'=>'error'));							
-						}
-						*/
-					?>
-
-					<?php echo $content_for_layout; ?>
+		        <div class="span-16 clear last">
+							<?php $session->flash(); ?>
+							<?php echo $content_for_layout; ?>
 		        </div>
 		    </div>
-		
 		    <div class="span-4 last">
 		        Right sidebar
 		        <hr />
