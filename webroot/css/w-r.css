@@ -134,9 +134,9 @@
     cursor:pointer;
 }
 .projectWrapper{
-   position:absolute;
-    top: 110px;
-    
+	position:absolute;
+	top: 110px;
+	z-index:10;
 }
 .topChessWrapper {
     position:relative;
@@ -190,11 +190,45 @@
 	/*color: red;
 	font-weight: bold;*/
 	display:none;
+	background:transparent url(../img/icons/stop_2.png) no-repeat scroll 0 0;
+	height:24px;
+	line-height:0.55;
+	position:absolute;
+	width:24px;
+	cursor: pointer;
+	color:transparent;
+}
+.stopInterval:hover {
+	background:transparent url(../img/icons/stop_1.png) no-repeat scroll 0 0;
 }
 .startInterval {
 	/*color: green;
 	font-weight: bold;*/
+	background:transparent url(../img/icons/go_2.png) no-repeat scroll 0 0;
+	height:24px;
+	line-height:0.55;
+	position:absolute;
+	width:24px;
+	cursor: pointer;
+	color:transparent;
 }
+.startInterval:hover {
+	background:transparent url(../img/icons/go_1.png) no-repeat scroll 0 0;
+}
+.graf{
+	position:relative;
+}
+.grafConnector {
+	background:transparent url(../img/icons/connector2.png) no-repeat scroll 0 0;
+	height:10px;
+	left:67px;
+	position:absolute;
+	width:14px;
+	z-index:2;
+}
+
+
+
 .newProject {
 	font-weight: bold;
 	margin: 5px 0 0 0;

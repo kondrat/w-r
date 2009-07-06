@@ -11,8 +11,8 @@
 	    	<div class="stopStart span-1">
 					<!--	<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>-->
 					<!--<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>-->
-					<div class="stopInterval" style="cursor: pointer;"><?php echo $html->image('icons/stop.png');?></div>
-					<div class="startInterval" style="cursor: pointer;"><?php echo $html->image('icons/stop_2.png');?></div>
+					<div class="stopInterval">Stop</div>
+					<div class="startInterval">Go</div>
 				</div>
 				
         <div class="work span-7 prepend-1">
@@ -85,6 +85,7 @@
 		
 			<div class="grafWrapper span-14 last prepend-1">
 				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+					<div class="grafConnector"></div>
 					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 				</div>
 			</div>
@@ -95,6 +96,7 @@
 
 		<div class="grafWrapper span-14 last prepend-1">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
+				<div class="grafConnector"></div>
 				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: red; float: left;"></div>
 			</div>
 		</div>
