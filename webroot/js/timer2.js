@@ -428,7 +428,7 @@ jQuery(document).ready( function(){
                                         color2 = workBackground;
                                     }
 
-									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">'+
+									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px"><div class="grafConnector"/>'+
 																								'<div class="interval" style="margin: 0; height: 10px; background-color:'+color2+'; float: left;width:0%"></div>'+
 																						'</div>'
 																					);																								

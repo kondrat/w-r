@@ -226,7 +226,14 @@
 	width:14px;
 	z-index:2;
 }
-
+.grafConnector1 {
+	background:transparent url(../img/icons/connector2.png) no-repeat scroll 0 0;
+	height:10px;
+	left:-10px;
+	position:absolute;
+	width:14px;
+	z-index:2;
+}
 
 
 .newProject {

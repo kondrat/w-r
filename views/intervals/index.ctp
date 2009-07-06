@@ -85,7 +85,7 @@
 		
 			<div class="grafWrapper span-14 last prepend-1">
 				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-					<div class="grafConnector"></div>
+					<div class="grafConnector1"></div><div class="grafConnector"></div>
 					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 
 		<div class="grafWrapper span-14 last prepend-1">
 			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-				<div class="grafConnector"></div>
+				<div class="grafConnector1"></div><div class="grafConnector"></div>
 				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: red; float: left;"></div>
 			</div>
 		</div>
