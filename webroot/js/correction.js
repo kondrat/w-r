@@ -9,12 +9,11 @@ jQuery(document).ready( function(){
 			secInt = 0;
 			clockObj = 0;
 			interval = false;
-			//alert(interval);
 		}
 		
-				$('.startInterval').css({'display':'inline'});
-				$('.stopInterval').css({'display':'none'});
-					
+		$('.startInterval').css({'display':'inline'});
+		$('.stopInterval').css({'display':'none'});
+		//correction step				
 		var step = 5;
 		var totalStep = 0;
 
