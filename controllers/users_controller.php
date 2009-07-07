@@ -3,9 +3,9 @@ uses('sanitize');
 $mrClean = new Sanitize();
 
 class UsersController extends AppController {
-	//var $uses = array('User');
+
 	var $name = 'Users';
-	var $helpers = array('Form');
+	//var $helpers = array();
 	var $components = array( 'Security','Cookie','userReg','kcaptcha');
 	var $pageTitle = 'Данные пользователя';
 	var $paginate = array('limit' => 5);
@@ -37,20 +37,6 @@ class UsersController extends AppController {
 		if( !empty($this->data) ) {
 
 			if( $this->Auth->login() ) {
-					//echo 'blin OK';
-            	// Retrieve user data
-
-             		
-           		if ( $this->Auth->user() ) {
-             			$this->data['User']['remember_me'] = true;
-										if ( !empty($this->data) && $this->data['User']['remember_me'] ) {
-											$cookie = array();
-											$cookie['username'] = $this->data['User']['username'];
-											$cookie['password'] = $this->data['User']['password'];
-											$this->Cookie->write('Auth.User', $cookie, true, '+3 hours');
-											unset($this->data['User']['remember_me']);
-										}
-         			}
 
 					if ($this->referer()=='/') {
 						$this->redirect( $this->Auth->redirect() );
@@ -79,9 +65,6 @@ class UsersController extends AppController {
     	$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
     	//$this->Session->del();
         $this->Auth->logout();
-        $this->Session->del('Order');
-        $this->Session->del('userCart');
-        $this->Cookie->del('Auth.User');
         $this->Session->setFlash( $tempUserName, 'default', array('class' => 'nomargin flash') );
         $this->redirect( '/',null,true);        
     }

@@ -21,30 +21,33 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		}
 		
 		
-		if ( nextInt == 0 ) {
-				
-					$('.interval:last').width( workPS+"%");
+		if ( nextInt == 0 ) {			
+				$('.interval:last').width( workPS+"%");					
+		} else if ( nextInt == 1) {				
+      	$('.interval:last').width( workPS+"%");          
+				if ( typeInt2 == 'rest' ) {
 					
-					
-		} else if ( nextInt == 1) {
-				
-            $('.interval:last').width( workPS+"%");
-            
-			if ( typeInt2 == 'rest' ) {
-				//old red #FF7D7D
-				$('.graf:last').append('<div class="interval hourRest" style="margin: 0; height: 10px; background-color:red; float: left;"></div>');					
-			} else if ( typeInt2 == 'work') {
-				$('.graf:last').append('<div class="interval hourWork" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');				
-			}
+					$('.graf:last').append('<div class="interval" style="background-color:#FF6666;"></div>');					
+				} else if ( typeInt2 == 'work') {
+					$('.graf:last').append('<div class="interval" style="background-color: '+color+';"></div>');				
+				}
 //To Fix!!
 		} else if ( nextInt == 2 ) {
 			
 			if ( typeInt2 == 'rest' ) {
-				$('.graf:last').append('<div class="interval hourRest1" style="margin: 0; height: 10px; background-color: red; float: left;"></div>');		//red			
+				$('.graf:last').append('<div class="interval" style="background-color: #FF6666;"></div>');		//red			
 			} else if ( typeInt2 == 'work') {
-				$('.graf:last').append('<div class="interval hourWork1" style="margin: 0; height: 10px; background-color: '+color+'; float: left;"></div>');		//green		
+				$('.graf:last').append('<div class="interval" style=" background-color: '+color+';"></div>');		//green		
 			}	
-					
+			
+		} else if ( nextInt == 3 ) {
+        if ( typeInt2 == 'rest') {
+            color = '#FF6666';
+        }
+				$('.grafWrapper').append(	'<div class=" graf span-2"><div class="grafConnector"/>'+
+														'<div class="interval" style="background-color:'+color+';"></div>'+
+												'</div>'
+											);									
 		}
 	
 }

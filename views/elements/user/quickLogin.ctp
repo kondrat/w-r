@@ -10,13 +10,11 @@
 		
 
 		<div class="span-3">
-	    <?php echo $form->checkbox('remember_me', array('class' => 'remember_me') );
-						echo $form->label(__('remember_me',true),__('Pls rem me',true), array('class' => 'choice') );
-			?>
+	    <?php echo $form->input('auto_login', array('type' => 'checkbox', 'label' => __('Pls rem me',true))); ?>
 		</div>
 		<?php echo $form->submit( __('Login',true), array('div'=>array('class'=>'quickLiginSubmit, span-2') ) ); ?>
 		<?php echo $form->end( ); ?>
-		<p class="quickLoginForPas clear"><?php echo $html->link(__('Forgot your password?',true), array('admin'=> false, 'action' => 'reset'), array('class' => '' ) ); ?></p>
+		<p class="quickLoginForPas clear"><?php echo $html->link(__('Forgot your password?',true), array('admin'=> false, 'controller'=>'users','action' => 'reset'), array('class' => '' ) ); ?></p>
 
 	</fieldset>
 	<br />

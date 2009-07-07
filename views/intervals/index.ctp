@@ -84,9 +84,9 @@
 		?>
 		
 			<div class="grafWrapper span-14 last prepend-1">
-				<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-					<div class="grafConnector1"></div><div class="grafConnector"></div>
-					<div class="interval hourRest" style="margin: 0; height: 10px; background-color: #ff7d7d; float: left;"></div>
+				<div class="span-2  graf">
+					<div class="grafConnector1"></div>
+					<div class="grafConnector"></div>
 				</div>
 			</div>
 
@@ -95,9 +95,9 @@
 <?php else: ?>
 
 		<div class="grafWrapper span-14 last prepend-1">
-			<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px">
-				<div class="grafConnector1"></div><div class="grafConnector"></div>
-				<div class="interval hourRest" style="margin: 0; height: 10px; background-color: red; float: left;"></div>
+			<div class="span-2  graf ">
+				<div class="grafConnector1"></div>
+				<div class="grafConnector"></div>
 			</div>
 		</div>
 		
@@ -113,7 +113,8 @@
 
 	<div class="clear"></div>
 	<?php if( !$session->check('Auth.User.id') ): ?>
-	
+	<div style="background-color: #00CACA"; border: 1px solid;">first</div>
+	<div style="background-color: #FF6666"; border: 1px solid;">second</div>
 	<div id="testCorrection">correction test</div>
 		
 		<hr />

@@ -58,8 +58,8 @@ jQuery(document).ready( function(){
 				
 			$('#clock1').css({'background-color' : workBackground });
 			$('#clock2').css({'background-color' :'#ffffff'});
-			$('.work span').css({'font-size':'100%'});
-			$('.rest span').css({'font-size':'85%'});
+			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
+			$('.rest span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
 			
 			$('.minusRest').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});
@@ -80,8 +80,8 @@ jQuery(document).ready( function(){
 			
 			$('#clock1').css({'background-color' :'#ffffff'});
 			$('#clock2').css({'background-color' :'#ffd7d7'});
-			$('.work span').css({'font-size':'85%'});
-			$('.rest span').css({'font-size':'100%'});
+			$('.work span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
+			$('.rest span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 			
 			$('.minusRest').css({'display':'block'});
 			$('.minusWork').css({'display':'none'});
@@ -271,7 +271,6 @@ jQuery(document).ready( function(){
 									nextInterval = 0;
 									
 									//so, new interval
-
 									workDelta = parseInt(workTotal) - parseInt(workStamp);											
 									restDelta = parseInt(restTotal) - parseInt(restStamp);											
 																			
@@ -284,26 +283,17 @@ jQuery(document).ready( function(){
 									} else if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'rest' ) {
 										Delta1 = restDelta;
 									}						
-									
-																		
-									var temp1 = HourStat[hourDay].pop();
-									//alert(temp1);
-									//$(".stopInterval").trigger('click');	
+																										
+									var temp1 = HourStat[hourDay].pop();	
 									temp1[0] = temp1[0] + Delta1;
-									//alert(HourStat[0][0]);
 									//checking if interval was to short or not
 									if ( temp1[0] > 2 || typeof(HourStat[0][0]) == 'undefined' ) {
-										//alert('here1');
 					
-										HourStat[hourDay].push(temp1);
-																				
-										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);
-										
+										HourStat[hourDay].push(temp1);																			
+										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);									
 										HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
-
 									
 									} else {
-										//alert('here2');
 										$('.interval:last').remove();
 										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 										$(".stopInterval").trigger('click');	
@@ -314,19 +304,11 @@ jQuery(document).ready( function(){
 											nnnT += this + " temp1: " + temp1[0] + ";<br />";									
 									} );
 									$('#hourstat').html(nnnT);
-
-									
-	                //New interval creation
-	               // if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][2] != projectId ) {
-										//HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
-									//}
-
-									
-																								
+																							
 								}	else if ( nextInterval == 1 && correction == 1 ) {
 									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
-									//alert(HourStat[hourDay][HourStat[hourDay].length - 1 ][1]);
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 2 , workBackground);
+									
+									grafon2( 0, typeInt, 2 , workBackground);
 									
 								}	
 								nextInterval = 0;	
@@ -421,17 +403,9 @@ jQuery(document).ready( function(){
 									hourDay++;
 								 	HourStat[hourDay] = new Array();
 								 	HourStat[hourDay].push(new Array(0,typeInt,projectId));
-
-                                    if ( typeInt == 'rest') {
-                                        color2 = 'red';
-                                    } else {
-                                        color2 = workBackground;
-                                    }
-
-									$('.grafWrapper').append(	'<div class=" graf span-2" style="height: 10px; border: 2px solid #ccc; margin: 2px"><div class="grafConnector"/>'+
-																								'<div class="interval" style="margin: 0; height: 10px; background-color:'+color2+'; float: left;width:0%"></div>'+
-																						'</div>'
-																					);																								
+								 	
+									grafon2(0, typeInt, 3, workBackground );
+																								
 									hourInt = 0
 								}	
 								

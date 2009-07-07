@@ -54,7 +54,7 @@ jQuery(document).ready( function(){
 			
 				//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
 				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
-					$('.graf:eq('+pos+')').append(	'<div class="interval hourWork wwoorrkk" style="margin: 0; height: 10px; background-color:green; float: left;width:0%"></div>');				
+					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:green; float: left;width:0%"></div>');				
 					HourStat[ii].push(new Array(0,'workTemp') );
 				}	
 					
