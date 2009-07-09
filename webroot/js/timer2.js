@@ -61,7 +61,7 @@ jQuery(document).ready( function(){
 			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 			$('.rest span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
 			
-			$('.minusRest').css({'display':'none'});
+			$('.minusRest, .minusRestUndo').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});
 			
 //to fix!!! wrong!!!

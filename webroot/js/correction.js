@@ -2,6 +2,7 @@ jQuery(document).ready( function(){
 	
 	$('.rest div.minusRest').click(function(){	
 		//stop interva module	
+		$('.minusRestUndo').css({'display':'block'});
 		if ( interval ) {
 			clearInterval(interval);					
 			//set up correction mode
@@ -20,8 +21,8 @@ jQuery(document).ready( function(){
 		
 			//fix of the current interval	
 			if ( 100 > 10 ) {
-				workDelta = parseInt(workTotal) - parseInt(workStamp);											
-				restDelta = parseInt(restTotal) - parseInt(restStamp);											
+				workDelta = parseInt(workTotal) - parseInt(workStamp);
+				restDelta = parseInt(restTotal) - parseInt(restStamp);
 														
 				workStamp = workTotal;
 				restStamp = restTotal;	
@@ -241,6 +242,15 @@ $('#testCorrection').after('<p style="margin:0">'+HourStat.join('<br />')+'</p>'
  			
 
 	})
+	
+	$('.minusRestUndo').click(function(){		
+		if ( correction == 1 ) {
+			
+		}
+	})
+
+
+
 
 	// not started yet
 	$('.plusRest').click(function(){		

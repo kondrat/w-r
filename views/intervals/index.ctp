@@ -18,7 +18,8 @@
         <div class="work span-7 prepend-1">
             <div class="chessKnob work2">           		
                 <span><?php __('Work');?></span>                            
-                <div class="minusWork"></div>               
+                <div class="minusWork"></div>
+                <div class="minusWorkUndo"></div>
             </div>
         </div>
 
@@ -26,6 +27,7 @@
             <div class="chessKnob rest2">         	
                 <span><?php __('Rest');?></span>              
                 <div class="minusRest"></div>
+                <div class="minusRestUndo"></div>
             </div>
         </div>
     </div>   
@@ -113,8 +115,9 @@
 
 	<div class="clear"></div>
 	<?php if( !$session->check('Auth.User.id') ): ?>
-	<div style="background-color: #00CACA"; border: 1px solid;">first</div>
-	<div style="background-color: #FF6666"; border: 1px solid;">second</div>
+	<!--ToDel-->
+	<div style="background-color: #6CFFB6; display:none; border: 1px solid;">Green</div>
+	<div style="background-color: #FF6666;display:none; border: 1px solid;">Red</div>
 	<div id="testCorrection">correction test</div>
 		
 		<hr />
@@ -129,3 +132,4 @@
 
 
 </div><!--last-->
+

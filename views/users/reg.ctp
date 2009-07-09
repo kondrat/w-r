@@ -1,7 +1,7 @@
 <?php echo $javascript->link(array('reg','localization/messages_ru'),false);?>
 
 <div class="inner_page">
-	<fieldset>
+	<fieldset class="fildsetReg">
 		<legend><?php __('Sign Up');?></legend>
 		<?php $session->flash(); ?>
 		<?php echo $form->create('User', array('action' => 'reg' ) ); ?>

@@ -1,12 +1,29 @@
 /*quick Login Calss*/
 .quickLiginSubmit {
 	margin: 3px 0;
-	border-right: 1px solid gray;
 }
+.quickLogin{
+
+}
+.quickLoginInner {
+	background-color:#9AE4E8;
+	border:3px solid silver;
+	margin:0 auto;
+	padding:0 10px 5px 30px;
+	width:224px;
+}
+.quickLoginInner h3{
+	margin: 0.4em 0;
+}
+
 p.quickLoginForPas {
 	margin-bottom: 0;
 }
+
 /*reg - get started*/
+.fildsetReg {
+	margin: 1em;
+}
 .reg a {
 	display:block;
 	border: 3px solid #ccc;
@@ -44,15 +61,14 @@ div.input {
 	margin: 0;
 } 
 .formWrap label {
-	margin: 0 1em 0 0;
+	margin: 0.6em 1em 0 0;
 	float: left;
 	width: 11em;
 	text-align: right; 
 }
 div.formWrap  {
-	background-color: inherit;
-	border:0;
-	margin: 0;
+	/*background-color: inherit;*/
+	margin: 2px;
 	padding: 0 0 1em 0;
 }
 div.formWrap input.form-error {

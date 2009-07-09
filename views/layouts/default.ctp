@@ -15,8 +15,7 @@
 		echo '<!--[if IE]>';
 		echo $html->css('ie');
 		echo '<![endif]-->';
-		echo $html->css('slider');
-		//echo $html->css('cake.generic');
+
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
 		echo $javascript->link('jquery-1.3.2.min');
 		echo $javascript->link('jquery.form');

@@ -52,6 +52,7 @@
 	font-size: 200%;
 	text-align: center;
 	position: relative;
+	margin: 0 0 2px 0;
 }
 
 .work{
@@ -87,6 +88,20 @@
 .minusWork:hover {
 	background-image: url(../img/icons/round_remove_green.png);
 }
+.minusWorkUndo {
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	height: 24px;
+	width: 24px;
+	background-image: url(../img/icons/undo_1.png);
+	cursor: pointer;
+	line-height: 0.55;
+	display:none;
+}
+.minusWorkUndo:hover {
+	background-image: url(../img/icons/undo_3.png);
+}
 .minusRest {
 	position: absolute;
 	background-image: url(../img/icons/round_remove.png);
@@ -99,6 +114,20 @@
 }
 .minusRest:hover {
 	background-image: url(../img/icons/round_remove_red.png);
+}
+.minusRestUndo {
+	position: absolute;
+	background-image: url(../img/icons/undo_1.png);
+	top: 50px;
+	right: 20px;
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+	line-height: 0.55;
+	display:none;
+}
+.minusRestUndo:hover {
+	background-image: url(../img/icons/undo_2.png);
 }
 
 .grafWrapper {

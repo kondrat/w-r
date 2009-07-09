@@ -19,7 +19,8 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		} else {
 			color = color; 
 		}
-		
+	//temp
+			color='#6CFFB6';		
 		
 		if ( nextInt == 0 ) {			
 				$('.interval:last').width( workPS+"%");					
@@ -33,7 +34,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 				}
 //To Fix!!
 		} else if ( nextInt == 2 ) {
-			
+
 			if ( typeInt2 == 'rest' ) {
 				$('.graf:last').append('<div class="interval" style="background-color: #FF6666;"></div>');		//red			
 			} else if ( typeInt2 == 'work') {
