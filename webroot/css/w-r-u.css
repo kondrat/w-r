@@ -2,8 +2,11 @@
 .quickLiginSubmit {
 	margin: 3px 0;
 }
-.quickLogin{
-
+.quickLoginCheckbox input.checkbox,.quickLoginCheckbox input[type="checkbox"]{
+	top: 0.15em;
+}
+.quickLoginCheckbox label{
+	margin: 4px;
 }
 .quickLoginInner {
 	background-color:#9AE4E8;
@@ -13,7 +16,7 @@
 	width:224px;
 }
 .quickLoginInner h3{
-	margin: 0.4em 0;
+	margin: 0.4em 0 0 0;
 }
 
 p.quickLoginForPas {

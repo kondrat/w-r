@@ -48,8 +48,7 @@ jQuery(document).ready( function(){
 		 i2 = cc.i2;			
 	}
 	
-
-	//#ffd7d7 - red;							
+							
 	$('#clock1, div.work2 span').click( function(){
 		
 			if (!interval) {
@@ -76,8 +75,7 @@ jQuery(document).ready( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}		
-	
-			
+				
 			$('#clock1').css({'background-color' :'#ffffff'});
 			$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('.work span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
@@ -125,7 +123,7 @@ jQuery(document).ready( function(){
 		
 	});
 
-		
+	//after loading ini	
 	if( typeInt == 'rest' ) {
 			$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('#clock1').css({'background-color' :'#ffffff'});
@@ -141,12 +139,13 @@ jQuery(document).ready( function(){
 	$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
 	$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 
+	//Here we starting of the interval
+	//---------------------------------------------------------
 			$('.startInterval').click( function(){	
-				
+				//central button
 				$('.startInterval').css({'display':'none'});
 				$('.stopInterval').css({'display':'inline'});
-				
-				
+								
 				//prepering of the array after correction
 				if ( correction == 1 ) {
 
@@ -155,10 +154,9 @@ jQuery(document).ready( function(){
 						for ( var nn in HourStat[kk] ) {
 							
 							if ( HourStat[kk][nn][1] == 'rest' && HourStat[kk][nn][0] == 0 ) {
-								HourStat[kk].splice(nn,1);
+								HourStat[kk].splice(nn,1);//removing 0 rest ints
 							} 
-							
-							
+							//resetting workTemp							
 							if ( HourStat[kk][nn][1] == 'workTemp' ) {
 								 HourStat[kk][nn][1] = 'work';
 								 HourStat[kk][nn][1] = projectId;
@@ -271,6 +269,12 @@ jQuery(document).ready( function(){
 									nextInterval = 0;
 									
 									//so, new interval
+									if(typeof(HourStat[hourDay])=='undefined'){
+										//HourStat[hourDay] = new Array( new Array(0,typeInt,projectId) );
+									}
+									
+									
+									
 									workDelta = parseInt(workTotal) - parseInt(workStamp);											
 									restDelta = parseInt(restTotal) - parseInt(restStamp);											
 																			
@@ -284,16 +288,19 @@ jQuery(document).ready( function(){
 										Delta1 = restDelta;
 									}						
 																										
-									var temp1 = HourStat[hourDay].pop();	
+									var temp1 = HourStat[hourDay].pop();
+									
 									temp1[0] = temp1[0] + Delta1;
 									//checking if interval was to short or not
 									if ( temp1[0] > 2 || typeof(HourStat[0][0]) == 'undefined' ) {
-					
-										HourStat[hourDay].push(temp1);																			
-										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);									
-										HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 									
+										HourStat[hourDay].push(temp1);																			
+										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);	
+										
+										HourStat[hourDay].push( new Array(0,typeInt,projectId) );
+																		
 									} else {
+										//HourStat[hourDay].pop();
 										$('.interval:last').remove();
 										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 										$(".stopInterval").trigger('click');	
