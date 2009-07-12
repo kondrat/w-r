@@ -36,7 +36,7 @@ jQuery(document).ready( function(){
 		 resHour = cc.resHour;
 		 hour = cc.hour;
 		 k = cc.k;
-		 i = cc.i;
+		 sec = cc.sec;
 		
 		 sec2 = cc.sec2;
 		 resSec2 = cc.resSec2,
@@ -45,7 +45,7 @@ jQuery(document).ready( function(){
 		 resHour2 = cc.resHour2;
 		 hour2 = cc.hour2;
 		 k2 = cc.k2;
-		 i2 = cc.i2;			
+		 sec2 = cc.sec2;			
 	}
 	
 							
@@ -54,40 +54,41 @@ jQuery(document).ready( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}
+			if ( typeInt != 'work') {					
+				$('#clock1').css({'background-color' : workBackground });
+				$('#clock2').css({'background-color' :'#ffffff'});
+				$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
+				$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 				
-			$('#clock1').css({'background-color' : workBackground });
-			$('#clock2').css({'background-color' :'#ffffff'});
-			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
-			$('.rest span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
-			
-			$('.minusRest, .minusRestUndo').css({'display':'none'});
-			$('.minusWork').css({'display':'block'});
-			
-//to fix!!! wrong!!!
-			projectId = $('.myProject:first').attr("id");
-
-			nextInterval = 1;
-			typeInt = 'work';
-			i = k;			
+				$('.minusRest, .minusRestUndo').css({'display':'none'});
+				$('.minusWork').css({'display':'block'});
+				
+				//to fix!!! wrong!!!
+				projectId = $('.myProject:first').attr("id");
+	
+				nextInterval = 1;
+				typeInt = 'work';		
+			}			
 	});
 	
 	$('#clock2, div.rest2 span').click( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}		
+				if (typeInt != 'rest') {				
+				$('#clock1').css({'background-color' :'#ffffff'});
+				$('#clock2').css({'background-color' :'#ffd7d7'});
+				$('.work span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
+				$('.rest span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 				
-			$('#clock1').css({'background-color' :'#ffffff'});
-			$('#clock2').css({'background-color' :'#ffd7d7'});
-			$('.work span').css({'font-size':'85%','border-bottom':'6px solid #ccc'});
-			$('.rest span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
-			
-			$('.minusRest').css({'display':'block'});
-			$('.minusWork').css({'display':'none'});
-			
-			projectId = 'rest_1';
-			nextInterval = 1;	
-			typeInt = 'rest';
-			i2 = k2;
+				$('.minusRest').css({'display':'block'});
+				$('.minusWork').css({'display':'none'});
+				
+				projectId = 'rest_1';
+				nextInterval = 1;	
+				typeInt = 'rest';
+
+			}
 	});
 
 	$(".myProject").click(function(){
@@ -109,15 +110,15 @@ jQuery(document).ready( function(){
 			$('.work span').text(projectName);
 			$('#clock1').css({'background-color' : workBackground });
 			$('#clock2').css({'background-color' :'#ffffff'});
-			$('.work span').css({'font-size':'100%'});
-			$('.rest span').css({'font-size':'85%'});
+			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
+			$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 			
 			$('.minusRest').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});			
 		
 			nextInterval = 1;
 			typeInt = 'work';
-			i = k;
+
 		} 
 
 		
@@ -166,8 +167,7 @@ jQuery(document).ready( function(){
 					}
 										
 				}
-				
-				
+
 				var clockObj = new Date();
 				interval = setInterval(function () {
 													
@@ -177,103 +177,95 @@ jQuery(document).ready( function(){
 		
 								if ( increm > 999 ) { 
 											secInt++;										
-											hourInt++;
-
-											i++;
-											i2++;
-											
+											hourInt++;										
 											graf++;
 											saveSumm++;
+										
+										if ( typeInt == 'work' ) {	
+												workTotal++;		
+												sec++;
+																				
+												if ( sec < 10 ) {
+													resSec = '0' + sec;
+												} else if ( sec >= 10 && sec < 60 ) {
+													resSec = sec;
+												} else if ( sec == 60 ) {
+													resSec = "00";
+													sec = 0;
+													minut++;
+												}
+												
+												if ( minut > 0 && minut < 10 ) {
+													resMin = "0" + minut;
+												} else if (minut >= 10 && minut < 60) {
+													resMin = minut;
+												} else if ( minut == 60 ) {
+													resMin = "00";
+													minut = 0;
+													hour++;
+												}
+												
+												if ( hour > 0 && hour < 10 ) {
+													resHour = "0" + hour;
+												} else if ( hour >= 10 && hour < 24 ) {
+													resHour = hour;
+												} else if ( hour == 24) {
+													resHour = "00";
+													hour = 0;
+												}
+																								
+												$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
+												document.title = 'Work ' + resHour + ":" + resMin; 
+								
+												
+											}	
+												
+										if ( typeInt == 'rest' ) {
+												restTotal++;	
+												sec2++;
+												
+												if ( sec2 < 10 ) {
+													resSec2 = '0' + sec2;
+												} else if ( sec2 >= 10 && sec2 < 60 ) {
+													resSec2 = sec2;
+												} else if ( sec2 == 60 ) {
+													resSec2 = "00";											
+													sec2 = 0;
+													minut2++;
+												}
+												
+												if ( minut2 > 0 && minut2 < 10 ) {
+													resMin2 = "0" + minut2;
+												} else if (minut2 >= 10 && minut2 < 60) {
+													resMin2 = minut2;
+												} else if ( minut2 == 60 ) {
+													resMin2 = "00";
+													minut2 = 0;
+													hour2++;
+												}
+												
+												if ( hour2 > 0 && hour2 < 10 ) {
+													resHour2 = "0" + hour2;
+												} else if ( hour2 >= 10 && hour2 < 24 ) {
+													resHour2 = hour2;
+												} else if ( hour2 == 24) {
+													resHour2 = "00";
+													hour2 = 0;
+												}
+												
+												
+												$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+												document.title = 'Rest ' + resHour2 + ":" + resMin2;
+								
+										}
+
+									
 								}
 										
-								if ( typeInt == 'work' ) {			
-										k = i;										
-										if ( i < 10 ) {
-											resSec = '0' + i;
-										} else if ( i >= 10 && i < 60 ) {
-											resSec = i;
-										} else if ( i == 60 ) {
-											resSec = "00";
-											i = 0;
-											minut++;
-										}
-										
-										if ( minut > 0 && minut < 10 ) {
-											resMin = "0" + minut;
-										} else if (minut >= 10 && minut < 60) {
-											resMin = minut;
-										} else if ( minut == 60 ) {
-											resMin = "00";
-											minut = 0;
-											hour++;
-										}
-										
-										if ( hour > 0 && hour < 10 ) {
-											resHour = "0" + hour;
-										} else if ( hour >= 10 && hour < 24 ) {
-											resHour = hour;
-										} else if ( hour == 24) {
-											resHour = "00";
-											hour = 0;
-										}
-										
-						
-										
-										$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
-										document.title = 'Work ' + resHour + ":" + resMin; 
-										workTotal = parseInt(hour)*3600 + parseInt(minut)*60 + parseInt(i)*1;										
-										
-									}	
-										
-								if ( typeInt == 'rest' ) {	
-										k2 = i2;
-										
-										if ( i2 < 10 ) {
-											resSec2 = '0' + i2;
-										} else if ( i2 >= 10 && i2 < 60 ) {
-											resSec2 = i2;
-										} else if ( i2 == 60 ) {
-											resSec2 = "00";											
-											i2 = 0;
-											minut2++;
-										}
-										
-										if ( minut2 > 0 && minut2 < 10 ) {
-											resMin2 = "0" + minut2;
-										} else if (minut2 >= 10 && minut2 < 60) {
-											resMin2 = minut2;
-										} else if ( minut2 == 60 ) {
-											resMin2 = "00";
-											minut2 = 0;
-											hour2++;
-										}
-										
-										if ( hour2 > 0 && hour2 < 10 ) {
-											resHour2 = "0" + hour2;
-										} else if ( hour2 >= 10 && hour2 < 24 ) {
-											resHour2 = hour2;
-										} else if ( hour2 == 24) {
-											resHour2 = "00";
-											hour2 = 0;
-										}
-										
-							
-										
-										$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
-										document.title = 'Rest ' + resHour2 + ":" + resMin2;
-										restTotal = parseInt(hour2)*3600 + parseInt(minut2)*60 + parseInt(i2);									
-								}											
 									
 										
 								if( nextInterval == 1 && correction != 1) {
 									nextInterval = 0;
-									
-									//so, new interval
-									if(typeof(HourStat[hourDay])=='undefined'){
-										//HourStat[hourDay] = new Array( new Array(0,typeInt,projectId) );
-									}
-									
-									
 									
 									workDelta = parseInt(workTotal) - parseInt(workStamp);											
 									restDelta = parseInt(restTotal) - parseInt(restStamp);											
@@ -281,37 +273,48 @@ jQuery(document).ready( function(){
 									workStamp = workTotal;
 									restStamp = restTotal;	
 									
-									var Delta1 = 0;
-									if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'work' ) {
-										Delta1 = workDelta;
-									} else if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'rest' ) {
-										Delta1 = restDelta;
-									}						
-																										
-									var temp1 = HourStat[hourDay].pop();
-									
-									temp1[0] = temp1[0] + Delta1;
-									//checking if interval was to short or not
-									if ( temp1[0] > 2 || typeof(HourStat[0][0]) == 'undefined' ) {
-									
-										HourStat[hourDay].push(temp1);																			
-										grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);	
-										
+									if ( typeof HourStat[hourDay][0] == 'undefined' ) {
 										HourStat[hourDay].push( new Array(0,typeInt,projectId) );
-																		
-									} else {
-										//HourStat[hourDay].pop();
-										$('.interval:last').remove();
-										HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
-										$(".stopInterval").trigger('click');	
+										grafon2( 0, typeInt, 4, workBackground);									
+									} else {								
+										var Delta1 = 0;
+										if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'work' ) {
+											Delta1 = workDelta;
+										} else if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'rest' ) {
+											Delta1 = restDelta;
+										}	
+										var temp1 = HourStat[hourDay].pop();									
+										temp1[0] = temp1[0] + Delta1;
+										if( temp1[0] > 4 ) {									
+											HourStat[hourDay].push(temp1);
+											grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, workBackground);
+											HourStat[hourDay].push( new Array(0,typeInt,projectId) );
+										} else {
+											
+											$('.interval:last').remove();
+											clockCorrection( temp1[0], temp1[1]);	
+											
+											if ( typeof HourStat[hourDay][0] == 'undefined' ) {//new intreval instead of the previous short one
+												HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
+												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, workBackground);							
+											} else {										 											
+												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];	
+											}																																										
+											
+								
+										}
+																																							
 									}
-
+					
+																					
+									/*
 									var nnnT = '';
 									$.each(HourStat[hourDay], function() {									
-											nnnT += this + " temp1: " + temp1[0] + ";<br />";									
+											nnnT += this  + ";<br />";									
 									} );
 									$('#hourstat').html(nnnT);
-																							
+									*/														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
 									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 									
@@ -320,6 +323,7 @@ jQuery(document).ready( function(){
 								}	
 								nextInterval = 0;	
 								correction = 0;
+								nextHour = 0;
 																				
 								if ( graf == 5 ) {
 																	
@@ -382,37 +386,48 @@ jQuery(document).ready( function(){
 									//$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
 									
 									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, workBackground );
-									
-									var nnnT = '';
-									$.each(HourStat[hourDay], function() {									
-											nnnT += this + " ;<br />";									
-									} );
-									$('#hourstat').html(nnnT);
-																
-								}
+									//stat
+									if ( 100 > 10 ) {
+										var nnnT = '';
+										
+										$.each(HourStat, function() {
+											var bbb2 = 0;
+											nnnT += '<div style="border:1px solid;padding: 5px;">';		 
+											$.each(this, function() {	
+												var bbb1;
+											
+												$.each(this, function() {
+													if ( !isNaN(parseInt(this)) ) {
+														bbb1 = parseInt(this)*100/HourCalc;
+														bbb2 += bbb1;
+													}
+												});
+																				
+													nnnT += this + " : <br /><b>"+ bbb1 + "</b><hr />";									
+											});
+											nnnT += "</div><i style='color:red'>"+bbb2+"</i><hr />";							
+										});
+									}
+
+									$('#hourstat').html(nnnT);						
+								}//graf
 	
-								if ( saveSumm  == 10 ) {
-									
+								if ( saveSumm  == 10 ) {									
 									//to create json text.
 									var HourStatJSONText = JSON.stringify(HourStat);
-
 									
 									saveTime2( HourStatJSONText );
-									
-									if ( nextHour == 1 ) {
-										nextHour = 0;
-									}
+
 									saveSumm = 0;
 								}
 	
-								if ( hourInt == 60 ) {
+								if ( hourInt == HourCalc ) {
 									nextHour = 1;
+									nextInterval = 1;
 									hourDay++;
 								 	HourStat[hourDay] = new Array();
-								 	HourStat[hourDay].push(new Array(0,typeInt,projectId));
 								 	
-									grafon2(0, typeInt, 3, workBackground );
-																								
+									grafon2(0, typeInt, 3, workBackground );																								
 									hourInt = 0
 								}	
 								
@@ -468,7 +483,7 @@ jQuery(document).ready( function(){
 												'resHour': resHour,
 												'hour': hour,
 												'k': k,
-												'i': i,
+												'sec': sec,
 												
 												'sec2': sec2,
 												'resSec2':resSec2,
@@ -477,7 +492,7 @@ jQuery(document).ready( function(){
 												'resHour2': resHour2,
 												'hour2':hour2,
 												'k2': k2,
-												'i2': i2		
+												'sec2': sec2		
 								};
 								var myJSONText = JSON.stringify(varsObject);												
 								var date2 = new Date();
@@ -543,7 +558,7 @@ jQuery(document).ready( function(){
 			 minut = 0;
 			 hour = 0;
 			 k = 0;
-			 i = 0;
+			 sec = 0;
 	
 	
 	
@@ -554,7 +569,7 @@ jQuery(document).ready( function(){
 			 minut2 = 0;
 			 hour2 = 0;
 			 k2 = 0;
-			 i2 = 0;	
+			 sec2 = 0;	
 			
 		}
 			

@@ -62,7 +62,7 @@
 .work span {
 	cursor: pointer;
 	font-size: 85%;
-	border-bottom: 6px solid #ccc;
+	border-bottom: 8px solid #ccc;
 }
 .rest{
 	color: red;

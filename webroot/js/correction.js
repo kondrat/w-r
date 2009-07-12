@@ -151,96 +151,10 @@ jQuery(document).ready( function(){
 //to del;
 $('#testCorrection').html('');
 $('#testCorrection').after('<p style="margin:0">'+HourStat.join('<br />')+'</p>');
- 			//clocks
-	 		if ( 100 > 10 ) {
-						//clocks
-						if ( restTotal >= totalStep) {
-							workTotal = parseInt(workTotal) + totalStep; 
-							restTotal = parseInt(restTotal) - totalStep;
-						} else if ( restTotal < totalStep ) {
-							workTotal = parseInt(workTotal) + parseInt(restTotal);
-							restTotal = 0;
-						}
-							workStamp = workTotal;
-							restStamp = restTotal;
-			 
-						hour = parseInt(workTotal/3600);
-						minut = parseInt( ( workTotal - (hour*3600) )/60 );
-						i = workTotal - (hour*3600) - (minut*60);
-						k = i;
-			
-						hour2 = parseInt(restTotal/3600);
-						minut2 = parseInt( ( restTotal - (hour2*3600) )/60 );
-						i2 = restTotal - (hour2*3600) - (minut2*60);
-						k2 = i2;	
-												//work
-												if ( i < 10 ) {
-														resSec = '0' + i;
-													} else if ( i >= 10 && i < 60 ) {
-														resSec = i;
-													} else if ( i == 60 ) {
-														resSec = "00";
-														i = 0;
-														minut++;
-													}
-													
-													if ( minut > 0 && minut < 10 ) {
-														resMin = "0" + minut;
-													} else if (minut >= 10 && minut < 60) {
-														resMin = minut;
-													} else if ( minut == 60 ) {
-														resMin = "00";
-														minut = 0;
-														hour++;
-													}
-													
-													if ( hour > 0 && hour < 10 ) {
-														resHour = "0" + hour;
-													} else if ( hour >= 10 && hour < 24 ) {
-														resHour = hour;
-													} else if ( hour == 24) {
-														resHour = "00";
-														hour = 0;
-													}
-													
-													
-													//rest
-													if ( i2 < 10 ) {
-														resSec2 = '0' + i2;
-													} else if ( i2 >= 10 && i2 < 60 ) {
-														resSec2 = i2;
-													} else if ( i2 == 60 ) {
-														resSec2 = "00";											
-														i2 = 0;
-														minut2--;
-													}
-													
-													if ( minut2 >= 0 && minut2 < 10 ) {
-														resMin2 = "0" + minut2;
-													} else if (minut2 >= 10 && minut2 < 60) {
-														resMin2 = minut2;
-													} else if ( minut2 == 60 ) {
-														resMin2 = "00";
-														minut2 = 0;
-														hour2--;
-													} 
-													
-													if ( hour2 >= 0 && hour2 < 10 ) {
-														resHour2 = "0" + hour2;
-													} else if ( hour2 >= 10 && hour2 < 24 ) {
-														resHour2 = hour2;
-													} else if ( hour2 == 24) {
-														resHour2 = "00";
-														hour2 = 0;
-													}	
-				
-					
-					
-					$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
-					$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);		
-				}					
- 			
 
+ 				//clocks
+				clockCorrection(totalStep,'rest');
+				
 	})
 	
 	$('.minusRestUndo').click(function(){		

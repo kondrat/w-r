@@ -52,6 +52,9 @@ msgstr 	"Пароль"
 msgid	"Username" 
 msgstr 	"Имя"
 
+msgid	"Remember me" 
+msgstr 	"Запомнить меня?"
+
 msgid	"Please type in the code" 
 msgstr 	"Введите код"
 

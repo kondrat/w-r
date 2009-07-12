@@ -1,7 +1,10 @@
+		var HourCalc = 3600;
+		var HourCalc = 60;
+
 		var secInt = 0;
 		var interval = false;
 		var nextInterval = 0;
-		var typeInt = 'rest';
+		var typeInt;
 		var projectId = 'project_1';
 		var projectName = 'Work';
 		var workBackground = '#d2ffe9';
@@ -12,7 +15,8 @@
 		var nextHour = 0;
 		var HourStat = new Array();
 		var projectId = 'rest_1';
-		 		HourStat[0] = new Array( new Array(0,'rest','rest_1') );
+		 		//HourStat[0] = new Array( new Array(0,'rest','rest_1') );
+		 		HourStat[0] = new Array(  );
 
 		
 					
@@ -39,8 +43,7 @@
 		var sec = 0;
 		var minut = 0;
 		var hour = 0;
-		var k = 0;
-		var i = 0;
+
 
 
 
@@ -50,5 +53,3 @@
 		var sec2 = 0;
 		var minut2 = 0;
 		var hour2 = 0;
-		var k2 = 0;
-		var i2 = 0;	
