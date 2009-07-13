@@ -55,8 +55,10 @@ jQuery(document).ready( function(){
 				$(".startInterval").trigger('click');
 			}
 			if ( typeInt != 'work') {					
-				$('#clock1').css({'background-color' : workBackground });
-				$('#clock2').css({'background-color' :'#ffffff'});
+				//$('#clock1').css({'background-color' : workBackground });
+				$('#clock1 .clockBackground').css({'background-color' : workBackground });
+				//$('#clock2').css({'background-color' :'#ffffff'});
+				$('#clock2 .clockBackground').css({'background-color' : '#fff' });
 				$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 				$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 				
@@ -76,8 +78,10 @@ jQuery(document).ready( function(){
 				$(".startInterval").trigger('click');
 			}		
 				if (typeInt != 'rest') {				
-				$('#clock1').css({'background-color' :'#ffffff'});
-				$('#clock2').css({'background-color' :'#ffd7d7'});
+				//$('#clock1').css({'background-color' :'#ffffff'});
+				$('#clock1 .clockBackground').css({'background-color' : '#fff' });
+				//$('#clock2').css({'background-color' :'#ffd7d7'});
+				$('#clock2 .clockBackground').css({'background-color' : 'red' });
 				$('.work span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 				$('.rest span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 				
@@ -102,14 +106,17 @@ jQuery(document).ready( function(){
 			
 			projectName = $(this).text();
 			colorProjectId = $(this).css("color");
-			workBackground = $(this).css("background-color");
+			//workBackground = $(this).css("background-color");
+			workBackground = colorProjectId;
 		
 		
 		
 			$('.clock1, .work').css({'color':colorProjectId});
 			$('.work span').text(projectName);
-			$('#clock1').css({'background-color' : workBackground });
-			$('#clock2').css({'background-color' :'#ffffff'});
+			//$('#clock1').css({'background-color' : workBackground });
+			$('#clock1 .clockBackground').css({'background-color' : workBackground });
+			//$('#clock2').css({'background-color' :'#ffffff'});
+			$('#clock2 .clockBackground').css({'background-color' : '#fff' });
 			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 			$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 			
@@ -126,19 +133,22 @@ jQuery(document).ready( function(){
 
 	//after loading ini	
 	if( typeInt == 'rest' ) {
-			$('#clock2').css({'background-color' :'#ffd7d7'});
+			//$('#clock2').css({'background-color' :'#ffd7d7'});
+			$('#clock2 .clockBackground').css({'background-color' : 'red' });
 			$('#clock1').css({'background-color' :'#ffffff'});
 			$('.minusRest').css({'display':'block'});	
 			$('.minusWork').css({'display':'none'});	
 	} else if (typeInt == 'work' ) {
-			$('#clock1').css({'background-color' : workBackground });
-			$('#clock2').css({'background-color' :'#ffffff'});	
+			//$('#clock1').css({'background-color' : workBackground });
+			$('#clock1 .clockBackground').css({'background-color' : workBackground });
+			$('#clock2 .clockBackground').css({'background-color' : '#fff' });
+			//$('#clock2').css({'background-color' :'#ffffff'});	
 			$('.minusRest').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});		
 	}
 	
-	$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
-	$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+	$('#clock1 span').html(resHour + ":" + resMin + ":" + resSec );
+	$('#clock2 span').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 
 	//Here we starting of the interval
 	//---------------------------------------------------------
@@ -214,7 +224,7 @@ jQuery(document).ready( function(){
 													hour = 0;
 												}
 																								
-												$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
+												$('#clock1 span').html(resHour + ":" + resMin + ":" + resSec );
 												document.title = 'Work ' + resHour + ":" + resMin; 
 								
 												
@@ -254,7 +264,7 @@ jQuery(document).ready( function(){
 												}
 												
 												
-												$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
+												$('#clock2 span').html(resHour2 + ":" + resMin2 + ":"+ resSec2);
 												document.title = 'Rest ' + resHour2 + ":" + resMin2;
 								
 										}

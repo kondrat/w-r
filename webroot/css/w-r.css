@@ -11,13 +11,24 @@
 	text-align: center;
 	cursor: pointer;
 	margin-bottom: 2px;
+	position:relative;
+	
+}
+.clockBackground{
+	position:absolute;
+	width:100%;
+	height:100%;
+	cursor:pointer;
+	opacity: 0.17;
+	top:0;
+	left:0
 }
 .clock1 {
 	color: green;
 }
 .clock2 {
 	color: red;
-	background-color: #ffd7d7;
+	/*background-color: #ffd7d7;*/
 }
 
 /*paginator classes*/
@@ -84,6 +95,7 @@
 	background-image: url(../img/icons/round_remove.png);
 	cursor: pointer;
 	line-height: 0.55;
+	z-index:2;
 }
 .minusWork:hover {
 	background-image: url(../img/icons/round_remove_green.png);
@@ -111,6 +123,7 @@
 	width: 24px;
 	cursor: pointer;
 	line-height: 0.55;
+	z-index:2;
 }
 .minusRest:hover {
 	background-image: url(../img/icons/round_remove_red.png);
@@ -211,7 +224,7 @@
 	position:absolute;
 	left: 303px;
 	top: 50px;
-	/*z-index:10;*/
+	z-index:2;
 }
 .stopStart div {
 	/*display: inline;*/
@@ -241,6 +254,7 @@
 	width:24px;
 	cursor: pointer;
 	color:transparent;
+	z-index:2;
 }
 .startInterval:hover {
 	background:transparent url(../img/icons/go_1.png) no-repeat scroll 0 0;

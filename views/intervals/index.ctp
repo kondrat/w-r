@@ -55,10 +55,18 @@
 
       
         <div class="span-7 prepend-1">
-            <p class="clock clock1" id="clock1">00:00:00</p>
+            <div class="clock clock1" id="clock1">
+            	<span>00:00:00</span>
+            	<div class="clockBackground" ></div>
+            </div>
+            
         </div>
         <div class="span-7 last">
-            <p class="clock clock2" id="clock2">00:00:00</p>
+            <div class="clock clock2" id="clock2">
+            	<span>00:00:00</span>
+            	<div class="clockBackground" ></div>
+            </div>
+            
         </div>
       
 

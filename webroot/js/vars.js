@@ -7,7 +7,8 @@
 		var typeInt;
 		var projectId = 'project_1';
 		var projectName = 'Work';
-		var workBackground = '#d2ffe9';
+		//var workBackground = '#d2ffe9';
+		var workBackground = 'green';
 		var colorProjectId = 'green';
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;

@@ -152,8 +152,8 @@ function clockCorrection (stepToDo, stepType) {
 				
 					
 					
-					$('#clock1').html(resHour + ":" + resMin + ":" + resSec );
-					$('#clock2').html(resHour2 + ":" + resMin2 + ":"+ resSec2);			
+					$('#clock1 span').html(resHour + ":" + resMin + ":" + resSec );
+					$('#clock2 span').html(resHour2 + ":" + resMin2 + ":"+ resSec2);			
 	
 	
 }
