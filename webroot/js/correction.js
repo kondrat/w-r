@@ -11,7 +11,7 @@ jQuery(document).ready( function(){
 			clockObj = 0;
 			interval = false;
 		}
-		
+		typeInt = 'work';
 		$('.startInterval').css({'display':'inline'});
 		$('.stopInterval').css({'display':'none'});
 		//correction step				
@@ -55,12 +55,12 @@ jQuery(document).ready( function(){
 			
 				//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
 				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
-					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:green; float: left;width:0%"></div>');				
-					HourStat[ii].push(new Array(0,'workTemp') );
+					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:'+colorProjectId+'; float: left;width:0%"></div>');				
+					HourStat[ii].push(new Array(0,'workTemp',projectId) );
 				}	
 					
 				//temp array to store info of the workTemp.
-				var workLastTemp = new Array(0,'workTemp');
+				var workLastTemp = new Array(0,'workTemp',projectId);
 				//start loop from the end.												
 				HourStat[ii].reverse();	
 				//mark for exiting the internal loop			
@@ -88,12 +88,12 @@ jQuery(document).ready( function(){
 										
 										HourStat[ii][j][0] = HourStat[ii][j][0] - step;
 										//grafon
-										var workPS11 = Math.floor( (HourStat[ii][j][0])/60*100 );
+										var workPS11 =  (HourStat[ii][j][0])*100/HourCalc;
 										$('.graf:eq('+pos+') .interval:last').prev().width( workPS11+"%");
 											
 										workLastTemp[0] = parseInt(workLastTemp[0])  + parseInt(step);
 										//grafon
-										var workPS12 = Math.floor( (workLastTemp[0])/60*100 );
+										var workPS12 =  (workLastTemp[0])*100/HourCalc;
 										$('.graf:eq('+pos+') .interval:last').width( workPS12+"%");	
 										
 										//ok, end of all loops, all done
@@ -114,7 +114,7 @@ jQuery(document).ready( function(){
 											
 										workLastTemp[0] = parseInt(workLastTemp[0])  + parseInt(Delta2);
 										//grafon
-										var workPS12 = Math.floor( (workLastTemp[0])/60*100 );
+										var workPS12 =  (workLastTemp[0])*100/HourCalc ;
 										$('.graf:eq('+pos+') .interval:last').width( workPS12+"%");	
 																	
 									}
@@ -148,9 +148,35 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
-//to del;
-$('#testCorrection').html('');
-$('#testCorrection').after('<p style="margin:0">'+HourStat.join('<br />')+'</p>');
+			
+						//to del;
+									if ( 100 > 10 ) {
+										var nnnC = '';										
+										$.each(HourStat, function() {
+											nnnC += '<div class="span-4 clearfix" style="border:1px solid;padding: 5px;">';		 
+											$.each(this, function() {	
+												var bbb1 = '';
+											
+												$.each(this, function() {
+													if ( !isNaN(parseInt(this)) ) {
+														bbb1 += '<b>'+this+'</b>&nbsp;';
+													} else if ( this == 'rest' ) {
+														bbb1 += '&nbsp;<b style="color:red">'+this +'</b>';
+													} else if (this == 'workTemp') {
+														bbb1 += '&nbsp;<b style="color:teal">'+this +'</b>';														
+													}else if (this == 'work') {
+														bbb1 += '&nbsp;<b style="color:green">'+this +'</b>';														
+													} else {
+														bbb1 += '&nbsp;<b>'+this+'</b>';
+													}
+												});
+																				
+													nnnC += bbb1+ "<hr />";									
+											});
+											nnnC += "</div><hr />";							
+										});
+									}
+									$('#testCorrection').html(nnnC);
 
  				//clocks
 				clockCorrection(totalStep,'rest');

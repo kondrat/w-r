@@ -11,8 +11,8 @@
 	    	<div class="stopStart span-1">
 					<!--	<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>-->
 					<!--<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>-->
-					<div class="stopInterval">Stop</div>
-					<div class="startInterval">Go</div>
+					<div class="stopInterval"></div>
+					<div class="startInterval"></div>
 				</div>
 				
         <div class="work span-7 prepend-1">

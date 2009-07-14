@@ -77,7 +77,7 @@ jQuery(document).ready( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}		
-				if (typeInt != 'rest') {				
+				if (typeInt != 'rest' || typeof HourStat[0][0] == 'undefined') {				
 				//$('#clock1').css({'background-color' :'#ffffff'});
 				$('#clock1 .clockBackground').css({'background-color' : '#fff' });
 				//$('#clock2').css({'background-color' :'#ffd7d7'});

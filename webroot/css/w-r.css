@@ -20,6 +20,7 @@
 	height:100%;
 	cursor:pointer;
 	opacity: 0.17;
+	filter: alpha(opacity = 17);
 	top:0;
 	left:0
 }
@@ -272,6 +273,8 @@
 	margin: 0;
 	height: 10px;
 	float: left;
+	opacity: 0.65;
+	filter: alpha(opacity = 65);
 }
 
 .grafConnector {

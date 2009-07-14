@@ -20,8 +20,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		} else {
 			color = color; 
 		}
-	//temp
-			color='#6CFFB6';		
+	//temp color='#6CFFB6';		
 
 		switch(nextInt) {
 			case 0:
@@ -30,16 +29,16 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 			case 1:
       	$('.interval:last').width( workPS+"%");          
 				if ( typeInt2 == 'rest' ) {					
-					$('.graf:last').append('<div class="interval" style="background-color:#FF6666;"></div>');					
+					$('.graf:last').append('<div class="interval" style="background-color:red;"></div>');					
 				} else if ( typeInt2 == 'work') {
 					$('.graf:last').append('<div class="interval" style="background-color: '+color+';"></div>');				
 				}				
 				break;
 			case 2://To Fix!!
 				if ( typeInt2 == 'rest' ) {
-					$('.graf:last').append('<div class="interval" style="background-color: #FF6666;"></div>');		//red			
+					$('.graf:last').append('<div class="interval rreesstt" style="background-color: red;"></div>');		//red			
 				} else if ( typeInt2 == 'work') {
-					$('.graf:last').append('<div class="interval" style=" background-color: '+color+';"></div>');		//green		
+					$('.graf:last').append('<div class="interval rreesstt" style=" background-color: '+color+';"></div>');		//green		
 				}				
 				break;
 			case 3:
@@ -47,7 +46,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 				break;
 			case 4:
         if ( typeInt2 == 'rest') {
-            color = '#FF6666';
+            color = 'red';
         }
 				$('.graf:last').append(	'<div class="interval" style="background-color:'+color+';"></div>');				
 				break;			

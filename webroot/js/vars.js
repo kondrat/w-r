@@ -4,7 +4,7 @@
 		var secInt = 0;
 		var interval = false;
 		var nextInterval = 0;
-		var typeInt;
+		var typeInt = 'rest';
 		var projectId = 'project_1';
 		var projectName = 'Work';
 		//var workBackground = '#d2ffe9';
