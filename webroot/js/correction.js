@@ -11,7 +11,7 @@ jQuery(document).ready( function(){
 			clockObj = 0;
 			interval = false;
 		}
-		typeInt = 'work';
+
 		$('.startInterval').css({'display':'inline'});
 		$('.stopInterval').css({'display':'none'});
 		//correction step				
@@ -57,7 +57,7 @@ jQuery(document).ready( function(){
 				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
 					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:'+colorProjectId+'; float: left;width:0%"></div>');				
 					HourStat[ii].push(new Array(0,'workTemp',projectId) );
-				}	
+				}
 					
 				//temp array to store info of the workTemp.
 				var workLastTemp = new Array(0,'workTemp',projectId);
@@ -69,24 +69,23 @@ jQuery(document).ready( function(){
 				for ( var j in HourStat[ii] ) {
 					
 					switch(HourStat[ii][j][1]) {
-						case 'workTemp':
-							//increasing the interval of the workTemp by the existing one
-							workLastTemp[0] = HourStat[ii][j][0];
-							endSmallLoop = 0;
-							break;
 						case 'work':
 							//it's a work interval, so we stop all the loops
 							endSmallLoop = 1;
 							endBigLoop = 1
-							totalStep = 0;
+							//totalStep = 0;
 							break;
-						case 'rest':
-												
-							if (  HourStat[ii][j][0] > 0  ) {
-								
+						case 'workTemp':
+							//increasing the interval of the workTemp by the existing one
+							workLastTemp[0] += HourStat[ii][j][0];
+							endSmallLoop = 0;
+							break;
+						case 'rest':												
+							if (  HourStat[ii][j][0] > 0  ) {								
 									if ( HourStat[ii][j][0] >= step ) {
-										
-										HourStat[ii][j][0] = HourStat[ii][j][0] - step;
+										//alert('rest1 - : '+HourStat[ii][j][0]);
+
+										HourStat[ii][j][0] = parseInt(HourStat[ii][j][0]) - parseInt(step);
 										//grafon
 										var workPS11 =  (HourStat[ii][j][0])*100/HourCalc;
 										$('.graf:eq('+pos+') .interval:last').prev().width( workPS11+"%");
@@ -103,10 +102,10 @@ jQuery(document).ready( function(){
 										break;				
 									
 									} else {
-										
+										alert('rest2: '+HourStat[ii][j][0]);
 										var Delta2 =  HourStat[ii][j][0];
 										totalStep += parseInt(HourStat[ii][j][0]);
-										
+										alert('rest2 totalStep: '+totalStep);
 										step = step - HourStat[ii][j][0];
 
 										HourStat[ii][j][0] = 0;
@@ -118,13 +117,9 @@ jQuery(document).ready( function(){
 										$('.graf:eq('+pos+') .interval:last').width( workPS12+"%");	
 																	
 									}
-							}	else if ( HourStat[ii][j][0] == 0 ) {
-								/*
+							} else {
 								endSmallLoop = 1;
-								endBigLoop = 1
-								step = 0;
-								*/
-							}						
+							}				
 							break;
 							
 					}//end of switch
@@ -135,10 +130,12 @@ jQuery(document).ready( function(){
 				}//end of internal loop
 				
 				//we removing old data of the work interval and putting new one
-				HourStat[ii].shift();
-				HourStat[ii].unshift(workLastTemp);
-				//reversing array back
 				HourStat[ii].reverse();
+				if ( HourStat[ii][(HourStat[ii].length -1)][1] == 'workTemp' ) {
+					HourStat[ii].pop();
+					HourStat[ii].push(workLastTemp);
+				}
+				//reversing array back
 			
 
 				if ( typeof(endBigLoop) != 'undefined' && endBigLoop == 1 ) {
@@ -148,7 +145,10 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
-			
+ 			//clocks
+ 			alert('totalStep final: ' +totalStep);
+			clockCorrection(totalStep,'rest');
+						
 						//to del;
 									if ( 100 > 10 ) {
 										var nnnC = '';										
@@ -175,11 +175,9 @@ jQuery(document).ready( function(){
 											});
 											nnnC += "</div><hr />";							
 										});
+										$('#testCorrection').html(nnnC);
 									}
-									$('#testCorrection').html(nnnC);
 
- 				//clocks
-				clockCorrection(totalStep,'rest');
 				
 	})
 	
@@ -200,3 +198,7 @@ jQuery(document).ready( function(){
 	})
 		
 });
+
+
+
+

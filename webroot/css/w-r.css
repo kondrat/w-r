@@ -111,6 +111,7 @@
 	cursor: pointer;
 	line-height: 0.55;
 	display:none;
+	z-index:2;
 }
 .minusWorkUndo:hover {
 	background-image: url(../img/icons/undo_3.png);
@@ -139,6 +140,7 @@
 	cursor: pointer;
 	line-height: 0.55;
 	display:none;
+	z-index:2;
 }
 .minusRestUndo:hover {
 	background-image: url(../img/icons/undo_2.png);
