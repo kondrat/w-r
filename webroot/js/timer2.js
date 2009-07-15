@@ -88,7 +88,7 @@ jQuery(document).ready( function(){
 				$('.minusRest').css({'display':'block'});
 				$('.minusWork').css({'display':'none'});
 				
-				projectId = 'rest_1';
+				//projectId = 'rest_1';
 				nextInterval = 1;	
 				typeInt = 'rest';
 
@@ -170,7 +170,7 @@ jQuery(document).ready( function(){
 							//resetting workTemp							
 							if ( HourStat[kk][nn][1] == 'workTemp' ) {
 								 HourStat[kk][nn][1] = 'work';
-								 HourStat[kk][nn][1] = projectId;
+								 HourStat[kk][nn][2] = projectId;
 							}
 						}
 
@@ -326,6 +326,7 @@ jQuery(document).ready( function(){
 									$('#hourstat').html(nnnT);
 									*/														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
+									alert('correction');
 									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
 									
 									grafon2( 0, typeInt, 2 , workBackground);

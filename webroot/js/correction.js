@@ -73,7 +73,6 @@ jQuery(document).ready( function(){
 							//it's a work interval, so we stop all the loops
 							endSmallLoop = 1;
 							endBigLoop = 1
-							//totalStep = 0;
 							break;
 						case 'workTemp':
 							//increasing the interval of the workTemp by the existing one
@@ -148,6 +147,7 @@ jQuery(document).ready( function(){
  			//clocks
  			alert('totalStep final: ' +totalStep);
 			clockCorrection(totalStep,'rest');
+			typeInt = 'work';
 						
 						//to del;
 									if ( 100 > 10 ) {
