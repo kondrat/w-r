@@ -1,53 +1,4 @@
 jQuery(document).ready( function(){
- 
-	if ( $.cookie("the_cookie11") != null ) {
-			
-		 var cc = JSON.parse( $.cookie("the_cookie11") );
-
-
-		 typeInt = cc.typeInt;
-		 hourDay = cc.hourDay;
-		 HourStat[hourDay] = new Array();
-		 HourStat[hourDay].push( new Array(cc.lastInterval ,cc.lastIntervalType) );
-		 projectId = cc.projectId;			
-					
-		 workStamp = cc.workStamp;
-		 workDelta = cc.workDelta;
-		 workTotal = cc.workTotal;
-		 workHour = cc.workHour;
-		 
-
-
-		 restStamp = cc.restStamp;
-		 restDelta = cc.restDelta;
-		 restTotal = cc.restTotal;
-		 restHour = cc.restHour;
-			
-
-		 hourInt = cc.hourInt;
-		 graf = cc.graf;
-		 saveSumm  = cc.saveSumm;
-		 saveCount = cc.saveCount;
-		 
-		 sec = cc.sec;
-		 resSec = cc.resSec,
-		 resMin = cc.resMin;
-		 minut = cc.minut;
-		 resHour = cc.resHour;
-		 hour = cc.hour;
-		 k = cc.k;
-		 sec = cc.sec;
-		
-		 sec2 = cc.sec2;
-		 resSec2 = cc.resSec2,
-		 resMin2 = cc.resMin2;
-		 minut2 = cc.minut2;
-		 resHour2 = cc.resHour2;
-		 hour2 = cc.hour2;
-		 k2 = cc.k2;
-		 sec2 = cc.sec2;			
-	}
-	
 							
 	$('#clock1, div.work2 span').click( function(){
 		
@@ -159,23 +110,9 @@ jQuery(document).ready( function(){
 								
 				//prepering of the array after correction
 				if ( correction == 1 ) {
-
-					for ( var kk in HourStat ) {
-
-						for ( var nn in HourStat[kk] ) {
-							
-							if ( HourStat[kk][nn][1] == 'rest' && HourStat[kk][nn][0] == 0 ) {
-								HourStat[kk].splice(nn,1);//removing 0 rest ints
-							} 
-							//resetting workTemp							
-							if ( HourStat[kk][nn][1] == 'workTemp' ) {
-								 HourStat[kk][nn][1] = 'work';
-								 HourStat[kk][nn][2] = projectId;
-							}
-						}
-					}
+					HourStatCorrection();					
 					$('.minusRestData').addClass('hide').text('');
-										
+					totalMinus = 0;										
 				}
 
 				var clockObj = new Date();
@@ -310,27 +247,14 @@ jQuery(document).ready( function(){
 												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, workBackground);							
 											} else {										 											
 												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];	
-											}																																										
-											
-								
-										}
-																																							
+											}	
+																																																											
+										}																																						
 									}
-					
-																					
-									/*
-									var nnnT = '';
-									$.each(HourStat[hourDay], function() {									
-											nnnT += this  + ";<br />";									
-									} );
-									$('#hourstat').html(nnnT);
-									*/														
+														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
-									alert('correction');
-									HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
-									
-									grafon2( 0, typeInt, 2 , workBackground);
-									
+									HourStat[hourDay].push( new Array(0,typeInt,projectId) );										
+									grafon2( 0, typeInt, 2 , workBackground);									
 								}	
 								nextInterval = 0;	
 								correction = 0;
@@ -352,50 +276,12 @@ jQuery(document).ready( function(){
 									} else if ( typeInt == 'work' ) {
 										Delta = workDelta;
 									}											
-								/*
-									if ( 10 > 9 ) {	
-									//to del
-										var qq1 = workDelta; 
-										var qq2 = restDelta;	
-												
-										var red = 'color: blue';
-										var check = 0;
-									//to del
-	
-										if ( restDelta < 0 || restDelta > graf ) {
-											//to del
-											red = 'color: red';
-											check = 1;											
-											if ( workDelta < 0 || workDelta > graf ) {
-												workDelta = 0;
-												restDelta = 0;
-											} else {
-												restDelta = graf - workDelta;
-											}												
-										} else if (workDelta < 0 || workDelta > graf) {
-											//to del
-											red = 'color: red';
-											check = 1;
-												workDelta = graf - restDelta;			
-										} else {
-											workDelta = graf - restDelta;												
-										}
-										//to del
-												if ( check == 1 ) {
-													$('.ultest').append('<li>'+ workDelta +' - ' + restDelta + ': <span style="font-weight: bold;'+ red +'">' + qq1 + ' - ' + qq2 + '</span>'+ ' - saveCount - '+ saveCount + '</li>');	
-												}	
-										//to del		
-									}	
-								*/
-									
+
 									
 									var temp2 = HourStat[hourDay].pop();
 									temp2[0] = parseInt(temp2[0]) + parseInt(Delta);									
 									HourStat[hourDay].push(temp2);	
-									
-																
-									//$('#test4').html('<p style="margin:0">'+HourStat[hourDay][HourStat[hourDay].length - 1][0]+' | '+HourStat[hourDay][HourStat[hourDay].length - 1][1]+' | '+hourDay+'</p>');
-									
+																		
 									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, workBackground );
 									//stat
 									if ( 100 > 10 ) {
@@ -419,8 +305,8 @@ jQuery(document).ready( function(){
 											nnnT += "</div><i style='color:red'>"+bbb2+"</i><hr />";							
 										});
 									}
-
-									$('#hourstat').html(nnnT);						
+									$('#hourstat').html(nnnT);
+															
 								}//graf
 	
 								if ( saveSumm  == 10 ) {									
@@ -441,47 +327,29 @@ jQuery(document).ready( function(){
 									grafon2(0, typeInt, 3, workBackground );																								
 									hourInt = 0
 								}	
-								
-										//to del										
-										if ( 10 > 9 ) {					
-											//$('#test1').html('secInt :'+secInt+' hourInt: '+hourInt);
-											//$('#test4').html(workDelta + ' - ' + restDelta + ' - saveCount - '+ saveCount+' | hourDay | '+hourDay );										
-											//$('#test3').html('Interval: '+ HourStat[hourDay][HourStat.length][0]+' | type: '+ HourStat[hourDay][HourStat.length][1] + ' | saveCount : '+ saveCount );
-											//
-										}
-										
-										
 						}	,100);	
 			});
 
 					
 		$(window).unload( function () {
+				if ( correction == 1 ) {
+					HourStatCorrection();
+				}						
 				//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
-				var toSaveInterval = new Array();
-				toSaveInterval = HourStat[hourDay].pop();
-				//alert(toSaveInterval);
 								var varsObject = {		
-												//'secInt': secInt,
 												'typeInt': typeInt,
 												'hourDay': hourDay,
-												//'lastInterval':toSaveInterval[0],
-												//'lastIntervalType':toSaveInterval[1],
-												
-												//'intervals':[],
 												
 												'projectId': projectId,
 															
 												'workStamp': workStamp,
 												'workDelta': workDelta,
 												'workTotal': workTotal,
-												//'workHour': workHour,
 										
 												'restStamp': restStamp,
 												'restDelta': restDelta,
 												'restTotal': restTotal,
-												//'restHour': restHour,
-													
-										
+																							
 												'hourInt': hourInt,
 												'graf': graf,
 												'saveSumm': saveSumm, 
@@ -493,7 +361,6 @@ jQuery(document).ready( function(){
 												'minut': minut,
 												'resHour': resHour,
 												'hour': hour,
-												'k': k,
 												'sec': sec,
 												
 												'sec2': sec2,
@@ -502,13 +369,17 @@ jQuery(document).ready( function(){
 												'minut2': minut2,
 												'resHour2': resHour2,
 												'hour2':hour2,
-												'k2': k2,
 												'sec2': sec2		
 								};
-								var myJSONText = JSON.stringify(varsObject);												
-								var date2 = new Date();
-								date2.setTime(date2.getTime() + (3 * 60 * 60 * 1000) );
-								//$.cookie("the_cookie11", myJSONText,{ expires: date2 } );	
+								var iniVarsJSONText = JSON.stringify(varsObject);	
+								//setting of the time offset for cookie (3hour ex.);											
+								var dateExp = new Date();	
+								dateExp.setTime( dateExp.getTime() + parseInt(cokieLive) );
+								//vars cookie setting
+								$.cookie("IniVars", iniVarsJSONText,{ expires: dateExp } );	
+								//hourStat cookie saving
+								var HourStatJSONText = JSON.stringify(HourStat);
+								$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
 		} );
 
 
@@ -529,8 +400,9 @@ jQuery(document).ready( function(){
 //misc
 
 	$('.delCookie').click(function(){
-		
-		$.cookie("the_cookie11",null);
+		clearInterval(interval);
+		$.cookie("HourStat",null);
+		$.cookie("IniVars",null);
 		if ( 100 > 0 ) {			
 			secInt = 0;
 			//interval;
@@ -540,21 +412,19 @@ jQuery(document).ready( function(){
 			grafClass = 'graf0';
 			nextHour = 0;
 			HourStat = new Array();
-			HourStat[hourDay] = new Array();
-			HourStat[hourDay][0] = new Array(0,0);
-			projectId = 0;
+		 	HourStat[0] = new Array();
+			projectId = 'rest_1';
 			
 						
 			workStamp = 0;
 			workDelta = 0;
 			workTotal = 0;
-			workHour = 0;
 			
 	
 			restStamp = 0;
 			 restDelta = 0;
 			 restTotal = 0;
-			 restHour = 0;
+
 				
 	
 			 hourInt = 0;
@@ -568,7 +438,6 @@ jQuery(document).ready( function(){
 			 sec = 0;
 			 minut = 0;
 			 hour = 0;
-			 k = 0;
 			 sec = 0;
 	
 	
@@ -579,10 +448,10 @@ jQuery(document).ready( function(){
 			 sec2 = 0;
 			 minut2 = 0;
 			 hour2 = 0;
-			 k2 = 0;
 			 sec2 = 0;	
 			
 		}
+		location.reload();
 			
 	})
 				

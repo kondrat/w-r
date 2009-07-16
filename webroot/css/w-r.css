@@ -146,10 +146,13 @@
 	background-image: url(../img/icons/undo_2.png);
 }
 .minusRestData {
+	background-color:#FFD2D2;
+	border:2px solid silver;
 	font-size:smaller;
-	height:24px;
+	line-height:1;
+	padding:2px 4px;
 	position:absolute;
-	right:10px;
+	right:0;
 	top:7px;
 	z-index:2;
 }

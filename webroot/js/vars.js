@@ -1,5 +1,6 @@
 		var HourCalc = 3600;
 		var HourCalc = 60;
+		var cokieLive = 3*3600;
 
 		var secInt = 0;
 		var interval = false;
@@ -16,9 +17,8 @@
 
 		var nextHour = 0;
 		var HourStat = new Array();
+		 		HourStat[0] = new Array();
 		var projectId = 'rest_1';
-		 		//HourStat[0] = new Array( new Array(0,'rest','rest_1') );
-		 		HourStat[0] = new Array(  );
 
 		
 					
@@ -55,3 +55,69 @@
 		var sec2 = 0;
 		var minut2 = 0;
 		var hour2 = 0;
+		
+jQuery(document).ready( function(){
+ 
+	if ( $.cookie("IniVars") != null ) {
+		
+
+		 var cc = JSON.parse( $.cookie("IniVars") );
+
+
+		 typeInt = cc.typeInt;
+		 hourDay = cc.hourDay;
+
+		 projectId = cc.projectId;			
+					
+		 workStamp = cc.workStamp;
+		 workDelta = cc.workDelta;
+		 workTotal = cc.workTotal;
+		 workHour = cc.workHour;
+		 
+
+
+		 restStamp = cc.restStamp;
+		 restDelta = cc.restDelta;
+		 restTotal = cc.restTotal;
+		 restHour = cc.restHour;
+			
+
+		 hourInt = cc.hourInt;
+		 graf = cc.graf;
+		 saveSumm  = cc.saveSumm;
+		 saveCount = cc.saveCount;
+		 
+		 sec = cc.sec;
+		 resSec = cc.resSec,
+		 resMin = cc.resMin;
+		 minut = cc.minut;
+		 resHour = cc.resHour;
+		 hour = cc.hour;
+		 sec = cc.sec;
+		
+		 sec2 = cc.sec2;
+		 resSec2 = cc.resSec2,
+		 resMin2 = cc.resMin2;
+		 minut2 = cc.minut2;
+		 resHour2 = cc.resHour2;
+		 hour2 = cc.hour2;
+		 sec2 = cc.sec2;			
+	}
+	if ( $.cookie("HourStat") != null ) {
+		
+		var hs = JSON.parse( $.cookie("HourStat") );		
+		HourStat = hs;
+									
+		$.each(HourStat, function(i) {
+			if ( i != 0 ) {
+				grafon2(0, null, 3  );
+			} 
+			$.each(this, function() {	
+				grafon2(null,this[1], 2 ,'green' );
+				grafon2(this[0],null, 0 ,null );														
+			});																	
+		});			
+		
+	}
+});
+	

@@ -147,7 +147,7 @@ jQuery(document).ready( function(){
 			
  			//clocks
  			totalMinus += totalStep;
-			var totalMinusShow = '';
+			var totalMinusShow = 0;
 			if( totalMinus <= 59 ) {
 				totalMinusShow = '- '+ totalMinus+'sec';
 			} else if (totalMinus >= 60 && totalMinus < 3600 ) {

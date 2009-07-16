@@ -38,7 +38,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 				if ( typeInt2 == 'rest' ) {
 					$('.graf:last').append('<div class="interval rreesstt" style="background-color: red;"></div>');		//red			
 				} else if ( typeInt2 == 'work') {
-					$('.graf:last').append('<div class="interval rreesstt" style=" background-color: '+color+';"></div>');		//green		
+					$('.graf:last').append('<div class="interval wwoorrkk" style=" background-color: '+color+';"></div>');		//green		
 				}				
 				break;
 			case 3:
@@ -156,6 +156,25 @@ function clockCorrection (stepToDo, stepType) {
 	
 	
 }
+function HourStatCorrection() {
+	if( typeof HourStat != 'undefined' ) {
+		for ( var kk in HourStat ) {
+		
+			for ( var nn in HourStat[kk] ) {
+				
+				if ( HourStat[kk][nn][1] == 'rest' && HourStat[kk][nn][0] == 0 ) {
+					HourStat[kk].splice(nn,1);//removing 0 rest ints
+				} 
+				//resetting workTemp							
+				if ( HourStat[kk][nn][1] == 'workTemp' ) {
+					 HourStat[kk][nn][1] = 'work';
+					 HourStat[kk][nn][2] = projectId;
+				}
+			}
+		}	
+	}
+}
+
 //misc
 function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 	var scrollBars = (Scroll!=0) ? 1 : 0;
