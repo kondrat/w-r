@@ -12,6 +12,7 @@
 		var colorProjectId = 'green';
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;
+		var totalMinus = 0;
 
 		var nextHour = 0;
 		var HourStat = new Array();

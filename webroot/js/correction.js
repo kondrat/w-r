@@ -55,7 +55,7 @@ jQuery(document).ready( function(){
 			
 				//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
 				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
-					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:'+colorProjectId+'; float: left;width:0%"></div>');				
+					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:'+colorProjectId+'; float: left;width:0%"></div>');
 					HourStat[ii].push(new Array(0,'workTemp',projectId) );
 				}
 					
@@ -101,10 +101,10 @@ jQuery(document).ready( function(){
 										break;				
 									
 									} else {
-										alert('rest2: '+HourStat[ii][j][0]);
+										//alert('rest2: '+HourStat[ii][j][0]);
 										var Delta2 =  HourStat[ii][j][0];
 										totalStep += parseInt(HourStat[ii][j][0]);
-										alert('rest2 totalStep: '+totalStep);
+										//alert('rest2 totalStep: '+totalStep);
 										step = step - HourStat[ii][j][0];
 
 										HourStat[ii][j][0] = 0;
@@ -144,8 +144,35 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
+			
  			//clocks
- 			alert('totalStep final: ' +totalStep);
+ 			totalMinus += totalStep;
+			var totalMinusShow = '';
+			if( totalMinus <= 59 ) {
+				totalMinusShow = '- '+ totalMinus+'sec';
+			} else if (totalMinus >= 60 && totalMinus < 3600 ) {
+				var minutMinus = parseInt(totalMinus/60);
+				if ( minutMinus < 10 ) {
+					totalMinusShow = '- 00:0'+ minutMinus;
+				} else {
+					totalMinusShow = '- 00:'+ minutMinus;					
+				}
+			} else if ( totalMinus >= 3600 ) {
+				var hourMinus = parseInt(totalMinus/3600);
+				var minutMinus = parseInt( (totalMinus - hourMinus*3600)/60);
+				if ( minutMinus < 10 ) {
+					minutMinus= '0'+ minutMinus;
+				} 			
+				if (hourMinus < 10 ) {
+					totalMinusShow = '- 0'+ hourMinus+':'+minutMinus;
+				} else {
+					totalMinusShow = '- '+ hourMinus+':'+minutMinus;					
+				}							
+			}
+ 
+ 			
+ 			
+ 			$('.minusRestData').removeClass('hide').text(totalMinusShow);
 			clockCorrection(totalStep,'rest');
 			typeInt = 'work';
 						

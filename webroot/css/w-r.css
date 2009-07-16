@@ -145,6 +145,14 @@
 .minusRestUndo:hover {
 	background-image: url(../img/icons/undo_2.png);
 }
+.minusRestData {
+	font-size:smaller;
+	height:24px;
+	position:absolute;
+	right:10px;
+	top:7px;
+	z-index:2;
+}
 
 .grafWrapper {
 }

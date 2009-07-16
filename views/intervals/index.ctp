@@ -28,6 +28,7 @@
                 <span><?php __('Rest');?></span>              
                 <div class="minusRest"></div>
                 <div class="minusRestUndo"></div>
+                <div class="minusRestData hide">-20sec</div>
             </div>
         </div>
     </div>   

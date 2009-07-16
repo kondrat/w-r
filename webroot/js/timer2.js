@@ -173,8 +173,8 @@ jQuery(document).ready( function(){
 								 HourStat[kk][nn][2] = projectId;
 							}
 						}
-
 					}
+					$('.minusRestData').addClass('hide').text('');
 										
 				}
 
