@@ -1,6 +1,11 @@
 jQuery(document).ready( function(){
 	
-	$('.rest div.minusRest').click(function(){	
+	$('.rest div.minusRest').click(function(){
+		
+		if( correction == 0 ) {
+			$('.projectTitle').trigger('click');
+		}
+
 		//stop interva module	
 		$('.minusRestUndo').css({'display':'block'});
 		if ( interval ) {
@@ -210,7 +215,7 @@ jQuery(document).ready( function(){
 	
 	$('.minusRestUndo').click(function(){		
 		if ( correction == 1 ) {
-			
+			alert('minusRestUndo');
 		}
 	})
 

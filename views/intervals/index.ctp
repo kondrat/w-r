@@ -34,6 +34,7 @@
     </div>   
         <div class="projectWrapper span-12 prepend-2">
 	      	<div class="projectMain">
+	      		<div class="projectSelect"><?php __('Which project You are working on?');?></div>
 						<div class="projectsNameWrpapper clearfix">
 							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
 								<?php foreach ( $projectUser as $project ): ?>

@@ -46,41 +46,7 @@ jQuery(document).ready( function(){
 			}
 	});
 
-	$(".myProject").click(function(){
-		
-		//$(".stopInterval").trigger('click');
-		var prevProjectId = projectId;
-		projectId = $(this).attr("id");
 
-		//only if we chose another project.
-		if ( prevProjectId != projectId ) {
-			
-			projectName = $(this).text();
-			colorProjectId = $(this).css("color");
-			//workBackground = $(this).css("background-color");
-			workBackground = colorProjectId;
-		
-		
-		
-			$('.clock1, .work').css({'color':colorProjectId});
-			$('.work span').text(projectName);
-			//$('#clock1').css({'background-color' : workBackground });
-			$('#clock1 .clockBackground').css({'background-color' : workBackground });
-			//$('#clock2').css({'background-color' :'#ffffff'});
-			$('#clock2 .clockBackground').css({'background-color' : '#fff' });
-			$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
-			$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
-			
-			$('.minusRest').css({'display':'none'});
-			$('.minusWork').css({'display':'block'});			
-		
-			nextInterval = 1;
-			typeInt = 'work';
-
-		} 
-
-		
-	});
 
 	//after loading ini	
 	if( typeInt == 'rest' ) {
