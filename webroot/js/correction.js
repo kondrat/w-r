@@ -2,16 +2,18 @@ jQuery(document).ready( function(){
 	
 	$('.rest div.minusRest').click(function(){
 		
-		if( correction == 0 ) {
+		if( correction == 0 && projectClicked == 0 ) {
+			$(".stopInterval").trigger('click');
 			$('.projectTitle').trigger('click');
+			//set up correction mode
+			correction = 1;	
+			return false;
 		}
 
 		//stop interva module	
 		$('.minusRestUndo').css({'display':'block'});
 		if ( interval ) {
 			clearInterval(interval);					
-			//set up correction mode
-			correction = 1;	
 			secInt = 0;
 			clockObj = 0;
 			interval = false;

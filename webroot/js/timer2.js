@@ -5,17 +5,15 @@ jQuery(document).ready( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}
-			if ( typeInt != 'work') {					
-				//$('#clock1').css({'background-color' : workBackground });
 				$('#clock1 .clockBackground').css({'background-color' : workBackground });
-				//$('#clock2').css({'background-color' :'#ffffff'});
 				$('#clock2 .clockBackground').css({'background-color' : '#fff' });
 				$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 				$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 				
-				$('.minusRest, .minusRestUndo').css({'display':'none'});
-				$('.minusWork').css({'display':'block'});
+				$('.minusRest, .minusRestUndo').css({'display':'none'});	
+				$('.minusWork').css({'display':'block'});		
 				
+			if ( typeInt != 'work') {									
 				//to fix!!! wrong!!!
 				projectId = $('.myProject:first').attr("id");
 	
@@ -222,8 +220,10 @@ jQuery(document).ready( function(){
 									HourStat[hourDay].push( new Array(0,typeInt,projectId) );										
 									grafon2( 0, typeInt, 2 , workBackground);									
 								}	
+								//flags down
 								nextInterval = 0;	
 								correction = 0;
+								projectClicked = 0;
 								nextHour = 0;
 																				
 								if ( graf == 5 ) {

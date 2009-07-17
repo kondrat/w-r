@@ -13,6 +13,19 @@ jQuery(document).ready( function(){
     });
 
 		$(".myProject").click(function(){
+
+			if ( correction == 1 ) {
+				projectClicked = 1;
+
+				projectId = $(this).attr("id");				
+				projectName = $(this).text();				
+				colorProjectId = $(this).css("color");				
+				$('.clock1, .work').css({'color':colorProjectId});
+				$('.work span').text(projectName);
+				$('.rest div.minusRest').trigger('click');
+								
+				return false;				
+			}
 			
 			$(".stopInterval").trigger('click');
 			var prevProjectId = projectId;
