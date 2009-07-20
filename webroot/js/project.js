@@ -36,6 +36,7 @@ jQuery(document).ready( function(){
 				
 				projectName = $(this).text();
 				colorProjectId = $(this).css("color");
+				alert(colorProjectId);
 		
 				$('.clock1, .work').css({'color':colorProjectId});
 				$('.work span').text(projectName);
