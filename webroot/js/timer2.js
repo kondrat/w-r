@@ -13,9 +13,13 @@ jQuery(document).ready( function(){
 				$('.minusRest, .minusRestUndo').css({'display':'none'});	
 				$('.minusWork').css({'display':'block'});		
 				
-			if ( typeInt != 'work') {									
-				//to fix!!! wrong!!!
-				projectId = $('.myProject:first').attr("id");
+			if ( typeInt != 'work') {
+													
+				if ( typeof projectId == 'undefined' || projectId == null) { 
+					projectId = $('.myProject:first').attr("id");
+					//toFix
+					colorProjectId = $('.myProject:first').css("color");
+				}
 	
 				nextInterval = 1;
 				typeInt = 'work';		
@@ -37,7 +41,7 @@ jQuery(document).ready( function(){
 				$('.minusRest').css({'display':'block'});
 				$('.minusWork').css({'display':'none'});
 				
-				//projectId = 'rest_1';
+
 				nextInterval = 1;	
 				typeInt = 'rest';
 
@@ -204,9 +208,11 @@ jQuery(document).ready( function(){
 											
 											$('.interval:last').remove();
 											clockCorrection( temp1[0], temp1[1]);	
-											
+	
 											if ( typeof HourStat[hourDay][0] == 'undefined' ) {//new intreval instead of the previous short one
+											
 												HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+												
 												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, colorProjectId);							
 											} else {										 											
@@ -379,8 +385,7 @@ jQuery(document).ready( function(){
 			nextHour = 0;
 			HourStat = new Array();
 		 	HourStat[0] = new Array();
-			projectId = 'rest_1';
-			
+		 	projectId = undefined;
 						
 			workStamp = 0;
 			workDelta = 0;

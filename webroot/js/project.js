@@ -13,8 +13,12 @@ jQuery(document).ready( function(){
     });
 
 		$(".myProject").click(function(){
+			
+			$(".stopInterval").trigger('click');
+			var prevProjectId = projectId;
+			projectId = $(this).attr("id");
 
-			if ( correction == 1 ) {
+			if ( correction == 1 && projectClicked == 0 ) {
 				projectClicked = 1;
 
 				projectId = $(this).attr("id");				
@@ -26,17 +30,13 @@ jQuery(document).ready( function(){
 								
 				return false;				
 			}
-			
-			$(".stopInterval").trigger('click');
-			var prevProjectId = projectId;
-			projectId = $(this).attr("id");
 	
 			//only if we chose another project.
 			if ( prevProjectId != projectId ) {
 				
 				projectName = $(this).text();
 				colorProjectId = $(this).css("color");
-				alert(colorProjectId);
+				//alert(colorProjectId);
 		
 				$('.clock1, .work').css({'color':colorProjectId});
 				$('.work span').text(projectName);

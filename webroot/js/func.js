@@ -168,7 +168,6 @@ function HourStatCorrection() {
 				//resetting workTemp							
 				if ( HourStat[kk][nn][1] == 'workTemp' ) {
 					 HourStat[kk][nn][1] = 'work';
-					 HourStat[kk][nn][2] = projectId;
 				}
 			}
 		}	

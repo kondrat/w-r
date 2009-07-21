@@ -6,10 +6,10 @@
 		var interval = false;
 		var nextInterval = 0;
 		var typeInt = 'rest';
-		var projectId = 'project_1';
+
 		var projectName = 'Work';
 		//var workBackground = '#d2ffe9';
-		var workBackground = 'green';
+		//var workBackground = 'green';
 		var colorProjectId = 'green';
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;
@@ -19,7 +19,8 @@
 		var nextHour = 0;
 		var HourStat = new Array();
 		 		HourStat[0] = new Array();
-		var projectId = 'rest_1';
+		 		
+		var projectId;
 
 		
 					
