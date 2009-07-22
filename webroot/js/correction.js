@@ -151,8 +151,13 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
-			var toCache = new Array(HourStat, totalStep);
+			alert(HourStat);
+			var toCache = new Array(2);
+			var b = new Array();
+			b=[].concat(HourStat);
+			toCache = [b,totalStep];
 			HourStatCache.push(toCache);
+			b = 'undefined';
 			alert("1 : "+HourStatCache);
 			
  			//clocks
@@ -224,7 +229,7 @@ jQuery(document).ready( function(){
 			var toUndo = new Array();
 			toUndo = (HourStatCache.pop());
 			HourStat = toUndo[0];
-			
+			alert(HourStat);
 			
 		$('.interval').remove();	
 		$.each(HourStat, function(i) {
@@ -241,8 +246,35 @@ jQuery(document).ready( function(){
 			
 			
 			clockCorrection(toUndo[1],'work');
-			alert(HourStatCache);
-			
+			//alert(HourStatCache);
+						//to del;
+									if ( 100 > 10 ) {
+										var nnnC = '';										
+										$.each(HourStat, function() {
+											nnnC += '<div class="span-4 clearfix" style="border:1px solid;padding: 5px;">';		 
+											$.each(this, function() {	
+												var bbb1 = '';
+											
+												$.each(this, function() {
+													if ( !isNaN(parseInt(this)) ) {
+														bbb1 += '<b>'+this+'</b>&nbsp;';
+													} else if ( this == 'rest' ) {
+														bbb1 += '&nbsp;<b style="color:red">'+this +'</b>';
+													} else if (this == 'workTemp') {
+														bbb1 += '&nbsp;<b style="color:teal">'+this +'</b>';														
+													}else if (this == 'work') {
+														bbb1 += '&nbsp;<b style="color:green">'+this +'</b>';														
+													} else {
+														bbb1 += '&nbsp;<b>'+this+'</b>';
+													}
+												});
+																				
+													nnnC += bbb1+ "<hr />";									
+											});
+											nnnC += "</div><hr />";							
+										});
+										$('#testCorrection').html(nnnC);
+									}			
 			
 			
 		}
