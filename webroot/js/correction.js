@@ -151,6 +151,9 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
+			var toCache = new Array(HourStat, totalStep);
+			HourStatCache.push(toCache);
+			alert("1 : "+HourStatCache);
 			
  			//clocks
  			totalMinus += totalStep;
@@ -217,7 +220,31 @@ jQuery(document).ready( function(){
 	
 	$('.minusRestUndo').click(function(){		
 		if ( correction == 1 ) {
-			alert('minusRestUndo');
+			//alert(HourStatCache);
+			var toUndo = new Array();
+			toUndo = (HourStatCache.pop());
+			HourStat = toUndo[0];
+			
+			
+		$('.interval').remove();	
+		$.each(HourStat, function(i) {
+			if ( i != 0 ) {
+				grafon2(0, null, 3  );
+			} 
+			$.each(this, function() {	
+				grafon2(null,this[1], 2 ,'green' );
+				grafon2(this[0],null, 0 ,null );														
+			});																	
+		});						
+			
+			
+			
+			
+			clockCorrection(toUndo[1],'work');
+			alert(HourStatCache);
+			
+			
+			
 		}
 	})
 

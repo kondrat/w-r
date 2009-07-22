@@ -30,14 +30,14 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
       	$('.interval:last').width( workPS+"%");          
 				if ( typeInt2 == 'rest' ) {					
 					$('.graf:last').append('<div class="interval" style="background-color:red;"></div>');					
-				} else if ( typeInt2 == 'work') {
+				} else {
 					$('.graf:last').append('<div class="interval" style="background-color: '+color+';"></div>');				
 				}				
 				break;
 			case 2://To Fix!!
 				if ( typeInt2 == 'rest' ) {
 					$('.graf:last').append('<div class="interval rreesstt" style="background-color: red;"></div>');		//red			
-				} else if ( typeInt2 == 'work') {
+				} else {
 					$('.graf:last').append('<div class="interval wwoorrkk" style=" background-color: '+color+';"></div>');		//green		
 				}				
 				break;

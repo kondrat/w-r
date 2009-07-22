@@ -215,21 +215,19 @@ jQuery(document).ready( function(){
 												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, colorProjectId);							
 											} else {										 											
-												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
-//toWorkHere!!!!!												
-												 	if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == temp1[1] ) {
-														HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
-														grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId);
+												
+												 	if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == temp1[1] ) { //from work to work
+														grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], null, 0, null);												 														 		
+														HourStat[hourDay].push( new Array(temp1[0],typeInt,projectId) );
+														grafon2( temp1[0], typeInt, 4, colorProjectId);	
+													} else { // from work to rest
+														HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
+														grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], null, 0, null);
+																											
 													}
 													
 											}
-												
-													
-										
-											if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] != temp1[1] ) {
-												clockCorrection( temp1[0], temp1[1]);		
-											}
-																																																											
+											if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] != temp1[1] )clockCorrection( temp1[0], temp1[1]);	 																																																											
 										}																																						
 									}
 														

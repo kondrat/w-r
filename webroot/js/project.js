@@ -3,7 +3,7 @@ jQuery(document).ready( function(){
 	$(".projectTitle, .projectMainClose , .myProject").click(function(){
 			
    		if ( $(".projectMain").is(":hidden") ) {
-            $(".projectMain").slideDown("slow");
+            $(".projectMain").slideDown("fast");
 						$(".projectTitle").text('close id').css({'color' : 'blue'});
           } else {
             $(".projectMain").slideUp();
@@ -14,7 +14,7 @@ jQuery(document).ready( function(){
 
 		$(".myProject").click(function(){
 			
-			$(".stopInterval").trigger('click');
+			//$(".stopInterval").trigger('click');
 			var prevProjectId = projectId;
 			projectId = $(this).attr("id");
 
@@ -36,13 +36,12 @@ jQuery(document).ready( function(){
 				
 				projectName = $(this).text();
 				colorProjectId = $(this).css("color");
-				//alert(colorProjectId);
-		
+
 				$('.clock1, .work').css({'color':colorProjectId});
 				$('.work span').text(projectName);
-				//$('#clock1').css({'background-color' : workBackground });
+
 				$('#clock1 .clockBackground').css({'background-color' : colorProjectId });
-				//$('#clock2').css({'background-color' :'#ffffff'});
+
 				$('#clock2 .clockBackground').css({'background-color' : '#fff' });
 				$('.work span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
 				$('.rest span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
