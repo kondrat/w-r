@@ -18,8 +18,9 @@
 
 		var nextHour = 0;
 		var HourStat = new Array();
-		 		HourStat[0] = new Array();
+		 		//HourStat[0] = new Array();
 				HourStatCache = new Array();
+				var a = new Array(2);
 		var toCache = 'toCache';
 				
 		var iiii = 0		

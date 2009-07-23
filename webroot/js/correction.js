@@ -8,8 +8,9 @@ jQuery(document).ready( function(){
 			//set up correction mode
 			correction = 1;
 			alert('start');
+			iiii=0;
 			//var toCache = new Array(1,4);
-			alert(toCache);	
+			//alert(toCache);	
 			return false;
 		}
 
@@ -156,17 +157,35 @@ jQuery(document).ready( function(){
 			HourStat.reverse();	
 			
 			alert(HourStat);
+			
 			//alert('toCache : '+toCache);
 		//	toCache[iiii].push( new Array('','') );
 		
-			 tempCache = 'toCache'+iiii;
-			alert('tempCache '+tempCache);
-			 window[tempCache] = new Array();
+			//tempCache = 'toCache'+iiii;
+			//alert('tempCache '+tempCache);
+			// window[tempCache] = new Array();
 			//var newVar = new Array();
 			
-			window[tempCache] = [].concat(HourStat);
+			//window[tempCache] = [].concat(HourStat);
+			a[iiii] = new Array(2);
+			alert(a);
+			a[iiii][0] = [].concat(HourStat);
+			a[iiii][1] = totalStep;
+			for (mk in a) {
+				alert(a[mk]+"\n");
+			}
+			
+			HourStatCache.push((a[iiii]));
+
+			
+			
+			iiii++;
+
+			alert('HourStatCache: i='+iiii+' '+HourStatCache);			
+			
+			
 			/*
-			b = new Array('hi','fi');
+b = new Array('hi','fi');
 c = new Array(10,11);
 
 
@@ -185,11 +204,9 @@ alert(a);
 alert(b );
 			*/
 			//'toCache'+iiii+[1] = totalStep;
-			HourStatCache.push(window[tempCache]);
+			//HourStatCache.push(window[tempCache]);
 						//toCache[toCache.length -1].push( new Array('','') );
-			iiii++;
 
-			alert('HourStatCache: '+HourStatCache);
 			
  			//clocks
  			totalMinus += totalStep;

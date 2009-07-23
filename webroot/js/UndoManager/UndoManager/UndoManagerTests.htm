@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>UndoManager Tests</title>
+    
+    <!-- Prevent Client Side Caching -->
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    
+    <!-- Scriptaculous Unit Testing Framework -->
+    <script src="Scriptaculous/prototype.js" type="text/javascript"></script>
+    <script src="Scriptaculous/scriptaculous.js" type="text/javascript"></script>
+    <script src="Scriptaculous/unittest.js" type="text/javascript"></script>
+    
+    <!-- Library under test -->
+    <script language="javascript" type="text/javascript" src="UndoManager.js"></script>
+    
+    <!-- The unit test display stylesheet -->
+    <link rel="stylesheet" href="Css/Test.css" type="text/css" />
+</head>
+<body>
+    <form>
+    
+    </form>
+    
+    <h1>UndoManager Tests</h1>
+
+    <!-- Log output -->
+    <div id="testlog"></div>
+    
+    <!-- Any HTML elements the tests may depend on can be put here -->
+
+    <!-- Tests (Note that it has to be put in the body of the page for it to work) -->
+    <script language="javascript" type="text/javascript">
+    
+    //Variables that are global to the page
+    
+    new Test.Unit.Runner(
+    {
+        testEmptyUndoShouldNotError: function() 
+        {
+            var undoManager = new UndoManager();
+            undoManager.undo();
+        },
+        
+        testGetObjectTypeShouldIdentifyArrayType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('array', undoItem._getObjectType([]));
+        },
+        
+        testGetObjectTypeShouldIdentifyDateType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('date', undoItem._getObjectType(new Date()));
+        },
+        
+        testGetObjectTypeShouldIdentifyObjectType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('object', undoItem._getObjectType({}));
+        },
+        
+        testGetObjectTypeShouldIdentifyNumberType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('number', undoItem._getObjectType(1));
+        },
+        
+        testGetObjectTypeShouldIdentifyStringType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('string', undoItem._getObjectType('string'));
+        },
+        
+        testGetObjectTypeShouldIdentifyFunctionType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('function', undoItem._getObjectType(function(){}));
+        },
+        
+        testGetObjectTypeShouldIdentifyBooleanType: function() 
+        {
+            var undoItem = new UndoItem({});
+            this.assertEqual('boolean', undoItem._getObjectType(false));
+        },
+        
+        testSimpleAttributes: function() 
+        {
+            var person = { Name: 'Joe' };
+            
+            var undoItem = new UndoItem(person);
+            person.Name = 'Bob';
+            
+            undoItem.undo();
+            
+            this.assertEqual('Joe', person.Name);
+        },
+        
+        testShouldUndoNullValueAttributes: function() 
+        {
+            var person = { PersonId: null, Name: 'Joe' };
+            
+            var undoItem = new UndoItem(person);
+            person.PersonId = 0;
+            
+            undoItem.undo();
+            
+            this.assertEqual(null, person.PersonId);
+        },
+        
+        testDateUndo: function() 
+        {
+            var logDate = new Date(2007, 0, 1);
+            var originalDate = new Date(2007, 0, 1);
+            
+            var undoItem = new UndoItem(logDate);
+            
+            logDate.setMonth(2);
+            
+            undoItem.undo();
+            
+            this.assertEqual(originalDate.valueOf(), logDate.valueOf());
+        },
+        
+        testDateAttributeUndo: function() 
+        {
+            var logDate = new Date(2007, 0, 1);
+            var originalDate = new Date(2007, 0, 1);
+            
+            var log = { date: logDate };
+            var undoItem = new UndoItem(log);
+            
+            log.date.setMonth(2);
+            
+            undoItem.undo();
+            
+            this.assertEqual(originalDate.valueOf(), log.date.valueOf());
+        },
+        
+        testWillRestoreOriginalDateObjectReferenceOnUndo: function() 
+        {
+            var logDate = new Date(2007, 0, 1);
+            
+            var log = { date: logDate };
+            var undoItem = new UndoItem(log);
+            
+            log.date = new Date();
+            
+            undoItem.undo();
+            
+            this.assertEqual(logDate, log.date);
+        },
+        
+        testWillRestoreOriginalObjectReferenceOnUndo: function() 
+        {
+            var team = { Name: 'Admin' };
+            
+            var person = { Team: team };
+            var undoItem = new UndoItem(person);
+            
+            person.Team = { Name: 'User' };
+            
+            undoItem.undo();
+            
+            this.assertEqual(team, person.Team);
+        },
+        
+        testShouldBeAbleToUndoUndefinedAttributes: function() 
+        {
+            var person = { Name: undefined };
+            
+            var undoItem = new UndoItem(person);
+            
+            person.Name = 'Person';
+            
+            undoItem.undo();
+            
+            this.assertEqual(undefined, person.Name);
+        },
+        
+        testShouldRestoreNestedObjectAttributes: function() 
+        {
+            var person = { 
+                            PersonId: 0,
+                            Team: { Name: 'Admin' }
+                         };
+            
+            var undoItem = new UndoItem(person);
+            person.Team.Name = 'General User';
+            
+            undoItem.undo();
+            
+            this.assertEqual('Admin', person.Team.Name);
+        },
+        
+        testNestedObjectsReferencesShouldNotChangeFromOriginalOnUndo: function() 
+        {
+            var person = { 
+                            PersonId: 0,
+                            Team: { Name: 'Admin' }
+                         };
+            
+            var personTeam = person.Team;
+            
+            var undoItem = new UndoItem(person);
+            person.Team.Name = 'General User';
+            
+            undoItem.undo();
+            
+            this.assertEqual(personTeam, person.Team);
+        },
+        
+        testShouldNotAllowSimpleTypesToBeUndone: function() 
+        {
+            var personName = "Bob";
+            
+            this.assertRaise("Error",
+                             function()
+                             {
+                                new UndoItem(personName);
+                             });
+        },
+        
+        testUndoOnSimpleArray: function() 
+        {
+            var people = [
+                            { Name: 'Person 1' },
+                            { Name: 'Person 2' }
+                         ];
+            
+            var undoItem = new UndoItem(people);
+            people.pop();
+            
+            undoItem.undo();
+            
+            this.assertEqual(2, people.length);
+            this.assertNotNull(people[0]);
+            this.assertNotNull(people[1]);
+        },
+        
+        testUndoOnArrayOfArraysRestoresNumberOfItems: function() 
+        {
+            var people = [
+                            [
+                                { Name: 'Person 1' },
+                                { Name: 'Person 2' }
+                            ]
+                         ];
+            
+            var undoItem = new UndoItem(people);
+            people[0].pop();
+            
+            undoItem.undo();
+            
+            this.assertEqual(2, people[0].length);
+        },
+        
+        testUndoOnArrayOfArraysRestoresOriginalObjectReferences: function() 
+        {
+            var people = [
+                            [
+                                { Name: 'Person 1' },
+                                { Name: 'Person 2' }
+                            ]
+                         ];
+            
+            var undoItem = new UndoItem(people);
+            var person1 = people[0][0];
+            var person2 = people[0][1];
+            
+            undoItem.undo();
+            
+            this.assertEqual(person1, people[0][0]);
+            this.assertEqual(person2, people[0][1]);
+        },
+        
+        testUndoOnArrayOfArraysRestoresOriginalObjectAttributes: function() 
+        {
+            var people = [
+                            [
+                                { Name: 'Person 1' },
+                                { Name: 'Person 2' }
+                            ]
+                         ];
+            
+            var undoItem = new UndoItem(people);
+            var person1 = people[0][0];
+            var person2 = people[0][1];
+            
+            person1.Name = 'Old 1';
+            person2.Name = 'Old 2';
+            
+            undoItem.undo();
+            
+            this.assertEqual('Person 1', people[0][0].Name);
+            this.assertEqual('Person 2', people[0][1].Name);
+        },
+        
+        testNestedArrayItemAttributeUndoneOnUndo: function() 
+        {
+            var person = { 
+                            PersonId: 0,
+                            Teams: 
+                            [
+                                { Name: 'Admin' },
+                                { Name: 'General User' }
+                            ]
+                          };
+            
+            var undoItem = new UndoItem(person);
+            person.Teams[0].Name = 'Super User';
+            
+            undoItem.undo();
+            
+            this.assertEqual('Admin', person.Teams[0].Name);
+        },
+        
+        testAddBackRemovedItemInArrayOnUndo: function() 
+        {
+            var person = { 
+                            PersonId: 0,
+                            Teams: 
+                            [
+                                { Name: 'Admin' },
+                                { Name: 'General User' }
+                            ]
+                          };
+            
+            var undoItem = new UndoItem(person);
+            
+            //Remove the General User team
+            person.Teams.pop();
+            
+            undoItem.undo();
+            
+            this.assertEqual(2, person.Teams.length);
+            this.assertNotNull(person.Teams[1]);
+            this.assertEqual('Admin', person.Teams[0].Name);
+        },
+        
+        testRemoveAddedItemInArrayOnUndo: function() 
+        {
+            var person = { 
+                            PersonId: 0,
+                            Teams: 
+                            [
+                                { Name: 'Admin' },
+                                { Name: 'General User' }
+                            ]
+                          };
+            
+            var undoItem = new UndoItem(person);
+            
+            //Remove the General User team
+            person.Teams.push({ Name: 'New' });
+            
+            undoItem.undo();
+            
+            this.assertEqual(2, person.Teams.length);
+        },
+        
+        testUndoManagerCanUndoSingleObject: function() 
+        {
+            var person = { Name: 'Joe' };
+            
+            var undoManager = new UndoManager();
+            undoManager.saveUndoPoint(person);
+            
+            person.Name = 'Bob';
+            
+            undoManager.undo();
+            
+            this.assertEqual('Joe', person.Name);
+        },
+        
+        testUndoManagerUndoOnlyRollsBackLastChange: function() 
+        {
+            var team = { Name: 'Admin' };
+            var person = { Name: 'Joe' };
+            
+            var undoManager = new UndoManager();
+            
+            undoManager.saveUndoPoint(team);
+            undoManager.saveUndoPoint(person);
+            
+            team.Name = 'General User';
+            person.Name = 'Bob';
+            
+            undoManager.undo();
+            
+            this.assertEqual('General User', team.Name);
+            this.assertEqual('Joe', person.Name);
+        },
+        
+        testUndoManagerMultipleUndosRollsBackChanges: function() 
+        {
+            var team = { Name: 'Admin' };
+            var person = { Name: 'Joe' };
+            
+            var undoManager = new UndoManager();
+            
+            undoManager.saveUndoPoint(team);
+            undoManager.saveUndoPoint(person);
+            
+            team.Name = 'General User';
+            person.Name = 'Bob';
+            
+            undoManager.undo();
+            undoManager.undo();
+            
+            this.assertEqual('Admin', team.Name);
+            this.assertEqual('Joe', person.Name);
+        }
+        
+    });
+    </script>
+</body>
+</html>
