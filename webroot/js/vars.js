@@ -19,7 +19,10 @@
 		var nextHour = 0;
 		var HourStat = new Array();
 		 		HourStat[0] = new Array();
-		HourStatCache = new Array();		
+				HourStatCache = new Array();
+		var toCache = 'toCache';
+				
+		var iiii = 0		
 		var projectId;
 
 		

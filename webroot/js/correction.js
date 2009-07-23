@@ -6,7 +6,10 @@ jQuery(document).ready( function(){
 			$(".stopInterval").trigger('click');
 			$('.projectTitle').trigger('click');
 			//set up correction mode
-			correction = 1;	
+			correction = 1;
+			alert('start');
+			//var toCache = new Array(1,4);
+			alert(toCache);	
 			return false;
 		}
 
@@ -151,14 +154,42 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();	
+			
 			alert(HourStat);
-			var toCache = new Array(2);
-			var b = new Array();
-			b=[].concat(HourStat);
-			toCache = [b,totalStep];
-			HourStatCache.push(toCache);
-			b = 'undefined';
-			alert("1 : "+HourStatCache);
+			//alert('toCache : '+toCache);
+		//	toCache[iiii].push( new Array('','') );
+		
+			 tempCache = 'toCache'+iiii;
+			alert('tempCache '+tempCache);
+			 window[tempCache] = new Array();
+			//var newVar = new Array();
+			
+			window[tempCache] = [].concat(HourStat);
+			/*
+			b = new Array('hi','fi');
+c = new Array(10,11);
+
+
+a = new Array();
+a = [].concat(c);
+b.push(a);
+alert(a);
+alert(b );
+
+//a = 'tram2';
+c[0] = 'nolick';
+c[1] += 10;
+a = [].concat(c);
+b.push(a);
+alert(a);
+alert(b );
+			*/
+			//'toCache'+iiii+[1] = totalStep;
+			HourStatCache.push(window[tempCache]);
+						//toCache[toCache.length -1].push( new Array('','') );
+			iiii++;
+
+			alert('HourStatCache: '+HourStatCache);
 			
  			//clocks
  			totalMinus += totalStep;
