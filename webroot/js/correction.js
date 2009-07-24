@@ -7,29 +7,7 @@ jQuery(document).ready( function(){
 			$('.projectTitle').trigger('click');
 			//set up correction mode
 			correction = 1;
-			alert('start');
-			iiii=0;
-			//var toCache = new Array(1,4);
-			//alert(toCache);	
-			return false;
-		}
 
-		//stop interva module	
-		$('.minusRestUndo').css({'display':'block'});
-		if ( interval ) {
-			clearInterval(interval);					
-			secInt = 0;
-			clockObj = 0;
-			interval = false;
-		}
-
-		$('.startInterval').css({'display':'inline'});
-		$('.stopInterval').css({'display':'none'});
-		//correction step				
-		var step = 5;
-		var totalStep = 0;
-
-		
 			//fix of the current interval	
 			if ( 100 > 10 ) {
 				workDelta = parseInt(workTotal) - parseInt(workStamp);
@@ -50,10 +28,35 @@ jQuery(document).ready( function(){
 				HourStat[hourDay].push(temp3);
 			}
 			//end of fix of the current interval
+			
+			var HourStatCacheJSONText = JSON.stringify(HourStat);
+			b = new Array(HourStatCacheJSONText,totalStep);		
+			HourStatCache.push(b);
+			
+			return false;
+		}
+
+		//stop interva module	
+		$('.minusRestUndo').css({'display':'block'});
+		if ( interval ) {
+			clearInterval(interval);					
+			secInt = 0;
+			clockObj = 0;
+			interval = false;
+		}
+
+		$('.startInterval').css({'display':'inline'});
+		$('.stopInterval').css({'display':'none'});
+		//correction step				
+		var step = 5;
+		var totalStep = 0;
+
+		
+
 	
 				
 		//grafs
-
+		
 		//start from the end.
 		HourStat.reverse();
 		//mark for stopping of an external loop	
@@ -158,55 +161,12 @@ jQuery(document).ready( function(){
 			
 			alert(HourStat);
 			
-			//alert('toCache : '+toCache);
-		//	toCache[iiii].push( new Array('','') );
-		
-			//tempCache = 'toCache'+iiii;
-			//alert('tempCache '+tempCache);
-			// window[tempCache] = new Array();
-			//var newVar = new Array();
+			var HourStatCacheJSONText = JSON.stringify(HourStat);
+			b = new Array(HourStatCacheJSONText,totalStep);
 			
-			//window[tempCache] = [].concat(HourStat);
-			a[iiii] = new Array(2);
-			alert(a);
-			a[iiii][0] = [].concat(HourStat);
-			a[iiii][1] = totalStep;
-			for (mk in a) {
-				alert(a[mk]+"\n");
-			}
-			
-			HourStatCache.push((a[iiii]));
+			HourStatCache.push(b);
 
-			
-			
-			iiii++;
-
-			alert('HourStatCache: i='+iiii+' '+HourStatCache);			
-			
-			
-			/*
-b = new Array('hi','fi');
-c = new Array(10,11);
-
-
-a = new Array();
-a = [].concat(c);
-b.push(a);
-alert(a);
-alert(b );
-
-//a = 'tram2';
-c[0] = 'nolick';
-c[1] += 10;
-a = [].concat(c);
-b.push(a);
-alert(a);
-alert(b );
-			*/
-			//'toCache'+iiii+[1] = totalStep;
-			//HourStatCache.push(window[tempCache]);
-						//toCache[toCache.length -1].push( new Array('','') );
-
+			alert('HourStatCache: '+HourStatCache);
 			
  			//clocks
  			totalMinus += totalStep;
@@ -273,28 +233,29 @@ alert(b );
 	
 	$('.minusRestUndo').click(function(){		
 		if ( correction == 1 ) {
-			//alert(HourStatCache);
+
 			var toUndo = new Array();
-			toUndo = (HourStatCache.pop());
-			HourStat = toUndo[0];
-			alert(HourStat);
 			
-		$('.interval').remove();	
-		$.each(HourStat, function(i) {
-			if ( i != 0 ) {
-				grafon2(0, null, 3  );
-			} 
-			$.each(this, function() {	
-				grafon2(null,this[1], 2 ,'green' );
-				grafon2(this[0],null, 0 ,null );														
-			});																	
-		});						
+			hz = HourStatCache.pop();
+			if ( hz[1] > 0 ){
+				toUndo = HourStatCache[HourStatCache.length-1];
+				clockCorrection(hz[1],'work');
+				var ccc = JSON.parse( toUndo[0] );
+				HourStat = ccc;
+				alert('last: '+ccc);
 			
-			
-			
-			
-			clockCorrection(toUndo[1],'work');
-			//alert(HourStatCache);
+				$('.interval').remove();	
+				$.each(HourStat, function(i) {
+					if ( i != 0 ) {
+						grafon2(0, null, 3  );
+					} 
+					$.each(this, function() {	
+						grafon2(null,this[1], 2 ,'green' );
+						grafon2(this[0],null, 0 ,null );														
+					});																	
+				});				
+			}
+
 						//to del;
 									if ( 100 > 10 ) {
 										var nnnC = '';										
