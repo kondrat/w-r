@@ -1,7 +1,14 @@
 jQuery(document).ready( function(){
+
+				if ( typeof projectId == 'undefined' || projectId == null) { 
+					projectId = $('.myProject:first').attr("id");
+					//toFix
+					colorProjectId = $('.myProject:first').css("color");
+				}
 							
 	$('#clock1, div.work2 span').click( function(){
 		
+			//alert(typeInt);
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}
@@ -14,12 +21,6 @@ jQuery(document).ready( function(){
 				$('.minusWork').css({'display':'block'});		
 				
 			if ( typeInt != 'work') {
-													
-				if ( typeof projectId == 'undefined' || projectId == null) { 
-					projectId = $('.myProject:first').attr("id");
-					//toFix
-					colorProjectId = $('.myProject:first').css("color");
-				}
 	
 				nextInterval = 1;
 				typeInt = 'work';		
@@ -52,16 +53,13 @@ jQuery(document).ready( function(){
 
 	//after loading ini	
 	if( typeInt == 'rest' ) {
-			//$('#clock2').css({'background-color' :'#ffd7d7'});
 			$('#clock2 .clockBackground').css({'background-color' : 'red' });
 			$('#clock1').css({'background-color' :'#ffffff'});
 			$('.minusRest').css({'display':'block'});	
 			$('.minusWork').css({'display':'none'});	
 	} else if (typeInt == 'work' ) {
-			//$('#clock1').css({'background-color' : colorProjectId });
 			$('#clock1 .clockBackground').css({'background-color' : colorProjectId });
-			$('#clock2 .clockBackground').css({'background-color' : '#fff' });
-			//$('#clock2').css({'background-color' :'#ffffff'});	
+			$('#clock2 .clockBackground').css({'background-color' : '#fff' });	
 			$('.minusRest').css({'display':'none'});
 			$('.minusWork').css({'display':'block'});		
 	}
@@ -189,7 +187,7 @@ jQuery(document).ready( function(){
 									restStamp = restTotal;	
 									
 									if ( typeof HourStat[hourDay][0] == 'undefined' ) {
-										HourStat[hourDay].push( new Array(0,typeInt,projectId) );
+										HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
 										grafon2( 0, typeInt, 4, colorProjectId);									
 									} else {								
 										var Delta1 = 0;
@@ -203,14 +201,14 @@ jQuery(document).ready( function(){
 										if( temp1[0] > 4 ) {									
 											HourStat[hourDay].push(temp1);
 											grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId);
-											HourStat[hourDay].push( new Array(0,typeInt,projectId) );
+											HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
 										} else {
 											
 											$('.interval:last').remove();
 	
 											if ( typeof HourStat[hourDay][0] == 'undefined' ) {//new intreval instead of the previous short one
 											
-												HourStat[hourDay].push( new Array(0,typeInt,projectId) );	
+												HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );	
 												
 												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
 												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, colorProjectId);							
@@ -232,7 +230,7 @@ jQuery(document).ready( function(){
 									}
 														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
-									HourStat[hourDay].push( new Array(0,typeInt,projectId) );										
+									HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );										
 									grafon2( 0, typeInt, 2 , colorProjectId);									
 								}	
 								//flags down

@@ -8,8 +8,6 @@
 		var typeInt = 'rest';
 
 		var projectName = 'Work';
-		//var workBackground = '#d2ffe9';
-		//var workBackground = 'green';
 		var colorProjectId = 'green';
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;
@@ -18,7 +16,7 @@
 
 		var nextHour = 0;
 		var HourStat = new Array();
-		 		//HourStat[0] = new Array();
+		 		HourStat[0] = new Array();
 				HourStatCache = new Array();
 
 
@@ -119,7 +117,7 @@ jQuery(document).ready( function(){
 				grafon2(0, null, 3  );
 			} 
 			$.each(this, function() {	
-				grafon2(null,this[1], 2 ,'green' );
+				grafon2(null,this[1], 2 ,this[3] );
 				grafon2(this[0],null, 0 ,null );														
 			});																	
 		});			
