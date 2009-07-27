@@ -188,7 +188,7 @@ jQuery(document).ready( function(){
 									
 									if ( typeof HourStat[hourDay][0] == 'undefined' ) {
 										HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
-										grafon2( 0, typeInt, 4, colorProjectId);									
+										grafon3(HourStat);									
 									} else {								
 										var Delta1 = 0;
 										if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'work' ) {
@@ -200,38 +200,29 @@ jQuery(document).ready( function(){
 										temp1[0] = temp1[0] + Delta1;
 										if( temp1[0] > 4 ) {									
 											HourStat[hourDay].push(temp1);
-											grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 1, colorProjectId);
 											HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
 										} else {
-											
-											$('.interval:last').remove();
-	
 											if ( typeof HourStat[hourDay][0] == 'undefined' ) {//new intreval instead of the previous short one
-											
 												HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );	
-												
-												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
-												grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], typeInt, 4, colorProjectId);							
+												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];						
 											} else {										 											
 												
-												 	if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == temp1[1] ) { //from work to work
-														grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], null, 0, null);												 														 		
+												 	if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == temp1[1] ) { //from work to work												 														 		
 														HourStat[hourDay].push( new Array(temp1[0],typeInt,projectId) );
-														grafon2( temp1[0], typeInt, 4, colorProjectId);	
 													} else { // from work to rest
-														HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];
-														grafon2( HourStat[hourDay][HourStat[hourDay].length - 1 ][0], null, 0, null);
-																											
+														HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];																										
 													}
 													
 											}
 											if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] != temp1[1] )clockCorrection( temp1[0], temp1[1]);	 																																																											
 										}																																						
 									}
+									
+									grafon3(HourStat);
 														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
 									HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );										
-									grafon2( 0, typeInt, 2 , colorProjectId);									
+									grafon3(HourStat);									
 								}	
 								//flags down
 								nextInterval = 0;	
@@ -259,9 +250,9 @@ jQuery(document).ready( function(){
 									
 									var temp2 = HourStat[hourDay].pop();
 									temp2[0] = parseInt(temp2[0]) + parseInt(Delta);									
-									HourStat[hourDay].push(temp2);	
-																		
-									grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, colorProjectId );
+									HourStat[hourDay].push(temp2);																			
+									//grafon2( HourStat[hourDay][HourStat[hourDay].length - 1][0], typeInt, 0, colorProjectId );
+									grafon3(HourStat);
 									//stat
 									if ( 100 > 10 ) {
 										var nnnT = '';
@@ -303,7 +294,8 @@ jQuery(document).ready( function(){
 									hourDay++;
 								 	HourStat[hourDay] = new Array();
 								 	
-									grafon2(0, typeInt, 3, colorProjectId );																								
+									//grafon2(0, typeInt, 3, colorProjectId );	
+									grafon3(HourStat);																							
 									hourInt = 0
 								}	
 						}	,100);	
@@ -353,12 +345,13 @@ jQuery(document).ready( function(){
 								var iniVarsJSONText = JSON.stringify(varsObject);	
 								//setting of the time offset for cookie (3hour ex.);											
 								var dateExp = new Date();	
-								dateExp.setTime( dateExp.getTime() + parseInt(cokieLive) );
+								dateExp.setTime( dateExp.getTime() + parseInt(cookieLive) );
 								//vars cookie setting
 								$.cookie("IniVars", iniVarsJSONText,{ expires: dateExp } );	
 								//hourStat cookie saving
 								var HourStatJSONText = JSON.stringify(HourStat);
 								$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
+								alert($.cookie("HourStat"));
 		} );
 
 

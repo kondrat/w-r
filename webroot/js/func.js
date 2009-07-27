@@ -53,7 +53,18 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		}
 	
 }
-
+function grafon3 (HourStat) {
+		$('.graf:gt(0), .interval').remove();	
+		$.each(HourStat, function(i) {
+			if ( i != 0 ) {
+				grafon2(0, null, 3  );
+			} 
+			$.each(this, function() {	
+				grafon2(null,this[1], 2 ,this[3] );
+				grafon2(this[0],null, 0 ,null );														
+			});																	
+		});			
+}
 function clockCorrection (stepToDo, stepType) {
 						//stepToDo - step to subtract.
 						totalStep = stepToDo;
@@ -166,7 +177,7 @@ function HourStatCorrection() {
 					HourStat[kk].splice(nn,1);//removing 0 rest ints
 				} 
 				//resetting workTemp							
-				if ( HourStat[kk][nn][1] == 'workTemp' ) {
+				if ( HourStat[kk][nn][1] == 'temp' ) {
 					 HourStat[kk][nn][1] = 'work';
 				}
 			}

@@ -29,14 +29,20 @@ jQuery(document).ready( function(){
 			}
 			//end of fix of the current interval
 			
+			//preparing of the array for undo;
 			var HourStatCacheJSONText = JSON.stringify(HourStat);
 			b = new Array(HourStatCacheJSONText,totalStep);		
 			HourStatCache.push(b);
 			
+			if ( typeInt == 'rest'){
+				(typeInt='work');
+			}else {
+				(typeInt='rest');
+			}
 			return false;
 		}
 
-		//stop interva module	
+		//stop interval module	
 		$('.minusRestUndo').css({'display':'block'});
 		if ( interval ) {
 			clearInterval(interval);					
@@ -51,62 +57,48 @@ jQuery(document).ready( function(){
 		var step = 5;
 		var totalStep = 0;	
 				
-		//grafs
-		
+
 		//start from the end.
 		HourStat.reverse();
 		//mark for stopping of an external loop	
 		var endBigLoop = 0;
 		
 		for ( var ii in HourStat ) {
-			
-				//position of the div to operate.
-				pos = parseInt(HourStat.length) - parseInt(ii) -1;
-			
-				//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
-				if (HourStat[ii][(HourStat[ii].length -1)][1] == 'rest' && HourStat[ii][(HourStat[ii].length -1)][0] != 0 ) {
-					$('.graf:eq('+pos+')').append(	'<div class="interval wwoorrkk" style="margin: 0; height: 10px; background-color:'+colorProjectId+'; float: left;width:0%"></div>');
-					HourStat[ii].push(new Array(0,'workTemp',projectId) );
-				}
-					
-				//temp array to store info of the workTemp.
-				var workLastTemp = new Array(0,'workTemp',projectId,colorProjectId);
-				//start loop from the end.												
-				HourStat[ii].reverse();	
+				
 				//mark for exiting the internal loop			
 				var endSmallLoop = 0;
+				
+							//creation of the new interval workTemp. ( It's for very first click, we havn't new interval yet.) and creation of the new array member for it.
+							if ( HourStat[ii][HourStat[ii].length-1][1] == 'rest' && HourStat[ii][HourStat[ii].length-1][0] != 0 ) {
+								HourStat[ii].push(new Array(0,'temp',projectId,colorProjectId) );
+							}				
+				
+				//start loop from the end.
+				HourStat[ii].reverse();	
+				//temp array to store info of the workTemp.
+				var workLastTemp = new Array(0,'temp',projectId,colorProjectId);				
 				
 				for ( var j in HourStat[ii] ) {
 					
 					switch(HourStat[ii][j][1]) {
 						case 'work':
-							alert('work');
 							//it's a work interval, so we stop all the loops
 							endSmallLoop = 1;
 							endBigLoop = 1
 							break;
-						case 'workTemp':
-							alert('workTemp');
+						case 'temp':
 							//increasing the interval of the workTemp by the existing one
 							workLastTemp[0] += HourStat[ii][j][0];
 							endSmallLoop = 0;
 							break;
 						case 'rest':
-							alert('rest');												
+						//	alert('rest');
+																		
 							if (  HourStat[ii][j][0] > 0  ) {								
 									if ( HourStat[ii][j][0] >= step ) {
-										//alert('rest1 - : '+HourStat[ii][j][0]);
 
-										HourStat[ii][j][0] = parseInt(HourStat[ii][j][0]) - parseInt(step);
-										//grafon
-										var workPS11 =  (HourStat[ii][j][0])*100/HourCalc;
-										$('.graf:eq('+pos+') .interval:last').prev().width( workPS11+"%");
-											
+										HourStat[ii][j][0] = parseInt(HourStat[ii][j][0]) - parseInt(step);											
 										workLastTemp[0] = parseInt(workLastTemp[0])  + parseInt(step);
-										//grafon
-										var workPS12 =  (workLastTemp[0])*100/HourCalc;
-										$('.graf:eq('+pos+') .interval:last').width( workPS12+"%");	
-										
 										//ok, end of all loops, all done
 										endBigLoop = 1;
 										endSmallLoop = 1;
@@ -114,23 +106,15 @@ jQuery(document).ready( function(){
 										break;				
 									
 									} else {
-										//alert('rest2: '+HourStat[ii][j][0]);
 										var Delta2 =  HourStat[ii][j][0];
 										totalStep += parseInt(HourStat[ii][j][0]);
-										//alert('rest2 totalStep: '+totalStep);
 										step = step - HourStat[ii][j][0];
-
-										HourStat[ii][j][0] = 0;
-										$('.graf:eq('+pos+') .interval:last').prev().width( "0%");
-											
+										HourStat[ii][j][0] = 0;									
 										workLastTemp[0] = parseInt(workLastTemp[0])  + parseInt(Delta2);
-										//grafon
-										var workPS12 =  (workLastTemp[0])*100/HourCalc ;
-										$('.graf:eq('+pos+') .interval:last').width( workPS12+"%");	
-																	
 									}
 							} else {
-								endSmallLoop = 1;
+							//	endSmallLoop = 1;
+							//	endBigLoop = 1;
 							}				
 							break;
 							
@@ -143,7 +127,7 @@ jQuery(document).ready( function(){
 				
 				//we removing old data of the work interval and putting new one
 				HourStat[ii].reverse();
-				if ( HourStat[ii][(HourStat[ii].length -1)][1] == 'workTemp' ) {
+				if ( HourStat[ii][(HourStat[ii].length -1)][1] == 'temp' ) {
 					HourStat[ii].pop();
 					HourStat[ii].push(workLastTemp);
 				}
@@ -151,15 +135,15 @@ jQuery(document).ready( function(){
 			
 
 				if ( typeof(endBigLoop) != 'undefined' && endBigLoop == 1 ) {
-					alert('engbigLoop '+endBigLoop);
 					break;
 				}				
 				
 				
 		}//ii
-			HourStat.reverse();	
+			HourStat.reverse();
+			grafon3(HourStat);	
 			
-			//alert(HourStat);
+
 			if ( totalStep > 0 ) {	
 				var HourStatCacheJSONText = JSON.stringify(HourStat);
 				b = new Array(HourStatCacheJSONText,totalStep);			
@@ -199,7 +183,7 @@ jQuery(document).ready( function(){
 									if ( 100 > 10 ) {
 										var nnnC = '';										
 										$.each(HourStat, function() {
-											nnnC += '<div class="span-4 clearfix" style="border:1px solid;padding: 5px;">';		 
+											nnnC += '<div class="span-5 clearfix" style="border:1px solid;padding: 5px;">';		 
 											$.each(this, function() {	
 												var bbb1 = '';
 											
@@ -208,7 +192,7 @@ jQuery(document).ready( function(){
 														bbb1 += '<b>'+this+'</b>&nbsp;';
 													} else if ( this == 'rest' ) {
 														bbb1 += '&nbsp;<b style="color:red">'+this +'</b>';
-													} else if (this == 'workTemp') {
+													} else if (this == 'temp') {
 														bbb1 += '&nbsp;<b style="color:teal">'+this +'</b>';														
 													}else if (this == 'work') {
 														bbb1 += '&nbsp;<b style="color:green">'+this +'</b>';														
@@ -239,25 +223,15 @@ jQuery(document).ready( function(){
 				clockCorrection(hz[1],'work');
 				var ccc = JSON.parse( toUndo[0] );
 				HourStat = ccc;
-				//('last: '+ccc);
-			
-				$('.graf:gt(0), .interval').remove();	
-				$.each(HourStat, function(i) {
-					if ( i != 0 ) {
-						grafon2(0, null, 3  );
-					} 
-					$.each(this, function() {	
-						grafon2(null,this[1], 2 ,this[3] );
-						grafon2(this[0],null, 0 ,null );														
-					});																	
-				});				
+
+				grafon3 (HourStat);
 			}
 
 						//to del;
 									if ( 100 > 10 ) {
 										var nnnC = '';										
 										$.each(HourStat, function() {
-											nnnC += '<div class="span-4 clearfix" style="border:1px solid;padding: 5px;">';		 
+											nnnC += '<div class="span-5 clearfix" style="border:1px solid;padding: 5px;">';		 
 											$.each(this, function() {	
 												var bbb1 = '';
 											
@@ -266,7 +240,7 @@ jQuery(document).ready( function(){
 														bbb1 += '<b>'+this+'</b>&nbsp;';
 													} else if ( this == 'rest' ) {
 														bbb1 += '&nbsp;<b style="color:red">'+this +'</b>';
-													} else if (this == 'workTemp') {
+													} else if (this == 'temp') {
 														bbb1 += '&nbsp;<b style="color:teal">'+this +'</b>';														
 													}else if (this == 'work') {
 														bbb1 += '&nbsp;<b style="color:green">'+this +'</b>';														
