@@ -25,6 +25,19 @@ class ProjectsController extends AppController {
 			$this->paginate['Project']['contain'] = 'ProjectsUser';
 			$this->paginate['Project']['order'] = array('Project.modified'=>'desc');
 			$this->set('projects', $this->paginate());
+		} else {
+					if ( $this->Session->check('startTime') ) {
+						$startTime = $this->Session->read('startTime');
+					} else {
+						$startTime = time();
+					}
+					$projectUser = array( array('Project'=> array('id' => '1','name'=>'work','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+																array('Project'=> array('id' => '2','name'=>'work1','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+																array('Project'=> array('id' => '3','name'=>'work3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+															);
+					
+					$this->set('projects', $projectUser);	
+		
 		}
 	}
 //--------------------------------------------------------------------

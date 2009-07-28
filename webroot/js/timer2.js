@@ -351,7 +351,7 @@ jQuery(document).ready( function(){
 								//hourStat cookie saving
 								var HourStatJSONText = JSON.stringify(HourStat);
 								$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
-								alert($.cookie("HourStat"));
+								//alert($.cookie("HourStat"));
 		} );
 
 

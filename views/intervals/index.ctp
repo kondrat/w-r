@@ -38,12 +38,12 @@
 						<div class="projectsNameWrpapper clearfix">
 							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
 								<?php foreach ( $projectUser as $project ): ?>
-									<div class="span-2 myProject" style="background-color:<?php echo $project['Project']['color'];?>;color:#000;" id="<?php echo 'project_'.$project['Project']['id'];?>"><?php echo $project['Project']['name'];?></div>
+									<div class="span-2 myProject" style="background-color:#fff;color:<?php echo $project['Project']['color'];?>;" id="<?php echo 'project_'.$project['Project']['id'];?>"><?php echo $project['Project']['name'];?></div>
 								<?php endforeach ?>
 							<?php else: ?>
-								<div class="span-2 myProject" style="background-color:#D2FFE9;color:green;" id="project_1">Work</div>
-								<div class="span-2 myProject" style="background-color:#ffffae;color:olive;" id="project_2">Work2</div>
-								<div class="span-2 myProject" style="background-color:#ddffff;color:teal;" id="project_3">Work3</div>
+								<div class="span-2 myProject" style="background-color:#fff;color:green;" id="project_1">Work</div>
+								<div class="span-2 myProject" style="background-color:#fff;color:olive;" id="project_2">Work</div>
+								<div class="span-2 myProject" style="background-color:#fff;color:teal;" id="project_3">Work</div>
 							<?php endif ?>
 						</div>
 	        	<div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>

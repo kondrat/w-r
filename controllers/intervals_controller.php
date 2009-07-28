@@ -24,10 +24,10 @@ class IntervalsController extends AppController {
 			
 			$key = md5(uniqid(rand(), true));
 			
+			$this->Session->write('startTime', time() );
 								
 			if( !$this->Cookie->read('guestKey')) {	
 				
-															
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				
 				$this->Session->write('guestKey', $key );
@@ -65,6 +65,14 @@ class IntervalsController extends AppController {
 			if ( $this->Auth->user('id') ) {
 					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
 			} else {
+				if ( $this->Cookie->read('Projects') ) {
+					$projectUser = $this->Cookie->read('Projects');
+				} else {
+					$projectUser = array( array('Project'=> array('id' => '1','name'=>'work','color'=>'green')),
+																array('Project'=> array('id' => '2','name'=>'work1','color'=>'olive')),
+																array('Project'=> array('id' => '3','name'=>'work3','color'=>'teal')),
+															);
+				}
 			}
 			
 
