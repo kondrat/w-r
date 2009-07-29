@@ -223,14 +223,20 @@
 	color: #999;
 }
 .projectPreview {
-	color: green;
-	font-size: larger;
-	font-weight: bold;
-	background-color: #D2FFE9;
+	border:3px solid grey;
+	font-size:larger;
+	font-weight:bold;
+	line-height:1.3em;
+	margin:0;
+	position:relative;
 	text-align:center;
-	border: 3px solid grey;
-	display: inline;
-	padding: 0 20px;
+}
+.projectPreviewBg {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	opacity:0.17;
 }
 .projectActions a {
 	

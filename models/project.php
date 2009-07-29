@@ -48,7 +48,7 @@ class Project extends AppModel {
 		$projectUser = array();		
 		if ( $userId != null ) {
 			$this->bindModel( array( 'hasOne' => array('ProjectsUser') ) );
-			$projectUser = $this->find('all', array( 'conditions'=> array( 'ProjectsUser.user_id'=> $userId ), 'fields' => array('Project.id','Project.name','Project.color'), 'order'=> array('Project.pos'=>'desc','Project.modified'=>'desc'), 'contain'=> array('ProjectsUser')  ) );
+			$projectUser = $this->find('all', array( 'conditions'=> array( 'ProjectsUser.user_id'=> $userId ), 'fields' => array('Project.id','Project.name','Project.color'), 'order'=> array('Project.pos'=>'desc','Project.modified'=>'desc'),'limit'=>5, 'contain'=> array('ProjectsUser')  ) );
 		}
 		if ( $projectUser != array() ) {
 			return $projectUser;

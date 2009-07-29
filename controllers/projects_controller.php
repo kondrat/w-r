@@ -18,8 +18,8 @@ class ProjectsController extends AppController {
 //--------------------------------------------------------------------
 	function index() {
 		if ( $this->Auth->user('id') ) {
-			$this->paginate['Project']['limit'] = 3;		
-			$this->Project->bindModel( array( 'hasOne' => array('ProjectsUser') ) );
+			$this->paginate['Project']['limit'] = 10;		
+			$this->Project->bindModel( array( 'hasOne' => array('ProjectsUser'=> array('fields'=>array('ProjectsUser.id') ) ) ) );
 			$this->paginate['Project']['conditions'] = array( 'ProjectsUser.user_id'=> $this->Auth->user('id') );
 			$this->paginate['Project']['fields'] = array();
 			$this->paginate['Project']['contain'] = 'ProjectsUser';

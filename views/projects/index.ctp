@@ -30,17 +30,18 @@
 		<?php if( isset($projects) && $projects != array() ):?>
 			<?php $i = 0; ?>
 			<?php foreach ($projects as $project): ?>
-				
-					<div class="projectList span-15">
+				<?php $stl=( $i == 4  && $this->params['paging']['Project']['page'] == 1 )?'5px':'1px'; ?>
+					<div class="projectList span-15" style="border-bottom:<?php echo $stl;?> solid green;">
 
-								<div class="projectPreview" style="color: <?php echo $project['Project']['color']; ?>;background-color:#fff">
+								<div class="projectPreview span-3" style="color: <?php echo $project['Project']['color']; ?>;">
 									<?php echo $project['Project']['name']; ?>
+									<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 								</div>
 							
 						
 							
 							
-							<div class="projectCreated">
+							<div class="projectCreated clear">
 								<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
 								<?php //echo __('Created',true).'&nbsp;'.$time->niceShort($project['Project']['created']); ?>
 							</div>	

@@ -97,7 +97,7 @@ jQuery(document).ready( function(){
 		$(".colorPicker").click(function () {
 			var colorCode = $(this).text();
 			var projectEdit = $(this).parents(".projectList").children('.projectPreview');
-			$(projectEdit).css({'background-color':'#fff','color':colorCode});
+			$(projectEdit).css({'background-color':colorCode,'color':colorCode});
 			var attrTest = $(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
 			return false;
 		}); 
