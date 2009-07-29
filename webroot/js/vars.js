@@ -64,7 +64,7 @@ jQuery(document).ready( function(){
  
 	if ( $.cookie("IniVars") != null ) {
 		
-			//alert('IniVars');
+			//alert($.cookie("IniVars"));
 
 		 var cc = JSON.parse( $.cookie("IniVars") );
 
@@ -109,13 +109,10 @@ jQuery(document).ready( function(){
 		 sec2 = cc.sec2;			
 	}
 	if ( $.cookie("HourStat") != null ) {
-		
+		//alert($.cookie("HourStat"));
 		var hs = JSON.parse( $.cookie("HourStat") );		
 		HourStat = hs;
-									
 		grafon3 (HourStat);							
-	
-		
 	}
 });
 	

@@ -12,8 +12,8 @@
 				<?php
 					echo $form->input('name');
 				?>
-				<div><?php __('Color');?></div>
-
+				
+					<?php echo $this->element('color/color', array('cache' => false)); ?>
 					<?php echo $form->submit('Submit',array('class'=>'projectSubmit'));?>
 					<?php echo $form->end();?>
 
@@ -33,7 +33,7 @@
 				
 					<div class="projectList span-15">
 
-								<div class="projectPreview" style="color: #000;background-color:<?php echo $project['Project']['color']; ?>">
+								<div class="projectPreview" style="color: <?php echo $project['Project']['color']; ?>;background-color:#fff">
 									<?php echo $project['Project']['name']; ?>
 								</div>
 							
@@ -66,9 +66,6 @@
 										</div>
 										<div class="span-3">
 											<?php echo $form->end('Submit');?>
-										</div>
-										<div class="clear">
-											<?php echo __('Color',true).':'; ?>
 										</div>
 									
 									<?php echo $this->element('color/color', array('cache' => false)); ?>

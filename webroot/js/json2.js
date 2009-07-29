@@ -1,6 +1,6 @@
 /*
     http://www.JSON.org/json2.js
-    2009-04-16
+    2009-06-29
 
     Public Domain.
 
@@ -146,8 +146,6 @@
 
 /*jslint evil: true */
 
-/*global JSON */
-
 /*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
     call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
     getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
@@ -158,9 +156,8 @@
 // Create a JSON object only if one does not already exist. We create the
 // methods in a closure to avoid creating global variables.
 
-if (!this.JSON) {
-    JSON = {};
-}
+var JSON = JSON || {};
+
 (function () {
 
     function f(n) {
@@ -172,12 +169,13 @@ if (!this.JSON) {
 
         Date.prototype.toJSON = function (key) {
 
-            return this.getUTCFullYear()   + '-' +
+            return isFinite(this.valueOf()) ?
+                   this.getUTCFullYear()   + '-' +
                  f(this.getUTCMonth() + 1) + '-' +
                  f(this.getUTCDate())      + 'T' +
                  f(this.getUTCHours())     + ':' +
                  f(this.getUTCMinutes())   + ':' +
-                 f(this.getUTCSeconds())   + 'Z';
+                 f(this.getUTCSeconds())   + 'Z' : null;
         };
 
         String.prototype.toJSON =

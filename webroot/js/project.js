@@ -1,6 +1,6 @@
 jQuery(document).ready( function(){
 
-	$(".projectTitle, .projectMainClose , .myProject").click(function(){
+		$(".projectTitle, .projectMainClose ").click(function(){
 			
    		if ( $(".projectMain").is(":hidden") ) {
             $(".projectMain").slideDown("fast");
@@ -12,12 +12,21 @@ jQuery(document).ready( function(){
 
     });
 
-		$(".myProject").click(function(){
-			
+		$(".myProject").live("click",function(){
+		
 			//$(".stopInterval").trigger('click');
 			var prevProjectId = projectId;
 			projectId = $(this).attr("id");
+			var index = $(".myProject").index(this);
+			if ( index > 0 ) {
+				var myPr = $(this).remove();
+				$(".myProject:first").next().remove();
+				$('.projectsNameWrpapper').prepend(myPr);	
+				$(".myProject:first").after('<hr style="margin: 5px;" />').addClass("myProjectFirst");
+			}					
+			
 
+			
 			if ( correction == 1 && projectClicked == 0 ) {
 				projectClicked = 1;
 
@@ -27,7 +36,7 @@ jQuery(document).ready( function(){
 				$('.clock1, .work').css({'color':colorProjectId});
 				$('.work span').text(projectName);
 				$('.rest div.minusRest').trigger('click');
-								
+
 				return false;				
 			}
 	
@@ -88,7 +97,7 @@ jQuery(document).ready( function(){
 		$(".colorPicker").click(function () {
 			var colorCode = $(this).text();
 			var projectEdit = $(this).parents(".projectList").children('.projectPreview');
-			$(projectEdit).css({'background-color':colorCode,'color':'#000'});
+			$(projectEdit).css({'background-color':'#fff','color':colorCode});
 			var attrTest = $(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
 			return false;
 		}); 
@@ -110,6 +119,9 @@ jQuery(document).ready( function(){
 			return false;
 		})
 		*/
+		
+		$('.myProject:first').after('<hr style="margin:5px"/>').addClass('myProjectFirst');
+		
 		$(' a img.pageImgPrev').hover(	
 			function(){
 				$(this).attr({src: "/w-r/img/icons/left_arrow2.png"});

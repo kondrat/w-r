@@ -3,12 +3,12 @@
 # --------------------------------------------------------
 # Host:                         127.0.0.1
 # Database:                     w-r
-# Server version:               5.0.6-beta-nt
+# Server version:               5.0.67-community-nt
 # Server OS:                    Win32
 # Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-06-22 00:34:37
+# Date/time:                    2009-07-29 21:39:50
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -37,7 +37,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 
 
@@ -71,7 +71,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `intervals` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 
@@ -95,12 +95,13 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(256) default NULL,
   `color` varchar(50) default NULL,
+  `pos` int(11) unsigned default '0',
   `created` datetime default NULL,
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 
 
@@ -110,15 +111,23 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS;*/
-REPLACE INTO `projects` (`id`, `name`, `color`, `created`, `modified`) VALUES
-	('2','first',NULL,'2009-04-19 17:43:51','2009-05-19 17:43:51'),
-	('3','third',NULL,'2009-05-19 17:49:41','2009-05-19 17:49:41'),
-	('4','forth',NULL,'2009-05-19 17:52:25','2009-05-19 17:52:25'),
-	('5','fifth',NULL,'2009-05-19 18:16:07','2009-05-19 18:16:07'),
-	('6','shestoy',NULL,'2009-05-19 18:33:51','2009-05-19 18:33:51'),
-	('7','seventh',NULL,'2009-05-19 18:34:28','2009-05-19 18:34:28'),
-	('8','newt',NULL,'2009-06-02 19:39:19','2009-06-02 19:39:19'),
-	('9','forTime',NULL,'2009-06-17 21:54:31','2009-06-17 21:54:31');
+REPLACE INTO `projects` (`id`, `name`, `color`, `pos`, `created`, `modified`) VALUES
+	('2','first',NULL,NULL,'2009-04-19 17:43:51','2009-05-19 17:43:51'),
+	('3','third54','teal','0','2009-05-19 17:49:41','2009-07-29 15:13:22'),
+	('4','forth23','black','0','2009-05-19 17:52:25','2009-07-29 16:26:30'),
+	('5','fifth',NULL,NULL,'2009-05-19 18:16:07','2009-05-19 18:16:07'),
+	('7','seventh42','#FF5EFF','0','2009-05-19 18:34:28','2009-07-29 15:15:31'),
+	('8','newt',NULL,NULL,'2009-06-02 19:39:19','2009-06-02 19:39:19'),
+	('9','forTime',NULL,NULL,'2009-06-17 21:54:31','2009-06-17 21:54:31'),
+	('10','asdgf2',NULL,NULL,'2009-06-29 13:51:19','2009-06-29 13:52:35'),
+	('12','sdf333',NULL,NULL,'2009-06-29 14:29:34','2009-06-29 14:29:34'),
+	('13','sdg',NULL,NULL,'2009-06-29 14:34:20','2009-06-29 14:34:20'),
+	('14','sdfe33',NULL,NULL,'2009-06-29 14:36:21','2009-06-29 14:36:21'),
+	('16','user3',NULL,NULL,'2009-06-29 15:24:56','2009-06-29 15:24:56'),
+	('17','user31',NULL,NULL,'2009-06-29 15:25:19','2009-06-29 15:25:19'),
+	('18','user32',NULL,NULL,'2009-06-29 15:25:26','2009-06-29 15:25:26'),
+	('19','secOne31','green','0','2009-06-29 20:15:39','2009-07-29 15:13:29'),
+	('20','brandNew','navy','0','2009-07-29 14:59:50','2009-07-29 17:05:54');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -135,7 +144,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
   `perm` int(10) unsigned default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 
 
@@ -146,11 +155,15 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
 LOCK TABLES `projects_users` WRITE;
 /*!40000 ALTER TABLE `projects_users` DISABLE KEYS;*/
 REPLACE INTO `projects_users` (`id`, `project_id`, `user_id`, `type`, `perm`, `created`) VALUES
-	('1','3','2','O',NULL,NULL),
-	('2','4','2','O',NULL,NULL),
-	('3','6','2','O',NULL,NULL),
-	('4','7','1','O',NULL,NULL),
-	('5','7','2','O',NULL,NULL);
+	('7','14','3','O',NULL,NULL),
+	('9','16','3','O',NULL,NULL),
+	('10','17','3','O',NULL,NULL),
+	('11','18','3','O',NULL,NULL),
+	('35','3','2','O',NULL,NULL),
+	('36','19','2','O',NULL,NULL),
+	('37','7','2','O',NULL,NULL),
+	('43','4','2','O',NULL,NULL),
+	('45','20','2','O',NULL,NULL);
 /*!40000 ALTER TABLE `projects_users` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -171,7 +184,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 

@@ -1,5 +1,5 @@
 <?php
-	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'));
+	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'),false);
 ?>
 <div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>
