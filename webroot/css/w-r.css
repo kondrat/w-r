@@ -366,6 +366,21 @@
 }
 .projectDataEdit{
 }
+.projectDataEditFileds {
+	background-color: #eee;
+}
+.projectDataEditFileds legend {
+	padding: 0 5px;
+	border: 1px solid gray;
+	margin:0;
+	background-color: #fff;
+}
+.projectDataEditFileds label {
+	margin: 0 5px 0 0 ;
+}
+.projectDataEditFileds .projectPreview {
+	background-color: white;
+}
 .projectDataEdit .submit {
 	margin: 5px;
 }

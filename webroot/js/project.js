@@ -93,16 +93,18 @@ jQuery(document).ready( function(){
       return false;
     });
   
+  
   	//colorPicker
 		$(".colorPicker").click(function () {
 			var colorCode = $(this).text();
-			var projectEdit = $(this).parents(".projectList").children('.projectPreview');
-			$(projectEdit).css({'background-color':colorCode,'color':colorCode});
-			var attrTest = $(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
+			$(this).parents(".projectDataEditFileds").children('.projectPreview').css({'color':colorCode}).children().css({'background-color':colorCode});
+			$(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
 			return false;
 		}); 
   
-  
+			
+		$('#MyInput').limit('10','#charsLeft');			
+
   
   
   

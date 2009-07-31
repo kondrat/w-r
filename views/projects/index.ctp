@@ -1,24 +1,45 @@
-<?php echo $javascript->link(array('jquery.cookie','jquery.form'),false);?>
+<?php echo $javascript->link(array('jquery.limit-1.2','jquery.cookie','jquery.form'),false);?>
 
 <?php echo $javascript->link('project',false);?>
 
 <div class="projects index">
 	
 	<div class="newProject"><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></div>
-	<div class="newProjectWrapper span-15 last hide">
-	<div class="projects form">
-			<?php echo $form->create('Project');?>
 
-				<?php
-					echo $form->input('name');
-				?>
-				
+
+
+			<div class="newProjectWrapper hide">
+				<?php $i=1000;?>
+				<?php echo $form->create('Project',array('id'=> 'formEdit'.$i));?>
+					<fieldset class="projectDataEditFileds">
+				 		<legend><?php __('Add Project');?></legend>
+
+						<div class="projectPreview span-3 push-5" style="color: green">
+							<?php echo __("Work",true); ?>
+							<div class="projectPreviewBg" style="background-color:green"></div>
+						</div>
+						
+				 		<div class="span-5 clear">
+							<?php
+								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput') );
+								echo $form->hidden('color');
+							?>
+							<span id="charsLeft" class="span-1" ></span>&nbsp;Left		
+						</div>
+					
 					<?php echo $this->element('color/color', array('cache' => false)); ?>
-					<?php echo $form->submit('Submit',array('class'=>'projectSubmit'));?>
-					<?php echo $form->end();?>
+						<div class="span-3">
+							<?php echo $form->end('Submit');?>
+						</div>
+					
+					</fieldset>
+				
+			</div>			
 
-			</div>
-	</div>
+			
+			
+			
+
 			<?php if( isset($this->params['paging']['Project']['pageCount']) && $this->params['paging']['Project']['pageCount'] > 1 ): ?>
 					<?php echo $paginator->sort('name');?>
 					<?php echo $paginator->sort('color');?>
@@ -37,17 +58,13 @@
 									<?php echo $project['Project']['name']; ?>
 									<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 								</div>
-							
-						
-							
-							
+
 							<div class="projectCreated clear">
 								<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>
 								<?php //echo __('Created',true).'&nbsp;'.$time->niceShort($project['Project']['created']); ?>
 							</div>	
 													
 							<div class="projectActions" style="float:right; margin: -32px 0 0 0;">
-								<?php //echo $html->link(__('View', true), array('action'=>'view', $project['Project']['id'])); ?>
 								<?php echo $html->link(__('Edit', true).'&nbsp;&nbsp;'.$html->image("icons/edit_2.png",array('class'=>'projectEditImg')), array('action'=>'edit', $project['Project']['id']),array('class'=>'projectEdit'),null,false); ?>
 								&nbsp;
 								<?php echo $html->link(__('Delete', true).'&nbsp;&nbsp;'.$html->image("icons/delete_2.png",array('class'=>'projectDelImg')), array('action'=>'delete', $project['Project']['id']), array('class'=>'projectDel'), sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id']) , false); ?>
@@ -56,21 +73,31 @@
 							
 							<div class="projectDataEdit hide">
 								<?php echo $form->create('Project',array('id'=> 'formEdit'.$i));?>
-									<fieldset>
+									<fieldset class="projectDataEditFileds">
 								 		<legend><?php __('Edit Project');?></legend>
-								 		<div class="span-5">
+
+										<div class="projectPreview span-3 push-5" style="color: <?php echo $project['Project']['color']; ?>;">
+											<?php echo $project['Project']['name']; ?>
+											<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
+										</div>
+										<span id="charsLeft<?php echo $i;?>" class="span-1" ></span>&nbsp;Left
+										
+										<script type="text/javascript">
+    									$("#<?php echo 'projectName'.$i;?>").limit('140');
+										</script>
+
+								 		<div class="span-5 clear">
 											<?php
 												echo $form->hidden('id', array('value'=> $project['Project']['id'], 'id'=>'projectId'.$i) );
 												echo $form->input('name', array('value'=> $project['Project']['name'],'id'=>'projectName'.$i) );
 												echo $form->hidden('color', array('id'=>'projectColor'.$i) );
 											?>
 										</div>
+									
+									<?php echo $this->element('color/color', array('cache' => false)); ?>
 										<div class="span-3">
 											<?php echo $form->end('Submit');?>
 										</div>
-									
-									<?php echo $this->element('color/color', array('cache' => false)); ?>
-
 									
 									</fieldset>
 								
