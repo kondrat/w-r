@@ -97,12 +97,24 @@ jQuery(document).ready( function(){
   	//colorPicker
 		$(".colorPicker").click(function () {
 			var colorCode = $(this).text();
-			$(this).parents(".projectDataEditFileds").children('.projectPreview').css({'color':colorCode}).children().css({'background-color':colorCode});
+			$(this).parents(".projectDataEditFileds").children('.projectPreview').css({'color':colorCode}).children('div').css({'background-color':colorCode});
 			$(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
 			return false;
-		}); 
-  
+		});
+		 
+		$(".projectNameInput").keyup(function (e) {
+			var projctName = $(this).val();
+			$(this).parents(".projectDataEditFileds").children('.projectPreview').children('span').remove();
+			$(this).parents(".projectDataEditFileds").children('.projectPreview').prepend('<span>'+ projctName +'</span>');//css({'color':colorCode}).children().css({'background-color':colorCode});
+			//$(this).parents(".projectDataEditFileds").children('.projectPreview').css({'color':colorCode}).children().css({'background-color':colorCode});
+			//$(this).parent().siblings('.span-5').children('input:eq(1)').attr({value : colorCode});
 			
+			//return false;
+		}); 
+
+
+  
+		//limit for add( for edit dianmic );	
 		$('#MyInput').limit('10','#charsLeft');			
 
   

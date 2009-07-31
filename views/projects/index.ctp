@@ -7,24 +7,28 @@
 	<div class="newProject"><?php echo $html->link(__('New Project', true), array('action'=>'add')); ?></div>
 
 
-
+	<!-- colorPicker for add mode. not set value after changing -->
+	
+	
 			<div class="newProjectWrapper hide">
 				<?php $i=1000;?>
 				<?php echo $form->create('Project',array('id'=> 'formEdit'.$i));?>
 					<fieldset class="projectDataEditFileds">
 				 		<legend><?php __('Add Project');?></legend>
 
-						<div class="projectPreview span-3 push-5" style="color: green">
-							<?php echo __("Work",true); ?>
+						<div class="projectPreview span-3 push-5 last" style="color: green">
+							<span><?php echo __("Work",true); ?></span>
 							<div class="projectPreviewBg" style="background-color:green"></div>
 						</div>
-						
+						<div class="span-2" style="margin-top:3px;">
+							<div id="charsLeft" class="charsLeftD"></div><div class="charsLeftS"><?php __('Left');?></div>
+						</div>
 				 		<div class="span-5 clear">
 							<?php
-								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput') );
-								echo $form->hidden('color');
+								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput', 'class'=>'projectNameInput') );
+								echo $form->hidden('color', array('value'=> 'green') );
 							?>
-							<span id="charsLeft" class="span-1" ></span>&nbsp;Left		
+								
 						</div>
 					
 					<?php echo $this->element('color/color', array('cache' => false)); ?>
@@ -55,7 +59,7 @@
 					<div class="projectList span-15" style="border-bottom:<?php echo $stl;?> solid green;">
 
 								<div class="projectPreview span-3" style="color: <?php echo $project['Project']['color']; ?>;">
-									<?php echo $project['Project']['name']; ?>
+									<span><?php echo  $project['Project']['name']; ?></span>
 									<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 								</div>
 
@@ -77,20 +81,19 @@
 								 		<legend><?php __('Edit Project');?></legend>
 
 										<div class="projectPreview span-3 push-5" style="color: <?php echo $project['Project']['color']; ?>;">
-											<?php echo $project['Project']['name']; ?>
+											<span><?php echo $project['Project']['name']; ?></span>
 											<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 										</div>
-										<span id="charsLeft<?php echo $i;?>" class="span-1" ></span>&nbsp;Left
-										
-										<script type="text/javascript">
-    									$("#<?php echo 'projectName'.$i;?>").limit('140');
-										</script>
-
+										<div class="span-2" style="margin-top:3px;">
+											<div id="charsLeft<?php echo $i;?>" class="charsLeftD"></div><div class="charsLeftS"><?php __('Left');?></div>
+										</div>										
+										<?php echo $javascript->codeBlock( 'jQuery(document).ready( function(){$("#projectName'.$i.'").limit("10","#charsLeft'.$i.'");});',array('allowCache'=>true,'safe'=>true,'inline'=>true));?>
+    									
 								 		<div class="span-5 clear">
 											<?php
 												echo $form->hidden('id', array('value'=> $project['Project']['id'], 'id'=>'projectId'.$i) );
-												echo $form->input('name', array('value'=> $project['Project']['name'],'id'=>'projectName'.$i) );
-												echo $form->hidden('color', array('id'=>'projectColor'.$i) );
+												echo $form->input('name', array('value'=> $project['Project']['name'],'id'=>'projectName'.$i, 'class'=>'projectNameInput') );
+												echo $form->hidden('color', array('id'=>'projectColor'.$i,'value'=> $project['Project']['color']) );
 											?>
 										</div>
 									

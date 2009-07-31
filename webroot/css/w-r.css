@@ -230,6 +230,7 @@
 	margin:0;
 	position:relative;
 	text-align:center;
+	height:20px;
 }
 .projectPreviewBg {
 	width:100%;
@@ -383,4 +384,19 @@
 }
 .projectDataEdit .submit {
 	margin: 5px;
+}
+.charsLeftD {
+	float:left;
+	font-family:comic Sans MS;
+	font-size:16pt;
+	font-weight:bold;
+	color:sienna;
+	margin:-5px 3px 3px 6px;
+}
+.charsLeftS {
+	float:left;
+	color:gray;
+	font-family:comic Sans MS;
+	font-size:12pt;
+	font-weight:bold;
 }
