@@ -107,16 +107,7 @@ jQuery(document).ready( function(){
 			$(this).parents(".projectDataEditFileds").children('.projectPreview').children('span').remove();
 			$(this).parents(".projectDataEditFileds").children('.projectPreview').prepend('<span>'+ projctName +'</span>');
 		}); 
-
-
-  
-		//limit for add( for edit dianmic );	
-		$('#MyInput').limit('10','#charsLeft');			
-
-  
-  
-  
-    
+     
 		/*
 		$('.projectSubmit').click(function(){
 			$(this).parents("form:first").ajaxSubmit({

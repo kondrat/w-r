@@ -23,6 +23,7 @@
 						<div class="span-2" style="margin-top:3px;">
 							<div id="charsLeft" class="charsLeftD"></div><div class="charsLeftS"><?php __('Left');?></div>
 						</div>
+						<?php echo $javascript->codeBlock( 'jQuery(document).ready( function(){$("#MyInput").limit("10","#charsLeft");});',array('allowCache'=>true,'safe'=>true,'inline'=>true));?>
 				 		<div class="span-5 clear">
 							<?php
 								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput', 'class'=>'projectNameInput') );

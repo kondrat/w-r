@@ -1,14 +1,30 @@
 jQuery(document).ready( function(){
-
+	
+				//alert(projectId);
+				
 				if ( typeof projectId == 'undefined' || projectId == null) { 
+
 					projectId = $('.myProject:first').attr("id");
-					//toFix
 					colorProjectId = $('.myProject:first').css("color");
-				}
+					projectName = $('.myProject:first').text();
+														
+					//alert('colorProjectId: '+colorProjectId);
+				}				
+				//$('#clock1 .clockBackground').css({'background-color' : colorProjectId });	
+	
+				
+				if ( typeof projecName == 'undefined' || projectName == null) { 
+										//alert(projecName);			
+				}	
+				//alert(projectId);	
+				//alert(projectName);
+				//alert(colorProjectId);			
+					$('.clock1, .work').css({'color':colorProjectId});
+					$('.work span').text(projectName);						
+				
 							
 	$('#clock1, div.work2 span').click( function(){
 		
-			//alert(typeInt);
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}
@@ -21,7 +37,6 @@ jQuery(document).ready( function(){
 				$('.minusWork').css({'display':'block'});		
 				
 			if ( typeInt != 'work') {
-	
 				nextInterval = 1;
 				typeInt = 'work';		
 			}			
@@ -32,9 +47,7 @@ jQuery(document).ready( function(){
 				$(".startInterval").trigger('click');
 			}		
 				if (typeInt != 'rest' || typeof HourStat[0][0] == 'undefined') {				
-				//$('#clock1').css({'background-color' :'#ffffff'});
 				$('#clock1 .clockBackground').css({'background-color' : '#fff' });
-				//$('#clock2').css({'background-color' :'#ffd7d7'});
 				$('#clock2 .clockBackground').css({'background-color' : 'red' });
 				$('.work span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
 				$('.rest span').css({'font-size':'100%','border-bottom':'3px solid #ccc'});
@@ -312,6 +325,8 @@ jQuery(document).ready( function(){
 												'hourDay': hourDay,
 												
 												'projectId': projectId,
+												'projectName':projectName,
+												'colorProjectId':colorProjectId,
 															
 												'workStamp': workStamp,
 												'workDelta': workDelta,

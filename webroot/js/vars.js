@@ -72,7 +72,9 @@ jQuery(document).ready( function(){
 		 typeInt = cc.typeInt;
 		 hourDay = cc.hourDay;
 
-		 projectId = cc.projectId;			
+		 projectId = cc.projectId;
+		 projectName = cc.projectName;
+		 colorProjectId = cc.colorProjectId;			
 					
 		 workStamp = cc.workStamp;
 		 workDelta = cc.workDelta;
