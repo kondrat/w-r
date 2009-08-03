@@ -26,7 +26,7 @@
 				 		<div class="span-5 clear">
 							<?php
 								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput', 'class'=>'projectNameInput') );
-								echo $form->hidden('color', array('value'=> 'green') );
+								echo $form->input('color',  array('type'=>'hidden','value'=> 'green')  );
 							?>
 								
 						</div>

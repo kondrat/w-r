@@ -170,10 +170,6 @@
 }
 /*--- Projects --*/
 .projectTitle {
-  /*position:absolute;
-  top: 10px;
-  left: 190px;
-  */
 	font-weight: bold;
 	font-size: 10pt;
 	cursor: pointer;
@@ -183,19 +179,18 @@
 	display:none;
 	border: 3px solid #ccc;
 }
-.myProject {
-    border: 3px solid gray;
-    font-weight: bold;
+div.myProject{
+ 	margin-bottom:10px;
 }
 .myProject:hover {
-    border: 3px solid silver;
-    font-weight: bold;
+	border: 3px solid silver;
+	font-weight: bold;
 }
 .myProjectFirst {
 	margin-bottom: 5px;
 }
 .projectMainClose, .myProject {
-    cursor:pointer;
+	cursor:pointer;
 }
 .projectWrapper{
 	position:absolute;
