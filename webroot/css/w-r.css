@@ -233,6 +233,7 @@ div.myProject{
 	position:absolute;
 	top:0;
 	opacity:0.17;
+	filter: alpha(opacity = 17);
 }
 .projectActions a {
 	
@@ -327,14 +328,16 @@ div.myProject{
 
 .newProject {
 	font-weight: bold;
-	margin: 5px 0 0 0;
+	margin: 10px;
 }
 .newProject a {
 	text-decoration:none;
 	color: gray;
+	font-size:18pt;
 }
 .newProject a:hover {
 	color: #000;
+	text-decoration:underline;
 }
 .projects .input {
 	float: none;
@@ -376,6 +379,7 @@ div.myProject{
 }
 .projectDataEditFileds .projectPreview {
 	background-color: white;
+	margin-bottom:0;
 }
 .projectDataEdit .submit {
 	margin: 5px;

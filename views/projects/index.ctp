@@ -16,7 +16,7 @@
 					<fieldset class="projectDataEditFileds">
 				 		<legend><?php __('Add Project');?></legend>
 
-						<div class="projectPreview span-3 push-5 last" style="color: green">
+						<div class="projectPreview span-3 push-1 last" style="color: green">
 							<span><?php echo __("Work",true); ?></span>
 							<div class="projectPreviewBg" style="background-color:green"></div>
 						</div>
@@ -50,9 +50,8 @@
 					<?php echo $paginator->sort('color');?>
 					<?php echo $paginator->sort('created');?>
 			<?php endif ?>
-					<br />
-					<br />
-	<div class="clearfix">
+
+	<div class="allProjects clearfix" style="padding: 5px; border-top:5px solid green;">
 		<?php if( isset($projects) && $projects != array() ):?>
 			<?php $i = 0; ?>
 			<?php foreach ($projects as $project): ?>
@@ -81,7 +80,7 @@
 									<fieldset class="projectDataEditFileds">
 								 		<legend><?php __('Edit Project');?></legend>
 
-										<div class="projectPreview span-3 push-5" style="color: <?php echo $project['Project']['color']; ?>;">
+										<div class="projectPreview span-3 push-1" style="color: <?php echo $project['Project']['color']; ?>;">
 											<span><?php echo $project['Project']['name']; ?></span>
 											<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 										</div>
