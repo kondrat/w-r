@@ -27,10 +27,22 @@
 .clock1 {
 	color: green;
 }
+.clock1Current {
+	position:absolute;
+	font-size: small;
+	top:0;
+	right:10px;
+}
 .clock2 {
 	color: red;
-	/*background-color: #ffd7d7;*/
 }
+.clock2Current {
+	position:absolute;
+	font-size: small;
+	top:0;
+	left:10px;
+}
+
 
 /*paginator classes*/
 .page {
@@ -173,11 +185,13 @@
 	font-weight: bold;
 	font-size: 10pt;
 	cursor: pointer;
+	font-family: comic Sans MS;
 }
 .projectMain {
 	background-color:white;
 	display:none;
 	border: 3px solid #ccc;
+	position:relative;
 }
 div.myProject{
  	margin-bottom:10px;
@@ -189,7 +203,7 @@ div.myProject{
 .myProjectFirst {
 	margin-bottom: 5px;
 }
-.projectMainClose, .myProject {
+.myProject {
 	cursor:pointer;
 }
 .projectWrapper{
@@ -227,6 +241,7 @@ div.myProject{
 	text-align:center;
 	height:20px;
 }
+
 .projectPreviewBg {
 	width:100%;
 	height:100%;
@@ -246,12 +261,54 @@ div.myProject{
 	font-weight:bold;
 	margin:5px 0 0 10px;
 }
-
-
-
-.timerControl div {
-	/*display: inline;*/
+.closeProjectSelect{
+	background-image:url(../img/icons/close_1.png);
+	cursor:pointer;
+	height:24px;
+	top:10px;
+	position:absolute;
+	right:10px;
+	width:24px;
 }
+.closeProjectSelect:hover{
+	background-image:url(../img/icons/close_2.png);	
+}
+
+.timerControl {
+	position:relative;
+}
+.currentProject{
+	position:absolute;
+	border:2px solid silver;
+	text-align:center;
+	font-size: 8pt;
+	font-weight:bold;
+	top:20px;
+	left:0;
+	height: 12px;
+	line-height:1.1em;
+}
+.currentProject span {
+	color:green;
+	/*
+	left:0;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:50;	
+	*/
+	padding:0 8px;
+}
+.currentProjectBg {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	background-color:green;
+	opacity:0.17;
+	filter: alpha(opacity = 17);
+}
+
 .stopStart {
 	position:absolute;
 	left: 303px;
@@ -328,16 +385,23 @@ div.myProject{
 
 .newProject {
 	font-weight: bold;
+	font-family:comic Sans MS;
 	margin: 10px;
 }
 .newProject a {
 	text-decoration:none;
-	color: gray;
+	color: sienna;
 	font-size:18pt;
 }
 .newProject a:hover {
-	color: #000;
+	color: saddleBrown;
 	text-decoration:underline;
+}
+.newProject a:active {
+	color: saddleBrown;
+}
+.newProject a:visited {
+	color: saddleBrown;
 }
 .projects .input {
 	float: none;

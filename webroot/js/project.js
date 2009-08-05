@@ -1,10 +1,26 @@
 jQuery(document).ready( function(){
+				//alert(projectId);
+				
+				if ( typeof projectId == 'undefined' || projectId == null) { 
 
-		$(".projectTitle, .projectMainClose ").click(function(){
+					projectId = $('.myProject:first').attr("id");
+					colorProjectId = $('.myProject:first').css("color");
+					projectName = $('.myProject:first').text();
+
+				}				
+
+		
+					$('.clock1, .work').css({'color':colorProjectId});
+					$('.currentProject span').text(projectName);
+					$('.currentProject span').css({'color':colorProjectId});	
+					$('.currentProjectBg').css({'background-color':colorProjectId});						
+				
+							
+		$(".projectTitle, .closeProjectSelect ").click(function(){
 			
    		if ( $(".projectMain").is(":hidden") ) {
             $(".projectMain").slideDown("fast");
-						$(".projectTitle").text('close id').css({'color' : 'blue'});
+						$(".projectTitle").text('close id').css({'color' : 'sienna'});
           } else {
             $(".projectMain").slideUp();
 						$(".projectTitle").text('switch projects').css({'color' : '#000'});
@@ -34,6 +50,10 @@ jQuery(document).ready( function(){
 				projectName = $(this).text();				
 				colorProjectId = $(this).css("color");				
 				$('.clock1, .work').css({'color':colorProjectId});
+				//$('.work span').text(projectName);
+				$('.currentProject span').text(projectName);
+				$('.currentProject span').css({'color':colorProjectId});
+				$('.currentProjectBg').css({'background-color':colorProjectId});	
 				$('.work span').text(projectName);
 				$('.rest div.minusRest').trigger('click');
 
@@ -47,7 +67,10 @@ jQuery(document).ready( function(){
 				colorProjectId = $(this).css("color");
 
 				$('.clock1, .work').css({'color':colorProjectId});
-				$('.work span').text(projectName);
+				//$('.work span').text(projectName);
+				$('.currentProject span').text(projectName);
+				$('.currentProject span').css({'color':colorProjectId});
+				$('.currentProjectBg').css({'background-color':colorProjectId});					
 
 				$('#clock1 .clockBackground').css({'background-color' : colorProjectId });
 
@@ -60,6 +83,8 @@ jQuery(document).ready( function(){
 			
 				nextInterval = 1;
 				typeInt = 'work';
+				sec1Cur = 0;
+				$('.clock1Current').html('00:00:00');
 			} 
 	
 			

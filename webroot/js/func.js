@@ -9,6 +9,46 @@ function saveTime2( hourStatJson ) {
 		);	
 	
 }
+function timer(timeToDo) {
+	var hourCur,minutCur,secCur;
+	var resSecCur = "00";
+	var resMinCur = "00";
+	var resHourCur = "00";
+	hourCur = parseInt(timeToDo/3600);
+	minutCur = parseInt( ( timeToDo - (hourCur*3600) )/60 );
+	secCur = timeToDo - (hourCur*3600) - (minutCur*60);
+	
+					if ( secCur < 10 ) {
+							resSecCur = '0' + secCur;
+						} else if ( secCur >= 10 && secCur < 60 ) {
+							resSecCur = secCur;
+						} else if ( secCur == 60 ) {
+							resSecCur = "00";
+							secCur = 0;
+							minutCur++;
+						}
+						
+						if ( minutCur > 0 && minutCur < 10 ) {
+							resMinCur = "0" + minutCur;
+						} else if (minutCur >= 10 && minutCur < 60) {
+							resMinCur = minutCur;
+						} else if ( minutCur == 60 ) {
+							resMinCur = "00";
+							minutCur = 0;
+							hourCur++;
+						}
+						
+						if ( hourCur > 0 && hourCur < 10 ) {
+							resHourCur = "0" + hourCur;
+						} else if ( hourCur >= 10 && hourCur < 24 ) {
+							resHourCur = hourCur;
+						} else if ( hourCur == 24) {
+							resHourCur = "00";
+							hourCur = 0;
+						}
+	return (resHourCur + ":" + resMinCur + ":" + resSecCur );
+}
+
 
 function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 	

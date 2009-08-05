@@ -255,8 +255,7 @@ jQuery(document).ready( function(){
 										});
 										$('#testCorrection').html(nnnC);
 									}			
-			
-			
+
 		}
 	});
 

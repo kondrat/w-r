@@ -5,12 +5,14 @@
 	<?php //echo $form->create('Interval');?>
 		<div class="timerControl clearfix">
 			<div class="projectTitle span-3"><?php __('switch projects');?></div>
+			<div class="currentProject">
+				<span><?php __('Work');?></span>
+				<div class="currentProjectBg"></div>
+			</div>
 		</div>
     <div class="span-16 last topChessWrapper">
     	
 	    	<div class="stopStart span-1">
-					<!--	<div class="stopInterval" style="cursor: pointer;"><?php __('Press to stop');?></div>-->
-					<!--<div class="startInterval" style="cursor: pointer;"><?php __('Press to start');?></div>-->
 					<div class="stopInterval"></div>
 					<div class="startInterval"></div>
 				</div>
@@ -35,6 +37,7 @@
         <div class="projectWrapper span-12 prepend-2">
 	      	<div class="projectMain">
 	      		<div class="projectSelect"><?php __('Which project You are working on?');?></div>
+	      		<div class="closeProjectSelect"></div>
 						<div class="projectsNameWrpapper clearfix">
 							<?php if ( isset( $projectUser ) && $projectUser != array() ): ?>
 								<?php $i = 0;?>
@@ -57,6 +60,7 @@
 								
 							<?php endif ?>
 						</div>
+						<div style="margin-left:10px"><?php echo $gravatar->image('a_kondrat@mail.ru',array('default' => 'identicon','size' => 40) ); ?></div>
 	        	<div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
 	       	</div>
         </div>
@@ -71,6 +75,7 @@
             <div class="clock clock1" id="clock1">
             	<span>00:00:00</span>
             	<div class="clockBackground" ></div>
+            	<div class="clock1Current">00:00:00</div>
             </div>
             
         </div>
@@ -78,6 +83,7 @@
             <div class="clock clock2" id="clock2">
             	<span>00:00:00</span>
             	<div class="clockBackground" ></div>
+            	<div class="clock2Current">00:00:00</div>
             </div>
             
         </div>
@@ -106,7 +112,7 @@
 		
 		?>
 		
-			<div class="grafWrapper span-14 last prepend-1">
+			<div class="grafWrapper span-15 last prepend-1">
 				<div class="span-2  graf">
 					<div class="grafConnector1"></div>
 					<div class="grafConnector"></div>

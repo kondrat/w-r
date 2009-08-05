@@ -7,8 +7,9 @@
 		var nextInterval = 0;
 		var typeInt = 'rest';
 
-		var projectName = 'Work';
+		//var projectName = 'Work';
 		var colorProjectId = 'green';
+		
 		var hourDay = 0;
 		var correction = 0;//switch correction mode;
 		var projectClicked = 0;
@@ -43,28 +44,31 @@
 		var saveSumm = 0;
 
 
-		var resSec = "00";
-		var resMin = "00";
-		var resHour = "00";
-		var sec = 0;
-		var minut = 0;
-		var hour = 0;
+		//var resSec = "00";
+		//var resMin = "00";
+		//var resHour = "00";
+		//var sec = 0;
+		var sec1Cur = 0;
+		//var minut = 0;
+		//var hour = 0;
 
 
 
 
-		var resSec2 = "00";
-		var resMin2 = "00";
-		var resHour2 = "00";
-		var sec2 = 0;
-		var minut2 = 0;
-		var hour2 = 0;
+		//var resSec2 = "00";
+		//var resMin2 = "00";
+		//var resHour2 = "00";
+		//var sec2 = 0;
+		var sec2Cur = 0;
+		//var minut2 = 0;
+		//var hour2 = 0;
 		
 jQuery(document).ready( function(){
  
 	if ( $.cookie("IniVars") != null ) {
 		
 			//alert($.cookie("IniVars"));
+
 
 		 var cc = JSON.parse( $.cookie("IniVars") );
 
@@ -80,6 +84,7 @@ jQuery(document).ready( function(){
 		 workDelta = cc.workDelta;
 		 workTotal = cc.workTotal;
 		 workHour = cc.workHour;
+		 sec1Cur = cc.sec1Cur;
 		 
 
 
@@ -87,28 +92,28 @@ jQuery(document).ready( function(){
 		 restDelta = cc.restDelta;
 		 restTotal = cc.restTotal;
 		 restHour = cc.restHour;
-			
+		 sec2Cur = cc.sec2Cur;			
 
 		 hourInt = cc.hourInt;
 		 graf = cc.graf;
 		 saveSumm  = cc.saveSumm;
 		 saveCount = cc.saveCount;
 		 
+		 /*
 		 sec = cc.sec;
 		 resSec = cc.resSec,
 		 resMin = cc.resMin;
 		 minut = cc.minut;
 		 resHour = cc.resHour;
 		 hour = cc.hour;
-		 sec = cc.sec;
-		
+
 		 sec2 = cc.sec2;
 		 resSec2 = cc.resSec2,
 		 resMin2 = cc.resMin2;
 		 minut2 = cc.minut2;
 		 resHour2 = cc.resHour2;
-		 hour2 = cc.hour2;
-		 sec2 = cc.sec2;			
+		 hour2 = cc.hour2;	
+		 */		
 	}
 	if ( $.cookie("HourStat") != null ) {
 		//alert($.cookie("HourStat"));
