@@ -26,7 +26,8 @@ jQuery(document).ready( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}		
-				if (typeInt != 'rest' || typeof HourStat[0][0] == 'undefined') {				
+
+			if (typeInt != 'rest' ||  typeof HourStat[0] == 'undefined') {									
 				$('#clock1 .clockBackground').css({'background-color' : '#fff' });
 				$('#clock2 .clockBackground').css({'background-color' : 'red' });
 				$('.work span').css({'font-size':'85%','border-bottom':'8px solid #ccc'});
@@ -34,7 +35,6 @@ jQuery(document).ready( function(){
 				
 				$('.minusRest').css({'display':'block'});
 				$('.minusWork').css({'display':'none'});
-				
 
 				nextInterval = 1;	
 				typeInt = 'rest';
@@ -97,7 +97,6 @@ jQuery(document).ready( function(){
 												document.title = 'Work ' + wT;
 												$('.clock1Current').html(timer(sec1Cur));	
 											}	
-												
 										if ( typeInt == 'rest' ) {
 												restTotal++;	
 												sec2Cur++;
@@ -106,117 +105,90 @@ jQuery(document).ready( function(){
 												document.title = 'Rest ' + wT2;
 												$('.clock2Current').html(timer(sec2Cur));	
 										}
-									
 								}
 										
 									
 										
 								if( nextInterval == 1 && correction != 1) {
+									
 									nextInterval = 0;
 									
-									workDelta = parseInt(workTotal) - parseInt(workStamp);											
-									restDelta = parseInt(restTotal) - parseInt(restStamp);											
+									if ( typeof HourStat[0] == 'undefined' ) {
+										alert('only One');
+										HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );
+										grafon4(HourStat);
 																			
-									workStamp = workTotal;
-									restStamp = restTotal;	
-									
-									if ( typeof HourStat[hourDay][0] == 'undefined' ) {
-										HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
-										grafon3(HourStat);									
 									} else {
 										
-																		
 										var Delta1 = 0;
-										if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'work' ) {
-											//Delta1 = workDelta;
+										if ( HourStat[HourStat.length - 1 ][1] == 'work' ) {	
 											Delta1 = sec1Cur;
-										} else if ( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == 'rest' ) {
-											//Delta1 = restDelta;
+										} else if ( HourStat[HourStat.length - 1 ][1] == 'rest' ) {
 											Delta1 = sec2Cur;
 										}	
 										
 										
-										var temp1 = HourStat[hourDay].pop();									
-										temp1[0] = temp1[0] + Delta1;
+										var temp1 = HourStat.pop();									
+										temp1[0] = Delta1;
 										if( temp1[0] > 4 ) {									
-											HourStat[hourDay].push(temp1);
-											HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );
+											HourStat.push(temp1);
+											HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );
+											
 										} else {
-											if ( typeof HourStat[hourDay][0] == 'undefined' ) {//new intreval instead of the previous short one
-												HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );	
-												HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];						
+											if ( typeof HourStat[0] == 'undefined' ) {//new intreval instead of the previous short one
+												HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );	
+												HourStat[HourStat.length - 1 ][0] += temp1[0];						
 											} else {										 											
 												
-												 	if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] == temp1[1] ) { //from work to work												 														 		
-														HourStat[hourDay].push( new Array(temp1[0],typeInt,projectId) );
+												 	if( HourStat[HourStat.length - 1 ][1] == temp1[1] ) { //from work to work
+														HourStat.push( new Array(temp1[0],typeInt,projectId) );
 													} else { // from work to rest
-														HourStat[hourDay][HourStat[hourDay].length - 1 ][0] += temp1[0];																										
+														HourStat[HourStat.length - 1 ][0] += temp1[0];
 													}
 													
 											}
-											if( HourStat[hourDay][HourStat[hourDay].length - 1 ][1] != temp1[1] )clockCorrection( temp1[0], temp1[1]);	 																																																											
+											if( HourStat[HourStat.length - 1 ][1] != temp1[1] ) clockCorrection( temp1[0], temp1[1]);
 										}																																						
 									}
 									
-									grafon3(HourStat);
+									//grafon4(HourStat);
 														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
-									HourStat[hourDay].push( new Array(0,typeInt,projectId,colorProjectId) );										
-									grafon3(HourStat);									
+									HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );										
+									grafon4(HourStat);									
 								}	
 								
 								//flags down
 								nextInterval = 0;	
 								correction = 0;
 								projectClicked = 0;
-								nextHour = 0;
-																				
+								//nextHour = 0;
+								
+
+									
+
 								if ( graf == 5 ) {
 																	
 									graf = 0;
-									
+										/*
 										workDelta = parseInt(workTotal) - parseInt(workStamp);																					
 										restDelta = parseInt(restTotal) - parseInt(restStamp);
 										
 										workStamp = workTotal;											
 										restStamp = restTotal;	
-																			 		
+										*/									 		
 									var Delta = 0;
 									if ( typeInt == 'rest' ) {
-										Delta = restDelta;
+										//Delta = restDelta;
+										Delta = sec2Cur;
 									} else if ( typeInt == 'work' ) {
-										Delta = workDelta;
+										Delta = sec1Cur;
 									}											
 
-									
-									var temp2 = HourStat[hourDay].pop();
-									temp2[0] = parseInt(temp2[0]) + parseInt(Delta);									
-									HourStat[hourDay].push(temp2);																			
-									grafon3(HourStat);
-									//stat
-									if ( 100 > 10 ) {
-										var nnnT = '';
-										
-										$.each(HourStat, function() {
-											var bbb2 = 0;
-											nnnT += '<div style="border:1px solid;padding: 5px;">';		 
-											$.each(this, function() {	
-												var bbb1;
-											
-												$.each(this, function() {
-													if ( !isNaN(parseInt(this)) ) {
-														bbb1 = parseInt(this)*100/HourCalc;
-														bbb2 += bbb1;
-													}
-												});
-																				
-													nnnT += this + " : <br /><b>"+ bbb1 + "</b><hr />";									
-											});
-											nnnT += "</div><i style='color:red'>"+bbb2+"</i><hr />";							
-										});
-									}
-									$('#hourstat').html(nnnT);
-															
+									HourStat[HourStat.length -1][0] = Delta;																		
+							
+									grafon4(HourStat);
+
 								}//graf
 	
 								if ( saveSumm  == 10 ) {									
@@ -228,6 +200,7 @@ jQuery(document).ready( function(){
 									saveSumm = 0;
 								}
 	
+								/*
 								if ( hourInt == HourCalc ) {
 									nextHour = 1;
 									nextInterval = 1;
@@ -237,6 +210,7 @@ jQuery(document).ready( function(){
 									grafon3(HourStat);	
 									hourInt = 0
 								}	
+								*/
 						}	,100);	
 			});
 
@@ -324,9 +298,9 @@ jQuery(document).ready( function(){
 			typeInt = 'rest';
 			hourDay = 0;
 			grafClass = 'graf0';
-			nextHour = 0;
+			//nextHour = 0;
 			HourStat = new Array();
-			HourStat[0] = new Array();
+			//HourStat[0] = new Array();
 			projectId = undefined;
 						
 			workStamp = 0;
@@ -337,7 +311,7 @@ jQuery(document).ready( function(){
 			restStamp = 0;
 			restDelta = 0;
 			restTotal = 0;
-			sec1Cur = 0;
+			sec2Cur = 0;
 
 	
 			hourInt = 0;

@@ -48,8 +48,6 @@ function timer(timeToDo) {
 						}
 	return (resHourCur + ":" + resMinCur + ":" + resSecCur );
 }
-
-
 function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 	
 		//workPS = Math.floor(workHour2/60*100);
@@ -93,6 +91,7 @@ function grafon2( workHour2, typeInt2 ,nextInt, color ) {
 		}
 	
 }
+
 function grafon3 (HourStat) {
 		$('.graf:gt(0), .interval').remove();	
 		$.each(HourStat, function(i) {
@@ -104,6 +103,63 @@ function grafon3 (HourStat) {
 				grafon2(this[0],null, 0 ,null );														
 			});																	
 		});			
+}
+
+function grafon4(HourStat) {
+	
+		$('.graf:gt(0), .interval').remove();
+		
+			var I = 60;
+			var inTe;			
+
+
+
+		$.each(HourStat, function(i) {
+
+				inTe = this[0];	
+			
+				do{
+					if( inTe < I ) {
+
+						I = parseInt(I) - parseInt(this[0]);
+						
+						if ( this[1] == 'rest' ) {
+							$('.graf:last').append('<div class="interval" style="background-color: red;"></div>');		//red			
+						} else {
+							$('.graf:last').append('<div class="interval" style=" background-color: '+this[3]+';"></div>');		//green		
+						}	
+						$('.interval:last').width( inTe/60*100+"%");
+							
+						inTe = 0;								
+
+					} else {
+						//alert(inTe);
+						
+						if ( this[1] == 'rest' ) {
+							$('.graf:last').append('<div class="interval" style="background-color: red;"></div>');		//red			
+						} else {
+							$('.graf:last').append('<div class="interval" style=" background-color: '+this[3]+';"></div>');		//green		
+						}	
+						$('.interval:last').width( I/60*100+"%");
+						
+						inTe = parseInt(inTe) - parseInt(I);
+						
+						$('.grafWrapper').append(	'<div class="graf span-2"><div class="grafConnector" /></div>');
+						//alert('inTe : '+inTe);
+						
+						I = 60
+												
+					}
+				
+				}
+				while (inTe != 0);				
+			
+
+				//stat toDel
+				stat(HourStat,'#hourstat');				
+																			
+		});	
+					
 }
 function clockCorrection (stepToDo, stepType) {
 						//stepToDo - step to subtract.
@@ -202,8 +258,8 @@ function clockCorrection (stepToDo, stepType) {
 				
 					
 					
-					$('#clock1 span').html(resHour + ":" + resMin + ":" + resSec );
-					$('#clock2 span').html(resHour2 + ":" + resMin2 + ":"+ resSec2);			
+					//$('#clock1 span').html(resHour + ":" + resMin + ":" + resSec );
+					//$('#clock2 span').html(resHour2 + ":" + resMin2 + ":"+ resSec2);			
 	
 	
 }
@@ -224,7 +280,24 @@ function HourStatCorrection() {
 		}	
 	}
 }
+function stat(intevalArray, elm) {
 
+		$(elm).empty();
+		
+		var Interval = '';
+		
+		$.each(intevalArray, function() {
+				if(this[1] == 'work' ){
+					var typeInn = '<span style="color:green">'+this[1]+'</span>';
+				} else {
+					var typeInn = '<span style="color:red">'+this[1]+'</span>';
+				}
+				var colorr = ' : <span style="padding:0 2px;color:white; font-size:smaller; background-color:'+this[3]+'">'+this[3]+'</span>';
+				Interval = '<b>'+this[0]+'</b> : '+typeInn+' : '+'<em>'+this[2]+'</em>'+colorr+'<hr style="margin-bottom:3px;" />';
+				$(elm).append(Interval);
+		});
+	$(elm).wrapInner('<div style="background-color:#eee; padding:5px; border:2px solid;"></div>');	
+}
 //misc
 function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
 	var scrollBars = (Scroll!=0) ? 1 : 0;

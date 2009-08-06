@@ -141,7 +141,7 @@ jQuery(document).ready( function(){
 				
 		}//ii
 			HourStat.reverse();
-			grafon3(HourStat);	
+			grafon4(HourStat);	
 			
 
 			if ( totalStep > 0 ) {	
@@ -180,34 +180,7 @@ jQuery(document).ready( function(){
 
 						
 						//to del;
-									if ( 100 > 10 ) {
-										var nnnC = '';										
-										$.each(HourStat, function() {
-											nnnC += '<div class="span-5 clearfix" style="border:1px solid;padding: 5px;">';		 
-											$.each(this, function() {	
-												var bbb1 = '';
-											
-												$.each(this, function() {
-													if ( !isNaN(parseInt(this)) ) {
-														bbb1 += '<b>'+this+'</b>&nbsp;';
-													} else if ( this == 'rest' ) {
-														bbb1 += '&nbsp;<b style="color:red">'+this +'</b>';
-													} else if (this == 'temp') {
-														bbb1 += '&nbsp;<b style="color:teal">'+this +'</b>';														
-													}else if (this == 'work') {
-														bbb1 += '&nbsp;<b style="color:green">'+this +'</b>';														
-													} else {
-														bbb1 += '&nbsp;<b>'+this+'</b>';
-													}
-												});
-																				
-													nnnC += bbb1+ "<hr />";									
-											});
-											nnnC += "</div><hr />";							
-										});
-										$('#testCorrection').html(nnnC);
-									}
-
+						stat(HourStat,'#testCorrection');
 				
 	})
 	
@@ -224,7 +197,7 @@ jQuery(document).ready( function(){
 				var ccc = JSON.parse( toUndo[0] );
 				HourStat = ccc;
 
-				grafon3 (HourStat);
+				grafon4 (HourStat);
 			}
 
 						//to del;

@@ -7,7 +7,7 @@
 		var nextInterval = 0;
 		var typeInt = 'rest';
 
-		//var projectName = 'Work';
+		var projectName = 'Work';
 		var colorProjectId = 'green';
 		
 		var hourDay = 0;
@@ -15,10 +15,10 @@
 		var projectClicked = 0;
 		var totalMinus = 0;
 
-		var nextHour = 0;
+		//var nextHour = 0;
 		var HourStat = new Array();
-		 		HourStat[0] = new Array();
-				HourStatCache = new Array();
+		 		//HourStat[0] = new Array();
+		var	HourStatCache = new Array();
 
 
 				
@@ -26,18 +26,18 @@
 		var projectId;
 
 		
-					
+		var workTotal = 0;
+		var restTotal = 0;
+		
+		/*					
 		var workStamp = 0;
 		var workDelta = 0;
-		var workTotal = 0;
 		var workHour = 0;
-		
-
+	
 		var restStamp = 0;
 		var restDelta = 0;
-		var restTotal = 0;
 		var restHour = 0;
-			
+		*/	
 
 		var hourInt = 0;
 		var graf = 0;
@@ -80,18 +80,18 @@ jQuery(document).ready( function(){
 		 projectName = cc.projectName;
 		 colorProjectId = cc.colorProjectId;			
 					
-		 workStamp = cc.workStamp;
-		 workDelta = cc.workDelta;
+		 //workStamp = cc.workStamp;
+		 //workDelta = cc.workDelta;
 		 workTotal = cc.workTotal;
-		 workHour = cc.workHour;
+		 //workHour = cc.workHour;
 		 sec1Cur = cc.sec1Cur;
 		 
 
 
-		 restStamp = cc.restStamp;
-		 restDelta = cc.restDelta;
+		 //restStamp = cc.restStamp;
+		 //restDelta = cc.restDelta;
 		 restTotal = cc.restTotal;
-		 restHour = cc.restHour;
+		 //restHour = cc.restHour;
 		 sec2Cur = cc.sec2Cur;			
 
 		 hourInt = cc.hourInt;
