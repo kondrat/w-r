@@ -33,6 +33,7 @@ jQuery(document).ready( function(){
 			//$(".stopInterval").trigger('click');
 			var prevProjectId = projectId;
 			projectId = $(this).attr("id");
+			//alert(projectId);
 			var index = $(".myProject").index(this);
 			if ( index > 0 ) {
 				var myPr = $(this).remove();

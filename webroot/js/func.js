@@ -105,59 +105,47 @@ function grafon3 (HourStat) {
 		});			
 }
 
-function grafon4(HourStat) {
-	
-		$('.graf:gt(0), .interval').remove();
-		
-			var I = 60;
-			var inTe;			
-
-
-
+function grafon4(HourStat) {	
+		$('.graf:gt(0), .interval').remove();		
+		var I = HourCalc;
+		var inTe = 0;			
 		$.each(HourStat, function(i) {
 
 				inTe = this[0];	
 			
-				do{
+				do {
 					if( inTe < I ) {
 
-						I = parseInt(I) - parseInt(this[0]);
+						I = parseInt(I) - parseInt(inTe);
 						
 						if ( this[1] == 'rest' ) {
 							$('.graf:last').append('<div class="interval" style="background-color: red;"></div>');		//red			
 						} else {
 							$('.graf:last').append('<div class="interval" style=" background-color: '+this[3]+';"></div>');		//green		
 						}	
-						$('.interval:last').width( inTe/60*100+"%");
+						$('.interval:last').width( inTe/HourCalc*100+"%");
 							
 						inTe = 0;								
 
 					} else {
-						//alert(inTe);
-						
 						if ( this[1] == 'rest' ) {
 							$('.graf:last').append('<div class="interval" style="background-color: red;"></div>');		//red			
 						} else {
 							$('.graf:last').append('<div class="interval" style=" background-color: '+this[3]+';"></div>');		//green		
 						}	
-						$('.interval:last').width( I/60*100+"%");
+						$('.interval:last').width( I/HourCalc*100+"%");
 						
 						inTe = parseInt(inTe) - parseInt(I);
 						
 						$('.grafWrapper').append(	'<div class="graf span-2"><div class="grafConnector" /></div>');
-						//alert('inTe : '+inTe);
-						
-						I = 60
-												
+					
+						I = HourCalc;											
 					}
 				
 				}
 				while (inTe != 0);				
-			
-
 				//stat toDel
-				stat(HourStat,'#hourstat');				
-																			
+				stat(HourStat,'#hourstat');																			
 		});	
 					
 }

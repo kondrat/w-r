@@ -1,5 +1,5 @@
 jQuery(document).ready( function(){
-
+	
 	$('#clock1, div.work2 span').click( function(){
 		
 			if (!interval) {
@@ -130,11 +130,13 @@ jQuery(document).ready( function(){
 										
 										var temp1 = HourStat.pop();									
 										temp1[0] = Delta1;
+										alert(temp1);
 										if( temp1[0] > 4 ) {									
 											HourStat.push(temp1);
 											HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );
 											
 										} else {
+											alert('nuh');
 											if ( typeof HourStat[0] == 'undefined' ) {//new intreval instead of the previous short one
 												HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );	
 												HourStat[HourStat.length - 1 ][0] += temp1[0];						
@@ -151,7 +153,7 @@ jQuery(document).ready( function(){
 										}																																						
 									}
 									
-									//grafon4(HourStat);
+									grafon4(HourStat);
 														
 								}	else if ( nextInterval == 1 && correction == 1 ) {
 									HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );										
@@ -170,13 +172,7 @@ jQuery(document).ready( function(){
 								if ( graf == 5 ) {
 																	
 									graf = 0;
-										/*
-										workDelta = parseInt(workTotal) - parseInt(workStamp);																					
-										restDelta = parseInt(restTotal) - parseInt(restStamp);
-										
-										workStamp = workTotal;											
-										restStamp = restTotal;	
-										*/									 		
+								 		
 									var Delta = 0;
 									if ( typeInt == 'rest' ) {
 										//Delta = restDelta;
