@@ -1,5 +1,6 @@
 jQuery(document).ready( function(){
 	
+	//work
 	$('#clock1, div.work2 span').click( function(){
 		
 			if (!interval) {
@@ -16,12 +17,12 @@ jQuery(document).ready( function(){
 			if ( typeInt != 'work') {
 				nextInterval = 1;
 				typeInt = 'work';	
-				sec1Cur = 0;
 				$('.clock1Current').html('00:00:00');		
 			}	
 	
 	});
 	
+	//rest
 	$('#clock2, div.rest2 span').click( function(){
 			if (!interval) {
 				$(".startInterval").trigger('click');
@@ -38,7 +39,6 @@ jQuery(document).ready( function(){
 
 				nextInterval = 1;	
 				typeInt = 'rest';
-				sec2Cur = 0;
 				$('.clock2Current').html('00:00:00');	
 			}
 	});
@@ -75,6 +75,8 @@ jQuery(document).ready( function(){
 					$('.minusRestData').addClass('hide').text('');
 					totalMinus = 0;										
 				}
+				
+				
 
 				var clockObj = new Date();
 				interval = setInterval(function () {
@@ -84,8 +86,7 @@ jQuery(document).ready( function(){
 								var increm = ( curClockObj.getTime() - clockObj.getTime() ) - (secInt*1000);		
 		
 								if ( increm > 999 ) { 
-											secInt++;										
-											hourInt++;										
+											secInt++;																			
 											graf++;
 											saveSumm++;
 										
@@ -113,45 +114,50 @@ jQuery(document).ready( function(){
 									
 									nextInterval = 0;
 									
+									
+									
+									//we start with the first int.
 									if ( typeof HourStat[0] == 'undefined' ) {
-										alert('only One');
-										HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );
-										grafon4(HourStat);
-																			
-									} else {
-										
-										var Delta1 = 0;
-										if ( HourStat[HourStat.length - 1 ][1] == 'work' ) {	
-											Delta1 = sec1Cur;
-										} else if ( HourStat[HourStat.length - 1 ][1] == 'rest' ) {
-											Delta1 = sec2Cur;
-										}	
-										
-										
-										var temp1 = HourStat.pop();									
-										temp1[0] = Delta1;
-										alert(temp1);
-										if( temp1[0] > 4 ) {									
-											HourStat.push(temp1);
-											HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );
-											
+										if ( typeInt == 'work' ) {
+											HourStat.push( new Array(0,'work',projectId,colorProjectId) );
 										} else {
-											alert('nuh');
-											if ( typeof HourStat[0] == 'undefined' ) {//new intreval instead of the previous short one
-												HourStat.push( new Array(0,typeInt,projectId,colorProjectId) );	
-												HourStat[HourStat.length - 1 ][0] += temp1[0];						
-											} else {										 											
-												
-												 	if( HourStat[HourStat.length - 1 ][1] == temp1[1] ) { //from work to work
-														HourStat.push( new Array(temp1[0],typeInt,projectId) );
-													} else { // from work to rest
-														HourStat[HourStat.length - 1 ][0] += temp1[0];
-													}
-													
+											HourStat.push( new Array(0,'rest','rest','red') );
+										}
+									} else {
+										if ( HourStat[HourStat.length - 1 ][1] == 'work' ) {
+											HourStat[HourStat.length - 1 ][0] = sec1Cur;
+											sec1CurPrev = sec1Cur;
+											sec1Cur = 0;
+										} else if ( HourStat[HourStat.length - 1 ][1] == 'rest' ) {
+											HourStat[HourStat.length - 1 ][0] = sec2Cur;
+											sec2CurPrev = sec2Cur;
+											sec2Cur = 0;
+										}
+										
+										clockCorrection(HourStat);
+											
+										if ( typeInt == 'work' ) {
+											//if ( HourStat[HourStat.length-1][2] != projectId ) {
+												HourStat.push( new Array(0,'work',projectId,colorProjectId) );
+												/*
+											}else {
+												sec1Cur = sec1CurPrev;
 											}
-											if( HourStat[HourStat.length - 1 ][1] != temp1[1] ) clockCorrection( temp1[0], temp1[1]);
-										}																																						
+											*/
+										} else if (typeInt == 'rest') {
+											//if ( HourStat[HourStat.length-1][2] != 'rest' ) {
+												HourStat.push( new Array(0,'rest','rest','red') );
+												/*
+											}else{
+												sec2Cur = sec2CurPrev;
+											}
+											*/
+										}
+										
+										
+										
 									}
+									
 									
 									grafon4(HourStat);
 														
@@ -165,9 +171,7 @@ jQuery(document).ready( function(){
 								correction = 0;
 								projectClicked = 0;
 								//nextHour = 0;
-								
 
-									
 
 								if ( graf == 5 ) {
 																	
@@ -175,7 +179,6 @@ jQuery(document).ready( function(){
 								 		
 									var Delta = 0;
 									if ( typeInt == 'rest' ) {
-										//Delta = restDelta;
 										Delta = sec2Cur;
 									} else if ( typeInt == 'work' ) {
 										Delta = sec1Cur;
@@ -190,23 +193,10 @@ jQuery(document).ready( function(){
 								if ( saveSumm  == 10 ) {									
 									//to create json text.
 									var HourStatJSONText = JSON.stringify(HourStat);
-									
 									saveTime2( HourStatJSONText );
-
 									saveSumm = 0;
 								}
-	
-								/*
-								if ( hourInt == HourCalc ) {
-									nextHour = 1;
-									nextInterval = 1;
-									hourDay++;
-								 	HourStat[hourDay] = new Array();
-								 	
-									grafon3(HourStat);	
-									hourInt = 0
-								}	
-								*/
+
 						}	,100);	
 			});
 
@@ -218,41 +208,19 @@ jQuery(document).ready( function(){
 				//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
 								var varsObject = {		
 												'typeInt': typeInt,
-												'hourDay': hourDay,
 												
 												'projectId': projectId,
 												'projectName':projectName,
 												'colorProjectId':colorProjectId,
-															
-												'workStamp': workStamp,
-												'workDelta': workDelta,
+
 												'workTotal': workTotal,
 												'sec1Cur': sec1Cur,
-										
-												'restStamp': restStamp,
-												'restDelta': restDelta,
+		
 												'restTotal': restTotal,
 												'sec2Cur': sec2Cur,
 																							
-												'hourInt': hourInt,
 												'graf': graf,
 												'saveSumm': saveSumm, 
-										
-												/*
-												'sec': sec,
-												'resSec':resSec,
-												'resMin': resMin,
-												'minut': minut,
-												'resHour': resHour,
-												'hour': hour,
-												
-												'sec2': sec2,
-												'resSec2':resSec2,
-												'resMin2': resMin2,
-												'minut2': minut2,
-												'resHour2': resHour2,
-												'hour2':hour2,
-												*/	
 								};
 								var iniVarsJSONText = JSON.stringify(varsObject);	
 								//setting of the time offset for cookie (3hour ex.);											
@@ -280,9 +248,7 @@ jQuery(document).ready( function(){
 	//if we want to start int after loading
 	//$(".startInterval").trigger('click');	
 
-
 //misc
-
 	$('.delCookie').click(function(){
 		clearInterval(interval);
 		$.cookie("HourStat",null);
@@ -292,49 +258,24 @@ jQuery(document).ready( function(){
 			//interval;
 			
 			typeInt = 'rest';
-			hourDay = 0;
-			grafClass = 'graf0';
-			//nextHour = 0;
+
 			HourStat = new Array();
 			//HourStat[0] = new Array();
 			projectId = undefined;
 						
-			workStamp = 0;
-			workDelta = 0;
+
 			workTotal = 0;
 			sec1Cur = 0;			
 	
-			restStamp = 0;
-			restDelta = 0;
+
 			restTotal = 0;
 			sec2Cur = 0;
 
-	
-			hourInt = 0;
+
 			graf = 0;
 			saveSumm = 0;
-	
-			/*
-			 resSec = "00";
-			 resMin = "00";
-			 resHour = "00";
-			 sec = 0;
-			 minut = 0;
-			 hour = 0;
-			 sec = 0;
-
-			 resSec2 = "00";
-			 resMin2 = "00";
-			 resHour2 = "00";
-			 sec2 = 0;
-			 minut2 = 0;
-			 hour2 = 0;
-			 sec2 = 0;
-			 */	
-			
 		}
 		location.reload();
-			
 	})
 				
 });

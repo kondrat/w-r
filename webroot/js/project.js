@@ -84,14 +84,13 @@ jQuery(document).ready( function(){
 			
 				nextInterval = 1;
 				typeInt = 'work';
-				sec1Cur = 0;
 				$('.clock1Current').html('00:00:00');
 			} 
 	
 			
 		});
 	
-			
+//--------------------------------------------------------------------			
 		$(".newProject").click(function () {
       $(".newProjectWrapper").toggle();
       return false;
