@@ -1,6 +1,6 @@
 		var HourCalc = 3600;
 		//var HourCalc = 60;
-		var cookieLive = 3*3600;
+		var cookieLive = 1*3600;
 
 		var secInt = 0;
 		var interval = false;
@@ -57,15 +57,17 @@ jQuery(document).ready( function(){
 		 sec2Cur = cc.sec2Cur;			
 
 
-		 graf = cc.graf;
-		 saveSumm  = cc.saveSumm;
-		 saveCount = cc.saveCount;
+		// graf = cc.graf;
+		// saveSumm  = cc.saveSumm;
+		// saveCount = cc.saveCount;
 	}
+	
 	if ( $.cookie("HourStat") != null ) {
 		//alert($.cookie("HourStat"));
 		var hs = JSON.parse( $.cookie("HourStat") );		
 		HourStat = hs;
 		grafon4 (HourStat);							
 	}
+	
 });
 	

@@ -107,8 +107,7 @@ jQuery(document).ready( function(){
 												$('.clock2Current').html(timer(sec2Cur));	
 										}
 								}
-										
-									
+
 										
 								if( nextInterval == 1 && correction != 1) {
 									
@@ -205,7 +204,7 @@ jQuery(document).ready( function(){
 				if ( correction == 1 ) {
 					HourStatCorrection();
 				}						
-				//saveTime( HourStat[hourDay][0][0][0], HourStat[hourDay][1], nextHour);
+				//saveTime2( HourStat);
 								var varsObject = {		
 												'typeInt': typeInt,
 												
@@ -219,13 +218,13 @@ jQuery(document).ready( function(){
 												'restTotal': restTotal,
 												'sec2Cur': sec2Cur,
 																							
-												'graf': graf,
-												'saveSumm': saveSumm, 
+												//'graf': graf,
+												//'saveSumm': saveSumm, 
 								};
 								var iniVarsJSONText = JSON.stringify(varsObject);	
 								//setting of the time offset for cookie (3hour ex.);											
-								var dateExp = new Date();	
-								dateExp.setTime( dateExp.getTime() + parseInt(cookieLive) );
+								var dateExp = new Date();
+								dateExp.setTime( dateExp.getTime()+parseInt(cookieLive)*1000  );
 								//vars cookie setting
 								$.cookie("IniVars", iniVarsJSONText,{ expires: dateExp } );	
 								//hourStat cookie saving

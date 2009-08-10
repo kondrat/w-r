@@ -124,7 +124,10 @@ function clockCorrection (HourStat) {
 		$('#clock1 span').html(timer(workTotal));
 		$('#clock2 span').html(timer(restTotal));
 }
+
 function HourStatCorrection() {
+	
+	
 	if( typeof HourStat != 'undefined' ) {
 		for ( var kk in HourStat ) {
 		
@@ -140,10 +143,12 @@ function HourStatCorrection() {
 			}
 		}	
 	}
+	
+	
 }
-function stat(intevalArray, elm) {
+function stat(intevalArray, domElm) {
 
-		$(elm).empty();
+		$(domElm).empty();
 		
 		var Interval = '';
 		
@@ -155,9 +160,9 @@ function stat(intevalArray, elm) {
 				}
 				var colorr = ' : <span style="padding:0 2px;color:white; font-size:smaller; background-color:'+this[3]+'">'+this[3]+'</span>';
 				Interval = '<b>'+this[0]+'</b> : '+typeInn+' : '+'<em>'+this[2]+'</em>'+colorr+'<hr style="margin-bottom:3px;" />';
-				$(elm).append(Interval);
+				$(domElm).append(Interval);
 		});
-	$(elm).wrapInner('<div style="background-color:#eee; padding:5px; border:2px solid;"></div>');	
+	$(domElm).wrapInner('<div style="background-color:#eee; padding:5px; border:2px solid;"></div>');	
 }
 //misc
 function openWin(wUri, wName, wWidth, wHeight, Scroll, wMenu) {
