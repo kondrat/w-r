@@ -3,7 +3,8 @@ function saveTime2( hourStatJson ) {
 			path + "/intervals/add",
 			{"data[work]": hourStatJson },
 					function(data){
-						$('#test2').html(data.hi+' - '+data.hi2+' - '+data.hi3);
+						$('#test2').html(data.hi);
+						hs2 = JSON.parse( data.hi );
 					},
 					"json"
 		);	

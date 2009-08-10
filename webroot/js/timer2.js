@@ -182,9 +182,7 @@ jQuery(document).ready( function(){
 									} else if ( typeInt == 'work' ) {
 										Delta = sec1Cur;
 									}											
-
-									HourStat[HourStat.length -1][0] = Delta;																		
-							
+									HourStat[HourStat.length -1][0] = Delta;																									
 									grafon4(HourStat);
 
 								}//graf
@@ -204,7 +202,6 @@ jQuery(document).ready( function(){
 				if ( correction == 1 ) {
 					HourStatCorrection();
 				}						
-				//saveTime2( HourStat);
 								var varsObject = {		
 												'typeInt': typeInt,
 												
@@ -221,7 +218,7 @@ jQuery(document).ready( function(){
 												//'graf': graf,
 												//'saveSumm': saveSumm, 
 								};
-								var iniVarsJSONText = JSON.stringify(varsObject);	
+								var iniVarsJSONText = JSON.stringify(varsObject);								
 								//setting of the time offset for cookie (3hour ex.);											
 								var dateExp = new Date();
 								dateExp.setTime( dateExp.getTime()+parseInt(cookieLive)*1000  );
@@ -231,6 +228,7 @@ jQuery(document).ready( function(){
 								var HourStatJSONText = JSON.stringify(HourStat);
 								$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
 								//alert($.cookie("HourStat"));
+								saveTime2(HourStatJSONText);
 		} );
 
 

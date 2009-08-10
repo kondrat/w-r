@@ -1,7 +1,9 @@
-		var HourCalc = 3600;
-		//var HourCalc = 60;
+		//var HourCalc = 3600;
+		var HourCalc = 60;
 		var cookieLive = 1*3600;
-
+		
+		var hs2;
+		
 		var secInt = 0;
 		var interval = false;
 		var nextInterval = 0;
@@ -67,6 +69,8 @@ jQuery(document).ready( function(){
 		var hs = JSON.parse( $.cookie("HourStat") );		
 		HourStat = hs;
 		grafon4 (HourStat);							
+	} else if (hs2 != null) {
+		alert('not Null');
 	}
 	
 });

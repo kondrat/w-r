@@ -98,7 +98,6 @@ class IntervalsController extends AppController {
 		
 				Configure::write('debug', 0);
 				$this->autoRender = false;
-				//print_r($this->data);
 							
 		if (!empty($this->data)) {
 			
@@ -114,13 +113,14 @@ class IntervalsController extends AppController {
 				}
 				
 				$this->data['Hour']['worksession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
-				//$this->Interval->Hour->save($this->data);
+				$this->data['Hour']['key'] = $key;
+				$this->Interval->Hour->save($this->data);
 				$workHoursArray = json_decode($this->data['work']);
 				
-				echo json_encode( array('hi'=> $ttbb, 'hi2'=> 'a', 'hi3'=> 'b' ) );
+				echo json_encode( array('hi'=> 'ok', 'hi2'=> 'a', 'hi3'=> 'b' ) );
 				exit;					
 				
-				$nextHour = $this->data['nextHour'];
+				
 				$workSession = $this->Session->read('workSession');
 				if ( $key != null || $userId != null ) {
 					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour, $workSession);
@@ -148,7 +148,7 @@ class IntervalsController extends AppController {
 				
 				
 				
-				echo json_encode( array('hi'=> $this->data['work'], 'hi2'=> $this->data['rest'], 'hi3'=> $this->data['nextHour'] ) );
+				echo json_encode( array('hi'=> $this->data['work'] ) );
 				exit;				
 				
 				
