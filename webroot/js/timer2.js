@@ -24,6 +24,7 @@ jQuery(document).ready( function(){
 	
 	//rest
 	$('#clock2, div.rest2 span').click( function(){
+
 			if (!interval) {
 				$(".startInterval").trigger('click');
 			}		
@@ -199,9 +200,11 @@ jQuery(document).ready( function(){
 
 					
 		$(window).unload( function () {
-				if ( correction == 1 ) {
-					HourStatCorrection();
-				}						
+			
+								if ( correction == 1 ) {
+									HourStatCorrection();
+								}	
+													
 								var varsObject = {		
 												'typeInt': typeInt,
 												
@@ -215,9 +218,10 @@ jQuery(document).ready( function(){
 												'restTotal': restTotal,
 												'sec2Cur': sec2Cur,
 																							
-												//'graf': graf,
-												//'saveSumm': saveSumm, 
+												'graf': graf,
+												'saveSumm': saveSumm, 
 								};
+								
 								var iniVarsJSONText = JSON.stringify(varsObject);								
 								//setting of the time offset for cookie (3hour ex.);											
 								var dateExp = new Date();
@@ -226,9 +230,9 @@ jQuery(document).ready( function(){
 								$.cookie("IniVars", iniVarsJSONText,{ expires: dateExp } );	
 								//hourStat cookie saving
 								var HourStatJSONText = JSON.stringify(HourStat);
-								$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
-								//alert($.cookie("HourStat"));
+								//$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
 								saveTime2(HourStatJSONText);
+								
 		} );
 
 
@@ -248,7 +252,7 @@ jQuery(document).ready( function(){
 //misc
 	$('.delCookie').click(function(){
 		clearInterval(interval);
-		$.cookie("HourStat",null);
+		saveTime2( null );
 		$.cookie("IniVars",null);
 		if ( 100 > 0 ) {			
 			secInt = 0;
@@ -257,7 +261,7 @@ jQuery(document).ready( function(){
 			typeInt = 'rest';
 
 			HourStat = new Array();
-			//HourStat[0] = new Array();
+			HourStat[0] = new Array();
 			projectId = undefined;
 						
 

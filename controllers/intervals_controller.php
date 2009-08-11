@@ -21,47 +21,45 @@ class IntervalsController extends AppController {
 			$hoursSaved = array();
 			$conditions = array();
 			$projectUser = array();
-			
-			$key = md5(uniqid(rand(), true));
-			
-			$this->Session->write('startTime', time() );
+
+			$key = null;
 								
-			if( !$this->Cookie->read('guestKey')) {	
-				
-				$this->Cookie->write('guestKey',$key, false, '360 days');		
-				
+			if( !$this->Cookie->read('guestKey') && !$this->Auth->user('id') ) {//looks like new user is tring us.	
+				$key = md5(uniqid(rand(), true));
+				$this->Cookie->write('guestKey',$key, false, '360 days');
+				//Do we need this?		
 				$this->Session->write('guestKey', $key );
-				
-				if( !$this->Session->check('guestKey') ) {				
-								
-				}	
-				
-				$workSession = md5(uniqid(rand(), true));
-				$this->Session->write('workSession', $workSession );	
-										
-			} else {
-				
+			} elseif( ($key = $this->Cookie->read('guestKey')) && !$this->Auth->user('id')) {
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
-					
-				$currentHour = $this->Interval->Hour->find('first', array( 'conditions'=> array('Hour.key'=> $this->Session->read('guestKey') ), 'fields' => array( 'Hour.worksession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+				$conditions = array('Hour.key'=> $key );
+			} elseif ( $key = $this->Auth->user('id') ) {
+				$conditions = array('Hour.user_id'=> $key );
+			}
+
+			$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => array( 'Hour.worksession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+
+				/*
 				if ( $currentHour != array() ) {
 					$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
-					$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
+					//$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
 				
 					$datetime = new DateTime($currentHour['Hour']['modified']);			 
 					if ( ( Date('U') - $datetime->format('U') ) > 10000 ) {
 						$workSession = md5(uniqid(rand(), true));
-						$this->Session->write('workSession', $workSession );
+						//$this->Session->write('workSession', $workSession );
 						//to close opend hour, to start new hour;	
 						$hoursSaved = array();
 					} else {
 						$this->Session->write('workSession', $currentHour['Hour']['worksession'] );
 					}					
-				
 				}
-							
-			}
+				*/
+				
 			
+
+
+
+			//finding of the user's projects
 			if ( $this->Auth->user('id') ) {
 					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
 			} else {
@@ -83,7 +81,7 @@ class IntervalsController extends AppController {
 
 
 			$this->set('projectUser', $projectUser);
-			$this->set('hoursSaved', $hoursSaved);
+			$this->set('workSession', $currentWorkSession);
 			
 	}
 //--------------------------------------------------------------------
@@ -104,54 +102,31 @@ class IntervalsController extends AppController {
 			App::import('Sanitize');
 			
 			if ($this->RequestHandler->isAjax()) {
-								
-				$userId= null;
+				
 				if ($this->Auth->user('id')) {
-					$userId = $this->Auth->user('id');
+					$this->data['Hour']['user_id'] = $this->Auth->user('id');
+					$conditions = array('Hour.user_id' => $this->data['Hour']['user_id'],'Hour.status'=>'open');
 				} else {
-					$key = $this->Session->read('guestKey');
+					$this->data['Hour']['key'] = $this->Session->read('guestKey');
+					$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
 				}
+				
+				
+				$currentWorkSession = $this->Interval->Hour->find('first',array('conditions'=> $conditions,'order' => array('Hour.created DESC') ) );
+				if ($currentWorkSession != array() ) {
+					$this->data['Hour']['id'] = $currentWorkSession['Hour']['id'];
+				}
+				
 				
 				$this->data['Hour']['worksession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
-				$this->data['Hour']['key'] = $key;
-				$this->Interval->Hour->save($this->data);
-				$workHoursArray = json_decode($this->data['work']);
 				
-				echo json_encode( array('hi'=> 'ok', 'hi2'=> 'a', 'hi3'=> 'b' ) );
+				
+				$this->Interval->Hour->save($this->data);
+				
+				echo json_encode( array('hi'=> 'ok') );
 				exit;					
 				
-				
-				$workSession = $this->Session->read('workSession');
-				if ( $key != null || $userId != null ) {
-					$hourId = $this->Interval->Hour->getHour($userId, $key, $nextHour, $workSession);
-				} else {
-					$hourId = 1000;
-				}
-									
-				if ( isset( $this->data['work']) && $this->data['work'] != 0 ) {
-									
-					$this->Interval->saveInterval( $this->data['work'] , $hourId, $projectId, 'work');
-					
-				} 
-				
-				if ( isset( $this->data['rest']) && $this->data['rest'] != 0 ) {
-					
-					$this->Interval->saveInterval($this->data['rest'], $hourId, $projectId, 'rest');
-					
-				} 
-			
-	
-				
-				
-				
-				
-				
-				
-				
-				echo json_encode( array('hi'=> $this->data['work'] ) );
-				exit;				
-				
-				
+				/*
 				$this->Interval->create();
 				if ($this->Interval->save($this->data)) {
 					$this->Session->setFlash(__('The Interval has been saved', true));
@@ -159,6 +134,7 @@ class IntervalsController extends AppController {
 				} else {
 					$this->Session->setFlash(__('The Interval could not be saved. Please, try again.', true));
 				}
+				*/
 			}
 			
 			

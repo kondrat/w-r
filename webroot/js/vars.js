@@ -9,8 +9,8 @@
 		var nextInterval = 0;
 		
 		var typeInt = 'rest';
-		var projectName = 'Work';
-		var colorProjectId = 'green';
+		var projectName = 'rest';
+		var colorProjectId = 'red';
 		
 
 		var correction = 0;//switch correction mode;
@@ -59,19 +59,19 @@ jQuery(document).ready( function(){
 		 sec2Cur = cc.sec2Cur;			
 
 
-		// graf = cc.graf;
-		// saveSumm  = cc.saveSumm;
-		// saveCount = cc.saveCount;
+			graf = cc.graf;
+			saveSumm  = cc.saveSumm;
+
 	}
 	
-	if ( $.cookie("HourStat") != null ) {
-		//alert($.cookie("HourStat"));
-		var hs = JSON.parse( $.cookie("HourStat") );		
-		HourStat = hs;
-		grafon4 (HourStat);							
-	} else if (hs2 != null) {
-		alert('not Null');
+
+			
+	if (hs2 != null && hs2 != 0) {	
+		HourStat = hs2;
+		grafon4 (HourStat);				
+	} else {
+		//var HourStat = new Array();
 	}
-	
+
 });
 	

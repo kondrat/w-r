@@ -4,7 +4,6 @@ function saveTime2( hourStatJson ) {
 			{"data[work]": hourStatJson },
 					function(data){
 						$('#test2').html(data.hi);
-						hs2 = JSON.parse( data.hi );
 					},
 					"json"
 		);	

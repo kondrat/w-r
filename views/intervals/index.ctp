@@ -1,5 +1,11 @@
 <?php
-	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'),false);
+
+	debug($workSession);
+	if ( $workSession != array() ) {
+		echo $javascript->codeBlock( 'var hs2 = '.$workSession['Hour']['worksession'] ,array('allowCache' => false,'safe'=>true,'inline'=>false));
+	}
+	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'),false);	
+	
 ?>
 <div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>
@@ -89,39 +95,7 @@
         </div>
       
 
-<?php if ( isset($hoursSaved) && $hoursSaved != array() ): ?>	
-	<div class="grafWrapper" >
-	<?php foreach ( $hoursSaved as $hour ) : ?>
-		<?php $work = $rest = 0;?>
-		<?php foreach ( $hour['Interval'] as $interval ) {
 
-			if ( $interval['type'] == 'work' ) {
-				$work += $interval['interval'];
-			} 
-			if ( $interval['type'] == 'rest') {
-				$rest = $interval['interval'];
-			}
-		}
-		
-		$work = floor($work/36);
-		$rest = floor($rest/36);
-		if ( ($work + $rest) == 99 ) {
-			$rest = 100 - $work;
-		}
-		$title = '"Work: '.$work.'% | Rest: '.$rest.'%"';
-		
-		?>
-		
-			<div class="grafWrapper span-15 last prepend-1">
-				<div class="span-2  graf">
-					<div class="grafConnector1"></div>
-					<div class="grafConnector"></div>
-				</div>
-			</div>
-
-	<?php endforeach ?>
-	</div><!--grafWrapper-->
-<?php else: ?>
 
 		<div class="grafWrapper span-14 last prepend-1">
 			<div class="span-2  graf ">
@@ -130,7 +104,7 @@
 			</div>
 		</div>
 		
-<?php endif ?>
+
 		
 
 <?php //echo $form->end( );?>
