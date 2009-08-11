@@ -252,7 +252,7 @@ jQuery(document).ready( function(){
 //misc
 	$('.delCookie').click(function(){
 		clearInterval(interval);
-		saveTime2( null );
+		delTime2();
 		$.cookie("IniVars",null);
 		if ( 100 > 0 ) {			
 			secInt = 0;

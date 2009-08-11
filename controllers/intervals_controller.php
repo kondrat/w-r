@@ -119,11 +119,19 @@ class IntervalsController extends AppController {
 				
 				
 				$this->data['Hour']['worksession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
-				
+				$idTemp = 'ok';
+				if($this->data['Hour']['worksession'] == 'del' && $this->data['Hour']['id'] != null) {
+					$this->Interval->Hour->delete($this->data['Hour']['id']);
+					$idTemp = ($this->data['Hour']['id']);
+				} else {
+					$idTemp = $this->data['Hour']['worksession'];//'notOk';
+					$idTemp = $this->data['work'].' blin';
+					//$this->data = null;
+				}
 				
 				$this->Interval->Hour->save($this->data);
-				
-				echo json_encode( array('hi'=> 'ok') );
+				$this->data = null;
+				echo json_encode( array('hi'=> $idTemp) );
 				exit;					
 				
 				/*
