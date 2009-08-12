@@ -183,6 +183,22 @@ jQuery(document).ready( function(){
 				$('img.projectEditImg').attr({src: "/w-r/img/icons/edit_2.png"});				
 			}			
 		);		
+
+
+		var $alert = $('#flashMessage');
+		if($alert.length) {
+				var alerttimer = window.setTimeout(function () {
+					$alert.trigger('click');
+				}, 3000);
+				$alert.animate({height: $alert.css('line-height') || '50px'}, 200)
+				.click(function () {
+					window.clearTimeout(alerttimer);
+					$alert.animate({height: '0'}, 200);
+				});
+		}
+
+
+
 				
 });
 

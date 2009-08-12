@@ -26,8 +26,7 @@ class IntervalsController extends AppController {
 								
 			if( !$this->Cookie->read('guestKey') && !$this->Auth->user('id') ) {//looks like new user is tring us.	
 				$key = md5(uniqid(rand(), true));
-				$this->Cookie->write('guestKey',$key, false, '360 days');
-				//Do we need this?		
+				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				$this->Session->write('guestKey', $key );
 			} elseif( ($key = $this->Cookie->read('guestKey')) && !$this->Auth->user('id')) {
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );

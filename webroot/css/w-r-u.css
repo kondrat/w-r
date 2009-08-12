@@ -165,3 +165,18 @@ div.formWrap input.form-error {
 	height: 60px;
 	float: left;
 }
+/*flash message*/
+#flashMessage {
+	position:absolute;
+	width: 600px;
+	background-color:#eee;
+	margin:0px;
+	font:bold 12pt/2.5em arial sans-serif;
+	text-align:center;
+	overflow: hidden;
+	opacity: .9;
+	height:0;
+}
+div.er {
+	color:red;
+}

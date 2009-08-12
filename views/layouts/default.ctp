@@ -79,7 +79,9 @@
 			            echo ' '.date("W"); ?>
 			        </div>
 		        <div class="span-16 clear last">
-							<?php $session->flash(); ?>
+						<div class="fl span-16 last" style="font-weight:bold; position:relative;">
+								<?php $session->flash(); ?>
+						</div>
 							<?php echo $content_for_layout; ?>
 		        </div>
 		    </div>
