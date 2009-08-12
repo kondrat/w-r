@@ -43,7 +43,6 @@ class Hour extends AppModel {
 	 *
 	 * @param string $userId
 	 * @param string $key
-	 * @param string $nextHour
 	 * @access public
 	 */
 	function getHour($userId = null, $key = null, $nextHour = 0, $workSession = null ) {

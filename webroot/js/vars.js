@@ -3,6 +3,7 @@
 		var cookieLive = 1*3600;
 		
 		var hs2;
+		var del = 1;
 		
 		var secInt = 0;
 		var interval = false;
@@ -37,12 +38,9 @@
 		
 jQuery(document).ready( function(){
  
-	if ( $.cookie("IniVars") != null ) {
-		
-			//alert($.cookie("IniVars"));
+	if ( $.cookie("CakeCookie[IniVars]") != null ) {
 
-
-		 var cc = JSON.parse( $.cookie("IniVars") );
+		 var cc = JSON.parse( $.cookie("CakeCookie[IniVars]") );
 
 
 		 typeInt = cc.typeInt;
@@ -69,8 +67,6 @@ jQuery(document).ready( function(){
 	if (hs2 != null && hs2 != 0) {	
 		HourStat = hs2;
 		grafon4 (HourStat);				
-	} else {
-		//var HourStat = new Array();
 	}
 
 });

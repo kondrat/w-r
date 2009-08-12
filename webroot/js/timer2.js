@@ -200,7 +200,7 @@ jQuery(document).ready( function(){
 
 					
 		$(window).unload( function () {
-			
+				if ( del == 1 ) {
 								if ( correction == 1 ) {
 									HourStatCorrection();
 								}	
@@ -227,11 +227,12 @@ jQuery(document).ready( function(){
 								var dateExp = new Date();
 								dateExp.setTime( dateExp.getTime()+parseInt(cookieLive)*1000  );
 								//vars cookie setting
-								$.cookie("IniVars", iniVarsJSONText,{ expires: dateExp } );	
+								$.cookie("CakeCookie[IniVars]", iniVarsJSONText,{ expires: dateExp } );	
 								//hourStat cookie saving
 								var HourStatJSONText = JSON.stringify(HourStat);
 								//$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
 								saveTime2(HourStatJSONText);
+				} 
 								
 		} );
 
@@ -250,33 +251,11 @@ jQuery(document).ready( function(){
 	//$(".startInterval").trigger('click');	
 
 //misc
-	$('.delCookie').click(function(){
-		clearInterval(interval);
-		delTime2();
-		$.cookie("IniVars",null);
-		if ( 100 > 0 ) {			
-			secInt = 0;
-			//interval;
-			
-			typeInt = 'rest';
 
-			HourStat = new Array();
-			HourStat[0] = new Array();
-			projectId = undefined;
-						
-
-			workTotal = 0;
-			sec1Cur = 0;			
-	
-
-			restTotal = 0;
-			sec2Cur = 0;
-
-
-			graf = 0;
-			saveSumm = 0;
-		}
-		location.reload();
+	$('.delWorkSession').click(function(){
+		del = 0;
+		$.cookie("CakeCookie[IniVars]", null );
 	})
+
 				
 });

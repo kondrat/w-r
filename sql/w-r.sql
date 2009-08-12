@@ -8,7 +8,7 @@
 # Target compatibility:         HeidiSQL w/ MySQL Server 5.0
 # Target max_allowed_packet:    1048576
 # HeidiSQL version:             4.0
-# Date/time:                    2009-07-29 21:39:50
+# Date/time:                    2009-08-12 21:07:22
 # --------------------------------------------------------
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;*/
@@ -37,7 +37,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
   `modified` datetime default NULL,
   PRIMARY KEY  (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 
 
@@ -48,10 +48,12 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `hours` (
 LOCK TABLES `hours` WRITE;
 /*!40000 ALTER TABLE `hours` DISABLE KEYS;*/
 REPLACE INTO `hours` (`id`, `user_id`, `key`, `status`, `worksession`, `created`, `modified`) VALUES
-	('1',NULL,NULL,'open','[[[9,"rest","rest_1"],[1,"work","project_1"]]]','2009-06-21 23:39:28','2009-06-21 23:39:28'),
-	('2',NULL,NULL,'open','[[[9,"rest","rest_1"],[10,"work","project_1"],[1,"rest","rest_1"]]]','2009-06-21 23:40:19','2009-06-21 23:40:19'),
-	('3',NULL,NULL,'open','[[[9,"rest","rest_1"],[10,"work","project_1"],[11,"rest","rest_1"]]]','2009-06-21 23:40:28','2009-06-21 23:40:28'),
-	('4',NULL,NULL,'open','[[[1,"rest","rest_1"],[9,"rest","rest_1"]]]','2009-06-22 00:10:13','2009-06-22 00:10:13');
+	('73',NULL,'83f799122ab30af1801cb48c9452e0d1','closed','[[5,"work","project_1","green"]]','2009-08-12 14:39:35','2009-08-12 14:39:50'),
+	('74',NULL,'83f799122ab30af1801cb48c9452e0d1','closed','[[5,"work","project_1","green"],[5,"rest","rest","red"]]','2009-08-12 20:21:01','2009-08-12 20:36:19'),
+	('75',NULL,'83f799122ab30af1801cb48c9452e0d1','open','[[10,"work","project_3","teal"],[9,"rest","rest","red"],[6,"work","project_2","olive"],[14,"rest","rest","red"],[16,"work","project_2","olive"],[5,"rest","rest","red"]]','2009-08-12 20:39:45','2009-08-12 20:42:14'),
+	('76',NULL,'cbd21e288a8858d72dd7acddc4b44245','closed','[[10,"work","project_3","teal"],[9,"rest","rest","red"],[6,"work","project_2","olive"],[14,"rest","rest","red"],[16,"work","project_2","olive"],[10,"rest","rest","red"]]','2009-08-12 20:53:18','2009-08-12 20:54:32'),
+	('77',NULL,'cbd21e288a8858d72dd7acddc4b44245','open','[]','2009-08-12 20:55:01','2009-08-12 20:58:55'),
+	('78',NULL,'1fcb66b55998b416be39ed2494deb17c','open','[]','2009-08-12 21:01:11','2009-08-12 21:01:54');
 /*!40000 ALTER TABLE `hours` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -101,7 +103,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 
 
@@ -127,7 +129,13 @@ REPLACE INTO `projects` (`id`, `name`, `color`, `pos`, `created`, `modified`) VA
 	('17','user31',NULL,NULL,'2009-06-29 15:25:19','2009-06-29 15:25:19'),
 	('18','user32',NULL,NULL,'2009-06-29 15:25:26','2009-06-29 15:25:26'),
 	('19','secOne31','green','0','2009-06-29 20:15:39','2009-07-29 15:13:29'),
-	('20','brandNew','navy','0','2009-07-29 14:59:50','2009-07-29 17:05:54');
+	('20','brandNew1f','green','0','2009-07-29 14:59:50','2009-08-04 16:42:29'),
+	('21','Work16','navy','0','2009-08-03 16:12:29','2009-08-03 16:12:39'),
+	('22','Work17','navy','0','2009-08-03 19:08:40','2009-08-03 19:08:40'),
+	('23','Work17','olive','0','2009-08-04 21:02:59','2009-08-04 21:02:59'),
+	('24','Work19','navy','0','2009-08-04 21:03:11','2009-08-04 21:03:11'),
+	('25','Work22','black','0','2009-08-04 21:03:19','2009-08-04 21:03:19'),
+	('26','Work123','maroon','0','2009-08-04 21:07:37','2009-08-04 21:07:37');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -144,7 +152,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `projects_users` (
   `perm` int(10) unsigned default NULL,
   `created` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 
 
@@ -163,7 +171,13 @@ REPLACE INTO `projects_users` (`id`, `project_id`, `user_id`, `type`, `perm`, `c
 	('36','19','2','O',NULL,NULL),
 	('37','7','2','O',NULL,NULL),
 	('43','4','2','O',NULL,NULL),
-	('45','20','2','O',NULL,NULL);
+	('46','21','2','O',NULL,NULL),
+	('48','22','2','O',NULL,NULL),
+	('49','20','2','O',NULL,NULL),
+	('50','23','2','O',NULL,NULL),
+	('51','24','2','O',NULL,NULL),
+	('52','25','2','O',NULL,NULL),
+	('53','26','2','O',NULL,NULL);
 /*!40000 ALTER TABLE `projects_users` ENABLE KEYS;*/
 UNLOCK TABLES;
 
@@ -176,6 +190,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `username` varchar(64) character set utf8 collate utf8_unicode_ci NOT NULL default '',
   `password` varchar(64) character set utf8 collate utf8_unicode_ci NOT NULL default '',
+  `key` varchar(32) default NULL,
   `timezone` int(3) unsigned default NULL,
   `email` varchar(100) character set utf8 collate utf8_unicode_ci NOT NULL default '',
   `uuid` varchar(50) NOT NULL default '',
@@ -194,10 +209,10 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS;*/
-REPLACE INTO `users` (`id`, `username`, `password`, `timezone`, `email`, `uuid`, `active`, `created`) VALUES
-	('1','admin','c129b324aee662b04eccf68babba85851346dff9',NULL,'admin@w-r.ru','4a06df7e237e2',0,'2009-05-10 18:06:54'),
-	('2','work1','c129b324aee662b04eccf68babba85851346dff9',NULL,'work1@mm.ru','4a12b4ab9dc81',0,'2009-05-19 17:31:23'),
-	('3','work2','c129b324aee662b04eccf68babba85851346dff9',NULL,'work2@mm.ru','4a1528e104bc9',0,'2009-05-21 14:11:45');
+REPLACE INTO `users` (`id`, `username`, `password`, `key`, `timezone`, `email`, `uuid`, `active`, `created`) VALUES
+	('1','admin','c129b324aee662b04eccf68babba85851346dff9',NULL,NULL,'admin@w-r.ru','4a06df7e237e2',0,'2009-05-10 18:06:54'),
+	('2','work1','c129b324aee662b04eccf68babba85851346dff9',NULL,NULL,'work1@mm.ru','4a12b4ab9dc81',0,'2009-05-19 17:31:23'),
+	('3','work2','c129b324aee662b04eccf68babba85851346dff9',NULL,NULL,'work2@mm.ru','4a1528e104bc9',0,'2009-05-21 14:11:45');
 /*!40000 ALTER TABLE `users` ENABLE KEYS;*/
 UNLOCK TABLES;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;*/

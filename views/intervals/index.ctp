@@ -1,11 +1,8 @@
 <?php
-
-	debug($workSession);
 	if ( $workSession != array() ) {
 		echo $javascript->codeBlock( 'var hs2 = '.$workSession['Hour']['worksession'] ,array('allowCache' => false,'safe'=>true,'inline'=>false));
 	}
 	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'),false);	
-	
 ?>
 <div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>

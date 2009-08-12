@@ -94,7 +94,10 @@
 						
 						<div id="test3">test3</div>
 						
-						<div class="delCookie" style="cursor: pointer">delCookie</div>
+						<!--<div class="delCookie" style="cursor: pointer">delCookie</div>-->
+						<div class="delWorkSession">
+							<?php echo $html->link('Delete workSession',array('action'=>'delWorkSession'));?>
+						</div>
 
 
 

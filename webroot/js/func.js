@@ -8,17 +8,7 @@ function saveTime2( hourStatJson ) {
 					"json"
 		);		
 }
-function delTime2() {
 
-		$.post(
-			path + "/intervals/add",
-			{"data[work]": "[['del']]" },
-					function(data){
-						$('#test2').html(data.hi);
-					},
-					"json"
-		);		
-}
 function timer(timeToDo) {
 	var hourCur,minutCur,secCur;
 	var resSecCur = "00";

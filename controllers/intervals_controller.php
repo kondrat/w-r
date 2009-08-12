@@ -6,7 +6,7 @@ class IntervalsController extends AppController {
 	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow('index','add');
+        $this->Auth->allow('index','add','delWorkSession');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -31,9 +31,9 @@ class IntervalsController extends AppController {
 				$this->Session->write('guestKey', $key );
 			} elseif( ($key = $this->Cookie->read('guestKey')) && !$this->Auth->user('id')) {
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
-				$conditions = array('Hour.key'=> $key );
+				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
 			} elseif ( $key = $this->Auth->user('id') ) {
-				$conditions = array('Hour.user_id'=> $key );
+				$conditions = array('Hour.user_id'=> $key,'Hour.status'=>'open' );
 			}
 
 			$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => array( 'Hour.worksession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
@@ -125,7 +125,7 @@ class IntervalsController extends AppController {
 					$idTemp = ($this->data['Hour']['id']);
 				} else {
 					$idTemp = $this->data['Hour']['worksession'];//'notOk';
-					$idTemp = $this->data['work'].' blin';
+					$idTemp = $this->data['work'];
 					//$this->data = null;
 				}
 				
@@ -151,6 +151,29 @@ class IntervalsController extends AppController {
 		//$hours = $this->Interval->Hour->find('list');
 		//$projects = $this->Interval->Project->find('list');
 		//$this->set(compact('hours', 'projects'));
+	}
+//--------------------------------------------------------------------
+	function delWorkSession() {
+		
+				if ($this->Auth->user('id')) {
+					$this->data['Hour']['user_id'] = $this->Auth->user('id');
+					$conditions = array('Hour.user_id' => $this->data['Hour']['user_id'],'Hour.status'=>'open');
+				} else {
+					$this->data['Hour']['key'] = $this->Session->read('guestKey');
+					$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
+				}
+				
+				
+				$currentWorkSession = $this->Interval->Hour->find('first',array('conditions'=> $conditions,'order' => array('Hour.created DESC') ) );
+				if ($currentWorkSession != array() ) {
+					$this->data['Hour']['id'] = $currentWorkSession['Hour']['id'];
+				}		
+				$this->data['Hour']['status'] = 'closed';
+		
+		if ($this->Interval->Hour->save($this->data)) {
+			$this->Session->setFlash(__('work session cleared', true).$this->Cookie->read('iniVars'));
+			$this->redirect(array('action'=>'index'));
+		}
 	}
 //--------------------------------------------------------------------
 	function view($id = null) {
