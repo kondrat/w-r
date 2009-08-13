@@ -17,10 +17,10 @@
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link('jquery-1.3.2.min');
-		echo $javascript->link('jquery.form');
-		echo $javascript->link('ui.core');
-		echo $javascript->link('ui.draggable');
+		echo $javascript->link(array('jquery-1.3.2.min','jquery.form','ui.core','ui.draggable','common'));
+		//echo $javascript->link('jquery.form');
+		//echo $javascript->link('ui.core');
+		//echo $javascript->link('ui.draggable');
 		//echo $javascript->link('dbg/prettyPrint');
 
 		echo $scripts_for_layout;

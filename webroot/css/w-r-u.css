@@ -171,11 +171,14 @@ div.formWrap input.form-error {
 	width: 600px;
 	background-color:#eee;
 	margin:0px;
-	font:bold 12pt/2.5em arial sans-serif;
+	font-weight:bold;
+	font-size: 12pt;
+	line-height:2.5em;
 	text-align:center;
 	overflow: hidden;
 	opacity: .9;
 	height:0;
+	z-index:100
 }
 div.er {
 	color:red;
