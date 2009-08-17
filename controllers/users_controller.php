@@ -48,7 +48,7 @@ class UsersController extends AppController {
 			} else {
 
 				$this->data['User']['password'] = null;
-				$this->Session->setFlash(__('Check your login and password',true),'default', array('class' => 'nomargin flash'));
+				$this->Session->setFlash(__('Check your login and password',true),'default', array('class' => 'er'));
 			}
 		} else {
 			if( !is_null( $this->Session->read('Auth.User.username') ) ){
@@ -65,7 +65,7 @@ class UsersController extends AppController {
     	$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
     	//$this->Session->del();
         $this->Auth->logout();
-        $this->Session->setFlash( $tempUserName, 'default', array('class' => 'nomargin flash') );
+        $this->Session->setFlash( $tempUserName, 'default', array('class' => '') );
         $this->redirect( '/',null,true);        
     }
 //--------------------------------------------------------------------
@@ -101,7 +101,7 @@ class UsersController extends AppController {
 
          	} else {
 				$this->data['User']['captcha'] = null;
-				$this->Session->setFlash(__('New user\'s accout hasn\'t been created',true) , 'default', array('class' => 'error') );
+				$this->Session->setFlash(__('New user\'s accout hasn\'t been created',true) , 'default', array('class' => 'er') );
 			}
 		}
 		
@@ -219,7 +219,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash('The User has been saved');
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The User could not be saved. Please, try again.');
+				$this->Session->setFlash('The User could not be saved. Please, try again.','default',array('class'='er'));
 			}
 		}
 		if (empty($this->data)) 
@@ -233,7 +233,7 @@ class UsersController extends AppController {
 //-------------------------------------------------------------------- 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for User');
+			$this->Session->setFlash('Invalid id for User','default',array('class'='er'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ( $this->User->del($id) ) {

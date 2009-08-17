@@ -54,14 +54,13 @@ class IntervalsController extends AppController {
 				}
 				*/
 				
-			
-
-
-
 			//finding of the user's projects
 			if ( $this->Auth->user('id') ) {
 					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
 			} else {
+				
+				
+				
 				if ( $this->Cookie->read('Projects') ) {
 					$projectUser = $this->Cookie->read('Projects');
 				} else {
