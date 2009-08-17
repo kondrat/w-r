@@ -65,9 +65,9 @@ class IntervalsController extends AppController {
 				if ( $this->Cookie->read('Projects') ) {
 					$projectUser = $this->Cookie->read('Projects');
 				} else {
-					$projectUser = array( array('Project'=> array('id' => '1','name'=>'work','color'=>'green')),
-																array('Project'=> array('id' => '2','name'=>'work1','color'=>'olive')),
-																array('Project'=> array('id' => '3','name'=>'work3','color'=>'teal')),
+					$projectUser = array( array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green')),
+																array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive')),
+																array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal')),
 															);
 				}
 			}

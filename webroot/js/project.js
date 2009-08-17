@@ -2,11 +2,9 @@ jQuery(document).ready( function(){
 				//alert(projectId);
 				
 				if ( typeof projectId == 'undefined' || projectId == null) { 
-
 					projectId = $('.myProject:first').attr("id");
 					colorProjectId = $('.myProject:first').css("color");
 					projectName = $('.myProject:first').text();
-
 				}				
 
 		
@@ -39,7 +37,7 @@ jQuery(document).ready( function(){
 				var myPr = $(this).remove();
 				$(".myProject:first").next().remove();
 				$('.projectsNameWrpapper').prepend(myPr);	
-				$(".myProject:first").after('<hr style="margin: 10px;" />');
+				$(".myProject:first").after('<hr style="margin-bottom: 10px;" />');
 			}					
 			
 

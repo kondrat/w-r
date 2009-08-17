@@ -50,7 +50,7 @@
 										<span><?php echo $project['Project']['name'];?></span>
 										<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
 									</div>
-								<?php $mm = ($i == 0)? '<hr style="margin: 10px;" />':null;?>
+								<?php $mm = ($i == 0)? '<hr style="margin-bottom: 10px;" />':null;?>
 								<?php echo $mm;?>
 								<?php $i++;?>
 								<?php endforeach ?>

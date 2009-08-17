@@ -31,9 +31,9 @@ class ProjectsController extends AppController {
 					} else {
 						$startTime = time();
 					}
-					$projectUser = array( array('Project'=> array('id' => '1','name'=>'work','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
-																array('Project'=> array('id' => '2','name'=>'work1','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
-																array('Project'=> array('id' => '3','name'=>'work3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+					$projectUser = array( array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+																array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+																array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
 															);
 					
 					$this->set('projects', $projectUser);	
