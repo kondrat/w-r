@@ -63,6 +63,7 @@
 				        										)						
 						 ) );	
 					?>	
+					<?php echo $form->input('auto_login', array('type' => 'checkbox', 'label' => 'Log me in automatically?')); ?>
 		</fieldset>	
 				<div class="submit clearfix">	
 					<?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?>

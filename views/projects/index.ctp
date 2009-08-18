@@ -17,7 +17,7 @@
 				 		<legend><?php __('Add Project');?></legend>
 
 						<div class="projectPreview span-3 push-1 last" style="color: green">
-							<span><?php echo __("Work",true); ?></span>
+							<span><?php echo __("Project",true); ?></span>
 							<div class="projectPreviewBg" style="background-color:green"></div>
 						</div>
 						<div class="span-2" style="margin-top:3px;">
@@ -26,7 +26,7 @@
 						<?php echo $javascript->codeBlock( 'jQuery(document).ready( function(){$("#MyInput").limit("10","#charsLeft");});',array('allowCache'=>true,'safe'=>true,'inline'=>true));?>
 				 		<div class="span-5 clear">
 							<?php
-								echo $form->input('name', array('value'=> __('Work',true), 'id'=>'MyInput', 'class'=>'projectNameInput') );
+								echo $form->input('name', array('value'=> __('Project',true), 'id'=>'MyInput', 'class'=>'projectNameInput') );
 								echo $form->input('color',  array('type'=>'hidden','value'=> 'green')  );
 							?>
 								

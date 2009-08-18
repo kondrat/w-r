@@ -5,16 +5,19 @@ class IntervalsController extends AppController {
 	var $helpers = array('Html', 'Form','Gravatar');
 	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
-  function beforeFilter() {
-        $this->Auth->allow('index','add','delWorkSession');
-        parent::beforeFilter(); 
-        $this->Auth->autoRedirect = false;
-        
-      // swiching off Security component for ajax call
-			if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
-     			$this->Security->enabled = false; 
-     		}
-    }
+	function beforeFilter() {
+		$this->Auth->allow('index','add','delWorkSession');
+		parent::beforeFilter(); 
+		$this->Auth->autoRedirect = false;
+
+		// swiching off Security component for ajax call
+		if( isset($this->Security) && $this->RequestHandler->isAjax() ) {
+			$this->Security->enabled = false; 
+		}
+		
+		
+		
+	}
 //--------------------------------------------------------------------
 	function index() {
 		
@@ -28,6 +31,26 @@ class IntervalsController extends AppController {
 				$key = md5(uniqid(rand(), true));
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				$this->Session->write('guestKey', $key );
+				
+				$this->data['Hour']['key'] = $key;
+				
+				if ( $this->Session->check('startTime') ) {
+					$startTime = $this->Session->read('startTime');
+				} else {
+					$startTime = time();
+				}
+					
+				$this->data['Hour']['psession'] = serialize(	
+																											array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+																															array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+																															array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+																														)													
+																											);
+				//debug($this->data);
+				$this->Interval->Hour->save($this->data);
+				
+				
+				
 			} elseif( ($key = $this->Cookie->read('guestKey')) && !$this->Auth->user('id')) {
 				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
 				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
@@ -35,11 +58,11 @@ class IntervalsController extends AppController {
 				$conditions = array('Hour.user_id'=> $key,'Hour.status'=>'open' );
 			}
 
-			$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => array( 'Hour.worksession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
+			$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
 
 				/*
 				if ( $currentHour != array() ) {
-					$conditions = array( 'Hour.worksession' => $currentHour['Hour']['worksession'] );			
+					$conditions = array( 'Hour.wsession' => $currentHour['Hour']['wsession'] );			
 					//$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
 				
 					$datetime = new DateTime($currentHour['Hour']['modified']);			 
@@ -59,8 +82,7 @@ class IntervalsController extends AppController {
 					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
 			} else {
 				
-				
-				
+
 				if ( $this->Cookie->read('Projects') ) {
 					$projectUser = $this->Cookie->read('Projects');
 				} else {
@@ -116,13 +138,13 @@ class IntervalsController extends AppController {
 				}
 				
 				
-				$this->data['Hour']['worksession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
+				$this->data['Hour']['wsession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
 				$idTemp = 'ok';
-				if($this->data['Hour']['worksession'] == 'del' && $this->data['Hour']['id'] != null) {
+				if($this->data['Hour']['wsession'] == 'del' && $this->data['Hour']['id'] != null) {
 					$this->Interval->Hour->delete($this->data['Hour']['id']);
 					$idTemp = ($this->data['Hour']['id']);
 				} else {
-					$idTemp = $this->data['Hour']['worksession'];//'notOk';
+					$idTemp = $this->data['Hour']['wsession'];//'notOk';
 					$idTemp = $this->data['work'];
 					//$this->data = null;
 				}

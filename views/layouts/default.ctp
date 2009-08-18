@@ -98,7 +98,7 @@
 						
 						<!--<div class="delCookie" style="cursor: pointer">delCookie</div>-->
 						<div class="delWorkSession">
-							<?php echo $html->link('Delete workSession',array('action'=>'delWorkSession'));?>
+							<?php echo $html->link('Delete workSession',array('controller'=>'intervals','action'=>'delWorkSession'));?>
 						</div>
 
 

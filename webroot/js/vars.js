@@ -1,5 +1,5 @@
-		//var HourCalc = 3600;
-		var HourCalc = 60;
+		var HourCalc = 3600;
+		//var HourCalc = 60;
 		var cookieLive = 1*3600;
 		
 		var hs2;

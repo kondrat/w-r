@@ -3,7 +3,7 @@ class ProjectsController extends AppController {
 
 	var $name = 'Projects';
 	var $helpers = array('Html', 'Form','Time');
-	//var $components = array('Security');
+	var $components = array('Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
         $this->Auth->allow('index');
@@ -17,6 +17,8 @@ class ProjectsController extends AppController {
     }
 //--------------------------------------------------------------------
 	function index() {
+		$projectUser = array();
+		
 		if ( $this->Auth->user('id') ) {
 			$this->paginate['Project']['limit'] = 10;		
 			$this->Project->bindModel( array( 'hasOne' => array('ProjectsUser'=> array('fields'=>array('ProjectsUser.id') ) ) ) );
@@ -25,18 +27,22 @@ class ProjectsController extends AppController {
 			$this->paginate['Project']['contain'] = 'ProjectsUser';
 			$this->paginate['Project']['order'] = array('Project.modified'=>'desc');
 			$this->set('projects', $this->paginate());
-		} else {
+		} elseif( $key = $this->Cookie->read('guestKey') ) {
 					if ( $this->Session->check('startTime') ) {
 						$startTime = $this->Session->read('startTime');
 					} else {
 						$startTime = time();
 					}
+			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key),'fields'=>array('Hour.psession'),'contain'=>false ) );
+			$ttt = unserialize($projectUser['Hour']['psession']);
+			debug($ttt);
+					/*		
 					$projectUser = array( array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
 																array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
 																array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
 															);
-					
-					$this->set('projects', $projectUser);	
+					*/
+			$this->set('projects', $ttt);	
 		
 		}
 	}
