@@ -21,46 +21,75 @@ class IntervalsController extends AppController {
 //--------------------------------------------------------------------
 	function index() {
 		
-			$hoursSaved = array();
+			$currentWorkSession = array();
 			$conditions = array();
+			$fields = array();
 			$projectUser = array();
+			if ( $this->Session->check('startTime') ) {
+				$startTime = $this->Session->read('startTime');
+			} else {
+				$startTime = time();
+			}
+
+
+
 
 			$key = null;
-								
-			if( !$this->Cookie->read('guestKey') && !$this->Auth->user('id') ) {//looks like new user is tring us.	
+			$auth = false;
+			if($key = $this->Auth->user('id'))$auth=true;
+										
+			if( !$auth && !$this->Cookie->read('guestKey') ) {//looks like new user is tring us.	
 				$key = md5(uniqid(rand(), true));
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				$this->Session->write('guestKey', $key );
 				
 				$this->data['Hour']['key'] = $key;
-				
-				if ( $this->Session->check('startTime') ) {
-					$startTime = $this->Session->read('startTime');
-				} else {
-					$startTime = time();
-				}
 					
 				$this->data['Hour']['psession'] = serialize(	
 																											array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
 																															array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
 																															array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
-																														)													
-																											);
-				//debug($this->data);
-				$this->Interval->Hour->save($this->data);
+																												)												
+																										);
+
+				if(!$this->Interval->Hour->save($this->data)){
+					$this->Session->setFlash(__('We have an problem with a server.', true),'default',array('class'=>'er'));
+				}
 				
+				$projectUser = unserialize($this->data['Hour']['psession']);
 				
+			} elseif ( !$auth && ($key = $this->Cookie->read('guestKey')) ) {
 				
-			} elseif( ($key = $this->Cookie->read('guestKey')) && !$this->Auth->user('id')) {
-				$this->Session->write('guestKey', $this->Cookie->read('guestKey') );
+				$this->Session->write('guestKey', $key );
 				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
-			} elseif ( $key = $this->Auth->user('id') ) {
+				$fields = array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified');
+
+				$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => $fields, 'order' => array('Hour.created DESC'),'contain' => false ) );
+				
+				if ( $currentWorkSession['Hour']['psession'] != null) {
+					$projectUser = unserialize($currentWorkSession['Hour']['psession']);
+				}else{
+					$projectUser = 	array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+																	array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+																	array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+																);
+				}						
+				
+			} elseif ( $auth ) {
+				
 				$conditions = array('Hour.user_id'=> $key,'Hour.status'=>'open' );
+				$fields = array( 'Hour.wsession','Hour.created','Hour.modified');
+				//finding of the user's projects
+				$projectUser = $this->Interval->Hour->User->Project->findUserProject( $key );
+				
+				$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => $fields, 'order' => array('Hour.created DESC'),'contain' => false ) );
+
+				
 			}
 
-			$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified'), 'order' => array('Hour.created DESC'),'contain' => false ) );
 
 				/*
+				//what will we do if worksession is to old?
 				if ( $currentHour != array() ) {
 					$conditions = array( 'Hour.wsession' => $currentHour['Hour']['wsession'] );			
 					//$hoursSaved = $this->Interval->Hour->find('all', array('conditions' => $conditions, 'contain'=> array('Interval'=> array('fields'=> array('Interval.type', 'Interval.interval') ) ) ) );
@@ -77,29 +106,6 @@ class IntervalsController extends AppController {
 				}
 				*/
 				
-			//finding of the user's projects
-			if ( $this->Auth->user('id') ) {
-					$projectUser = $this->Interval->Hour->User->Project->findUserProject( $this->Auth->user('id') );					
-			} else {
-				
-
-				if ( $this->Cookie->read('Projects') ) {
-					$projectUser = $this->Cookie->read('Projects');
-				} else {
-					$projectUser = array( array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green')),
-																array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive')),
-																array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal')),
-															);
-				}
-			}
-			
-
-			
-			
-			
-
-
-
 			$this->set('projectUser', $projectUser);
 			$this->set('workSession', $currentWorkSession);
 			
