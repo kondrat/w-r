@@ -25,41 +25,36 @@ class IntervalsController extends AppController {
 			$conditions = array();
 			$fields = array();
 			$projectUser = array();
-			if ( $this->Session->check('startTime') ) {
-				$startTime = $this->Session->read('startTime');
-			} else {
-				$startTime = time();
-			}
-
-
-
-
 			$key = null;
 			$auth = false;
 			if($key = $this->Auth->user('id'))$auth=true;
-										
+						
 			if( !$auth && !$this->Cookie->read('guestKey') ) {//looks like new user is tring us.	
+				
 				$key = md5(uniqid(rand(), true));
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
 				$this->Session->write('guestKey', $key );
+	
+
+				$startTime = time();
+
+				$projectUser = array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+														array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+														array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+													);	
+
 				
 				$this->data['Hour']['key'] = $key;
 					
-				$this->data['Hour']['psession'] = serialize(	
-																											array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
-																															array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
-																															array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
-																												)												
-																										);
+				$this->data['Hour']['psession'] = serialize( $projectUser );
 
 				if(!$this->Interval->Hour->save($this->data)){
 					$this->Session->setFlash(__('We have an problem with a server.', true),'default',array('class'=>'er'));
 				}
 				
-				$projectUser = unserialize($this->data['Hour']['psession']);
 				
 			} elseif ( !$auth && ($key = $this->Cookie->read('guestKey')) ) {
-				
+				debug($key);
 				$this->Session->write('guestKey', $key );
 				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
 				$fields = array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified');
@@ -69,6 +64,7 @@ class IntervalsController extends AppController {
 				if ( $currentWorkSession['Hour']['psession'] != null) {
 					$projectUser = unserialize($currentWorkSession['Hour']['psession']);
 				}else{
+					$startTime = time();
 					$projectUser = 	array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
 																	array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
 																	array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),

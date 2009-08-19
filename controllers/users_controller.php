@@ -33,10 +33,15 @@ class UsersController extends AppController {
 //--------------------------------------------------------------------
 	function login() {
 		$this->pageTitle = __('Login',true);
-			//echo 'blin OK1';
+
 		if( !empty($this->data) ) {
 
 			if( $this->Auth->login() ) {
+					
+    		$this->Session->delete('guestKey');
+    		$this->Cookie->del('IniVars');
+    		$this->Cookie->del('guestKey');
+
 
 					if ($this->referer()=='/') {
 						$this->redirect( $this->Auth->redirect() );
@@ -62,8 +67,14 @@ class UsersController extends AppController {
 //--------------------------------------------------------------------
     function logout() {
     	    	
-    	$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
+    		$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
+    		
     		$this->Session->delete('guestKey');
+    		$this->Cookie->del('IniVars');
+    		$this->Cookie->del('guestKey');
+    		
+    		
+    		
         $this->Auth->logout();
         $this->Session->setFlash( $tempUserName, 'default', array('class' => '') );
         $this->redirect( '/',null,true);        
@@ -90,7 +101,12 @@ class UsersController extends AppController {
 		
 			$this->data['User']['uuid'] = uniqid();
 
-			if ( $this->User->save( $this->data) ) {			
+			if ( $this->User->save( $this->data) ) {
+				
+    		$this->Session->delete('guestKey');
+    		$this->Cookie->del('IniVars');
+    		$this->Cookie->del('guestKey');				
+							
 				$a = $this->User->read();
 				$this->Auth->login($a);
 				$this->Session->setFlash(__('New user\'s accout has been created',true));
