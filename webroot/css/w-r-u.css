@@ -45,10 +45,18 @@ p.quickLoginForPas {
 }
 
 /*form classes*/
+
+.inner_page {
+	border: 1px solid #ccc;
+	position: relative;
+}
+
 .error-message {
-	color: #8A1F11;
-	font-weight: bold;
-	margin-left: 12em;
+	color:#8A1F11;
+	font-weight:bold;
+	margin-left:12em;
+	position:absolute;
+	top:27px;
 }
 #UserUsername, #UserPassword, #UserPassword1, #UserPassword2,#UserEmail {
 	width: 206px;
@@ -73,6 +81,11 @@ div.formWrap  {
 	/*background-color: inherit;*/
 	margin: 2px;
 	padding: 0 0 1em 0;
+	position:relative;
+}
+div.error {
+	border:none;
+	background:none;
 }
 div.formWrap input.form-error {
 	background-color: #FBC2C4;
@@ -84,11 +97,15 @@ div.formWrap input.form-error {
 	margin: 0 0 0 12em;
 	padding: 0;
 	height: 15px;
+	position:absolute;
+	top:30px;
 }
 .greenMessage{
 	margin: 0 0 0 12em;
 	padding: 0;
 	height: 15px;
+	position:absolute;
+	top:27px;
 }
 
 /*login*/
@@ -144,7 +161,8 @@ div.formWrap input.form-error {
 	position:relative;
 }
 .capReset span {
-	color:#ccc;
+	color: #808080;
+	font-family:comic Sans MS;
 	font-size:smaller;
 	font-weight:bold;
 	left:-5px;
@@ -168,7 +186,7 @@ div.formWrap input.form-error {
 /*flash message*/
 #flashMessage {
 	position:absolute;
-	width: 600px;
+	width: 630px;
 	background-color:#eee;
 	margin:0px;
 	font-weight:bold;

@@ -9,6 +9,7 @@ jQuery(document).ready( function(){
 				.click(function () {
 					window.clearTimeout(alerttimer);
 					$alert.animate({height: '0'}, 200);
+					
 				});
 		}
 
