@@ -95,6 +95,7 @@ jQuery(document).ready( function(){
     });
     
 		$("a.projectEdit").click(function () {
+			
 			//getting the object status
 			var ttm2 = $(this).parents(".projectList").find(".projectDataEdit");
     			if ( $(ttm2).is('.hide') ) {
@@ -106,11 +107,13 @@ jQuery(document).ready( function(){
 		    $("div.projectDataEdit").each(function (i) {
 					if( $("div.projectDataEdit").not('.hide') ) {
 						$("div.projectDataEdit").addClass('hide');
+						$(this).parents(".projectList").removeClass("projectListActive");
 					}
 				});
 				//if it was hidden showing it.
 				if ( hide == true ) {
      			$(this).parents(".projectList").find(".projectDataEdit").toggleClass('hide');
+     			$(this).parents(".projectList").addClass("projectListActive");
      		}
 
       return false;

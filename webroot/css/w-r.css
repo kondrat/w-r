@@ -226,6 +226,10 @@ div.myProject{
 	padding: 1px 5px 0 5px;
 	border-bottom: 1px solid #D5D5D5;
 }
+.projectListActive {
+	padding:10px;
+	border:3px solid silver;
+}
 .projectCreated {
 	font-size: 11px;
 	font-weight: 500;
@@ -389,19 +393,19 @@ div.myProject{
 	margin: 10px;
 }
 .newProject a {
-	text-decoration:none;
-	color: sienna;
+	color: silver;
 	font-size:18pt;
+}
+
+.newProject a:active {
+	color: silver;
+}
+.newProject a:visited {
+	color: silver;
 }
 .newProject a:hover {
 	color: saddleBrown;
-	text-decoration:underline;
-}
-.newProject a:active {
-	color: saddleBrown;
-}
-.newProject a:visited {
-	color: saddleBrown;
+	text-decoration:none;
 }
 .projects .input {
 	float: none;
@@ -427,7 +431,10 @@ div.myProject{
 	cursor:pointer;
 	
 }
-.projectDataEdit{
+.projectDataEdit {
+	border-top:2px solid sienna;
+	margin-top:5px;
+	padding-top:5px;
 }
 .projectDataEditFileds {
 	background-color: #eee;

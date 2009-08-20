@@ -51,12 +51,12 @@
 					<?php echo $paginator->sort('created');?>
 			<?php endif ?>
 
-	<div class="allProjects clearfix" style="padding: 5px; border-top:5px solid green;">
+	<div class="allProjects clearfix" style="padding: 5px; border-top:5px solid silver;">
 		<?php if( isset($projects) && $projects != array() ):?>
 			<?php $i = 0; ?>
 			<?php foreach ($projects as $project): ?>
 				<?php $stl=( $i == 4  && $this->params['paging']['Project']['page'] == 1 )?'5px':'1px'; ?>
-					<div class="projectList span-15" style="border-bottom:<?php echo $stl;?> solid green;">
+					<div class="projectList span-15" >
 
 								<div class="projectPreview span-3" style="color: <?php echo $project['Project']['color']; ?>;">
 									<span><?php echo  $project['Project']['name']; ?></span>
@@ -76,7 +76,7 @@
 							<div style="clear:both;"></div>
 							
 							<div class="projectDataEdit hide">
-								<?php echo $form->create('Project',array('id'=> 'formEdit'.$i));?>
+								<?php echo $form->create('Project',array('action'=>'edit','id'=> 'formEdit'.$i));?>
 									<fieldset class="projectDataEditFileds">
 								 		<legend><?php __('Edit Project');?></legend>
 

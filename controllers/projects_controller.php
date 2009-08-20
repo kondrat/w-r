@@ -31,7 +31,7 @@ class ProjectsController extends AppController {
 
 			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key),'fields'=>array('Hour.psession'),'contain'=>false ) );
 			$ttt = unserialize($projectUser['Hour']['psession']);
-			debug($ttt);
+			//debug($ttt);
 
 			$this->set('projects', $ttt);	
 		
@@ -48,9 +48,9 @@ class ProjectsController extends AppController {
 //--------------------------------------------------------------------
 	function add() {
 		if (!empty($this->data)) {
-			
-			if ( $this->Auth->user('id') ) {
-				$this->data['User']['User'] = $this->Auth->user('id');
+			$authId = $this->Auth->user('id');
+			if ( $authId ) {
+				$this->data['User']['User'] = $authId;
 			} else {
 				$this->Session->setFlash(__('The Project could not be saved.Invalid user. Please, try again.', true));
 				$this->redirect(array('action'=>'index'));				
@@ -83,12 +83,23 @@ class ProjectsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Project->save($this->data)) {
-				$this->Session->setFlash(__('The Project has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('Err... The Project could not be saved. Please, try again.', true),'default',array('class' => 'er_class'));
+			$ttt = array();
+			$authId = $this->Auth->user('id');
+			$id = $this->data['Project']['id'];
+			$this->Project->bindModel(array('hasOne' => array('ProjectsUser')));
+			$ttt = $this->Project->find('first',array('conditions'=>array('ProjectsUser.user_id' => $authId,'ProjectsUser.project_id' => $id),'contain'=>array('ProjectsUser'=>array('fields'=>array('id') ) ) ) );
+			
+			if ( $ttt != array() ) {
+				if ($this->Project->save($this->data)) {
+					$this->Session->setFlash(__('The Project has been saved', true));
+					$this->redirect(array('action'=>'index'));
+				} else {
+					$this->Session->setFlash(__('Err... The Project could not be saved. Please, try again.', true),'default',array('class' => 'er_class'));
+				}
 			}
+			
+			
+			
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Project->read(null, $id);

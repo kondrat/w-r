@@ -1,4 +1,4 @@
-#FF0000<div class="clear" style="font-weight:bold"><?php __('ColorPicker');?></div>
+<div class="clear" style="font-weight:bold"><?php __('ColorPicker');?></div>
 
 <div class="clearfix" style="margin: 2px 0 10px 0px">
 									<div class="colorPicker span-2" style="background-color: #008080">#008080</div>

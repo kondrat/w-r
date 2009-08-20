@@ -54,7 +54,7 @@ class IntervalsController extends AppController {
 				
 				
 			} elseif ( !$auth && ($key = $this->Cookie->read('guestKey')) ) {
-				debug($key);
+				//debug($key);
 				$this->Session->write('guestKey', $key );
 				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
 				$fields = array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified');
