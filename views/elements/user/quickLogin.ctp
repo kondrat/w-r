@@ -1,12 +1,10 @@
 <div class="quickLoginInner">
 	<?php echo $form->create('User', array('action' => 'login' ) ); ?>
-	
 
-	<h3><?php __('Login');?></h3>
-		<?php echo $form->input('username', array('type' => 'text', 'size' => 20,'class' => 'form',  'label' => false) );?>
+		<?php echo $form->input('username', array('type' => 'text', 'size' => 20,'class' => 'form',  'label' => __('Login',true) ) );?>
 		<?php echo $form->error( 'username', array('class' => 'error', 'style' => 'color: red') ); ?>
 
-		<?php echo $form->input('password', array( 'size' => 20,'class' => 'form',  'label' => false) );?>
+		<?php echo $form->input('password', array( 'size' => 20,'class' => 'form',  'label' => __('Password',true) ) );?>
 		
 
 		<div class="span-4 last quickLoginCheckbox">

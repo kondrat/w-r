@@ -2,8 +2,9 @@
 .quickLiginSubmit {
 	margin: 3px 0;
 }
-.quickLoginCheckbox input.checkbox,.quickLoginCheckbox input[type="checkbox"]{
+#UserAutoLogin{
 	top: 0.15em;
+	margin: 0;
 }
 .quickLoginCheckbox label{
 	margin: 4px;
@@ -15,10 +16,20 @@
 	padding:0 10px 5px 30px;
 	width:224px;
 }
-.quickLoginInner h3{
-	margin: 0.4em 0 0 0;
+#UserEmailReset{
+	margin:5px 0;
 }
-
+#UserResetForm .error{
+	margin:0;
+	padding:0;
+}
+.err {
+	margin:0 0 5px;
+	font-weight:bold;
+}
+#UserResetForm .submit{
+	margin:0;
+}
 p.quickLoginForPas {
 	margin-bottom: 0;
 }
@@ -60,6 +71,7 @@ p.quickLoginForPas {
 }
 #UserUsername, #UserPassword, #UserPassword1, #UserPassword2,#UserEmail {
 	width: 206px;
+	margin: 0 0 5px;
 }
 div.input {
 	/*margin-bottom: 1em;*/
@@ -157,7 +169,7 @@ div.formWrap input.form-error {
 }
 .capReset {
 	float: left;
-	margin: 19px 19px 0 19px;
+	margin: 19px 19px 10px 19px;
 	position:relative;
 }
 .capReset span {

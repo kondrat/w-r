@@ -7,6 +7,8 @@
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
+
+	
 		echo $html->meta('icon');
 		echo $html->css('w-r');
 		echo $html->css('w-r-u');
@@ -18,9 +20,8 @@
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
 		echo $javascript->link(array('jquery-1.3.2.min','jquery.form','ui.core','ui.draggable','common'));
-		//echo $javascript->link('jquery.form');
-		//echo $javascript->link('ui.core');
-		//echo $javascript->link('ui.draggable');
+
+
 		//echo $javascript->link('dbg/prettyPrint');
 
 		echo $scripts_for_layout;
@@ -78,10 +79,10 @@
 			            <?php __('Week'); 
 			            echo ' '.date("W"); ?>
 			        </div>
-		        <div class="span-16 clear last">
-						<div class="fl span-16 last" style="font-weight:bold; position:relative;">
-								<?php $session->flash(); ?>
-						</div>
+		        <div class="span-16 clear last myrr">
+							<div class="fl span-16 last" style="font-weight:bold; position:relative;">
+									<?php $session->flash(); ?>
+							</div>
 							<?php echo $content_for_layout; ?>
 		        </div>
 		    </div>

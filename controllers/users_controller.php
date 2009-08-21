@@ -1,13 +1,13 @@
 <?php
-uses('sanitize');
-$mrClean = new Sanitize();
+//uses('sanitize');
+//$mrClean = new Sanitize();
 
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	//var $helpers = array();
+	var $helpers = array('Javascript');
 	var $components = array( 'Security','Cookie','userReg','kcaptcha');
-	var $pageTitle = 'Данные пользователя';
+	var $pageTitle = 'Users data';
 	var $paginate = array('limit' => 5);
 
 //--------------------------------------------------------------------	
@@ -168,33 +168,39 @@ class UsersController extends AppController {
 	}
 //--------------------------------------------------------------------
     function reset() {
-
+			
     	if( empty($this->data) ) {
     		return;    		
     	}
 
-		// Check email is correct
-		$user = $this->User->find( array('User.email' => $this->data['User']['email']) , array('id', 'username', 'email'), null, 0 );
-		if(!$user) {
-			$this->User->invalidate('email', 'Этот E-mail не зарегистрирован' );
-			return;
-		}
+			// Check email is correct
+			$user = $this->User->find('first', array('conditions'=>array('User.email' => $this->data['User']['email']) , 'fields'=> array('User.id', 'User.username', 'User.email') ) );
+			//debug($user);
+			if(!$user) {
+				$this->User->invalidate('email', __('Your email address does not appear to be valid',true) );
+				$this->Session->setFlash(__("New password hasn't been changed",true),'default',array('class'=>'er'));
+				return;
+			}
 		
-		// Generate new password
-		$password = $this->userReg->createPassword();
-		$data['User']['password'] = $this->Auth->password($password);
-		$this->User->id = $user['User']['id'];
-		if(!$this->User->saveField('password', $this->Auth->password($password) ) ) {
-			return;
-		}
+			// Generate new password
+			/*
+			$password = $this->userReg->createPassword();
+			$data['User']['password'] = $this->Auth->password($password);
+			$this->User->id = $user['User']['id'];
+			if(!$this->User->saveField('password', $this->Auth->password($password) ) ) {
+				return;
+			}
+			*/
 		
-		// Send email
-		if(!$this->__sendNewPasswordEmail( $user, $password) ) {
-			$this->flash('Internal server error during sending mail', 'restore', 10);
-		}
-		else {
-			$this->flash('New password sent to '.$user['User']['email'].'. Please login', '/users/login', 10);
-		}
+			// Send email
+			//if(!$this->__sendNewPasswordEmail( $user, $password) ) {
+			if( 10 > 1){
+				$this->Session->setFlash(__('Internal server error during sending mail',true),'default',array('class'=>'er'));
+			}
+			else {
+				//$this->flash('New password sent to '.$user['User']['email'].'. Please login', '/users/login', 10);
+			}
+			
     }
 //--------------------------------------------------------------------
     /**
