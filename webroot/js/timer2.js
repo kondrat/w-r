@@ -198,13 +198,13 @@ jQuery(document).ready( function(){
 
 						}	,100);	
 			});
-				
+		/*		
 		$(window).unload( function () {
 				if ( del == 1 ) {
 								if ( correction == 1 ) {
 									HourStatCorrection();
 								}	
-											
+								/*			
 								var varsObject = {	
 										
 												'typeInt': typeInt,
@@ -224,20 +224,20 @@ jQuery(document).ready( function(){
 											
 								};
 								
-								var iniVarsJSONText = JSON.stringify(varsObject);								
+								var iniVarsJSONText = 100;//JSON.stringify(varsObject);								
 								//setting of the time offset for cookie (3hour ex.);											
 								var dateExp = new Date();
 								dateExp.setTime( dateExp.getTime()+parseInt(cookieLive)*1000  );
 								//vars cookie setting
-								$.cookie("CakeCookie[IniVars]", iniVarsJSONText,{ expires: dateExp } );	
+							//	$.cookie("CakeCookie[IniVars]", iniVarsJSONText,{ expires: dateExp } );	
 								//hourStat cookie saving
-								var HourStatJSONText = JSON.stringify(HourStat);
+								//var HourStatJSONText = JSON.stringify(HourStat);
 								//$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
-								saveTime2(HourStatJSONText);
+							//	saveTime2(HourStatJSONText);
 				} 
 								
 		} );
-
+		*/
 	
 	$('.stopInterval').click(function(){		
 		clearInterval(interval);

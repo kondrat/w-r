@@ -56,7 +56,7 @@
 								<?php endforeach ?>
 								
 							<?php else: ?>
-							
+								<!--toDel-->
 								<div class="span-2 myProject" style="background-color:#fff;color:green;" id="project_1">Work</div>
 								<div class="span-2 myProject" style="background-color:#fff;color:olive;" id="project_2">Work</div>
 								<div class="span-2 myProject" style="background-color:#fff;color:teal;" id="project_3">Work</div>
@@ -77,7 +77,7 @@
         <div class="span-7 prepend-1">
             <div class="clock clock1" id="clock1">
             	<span>00:00:00</span>
-            	<div class="clockBackground" ></div>
+            	<div class="clockBackground"></div>
             	<div class="clock1Current">00:00:00</div>
             </div>
             
@@ -85,7 +85,7 @@
         <div class="span-7 last">
             <div class="clock clock2" id="clock2">
             	<span>00:00:00</span>
-            	<div class="clockBackground" ></div>
+            	<div class="clockBackground"></div>
             	<div class="clock2Current">00:00:00</div>
             </div>
             

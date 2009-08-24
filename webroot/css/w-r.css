@@ -8,8 +8,11 @@
 	cursor: pointer;
 	margin-bottom: 2px;
 	position:relative;
+	height: 1%;
+	z-index:-1;
 	
 }
+
 .clockBackground{
 	position:absolute;
 	width:100%;
@@ -19,15 +22,15 @@
 	filter: alpha(opacity = 17);
 	top:0;
 	left:0
-
 }
+
 .clock1 {
 	color: green;
 }
 .clock1Current {
 	position:absolute;
 	font-size: small;
-	top:0;
+	top:0px;
 	right:10px;
 }
 .clock2 {
@@ -74,6 +77,7 @@
 	text-align: center;
 	position: relative;
 	margin: 0 0 2px 0;
+	height: 1%;
 }
 
 .work{
@@ -100,12 +104,12 @@
 	position: absolute;
 	top: 50px;
 	left: -9px;
-	height: 24px;
+	height: 10px;
 	width: 24px;
-	background-image: url(../img/icons/round_remove.png);
+	background-image: url(../img/icons/round_remove.png) ;
 	cursor: pointer;
-	line-height: 0.55;
-	z-index:2;
+	line-height: 0.45;
+	z-index:20;
 }
 .minusWork:hover {
 	background-image: url(../img/icons/round_remove_green.png);
@@ -210,7 +214,7 @@ div.myProject{
 }
 .topChessWrapper {
     position:relative;
-    /*height: 30px;*/
+    height: 1%;
 }
 .projectsNameWrpapper {
 	margin: 10px;
@@ -278,6 +282,7 @@ div.myProject{
 
 .timerControl {
 	position:relative;
+	height: 1%;
 }
 .currentProject{
 	position:absolute;
@@ -294,6 +299,7 @@ div.myProject{
 	color:green;
 	padding:0 8px;
 }
+
 .currentProjectBg {
 	position:absolute;
 	width:100%;
@@ -321,7 +327,7 @@ div.myProject{
 	background:transparent url(../img/icons/stop_2.png) no-repeat scroll 0 0;
 	height:24px;
 	line-height:0.55;
-	position:absolute;
+	
 	width:24px;
 	cursor: pointer;
 	color:transparent;
@@ -335,7 +341,7 @@ div.myProject{
 	background:transparent url(../img/icons/go_2.png) no-repeat scroll 0 0;
 	height:24px;
 	line-height:0.55;
-	position:absolute;
+	
 	width:24px;
 	cursor: pointer;
 	color:transparent;
@@ -349,6 +355,8 @@ div.myProject{
 	height: 10px;
 	border: 3px solid #ccc;
 	margin: 2px 0px 2px 2px;
+	z-index:1;
+	
 }
 .grafWrapper div.graf {
 	margin-right: 1px;
@@ -359,6 +367,7 @@ div.myProject{
 	float: left;
 	opacity: 0.65;
 	filter: alpha(opacity = 65);
+	
 }
 
 .grafConnector {
