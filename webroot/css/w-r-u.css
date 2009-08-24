@@ -13,7 +13,7 @@
 	background-color:#9AE4E8;
 	border:3px solid silver;
 	margin:0 auto;
-	padding:0 10px 5px 30px;
+	padding:5px 10px 5px 30px;
 	width:224px;
 }
 #UserEmailReset{
@@ -36,11 +36,19 @@ p.quickLoginForPas {
 
 /*reg - get started*/
 .fildsetReg {
-	margin: 1em;
+	background-color:#9AE4E8;
+	border:3px solid silver;
+	margin:1em;
+}
+.fildsetReg legend {
+	background-color:white;
+	border:3px solid silver;
+	margin:0;
+	padding:0 5px;
 }
 .reg a {
 	display:block;
-	border: 3px solid #ccc;
+	border: 3px solid silver;
 	margin: 30px auto;
 	padding: 3px 10px;
 	text-align:center;
@@ -49,10 +57,11 @@ p.quickLoginForPas {
 	text-decoration:none;
 	font-weight: bold;
 	background-color: #97CD39;
-	color: #fff;
+	color: #f2f2f2;
 }
 .reg a:hover {
-	color: #f2f2f2;
+	color: #fff;
+	border: 3px solid #DFDFDF;
 }
 
 /*form classes*/
@@ -66,8 +75,6 @@ p.quickLoginForPas {
 	color:#8A1F11;
 	font-weight:bold;
 	margin-left:12em;
-	position:absolute;
-	top:27px;
 }
 #UserUsername, #UserPassword, #UserPassword1, #UserPassword2,#UserEmail {
 	width: 206px;
@@ -84,14 +91,14 @@ div.input {
 	margin: 0;
 } 
 .formWrap label {
-	margin: 0.6em 1em 0 0;
+	margin: 0.1em 1em 0 0;
 	float: left;
 	width: 11em;
 	text-align: right; 
 }
 div.formWrap  {
 	/*background-color: inherit;*/
-	margin: 2px;
+	margin: 0;
 	padding: 0 0 1em 0;
 	position:relative;
 }
@@ -103,25 +110,20 @@ div.formWrap input.form-error {
 	background-color: #FBC2C4;
 }
 .submit {
-	margin: 1em 0 1em 13.5em;
+	margin: 1em 0 1em 14.5em;
 }
 #ajimg {
 	margin: 0 0 0 12em;
 	padding: 0;
 	height: 15px;
-	position:absolute;
-	top:30px;
 }
 .greenMessage{
 	margin: 0 0 0 12em;
 	padding: 0;
 	height: 15px;
-	position:absolute;
-	top:27px;
 }
 
 /*login*/
-
 
 .signup {
 	z-index: 10;
@@ -160,7 +162,8 @@ div.formWrap input.form-error {
 	margin: 0 0 1em 12em;
 }
 #UserCaptcha {
-	width: 116px;	
+	width: 120px;	
+	margin:0;
 }
 .capchaImg p img {
 	border: none;

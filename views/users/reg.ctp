@@ -3,7 +3,7 @@
 <div class="inner_page">
 	<fieldset class="fildsetReg">
 		<legend><?php __('Sign Up');?></legend>
-		<?php //$session->flash(); ?>
+		
 		<?php echo $form->create('User', array('action' => 'reg' ) ); ?>
 	
 	

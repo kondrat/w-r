@@ -120,7 +120,8 @@ class UsersController extends AppController {
 		
 
 	}
-	//ajax staff
+	
+//ajax staff
 	//----------------------------------------------------------------
 		function userNameCheck() {
 
