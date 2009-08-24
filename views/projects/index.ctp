@@ -58,10 +58,13 @@
 				<?php $stl=( $i == 4  && $this->params['paging']['Project']['page'] == 1 )?'5px':'1px'; ?>
 					<div class="projectList span-15" >
 
-								<div class="projectPreview span-3" style="color: <?php echo $project['Project']['color']; ?>;">
-									<span><?php echo  $project['Project']['name']; ?></span>
-									<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
-								</div>
+							<div class="projectPreview span-3" style="color: <?php echo $project['Project']['color']; ?>;">
+								<span><?php echo  $project['Project']['name']; ?></span>
+								<div class="projectPreviewBg" style="background-color:<?php echo $project['Project']['color']; ?>"></div>
+							</div>
+							<div class="span-4 prepend-1 timeSpent">
+								<?php echo __('Time spent',true).':'.' 10min.';?>
+							</div>
 
 							<div class="projectCreated clear">
 								<?php echo __('Created',true).'&nbsp;'.$time->relativeTime($project['Project']['created'],array('format' =>'j/n/y','end'=>'+ 1 week'), false); ?>

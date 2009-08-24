@@ -89,7 +89,7 @@
 		    <div class="span-4 last">
 		        Right sidebar
 		        <hr />
-						<div id="hourstat" style="position:absolute; top:50px;left:5px;">hourstat</div>
+						<div id="hourstat" style="position:absolute; top:50px;left:5px;width:200px;">hourstat</div>
 						<div id="test1">test1</div>
 						<p class="margin:0;"> Data from app</p>
 						<div id="test2"></div>

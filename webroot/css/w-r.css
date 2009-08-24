@@ -19,6 +19,7 @@
 	filter: alpha(opacity = 17);
 	top:0;
 	left:0
+
 }
 .clock1 {
 	color: green;
@@ -291,13 +292,6 @@ div.myProject{
 }
 .currentProject span {
 	color:green;
-	/*
-	left:0;
-	position:absolute;
-	top:0;
-	width:100%;
-	z-index:50;	
-	*/
 	padding:0 8px;
 }
 .currentProjectBg {
@@ -467,4 +461,11 @@ div.myProject{
 	font-family:comic Sans MS;
 	font-size:12pt;
 	font-weight:bold;
+}
+.timeSpent{
+	font-family:comic Sans MS;
+	font-size:larger;
+	font-weight:bold;
+	margin:5px;
+	color:tomato;
 }

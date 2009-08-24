@@ -2,6 +2,7 @@ jQuery(document).ready( function(){
 	
 	//work
 	$('#clock1, div.work2 span').click( function(){
+		alert("#clock1, div.work2 span");
 		
 			if (!interval) {
 				$(".startInterval").trigger('click');
@@ -197,15 +198,15 @@ jQuery(document).ready( function(){
 
 						}	,100);	
 			});
-
-					
+				
 		$(window).unload( function () {
 				if ( del == 1 ) {
 								if ( correction == 1 ) {
 									HourStatCorrection();
 								}	
-													
-								var varsObject = {		
+											
+								var varsObject = {	
+										
 												'typeInt': typeInt,
 												
 												'projectId': projectId,
@@ -218,8 +219,9 @@ jQuery(document).ready( function(){
 												'restTotal': restTotal,
 												'sec2Cur': sec2Cur,
 																							
-												'graf': graf,
-												'saveSumm': saveSumm, 
+											//	'graf': graf,
+											//	'saveSumm': saveSumm, 
+											
 								};
 								
 								var iniVarsJSONText = JSON.stringify(varsObject);								
@@ -236,7 +238,7 @@ jQuery(document).ready( function(){
 								
 		} );
 
-
+	
 	$('.stopInterval').click(function(){		
 		clearInterval(interval);
 		secInt = 0;

@@ -6,7 +6,7 @@ class ProjectsController extends AppController {
 	var $components = array('Cookie');
 //--------------------------------------------------------------------	
   function beforeFilter() {
-        $this->Auth->allow('index');
+        $this->Auth->allow('index','testBox');
         parent::beforeFilter(); 
         $this->Auth->autoRedirect = false;
         
@@ -20,6 +20,7 @@ class ProjectsController extends AppController {
 		$projectUser = array();
 		
 		if ( $this->Auth->user('id') ) {
+			
 			$this->paginate['Project']['limit'] = 10;		
 			$this->Project->bindModel( array( 'hasOne' => array('ProjectsUser'=> array('fields'=>array('ProjectsUser.id') ) ) ) );
 			$this->paginate['Project']['conditions'] = array( 'ProjectsUser.user_id'=> $this->Auth->user('id') );
@@ -27,15 +28,26 @@ class ProjectsController extends AppController {
 			$this->paginate['Project']['contain'] = 'ProjectsUser';
 			$this->paginate['Project']['order'] = array('Project.modified'=>'desc');
 			$this->set('projects', $this->paginate());
+			
 		} elseif( $key = $this->Cookie->read('guestKey') ) {
 
-			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key),'fields'=>array('Hour.psession'),'contain'=>false ) );
-			$ttt = unserialize($projectUser['Hour']['psession']);
-			//debug($ttt);
+			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key),'fields'=>array('Hour.psession','Hour.wsession'),'contain'=>false ) );
+			$psession = unserialize($projectUser['Hour']['psession']);
+			$wsession = json_decode($wsession);
+			//debug( json_decode($wsession) );
+			/*
+			foreach($psession as $ps ){
+				debug($ps);
+			}
+			*/
 
-			$this->set('projects', $ttt);	
+			$this->set('projects', $psession);
+			//$this->set('projects', $psession);	
 		
 		}
+	}
+	
+	function testBox() {
 	}
 //--------------------------------------------------------------------
 	function view($id = null) {
