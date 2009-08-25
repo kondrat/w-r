@@ -16,11 +16,11 @@ jQuery(document).ready( function(){
 							
 		$(".projectTitle, .closeProjectSelect ").click(function(){
 			
-   		if ( $(".projectMain").is(":hidden") ) {
-            $(".projectMain").slideDown("fast");
+   		if ( $(".projectWrapper").is(":hidden") ) {
+            $(".projectWrapper").slideDown();
 						$(".projectTitle").text('close id').css({'color' : 'sienna'});
           } else {
-            $(".projectMain").slideUp();
+            $(".projectWrapper").hide();
 						$(".projectTitle").text('switch projects').css({'color' : '#000'});
           }
 

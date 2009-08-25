@@ -104,7 +104,7 @@
 	position: absolute;
 	top: 50px;
 	left: -9px;
-	height: 10px;
+	height: 24px;
 	width: 24px;
 	background-image: url(../img/icons/round_remove.png) ;
 	cursor: pointer;
@@ -180,7 +180,7 @@
 }
 .intervals {
 	margin-top: -10px;
-	/*position:relative;*/
+	position:relative;
 }
 /*--- Projects --*/
 .projectTitle {
@@ -191,10 +191,10 @@
 }
 .projectMain {
 	background-color:white;
-	display:none;
+	/*display:none;*/
 	border: 3px solid #ccc;
-	position:relative;
-	height:1%;
+	/*position:relative;
+	height:1%;*/
 }
 div.myProject{
  	margin-bottom:10px;
@@ -211,9 +211,10 @@ div.myProject{
 }
 .projectWrapper{
 	position:absolute;
-	top: 112px;
+	top: 0px;
 	left:0px;
 	z-index:10;
+	display:none;
 }
 .topChessWrapper {
     position:relative;

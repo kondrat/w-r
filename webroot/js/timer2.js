@@ -2,7 +2,7 @@ jQuery(document).ready( function(){
 	
 	//work
 	$('#clock1, div.work2 span').click( function(){
-		alert("#clock1, div.work2 span");
+		//alert("#clock1, div.work2 span");
 		
 			if (!interval) {
 				$(".startInterval").trigger('click');
@@ -69,8 +69,8 @@ jQuery(document).ready( function(){
 			$('.startInterval').click( function(){	
 				//central button
 				$('.startInterval').css({'display':'none'});
-				$('.stopInterval').css({'display':'inline'});
-								
+				$('.stopInterval').css({'display':'block'});
+					//return;			
 				//prepering of the array after correction
 				if ( correction == 1 ) {
 					HourStatCorrection();					
@@ -243,7 +243,7 @@ jQuery(document).ready( function(){
 		clearInterval(interval);
 		secInt = 0;
 		clockObj = 0;
-		$('.startInterval').css({'display':'inline'});
+		$('.startInterval').css({'display':'block'});
 		$(this).css({'display':'none'});
 		interval = false;
 
