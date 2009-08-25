@@ -180,6 +180,7 @@
 }
 .intervals {
 	margin-top: -10px;
+	/*position:relative;*/
 }
 /*--- Projects --*/
 .projectTitle {
@@ -193,6 +194,7 @@
 	display:none;
 	border: 3px solid #ccc;
 	position:relative;
+	height:1%;
 }
 div.myProject{
  	margin-bottom:10px;
@@ -210,6 +212,7 @@ div.myProject{
 .projectWrapper{
 	position:absolute;
 	top: 112px;
+	left:0px;
 	z-index:10;
 }
 .topChessWrapper {
