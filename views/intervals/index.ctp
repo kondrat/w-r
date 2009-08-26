@@ -122,7 +122,7 @@
 		<div class="quickLogin span-7 prepend-1">
 			<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>
 		</div>
-		<div class="span-7 reg">
+		<div class="span-5 prepend-1 reg">
 			<?php echo $html->link(__('Get Started—Join!',true), array('controller'=>'users','action'=>'reg') );?>
 		</div>
 	<?php endif ?>

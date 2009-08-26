@@ -16,6 +16,7 @@
 		//echo $html->css('print');
 		echo '<!--[if IE]>';
 		echo $html->css('ie');
+		echo $html->css('w-r-ie');
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );

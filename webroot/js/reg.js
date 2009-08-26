@@ -6,7 +6,7 @@ jQuery(document).ready( function(){
 							required: "This field cannot be left blank",
 							betweenRus: "Username must be between 4 and 10 characters long",
 							passidentity: "Please verify your password again",
-							email: "Your email address does not appear to be valid",
+							email: "Your email address does not appear to be valid"
 								
 		 };
 	
