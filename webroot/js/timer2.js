@@ -198,13 +198,13 @@ jQuery(document).ready( function(){
 
 						}	,100);	
 			});
-		/*		
+	
 		$(window).unload( function () {
 				if ( del == 1 ) {
 								if ( correction == 1 ) {
 									HourStatCorrection();
 								}	
-								/*			
+											
 								var varsObject = {	
 										
 												'typeInt': typeInt,
@@ -217,10 +217,10 @@ jQuery(document).ready( function(){
 												'sec1Cur': sec1Cur,
 		
 												'restTotal': restTotal,
-												'sec2Cur': sec2Cur,
+												'sec2Cur': sec2Cur
 																							
 											//	'graf': graf,
-											//	'saveSumm': saveSumm, 
+											//	'saveSumm': saveSumm
 											
 								};
 								
@@ -233,11 +233,11 @@ jQuery(document).ready( function(){
 								//hourStat cookie saving
 								//var HourStatJSONText = JSON.stringify(HourStat);
 								//$.cookie("HourStat", HourStatJSONText,{ expires: dateExp } );	
-							//	saveTime2(HourStatJSONText);
+								saveTime2(HourStatJSONText);
 				} 
 								
 		} );
-		*/
+
 	
 	$('.stopInterval').click(function(){		
 		clearInterval(interval);

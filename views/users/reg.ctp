@@ -65,7 +65,7 @@
 					?>	
 		</fieldset>	
 				<div class="submit clearfix">	
-					<?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?>
+					<span><?php echo $form->button( __('Submit',true), array('type'=>'submit', 'id'=>'regSubmit','class'=>'span-3') ); ?></span>
 				</div>
 		
 	<?php echo $form->end(); ?>

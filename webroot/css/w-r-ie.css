@@ -11,3 +11,11 @@ legend {
 .fildsetReg {
 	margin: 2.2em 1em 0 1em;
 }
+.submit input {
+	/*margin-left:-14em;*/
+	display: inline; 
+	margin:0;
+}
+div.formWrap #UserAutoLogin {
+	position:absolute;
+}
