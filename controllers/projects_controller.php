@@ -31,9 +31,19 @@ class ProjectsController extends AppController {
 			
 		} elseif( $key = $this->Cookie->read('guestKey') ) {
 
-			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key),'fields'=>array('Hour.psession','Hour.wsession'),'contain'=>false ) );
+			$projectUser = $this->Project->Interval->Hour->find('first',array('conditions'=> array('Hour.key'=>$key,'Hour.status'=>'open'),'fields'=>array('Hour.psession','Hour.wsession'),'contain'=>false ) );
 			$psession = unserialize($projectUser['Hour']['psession']);
-			$wsession = json_decode($wsession);
+			$wsession = json_decode($projectUser['Hour']['wsession']);
+			$this->set('psession', $psession);
+			$this->set('wsession', $wsession);
+			foreach($psession as $ps ) {
+				foreach($wsession as $ws ) {
+					if ( $ws[2] == 'project_'.$ps['Project']['id'] ) {
+						$tt1[] = $ws[0];
+					}
+				}			
+			}
+			$this->set('tt1', $tt1);
 			//debug( json_decode($wsession) );
 			/*
 			foreach($psession as $ps ){
