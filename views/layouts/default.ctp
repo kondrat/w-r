@@ -60,23 +60,23 @@
 		    </div>
 		
 		    <div class="span-16">
-			        <div class="span-8">
-			            <div class="rounded." style="background-color: #ccc; padding-left: 20px;">
+			        <div class="span-7">
+			            <div class="rounded." style="background-color: #ccc; padding-left: 15px;overflow:hidden;">
 										<?php
 											if ($session->check('Auth.User.username')) {
 												echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
 											} elseif ( $session->check('guestKey') ) {
-												echo '<b>&laquo;'.$session->read('guestKey').'&raquo;</b>';
+												echo '<b title="'.$session->read('guestKey').'">&laquo;'.$session->read('guestKey').'&raquo;</b>';
 											} else {
 												echo 'Username';
 											}
 										?>
 									</div>
 			      	</div>
-			        <div class="span-4">
+			        <div class="span-5">
 			       		<?php echo date("l dS \of F"); ?>
 			        </div>
-			        <div class="span-4 last">
+			        <div class="span-2 last">
 			            <?php __('Week'); 
 			            echo ' '.date("W"); ?>
 			        </div>

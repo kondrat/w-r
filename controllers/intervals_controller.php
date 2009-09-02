@@ -27,6 +27,8 @@ class IntervalsController extends AppController {
 			$projectUser = array();
 			$key = null;
 			$auth = false;
+			$guestId = null;
+			
 			if($key = $this->Auth->user('id'))$auth=true;
 						
 			if( !$auth && !$this->Cookie->read('guestKey') ) {//looks like new user is tring us.	
@@ -38,18 +40,22 @@ class IntervalsController extends AppController {
 
 				$startTime = time();
 
-				$projectUser = array(	array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
-														array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
-														array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
-													);	
+				$projectUser = array(	
+															array('Project'=> array('id' => '1','name'=>'Project 1','color'=>'green','created'=> $startTime,'modified'=> $startTime )),
+															array('Project'=> array('id' => '2','name'=>'Project 2','color'=>'olive','created'=> $startTime,'modified'=> $startTime)),
+															array('Project'=> array('id' => '3','name'=>'Project 3','color'=>'teal','created'=> $startTime,'modified'=> $startTime)),
+														);	
 
 				
-				$this->data['Hour']['key'] = $key;
+				$this->data['User']['key'] = $key;
+				
 					
-				$this->data['Hour']['psession'] = serialize( $projectUser );
-
-				if(!$this->Interval->Hour->save($this->data)){
+				//$this->data['Hour']['psession'] = serialize( $projectUser );
+				
+				if( !$this->Interval->Hour->User->save( $this->data, array('validate' => false,'fieldList' => array('User.key') ) ) ){
 					$this->Session->setFlash(__('We have an problem with a server.', true),'default',array('class'=>'er'));
+				} else {
+					$guestId = $this->Interval->Hour->User->id;
 				}
 				
 				
@@ -101,6 +107,8 @@ class IntervalsController extends AppController {
 					}					
 				}
 				*/
+			$this->set('guestId', $guestId);
+			
 				
 			$this->set('projectUser', $projectUser);
 			$this->set('workSession', $currentWorkSession);
@@ -130,6 +138,9 @@ class IntervalsController extends AppController {
 					$conditions = array('Hour.user_id' => $this->data['Hour']['user_id'],'Hour.status'=>'open');
 				} else {
 					$this->data['Hour']['key'] = $this->Session->read('guestKey');
+					
+					$key = $this->Cookie->read('guestKey');
+					
 					$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
 				}
 				
@@ -153,7 +164,7 @@ class IntervalsController extends AppController {
 				
 				$this->Interval->Hour->save($this->data);
 				$this->data = null;
-				echo json_encode( array('hi'=> $idTemp) );
+				echo json_encode( array('hi'=> $key) );
 				exit;					
 				
 				/*
