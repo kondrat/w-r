@@ -35,7 +35,7 @@ class IntervalsController extends AppController {
 				
 				$key = md5(uniqid(rand(), true));
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
-				$this->Session->write('guestKey', $key );
+				//$this->Session->write('guestKey', $key );
 	
 
 				$startTime = time();
@@ -51,17 +51,17 @@ class IntervalsController extends AppController {
 				
 					
 				//$this->data['Hour']['psession'] = serialize( $projectUser );
-				
+				/*
 				if( !$this->Interval->Hour->User->save( $this->data, array('validate' => false,'fieldList' => array('User.key') ) ) ){
 					$this->Session->setFlash(__('We have an problem with a server.', true),'default',array('class'=>'er'));
 				} else {
 					$guestId = $this->Interval->Hour->User->id;
 				}
-				
+				*/
 				
 			} elseif ( !$auth && ($key = $this->Cookie->read('guestKey')) ) {
 				//debug($key);
-				$this->Session->write('guestKey', $key );
+				//$this->Session->write('guestKey', $key );
 				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
 				$fields = array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified');
 
@@ -133,15 +133,51 @@ class IntervalsController extends AppController {
 			
 			if ($this->RequestHandler->isAjax()) {
 				
+				//reged user
 				if ($this->Auth->user('id')) {
+					
+					
+					
 					$this->data['Hour']['user_id'] = $this->Auth->user('id');
 					$conditions = array('Hour.user_id' => $this->data['Hour']['user_id'],'Hour.status'=>'open');
+					
+					
+					
+				// not reged user	
 				} else {
-					$this->data['Hour']['key'] = $this->Session->read('guestKey');
+					
+					//$this->data['Hour']['key'] = $this->Session->read('guestKey');
 					
 					$key = $this->Cookie->read('guestKey');
+					if(!$key) {
+						//do smth.
+					} else {
+						
+					}
 					
-					$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
+					
+					
+					
+					if ( !$this->Session->check('guestKey2.id') ) {
+						
+						$this->data['User']['username'] = uniqid();
+						$this->data['User']['key'] = $key;
+						$this->Session->write('test.id',uniqid());
+						$this->Session->write('guestKey2.key', $key );
+						$this->Interval->Hour->User->save($this->data, array('validate' => false,'fieldList' => array('username','key') ) );
+						$guestId = $this->Interval->Hour->User->id;
+						$this->Session->write('guestKey2.id', $guestId );
+						
+					} else {
+						$tttt = 'iih';
+					}
+						
+					
+					
+					
+					
+						$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
+					
 				}
 				
 				
@@ -164,7 +200,7 @@ class IntervalsController extends AppController {
 				
 				$this->Interval->Hour->save($this->data);
 				$this->data = null;
-				echo json_encode( array('hi'=> $key) );
+				echo json_encode( array('hi'=> $tttt) );
 				exit;					
 				
 				/*
@@ -181,9 +217,7 @@ class IntervalsController extends AppController {
 			
 			
 		}
-		//$hours = $this->Interval->Hour->find('list');
-		//$projects = $this->Interval->Project->find('list');
-		//$this->set(compact('hours', 'projects'));
+
 	}
 //--------------------------------------------------------------------
 	function delWorkSession() {

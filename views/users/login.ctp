@@ -21,7 +21,7 @@
 		<?php echo $form->end(); ?>
 		
 		<div class="reg" style="position:absolute; left:420px;top:30px;left:420px;">
-			<?php echo $html->link( __('Get Started - Join!',true), array( 'action' => 'reg' ), array('class' => '' ) ); ?>
+			<?php echo $html->link(__('Get Started—Join!',true), array('controller'=>'users','action'=>'reg') );?>
 		</div>
 </div>
 

@@ -40,6 +40,9 @@ msgstr 	"Логин"
 msgid	"Sign Up" 
 msgstr 	"Регистрация"
 
+msgid	"Get Started—Join!" 
+msgstr 	"Регистрация!"
+
 msgid	"Submit" 
 msgstr 	"Послать"
 

@@ -99,7 +99,7 @@ class UsersController extends AppController {
 			}
 			*/
 		
-			$this->data['User']['uuid'] = uniqid();
+			//$this->data['User']['uuid'] = uniqid();
 
 			if ( $this->User->save( $this->data) ) {
 				
