@@ -146,30 +146,45 @@ class IntervalsController extends AppController {
 				// not reged user	
 				} else {
 					
-					//$this->data['Hour']['key'] = $this->Session->read('guestKey');
+
 					
-					$key = $this->Cookie->read('guestKey');
-					if(!$key) {
-						//do smth.
+					
+					
+					if( $this->Session->check('guestKey2.id') ) {
+						
+						$this->data['Hour']['id'] = $this->Session->check('guestKey2.id');
+						
 					} else {
 						
+						$key = $this->Cookie->read('guestKey');
+						if($key) {
+							
+								$currentWorkSession = $this->Interval->Hour->User->find('first',array('conditions'=> array('User.key'=> $key) ) );
+								if ($currentWorkSession != array() ) {
+									$this->Session->write('guestKey2.id', $currentWorkSession['User']['id']);
+								}
+								
+						} else {
+							
+						}
+
 					}
-					
-					
 					
 					
 					if ( !$this->Session->check('guestKey2.id') ) {
 						
 						$this->data['User']['username'] = uniqid();
 						$this->data['User']['key'] = $key;
-						$this->Session->write('test.id',uniqid());
-						$this->Session->write('guestKey2.key', $key );
-						$this->Interval->Hour->User->save($this->data, array('validate' => false,'fieldList' => array('username','key') ) );
-						$guestId = $this->Interval->Hour->User->id;
-						$this->Session->write('guestKey2.id', $guestId );
 						
-					} else {
-						$tttt = 'iih';
+						$this->Session->write('guestKey2.key', $key );
+						
+						if ( $this->Interval->Hour->User->save($this->data, array('validate' => false,'fieldList' => array('username','key') ) ) ) {
+							$guestId = $this->Interval->Hour->User->id;
+							$this->Session->write('guestKey2.id', $guestId );
+						}
+						
+					} elseif() {
+						$this->data['Hour']['wsession'] = 
 					}
 						
 					
@@ -181,10 +196,7 @@ class IntervalsController extends AppController {
 				}
 				
 				
-				$currentWorkSession = $this->Interval->Hour->find('first',array('conditions'=> $conditions,'order' => array('Hour.created DESC') ) );
-				if ($currentWorkSession != array() ) {
-					$this->data['Hour']['id'] = $currentWorkSession['Hour']['id'];
-				}
+
 				
 				
 				$this->data['Hour']['wsession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
