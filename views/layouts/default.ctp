@@ -65,18 +65,18 @@
 										<?php
 											if ($session->check('Auth.User.username')) {
 												echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
-											} elseif ( $session->check('guestKey') ) {
-												echo '<b title="'.$session->read('guestKey').'">&laquo;'.$session->read('guestKey').'&raquo;</b>';
+											} elseif ( $session->check('guestKey2.key') ) {
+												echo '<b title="'.$session->read('guestKey2.key').'">&laquo;'.$session->read('guestKey2.key').'&raquo;</b>';
 											} else {
-												echo 'Username';
+												echo '<b>&laquo;Username&raquo;</b>';
 											}
 										?>
 									</div>
 			      	</div>
-			        <div class="span-5">
+			        <div class="span-5" style="font-weight:bold;color:teal;">
 			       		<?php echo date("l dS \of F"); ?>
 			        </div>
-			        <div class="span-2 last">
+			        <div class="span-2 last" style="font-weight:bold;color:maroon;">
 			            <?php __('Week'); 
 			            echo ' '.date("W"); ?>
 			        </div>

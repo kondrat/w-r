@@ -34,7 +34,7 @@
 					
 					<?php echo $this->element('color/color', array('cache' => false)); ?>
 						<div class="span-3">
-							<?php echo $form->button('Subm',array('type'=>'submit','class'=>'span-3'));?>
+							<?php echo $form->button(__('Submit',true),array('type'=>'submit','class'=>'span-3'));?>
 							<?php echo $form->end();?>
 						</div>
 					
@@ -103,7 +103,7 @@
 									
 									<?php echo $this->element('color/color', array('cache' => false)); ?>
 										<div class="span-3">
-											<?php echo $form->button('Subm',array('type'=>'submit','class'=>'span-3'));?>
+											<?php echo $form->button(__('Submit',true),array('type'=>'submit','class'=>'span-3'));?>
 											<?php echo $form->end();?>
 										</div>
 									

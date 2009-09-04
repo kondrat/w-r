@@ -31,7 +31,8 @@ class IntervalsController extends AppController {
 			
 			if($key = $this->Auth->user('id'))$auth=true;
 						
-			if( !$auth && !$this->Cookie->read('guestKey') ) {//looks like new user is tring us.	
+			if( !$auth && !$this->Cookie->read('guestKey') ) {
+				//looks like new user is tring us.	
 				
 				$key = md5(uniqid(rand(), true));
 				$this->Cookie->write('guestKey',$key, false, '360 days');		
@@ -47,7 +48,7 @@ class IntervalsController extends AppController {
 														);	
 
 				
-				$this->data['User']['key'] = $key;
+				//$this->data['User']['key'] = $key;
 				
 					
 				//$this->data['Hour']['psession'] = serialize( $projectUser );
@@ -60,14 +61,14 @@ class IntervalsController extends AppController {
 				*/
 				
 			} elseif ( !$auth && ($key = $this->Cookie->read('guestKey')) ) {
-				//debug($key);
-				//$this->Session->write('guestKey', $key );
-				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
-				$fields = array( 'Hour.wsession','Hour.psession','Hour.created','Hour.modified');
 
-				$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => $fields, 'order' => array('Hour.created DESC'),'contain' => false ) );
+				$this->Session->write('guestKey2.key', $key );
+				$conditions = array('Hour.key'=> $key,'Hour.status'=>'open');
+				$fields = array( 'Hour.wsession','Hour.created','Hour.modified');
+
+				//$currentWorkSession = $this->Interval->Hour->find('first', array( 'conditions'=> $conditions, 'fields' => $fields, 'order' => array('Hour.created DESC'),'contain' => false ) );
 				
-				if ( $currentWorkSession['Hour']['psession'] != null) {
+				if ( $currentWorkSession != null) {
 					$projectUser = unserialize($currentWorkSession['Hour']['psession']);
 				}else{
 					$startTime = time();
@@ -117,8 +118,10 @@ class IntervalsController extends AppController {
 //--------------------------------------------------------------------
 	function add() {
 		
-		$hourId = null;
+		$hourId = array();
 		$key = null;
+		$currentWorkSession = array();
+		
 		$workInt = array();
 		$projectId = null;
 		$workHoursArray = array();
@@ -133,9 +136,9 @@ class IntervalsController extends AppController {
 			
 			if ($this->RequestHandler->isAjax()) {
 				
-				//reged user
+				
 				if ($this->Auth->user('id')) {
-					
+					//reged user
 					
 					
 					$this->data['Hour']['user_id'] = $this->Auth->user('id');
@@ -143,55 +146,70 @@ class IntervalsController extends AppController {
 					
 					
 					
-				// not reged user	
+					
 				} else {
-					
+					// not reged user
 
-					
-					
-					
+			
 					if( $this->Session->check('guestKey2.id') ) {
 						
-						$this->data['Hour']['id'] = $this->Session->check('guestKey2.id');
+						//setting up user's id and conditions for finding current hour.
+						$this->data['Hour']['user_id'] = $this->Session->read('guestKey2.id');
+						
+						$conditions = array('Hour.user_id' => $this->data['Hour']['user_id'],'Hour.status'=>'open');
+						
+						$hourId = $this->Interval->Hour->find('first',array($conditions));
+						if( $hourId != array() ) {
+							$this->data['Hour']['id'] = $hourId['Hour']['id'];
+						}						
+						
+										
 						
 					} else {
 						
+						//checking if user has a cookie on his comp. if so getting unreged user's data
+						
 						$key = $this->Cookie->read('guestKey');
+						//if we have found user with guestKey
 						if($key) {
 							
 								$currentWorkSession = $this->Interval->Hour->User->find('first',array('conditions'=> array('User.key'=> $key) ) );
+								
 								if ($currentWorkSession != array() ) {
 									$this->Session->write('guestKey2.id', $currentWorkSession['User']['id']);
+									$this->Session->write('guestKey2.key', $currentWorkSession['User']['key']);
+														
+									$hourId = $this->Interval->Hour->find('first',array($conditions));
+									if( $hourId != array() ) {
+										$this->data['Hour']['id'] = $hourId['Hour']['id'];
+									}									
+								
+								} else {
+									//what we do?
 								}
 								
 						} else {
 							
+								$this->data['User']['username'] = uniqid();
+								$this->data['User']['key'] = $key;
+								
+								$this->Session->write('guestKey2.key', $key );
+								
+								if ( $this->Interval->Hour->User->save($this->data, array('validate' => false,'fieldList' => array('username','key') ) ) ) {
+									$guestId = $this->Interval->Hour->User->id;
+									$this->Session->write('guestKey2.id', $guestId );
+									$this->data['User'] = null;
+									
+									$this->data['Hour']['user_id'] = $guestId;
+									
+								} else {
+									//what we do?
+								}							
+							
+							
 						}
 
 					}
-					
-					
-					if ( !$this->Session->check('guestKey2.id') ) {
-						
-						$this->data['User']['username'] = uniqid();
-						$this->data['User']['key'] = $key;
-						
-						$this->Session->write('guestKey2.key', $key );
-						
-						if ( $this->Interval->Hour->User->save($this->data, array('validate' => false,'fieldList' => array('username','key') ) ) ) {
-							$guestId = $this->Interval->Hour->User->id;
-							$this->Session->write('guestKey2.id', $guestId );
-						}
-						
-					} elseif() {
-						$this->data['Hour']['wsession'] = 
-					}
-						
-					
-					
-					
-					
-						$conditions = array('Hour.key' => $this->data['Hour']['key'],'Hour.status'=>'open');
 					
 				}
 				
@@ -200,7 +218,8 @@ class IntervalsController extends AppController {
 				
 				
 				$this->data['Hour']['wsession'] = Sanitize::paranoid($this->data['work'], array(' ','_', ',','{','}','[',']',':','"'));
-				$idTemp = 'ok';
+				
+				
 				if($this->data['Hour']['wsession'] == 'del' && $this->data['Hour']['id'] != null) {
 					$this->Interval->Hour->delete($this->data['Hour']['id']);
 					$idTemp = ($this->data['Hour']['id']);
@@ -210,9 +229,14 @@ class IntervalsController extends AppController {
 					//$this->data = null;
 				}
 				
-				$this->Interval->Hour->save($this->data);
+				
+				if( $this->Interval->Hour->save($this->data, array('validate' => false ) ) ) {
+					$idTemp = $this->data['Hour']['user_id'];
+				} else {
+					$idTemp = 'notOOKK';
+				}
 				$this->data = null;
-				echo json_encode( array('hi'=> $tttt) );
+				echo json_encode( array('hi'=> $idTemp) );
 				exit;					
 				
 				/*
