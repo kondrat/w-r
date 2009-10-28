@@ -16,7 +16,6 @@ class IntervalsController extends AppController {
 		}
 		
 		
-		
 	}
 //--------------------------------------------------------------------
 	function index() {
