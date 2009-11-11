@@ -1,3 +1,12 @@
+/*header*/
+.userbox {
+	background:transparent url(../images/modules/header/userbox/bar-left.png) no-repeat scroll 0 0;
+	float:right;
+	font-size:12px;
+	height:39px;
+	padding-left:6px;
+}
+
 
 
 .clock {

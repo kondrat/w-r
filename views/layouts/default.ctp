@@ -29,30 +29,35 @@
 	?>
 </head>
 <body>
+	<div class="pageheaded" style="border-bottom:2px solid #DDDDDD;height:55px; background:#FCFCFC url(./img/pic/header_bg.png) repeat-x scroll 0 100%;min-width:75em;">
+			<div class="container">
+				<div class="span-24">
+	
+			    	<div class="userbox">
+			    		<?php 
+	
+			    			echo $html->link(__('Home',true),array('controller'=>'intervals','action'=>'index')).'&nbsp';
+	
+			    			if ( $session->check('Auth.User.id') ){
+			    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout','admin'=>false)).'&nbsp';
+			    			} else {
+			    				echo $html->link(__('Login',true),array('controller'=>'users','action'=>'login')).'&nbsp';
+			    			}
+			    			echo $html->link(__('Albums',true),array('controller'=>'times','action'=>'index')).'&nbsp';
+			    			echo $html->link(__('Images',true),array('controller'=>'images','action'=>'index')).'&nbsp';
+			    			echo $html->link("Eng",array('lang'=>'en')).'&nbsp';
+			    			echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';
+			    				if ($session->read('Auth.User.group_id') == '1') {
+			    					echo $html->link(__('Admin Zone',true),array('controller'=>'pages','action'=>'index','admin'=>true),array('style'=>'color:#ffaeae;font-weight:bold') );
+			    				}
+			    		?>
+			    	</div>
+			  </div>
+			</div>
+	</div>
 	<div class="container showgrid.">
 
-			<div class="span-24">
 
-		    	<p>
-		    		<?php 
-
-		    			echo $html->link(__('Home',true),array('controller'=>'intervals','action'=>'index')).'&nbsp';
-
-		    			if ( $session->check('Auth.User.id') ){
-		    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout','admin'=>false)).'&nbsp';
-		    			} else {
-		    				echo $html->link(__('Login',true),array('controller'=>'users','action'=>'login')).'&nbsp';
-		    			}
-		    			echo $html->link(__('Albums',true),array('controller'=>'times','action'=>'index')).'&nbsp';
-		    			echo $html->link(__('Images',true),array('controller'=>'images','action'=>'index')).'&nbsp';
-		    			echo $html->link("Eng",array('lang'=>'en')).'&nbsp';
-		    			echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';
-		    				if ($session->read('Auth.User.group_id') == '1') {
-		    					echo $html->link(__('Admin Zone',true),array('controller'=>'pages','action'=>'index','admin'=>true),array('style'=>'color:#ffaeae;font-weight:bold') );
-		    				}
-		    		?>
-		    	</p>
-		    </div>
 		    <div class="span-4">
 		        Left sidebar
 		        <hr />
