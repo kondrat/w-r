@@ -29,35 +29,49 @@
 	?>
 </head>
 <body>
-	<div class="pageheaded" style="border-bottom:2px solid #DDDDDD;height:55px; background:#FCFCFC url(./img/pic/header_bg.png) repeat-x scroll 0 100%;min-width:75em;">
+	<div class="pageheader" style="">
 			<div class="container">
 				<div class="span-24">
+					
+					
+			        <div class="headerData">
+			       		<?php echo date("l dS \of F"); ?>
+			        </div>
+			        <div class="headerWeek">
+			            <?php __('Week'); 
+			            echo ' '.date("W"); ?>
+			        </div>	
+	
+	
 	
 			    	<div class="userbox">
-			    		<?php 
-	
-			    			echo $html->link(__('Home',true),array('controller'=>'intervals','action'=>'index')).'&nbsp';
-	
-			    			if ( $session->check('Auth.User.id') ){
-			    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout','admin'=>false)).'&nbsp';
-			    			} else {
-			    				echo $html->link(__('Login',true),array('controller'=>'users','action'=>'login')).'&nbsp';
-			    			}
-			    			echo $html->link(__('Albums',true),array('controller'=>'times','action'=>'index')).'&nbsp';
-			    			echo $html->link(__('Images',true),array('controller'=>'images','action'=>'index')).'&nbsp';
-			    			echo $html->link("Eng",array('lang'=>'en')).'&nbsp';
-			    			echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';
-			    				if ($session->read('Auth.User.group_id') == '1') {
-			    					echo $html->link(__('Admin Zone',true),array('controller'=>'pages','action'=>'index','admin'=>true),array('style'=>'color:#ffaeae;font-weight:bold') );
-			    				}
-			    		?>
+			    		<div class="inner">
+							<ul class="usernav">
+									<?php
+											if ($session->check('Auth.User.username')) {
+												echo $gravatar->image('a_kondrat@mail.ru',array('default' => 'identicon','size' => 20) );
+												echo '<b>'.$session->read('Auth.User.username').'</b>';
+											}
+									?>
+								<li>
+				    		<?php 		
+				    			if ( $session->check('Auth.User.id') ){
+				    				echo $html->link(__('Logout',true),array('controller'=>'users','action'=>'logout','admin'=>false)).'&nbsp';
+				    			} else {
+				    				echo $html->link(__('Login',true),array('controller'=>'users','action'=>'login')).'&nbsp';
+				    			}
+								?>
+								</li>
+								<li><?php echo $html->link(__('Home',true),array('controller'=>'intervals','action'=>'index')).'&nbsp';?></li>
+			    			<li><?php echo $html->link("Eng",array('lang'=>'en')).'&nbsp';?></li>
+			    			<li><?php echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';?> </li>
+			    		</ul>
+			    		</div>
 			    	</div>
 			  </div>
 			</div>
 	</div>
 	<div class="container showgrid.">
-
-
 		    <div class="span-4">
 		        Left sidebar
 		        <hr />
@@ -67,24 +81,10 @@
 		    <div class="span-16">
 			        <div class="span-7">
 			            <div class="rounded." style="background-color: #ccc; padding-left: 15px;overflow:hidden;">
-										<?php
-											if ($session->check('Auth.User.username')) {
-												echo '<b>&laquo;'.$session->read('Auth.User.username').'&raquo;</b>';
-											} elseif ( $session->check('guestKey2.key') ) {
-												echo '<b title="'.$session->read('guestKey2.key').'">&laquo;'.$session->read('guestKey2.key').'&raquo;</b>';
-											} else {
-												echo '<b>&laquo;Username&raquo;</b>';
-											}
-										?>
+
 									</div>
 			      	</div>
-			        <div class="span-5" style="font-weight:bold;color:teal;">
-			       		<?php echo date("l dS \of F"); ?>
-			        </div>
-			        <div class="span-2 last" style="font-weight:bold;color:maroon;">
-			            <?php __('Week'); 
-			            echo ' '.date("W"); ?>
-			        </div>
+
 		        <div class="span-16 clear last myrr">
 							<div class="fl span-16 last" style="font-weight:bold; position:relative;">
 									<?php $session->flash(); ?>
@@ -115,10 +115,21 @@
 
 	
 
-		    <div class="span-24" style="border-top: 1px solid #eee; margin-top: 10px;color:#ccc;font-weight: bold">
-		       work-rest &copy;<?php echo date('Y');?>
-		    </div>
+
 		
+	</div>
+	<div class="pagefooter" style="">
+			<div class="container">
+				<div class="span-24">
+					
+			    <div class="span-24">
+			    	<div class="footerNote">
+		      	 work-rest &copy;<?php echo date('Y');?>
+		      	</div>
+		   		</div>
+		   		
+			  </div>
+			</div>
 	</div>
 	<?php echo $cakeDebug; ?>
 </body>

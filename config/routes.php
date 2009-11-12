@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: routes.php 7945 2008-12-19 02:16:01Z gwoo $ */
+/* SVN FILE: $Id$ */
 /**
  * Short description for file.
  *
@@ -21,9 +21,9 @@
  * @package       cake
  * @subpackage    cake.app.config
  * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision: 7945 $
- * @modifiedby    $LastChangedBy: gwoo $
- * @lastmodified  $Date: 2008-12-18 18:16:01 -0800 (Thu, 18 Dec 2008) $
+ * @version       $Revision$
+ * @modifiedby    $LastChangedBy$
+ * @lastmodified  $Date$
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
@@ -31,32 +31,9 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
- 
- $defaultLang = Configure::read('Languages.default');
-
-
-	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	//Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
-	
-
-			
-			Router::connect('edit/*',array('controller' => 'images', 'action' => 'edit'),array());
-			Router::connect('/:lang/edit/*',array('controller' => 'images', 'action' => 'edit'),array('lang'=>'[a-z]{2}'));
-			
-			Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-			Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
-			
-			Router::connect('/', array('controller' => 'intervals', 'action' => 'index'), array());			                       
-			Router::connect('/:lang/', array('controller' => 'albums', 'action' => 'useralbum'),array('lang' => '[a-z]{2}'));
-					
-			Router::connect('/:lang/admin/:controller/:action/*',
-			                       array('admin' => true),
-			                       array('lang' => '[a-z]{2}'));			
-			Router::connect('/:lang/:controller/:action/*',
-			                       array(),
-			                       array('lang' => '[a-z]{2}'));	
+	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 ?>
