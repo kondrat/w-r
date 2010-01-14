@@ -2,7 +2,7 @@
 class IntervalsController extends AppController {
 
 	var $name = 'Intervals';
-	var $helpers = array('Javascript','Html', 'Form','Gravatar');
+	var $helpers = array();
 	var $components = array('Security','Cookie');
 //--------------------------------------------------------------------	
 	function beforeFilter() {

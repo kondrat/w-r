@@ -1,7 +1,4 @@
 <?php
-//uses('sanitize');
-//$mrClean = new Sanitize();
-
 class UsersController extends AppController {
 
 	var $name = 'Users';
@@ -155,6 +152,7 @@ class UsersController extends AppController {
 			}		
 		}
 		//kcaptcha stuff
+		//----------------------------------------------------------------
     function kcaptcha() {
         $this->kcaptcha->render(); 
     } 

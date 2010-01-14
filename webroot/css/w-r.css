@@ -1,4 +1,56 @@
-
+/*header*/
+.pageheader{
+	border-bottom:2px solid #DDDDDD;
+	height:24px;
+	background:#FCFCFC url(../img/pic/header_bg.png) repeat-x scroll 0 100%;min-width:75em;
+}
+.pagefooter {
+	background:#BBCCD9 url(../img/pic/bg2.png) repeat-x scroll 0 0;
+	color:#CCCCCC;
+	height:808px;
+	min-width:75em;
+	overflow:hidden;
+}
+.headerData {
+	float:left;
+	margin-right:1em;
+	color:gray;
+	font-size: 80%;
+}
+.headerWeek {
+	float:left;
+	font-size:80%;
+	color:gray;
+}
+.userbox img {
+	border:1px solid #FFFFFF;
+	margin-right:3px;
+	margin-top:-3px;
+	vertical-align:middle;
+}
+.footerNote {
+	color:gray;
+	margin:1em;
+}
+.userbox {
+	background:transparent url(../img/pic/bar-left.png) no-repeat scroll 0 0;
+	float:right;
+	font-size:12px;
+	height:39px;
+	padding-left:6px;
+}
+.userbox .inner {
+	background:transparent url(../img/pic/bar-right.png) no-repeat scroll 100% 0;
+	height:29px;
+	padding:10px 12px 0 6px;
+}
+ul.usernav li {
+	background:transparent url(../img/pic/bar_separator.gif) no-repeat scroll 5px 0;
+	display:inline;
+	list-style-type:none;
+	margin:0;
+	padding:0 0 0 15px;
+}
 
 .clock {
 	font-weight: bold;

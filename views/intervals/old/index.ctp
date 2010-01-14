@@ -2,7 +2,7 @@
 	if ( $workSession != array() ) {
 		echo $javascript->codeBlock( 'var hs2 = '.$workSession['Hour']['wsession'] ,array('allowCache' => false,'safe'=>true,'inline'=>false));
 	}
-	echo $javascript->link(array('jquery/jquery.cookie','json2','vars','func','timer2','project','correction'),false);	
+	echo $javascript->link(array('jquery.cookie','json2','vars','func','timer2','project','correction'),false);	
 ?>
 <div class="intervals index clearfix" style=" margin:0;">
 	<?php //echo $form->create('Interval');?>
@@ -63,6 +63,7 @@
 								
 							<?php endif ?>
 						</div>
+						<div style="margin-left:10px"></div>
 	        	<div style="margin: 10px;"><?php echo $html->link(__('My projects',true),array('controller'=>'projects','action'=>'index')); ?></div>
 	       	</div>
         </div>
@@ -118,7 +119,9 @@
 	<div id="testCorrection">correction test</div>
 		
 		<hr />
-
+		<div class="quickLogin span-7 prepend-1">
+			<?php echo $this->element('user/quickLogin', array( "cache" => false ) ); ?>
+		</div>
 		<div class="span-5 prepend-1 reg">
 			<?php echo $html->link(__('Get Started—Join!',true), array('controller'=>'users','action'=>'reg') );?>
 		</div>
