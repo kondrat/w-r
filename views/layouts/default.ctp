@@ -19,8 +19,8 @@
 		echo $html->css('w-r-ie');
 		echo '<![endif]-->';
 
-		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','common'));
+		echo $html->scriptBlock('var path = "'.Configure::read('path').'";' );
+		echo $html->script(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','common'));
 
 
 		//echo $javascript->link('dbg/prettyPrint');
@@ -131,6 +131,6 @@
 			  </div>
 			</div>
 	</div>
-	<?php echo $cakeDebug; ?>
+	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

@@ -300,7 +300,6 @@
  *
  */
 	Cache::config('default', array('engine' => 'File'));
-
 /*
  * Current dir configuratin
  * ex '/pvr' or ''.
