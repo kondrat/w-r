@@ -1,5 +1,3 @@
-<?php echo $javascript->link(array('reg','localization/messages_ru'),false);?>
-
 <div class="inner_page">
 	<fieldset class="fildsetReg">
 		<legend><?php __('Sign Up');?></legend>
