@@ -20,7 +20,14 @@
 		echo '<![endif]-->';
 
 		echo $html->scriptBlock('var path = "'.Configure::read('path').'";' );
-		echo $html->script(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','common'));
+		echo $html->script(array('jquery/jquery-1.3.2.min',
+															'jquery/jquery.form',
+															'jquery/ui.core',
+															'jquery/ui.draggable',
+															'common',
+															'reg',
+															'localization/messages_ru',
+															));
 
 
 		//echo $javascript->link('dbg/prettyPrint');
