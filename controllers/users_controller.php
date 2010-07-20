@@ -9,6 +9,7 @@ class UsersController extends AppController {
 
 //--------------------------------------------------------------------	
   function beforeFilter() {
+  	//just a test. remove this
         $this->Auth->allow( 'logout','login', 'reg','kcaptcha', 'reset', 'acoset','aroset','permset','buildAcl');
           
         //to Del:
