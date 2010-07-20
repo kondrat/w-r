@@ -36,8 +36,8 @@ class UsersController extends AppController {
 			if( $this->Auth->login() ) {
 					
     		$this->Session->delete('guestKey');
-    		$this->Cookie->del('IniVars');
-    		$this->Cookie->del('guestKey');
+    		$this->Cookie->delete('IniVars');
+    		$this->Cookie->delete('guestKey');
 
 
 					if ($this->referer()=='/') {
@@ -67,8 +67,8 @@ class UsersController extends AppController {
     		$tempUserName = __('Good bay, ',true).$this->Session->read('Auth.User.username');
     		
     		$this->Session->delete('guestKey');
-    		$this->Cookie->del('IniVars');
-    		$this->Cookie->del('guestKey');
+    		$this->Cookie->delete('IniVars');
+    		$this->Cookie->delete('guestKey');
     		
     		
     		
@@ -101,8 +101,8 @@ class UsersController extends AppController {
 			if ( $this->User->save( $this->data) ) {
 				
     		$this->Session->delete('guestKey');
-    		$this->Cookie->del('IniVars');
-    		$this->Cookie->del('guestKey');				
+    		$this->Cookie->delete('IniVars');
+    		$this->Cookie->delete('guestKey');				
 							
 				$a = $this->User->read();
 				$this->Auth->login($a);
@@ -253,7 +253,7 @@ class UsersController extends AppController {
 			$this->Session->setFlash('Invalid id for User','default',array('class'=>'er'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if ( $this->User->del($id) ) {
+		if ( $this->User->delete($id) ) {
 			$this->Session->setFlash('User #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
@@ -307,7 +307,7 @@ class UsersController extends AppController {
 			$this->Session->setFlash('Invalid id for User');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if ( $this->User->del($id) ) {
+		if ( $this->User->delete($id) ) {
 			$this->Session->setFlash('User #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}

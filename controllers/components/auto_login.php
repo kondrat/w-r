@@ -162,7 +162,7 @@ class AutoLoginComponent extends Object {
 	 * @return void
 	 */
 	function delete() {
-		$this->Cookie->del($this->cookieName);
+		$this->Cookie->delete($this->cookieName);
 	}
 	
 }?>
